@@ -423,7 +423,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <h2 id="Andoird">Andoird</h2>
 <h3 id="启动原理">启动原理</h3>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/12de32b31836">https://www.jianshu.com/p/12de32b31836</a></p>
-<h2 id=""></h2>
+<h2 id="-v2"></h2>
 <h3 id="事件分发机制">事件分发机制</h3>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301164920245.png" srcset="/img/loading.gif" lazyload alt="image-20210301164920245"></p>
 <h4 id="dispatchTouchEvent">dispatchTouchEvent</h4>
@@ -558,7 +558,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 </ul>
 <h4 id="HandlerThread">HandlerThread</h4>
 <p>就是内置handler的thread</p>
-<h4 id="面试问题">面试问题</h4>
+<h4 id="面试问题-v2">面试问题</h4>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210305165916419.png" srcset="/img/loading.gif" lazyload alt="image-20210305165916419"></p>
 <p><span style='color:red;font-size:20px;'>一个线程有几个Handler</span></p>
 <p>多个handler</p>
@@ -634,13 +634,13 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <div class="code-wrapper"><pre class="language-none"><code class="language-none">w;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 </code></pre></div>
 <h3 id="屏幕适配">屏幕适配</h3>
-<h4 id="概念">概念</h4>
+<h4 id="概念-v2">概念</h4>
 <p>dp ：  	density-independent pixels n个实际像素，与设备dpi相关，与px（像素）换算关系：dp/160 = px/dpi。  px = dp*dpi /160</p>
 <p>那么dp究竟解决了适配上的什么问题？可以看出1dp = 1/160inch；那么它至少能解决一个问题，就是你在布局文件写某个View的宽和高为160dp*160dp，这个View在任何分辨率的屏幕中，显示的尺寸大小是大约是一致的（可能不精确），大概是 1 inch * 1 inch</p>
 <p>dpi:         Dots Per Inch（每英寸所打印的点数）</p>
 <p>px: 1920*1080 (px)</p>
 <h3 id="Framework">Framework</h3>
-<h4 id="概念-v2">概念</h4>
+<h4 id="概念-v3">概念</h4>
 <h3 id="ContentProvider">ContentProvider</h3>
 <h4 id="作用">作用</h4>
 <h3 id="OkHttp">OkHttp</h3>
@@ -900,8 +900,8 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210322153735717.png" srcset="/img/loading.gif" lazyload alt="image-20210322153735717"></p>
 <p>Retrofit不做网络请求，他相当于是一个中间人</p>
 <p>通过接口，对接口方法进行注解</p>
-<h4 id="原理">原理</h4>
-<h5 id="动态代理">动态代理</h5>
+<h4 id="原理-v3">原理</h4>
+<h5 id="动态代理-v2">动态代理</h5>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token class-name">INetApiService</span> netApiService<span class="token operator">=</span> retrofit<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token class-name">INetApiService</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>这里得到的netApiService不是本尊，而只是一个动态代理对象</p>
 <h4 id="类">类</h4>
@@ -916,7 +916,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <p>外观模式</p>
 <h4 id="差异">差异</h4>
 <p>Retrofit的Call 支持泛型，也就是可以用一个bean类进行包装，然后通过GSON直接返回想得到的对象？</p>
-<h4 id="问题">问题</h4>
+<h4 id="问题-v2">问题</h4>
 <p>为什么请求在子线程而显示在UI主线程？ 添加了Looper？</p>
 <h3 id="Volley">Volley</h3>
 <h3 id="图片加载框架">图片加载框架</h3>
@@ -948,7 +948,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <h4 id="from">from</h4>
 <h4 id="load">load</h4>
 <h4 id="into">into</h4>
-<h3 id="面试问题-v2">面试问题</h3>
+<h3 id="面试问题-v3">面试问题</h3>
 <h4 id="为什么子线程不能更新UI">为什么子线程不能更新UI</h4>
 <p>原因： ViewRootIml.scheduleTraversals对view进行绘制前，对当前线程进行检查是不是主线程</p>
 <p>，多线程加载Ui使得资源抢占，界面更新混乱</p>
