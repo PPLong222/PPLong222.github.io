@@ -1,0 +1,1286 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/;/gallery/paw_img.jpg">
+  <link rel="icon" href="/;/gallery/paw_img.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Docker学习日记
+基础">
+  <meta name="author" content="PPLong">
+  <meta name="keywords" content="">
+  <!--添加百度站点统计-->
+  <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
+  <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
+  <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
+  <meta name="description" content="Docker学习日记 基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker学习">
+<meta property="og:url" content="http://43.139.93.91/;/2021/10/14/Docker%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="PPLong的博客">
+<meta property="og:description" content="Docker学习日记 基础">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211015110209785.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211021165235597.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211024230125804.png">
+<meta property="article:published_time" content="2021-10-14T08:38:07.000Z">
+<meta property="article:modified_time" content="2022-04-07T01:45:18.000Z">
+<meta property="article:author" content="PPLong">
+<meta property="article:tag" content="Tool">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211015110209785.png">
+  
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
+  
+  <title>Docker学习 - PPLong的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/;/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/;/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/;/css/indexing-hover.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"43.139.93.91","root":"/;/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/;/local-search.xml"};
+  </script>
+  <script  src="/;/js/utils.js" ></script>
+  <script  src="/;/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 90vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/;/">
+      <strong>PPLong的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友達
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-link-fill"></i>
+                娱乐
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/movie/">
+                    <i class="iconfont icon-movie"></i>
+                    第二人生
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/shuoshuo/">
+                    <i class="iconfont icon-comment"></i>
+                    唠唠
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/develop/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    尝鲜
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/;/gallery/covers/docker.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Docker学习">
+              
+            </span>
+
+            
+              <div class="mt-3">
+    
+            
+                <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-14 16:38" pubdate>
+        始于: 2021年10月14日下午4点38分
+      </time>
+    </span>
+                
+</div>
+
+<!-- 自定义的更新时间 -->
+<div class="mt-1">
+    
+        <span class="post-meta">
+  <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
+  <time datetime="2022-04-07 09:45" pubdate>
+    更新: 2022年4月7日上午9点45分
+  </time>
+</span>
+        
+</div>
+
+<div class="mt-1">
+    
+        <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      20k 字
+    </span>
+        
+
+            
+                <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      64 分钟
+    </span>
+                
+
+                    
+                        
+                            
+                                <!-- LeanCloud 统计文章PV -->
+                                <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span>
+                                 次
+                                    </span>
+                                    
+                                                
+</div>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+    <div class="container-fluid nopadding-x">
+        <div class="row nomargin-x">
+            <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-x-md">
+                <div class="container nopadding-x-md" id="board-ctn">
+                    <div class="py-5" id="board">
+                        <article class="post-content mx-auto">
+                            <!-- SEO header -->
+                            <h1 style="display: none">
+                                Docker学习
+                            </h1>
+                            
+                                    <div class="markdown-body">
+                                        <h1>Docker学习日记</h1>
+<h2 id="基础">基础</h2>
+<span id="more"></span>
+<!--toc-->
+<h3 id="命令">命令</h3>
+<ul>
+<li>docker attach [id]  进入到正在运行的容器.本机的输入直接输到容器中，容器的输出会直接显示在本机的屏幕上</li>
+<li>docker run
+<ul>
+<li>-i 以交互模式运行</li>
+<li>-d 后台运行容器</li>
+<li>-t 为容器重新分配一个伪输入终端</li>
+<li>-p    主机端口:容器端口          -P 随机制定端口</li>
+<li>–name</li>
+<li>-v</li>
+<li>–volumes-from</li>
+</ul>
+</li>
+<li>docker rm id 删除容器
+<ul>
+<li>-f force delete</li>
+</ul>
+</li>
+<li>docker images</li>
+<li>docker exec 在运行的容器中执行命令</li>
+<li>docker volumn 查看卷信息
+<ul>
+<li>ls   查看所有卷情况</li>
+<li>create</li>
+<li>inspect 查看特定volume的信息</li>
+<li>rm</li>
+</ul>
+</li>
+<li>docker build 通过dockerfile方式创建容器
+<ul>
+<li>-f dockerfile文件路径（如果是Dockerfile的话就不用加这个了）</li>
+<li>-t 镜像名</li>
+</ul>
+</li>
+<li>docker push 发布镜像</li>
+<li>docker history</li>
+<li>docker save</li>
+<li>docker load</li>
+<li>docker inspect
+<ul>
+<li>id</li>
+</ul>
+</li>
+<li>docker network
+<ul>
+<li>ls</li>
+<li>rm</li>
+<li>inspect</li>
+<li>connect [network] [container(can be name)] 把一个容器连接到一个网络</li>
+<li>create</li>
+</ul>
+</li>
+</ul>
+<h3 id="comit镜像">comit镜像</h3>
+<p>docker commit -m=“xxxx”</p>
+<p>提交容器称为一个新的副本，我自己做的，我觉得好用想要保存下来</p>
+<p>docker commit -a=“xxx” [id] [name]:[tag]</p>
+<p><strong>Tomcat拷贝欢迎页面到webapps</strong></p>
+<p>cp -r webapps.dist/* webapps</p>
+<p>这里拷贝进去后不用重启都可以在页面访问</p>
+<h2 id="卷">卷</h2>
+<h3 id="容器数据卷">容器数据卷</h3>
+<p>一种数据共享技术。</p>
+<p>容器删除，数据如果在容器中，那数据 也会消失，则真实数据不应在相同容器中，两者应该有一种映射关系。</p>
+<h4 id="挂载方式">挂载方式</h4>
+<h5 id="命令方式挂载">命令方式挂载</h5>
+<ol>
+<li>
+<p><strong>指定路径挂载</strong></p>
+<p>docker run -v 主机目录:容器目录</p>
+<p>docker inspect id查看容器情况</p>
+<div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell">&quot;Mounts&quot;: [
+            &#123;
+                &quot;Type&quot;: &quot;bind&quot;,
+                # 主机内
+                &quot;Source&quot;: &quot;&#x2F;home&#x2F;tempFile&quot;,
+                # docker容器内地址
+                &quot;Destination&quot;: &quot;&#x2F;home&quot;,
+                &quot;Mode&quot;: &quot;&quot;,
+                &quot;RW&quot;: true,
+                &quot;Propagation&quot;: &quot;rprivate&quot;
+            &#125;
+        ],</code></pre></div>
+<p>此时在容器内该目录下的操作，都相当于在主机内的该目录下进行的操作。删除容器，但主机内的文件不会消失</p>
+<p><strong>同步Mysql</strong></p>
+<div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell"># 创建容器
+docker run -d -p 3310:3306 -v &#x2F;home&#x2F;mysql&#x2F;conf:&#x2F;etc&#x2F;mysql&#x2F;conf.d -v &#x2F;home&#x2F;mysql&#x2F;data:&#x2F;var&#x2F;lib&#x2F;mysql -e MYSQL_ROOT_PASSWORD&#x3D;Zyl2000215 --name mysql01 mysql:8.0.26
+# 可以直接从远程访问</code></pre></div>
+</li>
+<li>
+<p><strong>匿名挂载</strong></p>
+<p>DRIVER    VOLUME NAME<br>
+local     d7e224fbb90a257812018ad044398007014d08293674b8fc9266fe22b1773c8b(匿名挂载的名称)</p>
+<p>-v 时只写了容器内部的路径，没有写容器外部的路径（随便找个地方挂了）</p>
+</li>
+<li>
+<p><strong>具名挂载</strong></p>
+<p>-v [volumnj_name]:/xxx/xxx</p>
+<p>DRIVER    VOLUME NAME<br>
+local     specific-name(匿名挂载的名称)</p>
+<p>通过docker volume inspect xxxx查看</p>
+<p>放在docker/volumes中</p>
+</li>
+</ol>
+<p><strong>在容器路径后加:rw 和 :ro 改变读写的权限</strong></p>
+<ul>
+<li>ro：只能从外部（主机）改变，容器内部不得更改</li>
+<li>rw：默认</li>
+</ul>
+<h5 id="DockerFile挂载">DockerFile挂载</h5>
+<p><strong>DockerFile</strong></p>
+<p>一段命令脚步</p>
+<div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell"># 示例脚本
+FROM centos
+# 生成数据卷目录，匿名挂载
+VOLUME [&quot;volume01&quot;,&quot;volumn02&quot;]
+
+CMD echo &quot;---end---&quot;
+CMD &#x2F;bin&#x2F;bash</code></pre></div>
+<div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell">docker build -f dockerfile1 -t zyl&#x2F;centos .
+# 注意这个 . 
+# 运行结果
+Sending build context to Docker daemon  2.048kB
+Step 1&#x2F;4 : FROM centos
+ ---&gt; 5d0da3dc9764
+Step 2&#x2F;4 : VOLUME [&quot;volume01&quot;,&quot;volumn02&quot;]
+ ---&gt; Running in 8c219faef7d6
+Removing intermediate container 8c219faef7d6
+ ---&gt; 905dfeb79eb6
+Step 3&#x2F;4 : CMD echo &quot;---end---&quot;
+ ---&gt; Running in 4996222c5dae
+Removing intermediate container 4996222c5dae
+ ---&gt; 0876105c0d1b
+Step 4&#x2F;4 : CMD &#x2F;bin&#x2F;bash
+ ---&gt; Running in 719ba2d3806a
+Removing intermediate container 719ba2d3806a
+ ---&gt; ffa50b1fdb37
+Successfully built ffa50b1fdb37
+Successfully tagged zyl&#x2F;centos:latest
+</code></pre></div>
+<h3 id="数据卷容器">数据卷容器</h3>
+<p>多个mysql同步数据（子、父容器间的挂载）</p>
+<p>–volumes-from [main_instance]。可以嵌套的挂载</p>
+<p>此时主机main和主机this的volume就会同步了</p>
+<p>删除main，docker02和docker03还是可以访问volume下的文件(但这里的前提是，映射的是真实主机下的目录，主机下的目录还没删除)[这里还不是很清楚]</p>
+<p>数据卷容器的生命周期一直持续到没有容器使用为止</p>
+<p><strong>多个mysql实现数据共享</strong></p>
+<h3 id="DockerFile">DockerFile</h3>
+<p>一段命令脚本</p>
+<p>比如你想要一个centos + jdk + mysql…</p>
+<h4 id="指令">指令</h4>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211015110209785.png" srcset="/;/img/loading.gif" lazyload alt="image-20211015110209785"></p>
+<ul>
+<li>每个关键字都<strong>必须</strong>是大写字母</li>
+<li>指令是顺序执行的</li>
+<li>#表示注释</li>
+<li><strong>每个指令都会创建提交一个新的镜像层</strong></li>
+</ul>
+<p><strong>CMD 和 ENTRYPOINT的区别</strong></p>
+<ul>
+<li>CMD [“ls”,“-a”] ，dockerfile在这种方式后，通过docker run  id 再去<strong>追加</strong> -l 操作就会报错，因为它会替换掉CMD的命令</li>
+<li>如果用ENTRYPOINT[“ls”,“-a”] 则不会出现上述问题</li>
+</ul>
+<h4 id="构建过程">构建过程</h4>
+<p>99%镜像是从基础镜像来的 scratch</p>
+<div class="code-wrapper"><pre class="language-dockerfile" data-language="dockerfile"><code class="language-dockerfile">FROM centos
+MAINTAINER zyl&lt;401177923@qq.com&gt;
+
+ENV MYPATH &#x2F;usr&#x2F;local
+WORKDIR $MYPATH
+# 带vim和net-tools
+RUN yum -y install vim
+RUN yum -y install net-tools
+# 暴露80端口
+EXPOSE 80
+
+CMD echo$MYPATH
+CMD echo &quot;build finished&quot;
+CMD &#x2F;bin&#x2F;bash
+</code></pre></div>
+<p>返回内容</p>
+<div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell"># 注意命令最后还有个 .
+# docker build -f tarDockerFile -t imagename .
+Sending build context to Docker daemon  2.048kB
+Step 1&#x2F;10 : FROM centos
+ ---&gt; 5d0da3dc9764
+Step 2&#x2F;10 : MAINTAINER zyl&lt;401177923@qq.com&gt;
+ ---&gt; Running in 4d6110c861e7
+Removing intermediate container 4d6110c861e7
+ ---&gt; 0ac892083934
+Step 3&#x2F;10 : ENV MYPATH &#x2F;usr&#x2F;local
+ ---&gt; Running in 8c0c8833003d
+Removing intermediate container 8c0c8833003d
+ ---&gt; 75e64bad3a9e
+Step 4&#x2F;10 : WORKDIR $MYPATH
+ ---&gt; Running in 2e111cca4927
+Removing intermediate container 2e111cca4927
+ ---&gt; 03809e35e5a5
+Step 5&#x2F;10 : RUN yum -y install vim
+ ---&gt; Running in 444473f309e6
+CentOS Linux 8 - AppStream                       14 MB&#x2F;s | 9.3 MB     00:00    
+CentOS Linux 8 - BaseOS                         3.2 MB&#x2F;s | 7.5 MB     00:02    
+CentOS Linux 8 - Extras                          19 kB&#x2F;s |  10 kB     00:00    
+Dependencies resolved.
+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+ Package             Arch        Version                   Repository      Size
+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+Installing:
+ vim-enhanced        x86_64      2:8.0.1763-15.el8         appstream      1.4 M
+Installing dependencies:
+ gpm-libs            x86_64      1.20.7-17.el8             appstream       39 k
+ vim-common          x86_64      2:8.0.1763-15.el8         appstream      6.3 M
+ vim-filesystem      noarch      2:8.0.1763-15.el8         appstream       48 k
+ which               x86_64      2.21-12.el8               baseos          49 k
+
+Transaction Summary
+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+Install  5 Packages
+
+Total download size: 7.8 M
+Installed size: 30 M
+Downloading Packages:
+(1&#x2F;5): gpm-libs-1.20.7-17.el8.x86_64.rpm        1.3 MB&#x2F;s |  39 kB     00:00    
+(2&#x2F;5): vim-filesystem-8.0.1763-15.el8.noarch.rp 3.2 MB&#x2F;s |  48 kB     00:00    
+(3&#x2F;5): vim-enhanced-8.0.1763-15.el8.x86_64.rpm   20 MB&#x2F;s | 1.4 MB     00:00    
+(4&#x2F;5): which-2.21-12.el8.x86_64.rpm             931 kB&#x2F;s |  49 kB     00:00    
+(5&#x2F;5): vim-common-8.0.1763-15.el8.x86_64.rpm     45 MB&#x2F;s | 6.3 MB     00:00    
+--------------------------------------------------------------------------------
+Total                                           8.8 MB&#x2F;s | 7.8 MB     00:00     
+warning: &#x2F;var&#x2F;cache&#x2F;dnf&#x2F;appstream-02e86d1c976ab532&#x2F;packages&#x2F;gpm-libs-1.20.7-17.el8.x86_64.rpm: Header V3 RSA&#x2F;SHA256 Signature, key ID 8483c65d: NOKEY                                                                                 
+CentOS Linux 8 - AppStream                      257 kB&#x2F;s | 1.6 kB     00:00    
+Importing GPG key 0x8483C65D:
+ Userid     : &quot;CentOS (CentOS Official Signing Key) &lt;security@centos.org&gt;&quot;                                         
+ Fingerprint: 99DB 70FA E1D7 CE22 7FB6 4882 05B5 55B3 8483 C65D                                                    
+ From       : &#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-centosofficial                                                          
+Key imported successfully
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1&#x2F;1 
+  Installing       : which-2.21-12.el8.x86_64                               1&#x2F;5 
+  Installing       : vim-filesystem-2:8.0.1763-15.el8.noarch                2&#x2F;5 
+  Installing       : vim-common-2:8.0.1763-15.el8.x86_64                    3&#x2F;5 
+  Installing       : gpm-libs-1.20.7-17.el8.x86_64                          4&#x2F;5 
+  Running scriptlet: gpm-libs-1.20.7-17.el8.x86_64                          4&#x2F;5 
+  Installing       : vim-enhanced-2:8.0.1763-15.el8.x86_64                  5&#x2F;5 
+  Running scriptlet: vim-enhanced-2:8.0.1763-15.el8.x86_64                  5&#x2F;5 
+  Running scriptlet: vim-common-2:8.0.1763-15.el8.x86_64                    5&#x2F;5 
+  Verifying        : gpm-libs-1.20.7-17.el8.x86_64                          1&#x2F;5 
+  Verifying        : vim-common-2:8.0.1763-15.el8.x86_64                    2&#x2F;5 
+  Verifying        : vim-enhanced-2:8.0.1763-15.el8.x86_64                  3&#x2F;5 
+  Verifying        : vim-filesystem-2:8.0.1763-15.el8.noarch                4&#x2F;5 
+  Verifying        : which-2.21-12.el8.x86_64                               5&#x2F;5 
+
+Installed:
+  gpm-libs-1.20.7-17.el8.x86_64         vim-common-2:8.0.1763-15.el8.x86_64    
+  vim-enhanced-2:8.0.1763-15.el8.x86_64 vim-filesystem-2:8.0.1763-15.el8.noarch
+  which-2.21-12.el8.x86_64             
+
+Complete!
+Removing intermediate container 444473f309e6
+ ---&gt; 78cb874e438d
+Step 6&#x2F;10 : RUN yum -y install net-tools
+ ---&gt; Running in 7311bbbb2557
+Last metadata expiration check: 0:00:08 ago on Fri Oct 15 03:20:15 2021.
+Dependencies resolved.
+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+ Package         Architecture Version                        Repository    Size
+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+Installing:
+ net-tools       x86_64       2.0-0.52.20160912git.el8       baseos       322 k
+
+Transaction Summary
+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+Install  1 Package
+
+Total download size: 322 k
+Installed size: 942 k
+Downloading Packages:
+net-tools-2.0-0.52.20160912git.el8.x86_64.rpm   2.1 MB&#x2F;s | 322 kB     00:00    
+--------------------------------------------------------------------------------
+Total                                           554 kB&#x2F;s | 322 kB     00:00     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1&#x2F;1 
+  Installing       : net-tools-2.0-0.52.20160912git.el8.x86_64              1&#x2F;1 
+  Running scriptlet: net-tools-2.0-0.52.20160912git.el8.x86_64              1&#x2F;1 
+  Verifying        : net-tools-2.0-0.52.20160912git.el8.x86_64              1&#x2F;1 
+
+Installed:
+  net-tools-2.0-0.52.20160912git.el8.x86_64                                     
+
+Complete!
+Removing intermediate container 7311bbbb2557
+ ---&gt; d853a514f23d
+Step 7&#x2F;10 : EXPOSE 80
+ ---&gt; Running in 4c11e9c9381b
+Removing intermediate container 4c11e9c9381b
+ ---&gt; 4e1f8eeab200
+Step 8&#x2F;10 : CMD echo$MYPATH
+ ---&gt; Running in 4e657781cf01
+Removing intermediate container 4e657781cf01
+ ---&gt; f59d25947e4c
+Step 9&#x2F;10 : CMD echo &quot;build finished&quot;
+ ---&gt; Running in c91b3f839631
+Removing intermediate container c91b3f839631
+ ---&gt; b0dc3c46d320
+Step 10&#x2F;10 : CMD &#x2F;bin&#x2F;bash
+ ---&gt; Running in 8633f3644184
+Removing intermediate container 8633f3644184
+ ---&gt; ea1d45e0166b
+Successfully built ea1d45e0166b
+Successfully tagged zylcentos:1.0
+</code></pre></div>
+<p><strong>实例：Tomcat镜像</strong></p>
+<ol>
+<li>
+<p>准备：tomcat + jdk压缩包</p>
+</li>
+<li>
+<p>编写dockerfile</p>
+<div class="code-wrapper"><pre class="language-dockerfile" data-language="dockerfile"><code class="language-dockerfile">FROM centos
+MAINTAINER zyl&lt;401177923@qq.com&gt;
+# ADD可以自动解压  后面跟指定路径
+ADD jdk-8u202-linux-x64.tar.gz &#x2F;usr&#x2F;local&#x2F;
+ADD apache-tomcat-8.5.72.tar.gz &#x2F;usr&#x2F;local&#x2F;
+
+RUN yum -y install vim
+
+ENV MYPATH &#x2F;usr&#x2F;local
+WORKDIR $MYPATH
+
+ENV JAVA_HOME &#x2F;usr&#x2F;local&#x2F;jdk1.8.0_202
+ENV CLASSPATH $JAVA_HOME&#x2F;lib&#x2F;dt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.jar
+ENV CATALINA_HOME &#x2F;usr&#x2F;local&#x2F;apache-tomcat-8.5.72
+ENV CATALINA_BASE &#x2F;usr&#x2F;local&#x2F;apache-tomcat-8.5.72
+ENV PATH $PATH:$JAVA_HOME&#x2F;bin:$CATALINA_HOME&#x2F;lib:$CATALINA_HOME&#x2F;bin
+
+EXPOSE 8080
+
+CMD &#x2F;usr&#x2F;local&#x2F;apache-tomcat-8.5.72&#x2F;bin&#x2F;startup.sh &amp;&amp; tail -F &#x2F;usr&#x2F;local&#x2F;apache-tomcat-8.5.72&#x2F;bin&#x2F;logs&#x2F;catalina.out
+
+# docker run -d -p 9090:8080 --name zylstomcat -v &#x2F;home&#x2F;zyl&#x2F;zyltomcat&#x2F;test:&#x2F;usr&#x2F;local&#x2F;apache-tomcat-8.5.72&#x2F;webapps&#x2F;test -v &#x2F;home&#x2F;zyl&#x2F;zyltomcat&#x2F;tomcatlogs&#x2F;:&#x2F;usr&#x2F;local&#x2F;apache-tomcat-8.5.72&#x2F;logs zyltomcat
+# 当然 主机服务器需要对外暴露9090端口</code></pre></div>
+</li>
+</ol>
+<h2 id="发布">发布</h2>
+<p>服务器上提交</p>
+<p>docker 登录</p>
+<div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell">docker login -u ssss -password xxx
+# 当然，这里存的是MD5或者是其他散列后的密码
+docker push imagename zyltomcat:1.0 # 最好附带版本号
+
+# push镜像问题 ： 没有tag
+The push refers to repository [docker.io&#x2F;library&#x2F;zyltomcat]
+tag does not exist
+
+docker tag 7235ec815853 zyltomcat:1.0
+
+
+</code></pre></div>
+<p><strong>发布到阿里云</strong></p>
+<p>官网都有</p>
+<p><strong>镜像打包成tar 和 加载</strong></p>
+<p>docker save   docker load</p>
+<h2 id="Docker网络">Docker网络</h2>
+<p>核心：Linux虚拟化网络技术</p>
+<h3 id="Docker0">Docker0</h3>
+<div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell">ip a 查看网络信息
+[root@VM-4-4-centos ~]# ip a
+# 本机地址
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link&#x2F;loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1&#x2F;8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1&#x2F;128 scope host 
+       valid_lft forever preferred_lft forever
+# 阿里云内网地址
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000
+    link&#x2F;ether 52:54:00:c3:15:52 brd ff:ff:ff:ff:ff:ff
+    inet 10.0.4.4&#x2F;22 brd 10.0.7.255 scope global noprefixroute eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::5054:ff:fec3:1552&#x2F;64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+# docker地址
+# B类网络，容纳6万多个子网
+3: docker0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default 
+    link&#x2F;ether 02:42:ad:16:e9:c5 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1&#x2F;16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::42:adff:fe16:e9c5&#x2F;64 scope link 
+       valid_lft forever preferred_lft forever
+</code></pre></div>
+<p>启动一个tomcat容器后，主机ip a,增加了一个网卡</p>
+<div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell"># 主机内的。并且注意这里的inet和docker0的inet网段是相同的！
+68: eth0@if69: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default 
+    link&#x2F;ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 172.17.0.2&#x2F;16 brd 172.17.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+# 容器内的
+69: vethfcd0557@if68: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue master docker0 state UP group default 
+    link&#x2F;ether b2:7e:eb:e8:24:aa brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet6 fe80::b07e:ebff:fee8:24aa&#x2F;64 scope link 
+       valid_lft forever preferred_lft forever
+# 两者是对称的</code></pre></div>
+<p>通过容器增加的网卡，都是一对的。<br>
+evth-pair，就是一堆虚拟设备接口，成对出现，一端接协议，一段彼此相连。充当桥梁，连接各种虚拟网络设备</p>
+<p>docker 如何处理容器访问网络？主机能否pin到容器内的ip地址</p>
+<p>此过程中如果容器内没有ip a 指令，需要通过apt安装iproute2<br>
+没有ping，需要安装iputils-ping</p>
+<p>veth-pair</p>
+<ul>
+<li>ip主机能否pin到容器内的ip地址？能</li>
+<li>容器能否ping到主机(这里用的内网地址)？能</li>
+<li>容器pin容器能否pin通？</li>
+</ul>
+<h4 id="原理-v2"><strong>原理</strong></h4>
+<ol>
+<li>每启动给一个docker容器，docker就会给容器分配一个ip</li>
+<li>只要安装了docker，就会有一个网卡docker0 — 桥接模式 ----<strong>veth-pair</strong>技术</li>
+<li>docker中所有的网络接口都是<strong>虚拟</strong>的，虚拟的转发效率高</li>
+</ol>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211021165235597.png" srcset="/;/img/loading.gif" lazyload alt="image-20211021165235597"></p>
+<p>tomcat01 与 02 并不是直接通信，而是通过docker0去路由。通过表结构记录或者广播的方式</p>
+<h3 id="Veth-Pair技术">Veth-Pair技术</h3>
+<h3 id="Link">Link</h3>
+<p>通过name去ping对应的容器</p>
+<div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell">docker run -d -P --name tomcat03 --link tomcat01 tomcat</code></pre></div>
+<p>这样tomcat03能够ping通02，但02ping不通03</p>
+<p>docker network inspect bridgeid</p>
+<div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell">[root@VM-4-4-centos ~]# docker network inspect 9be3892efc4c
+\[
+    &#123;
+        &quot;Name&quot;: &quot;bridge&quot;,
+        &quot;Id&quot;: &quot;9be3892efc4c9f1c47f9340dd9a10326e11d913a1a955176009bd3819912636c&quot;,
+        &quot;Created&quot;: &quot;2021-09-23T19:22:22.607525017+08:00&quot;,
+        &quot;Scope&quot;: &quot;local&quot;,
+        &quot;Driver&quot;: &quot;bridge&quot;,
+        &quot;EnableIPv6&quot;: false,
+        &quot;IPAM&quot;: &#123;
+            &quot;Driver&quot;: &quot;default&quot;,
+            &quot;Options&quot;: null,
+            &quot;Config&quot;: [
+                &#123;
+                    &quot;Subnet&quot;: &quot;172.17.0.0&#x2F;16&quot;,
+                    &quot;Gateway&quot;: &quot;172.17.0.1&quot;
+                &#125;
+            ]
+        &#125;,
+        &quot;Internal&quot;: false,
+        &quot;Attachable&quot;: false,
+        &quot;Ingress&quot;: false,
+        &quot;ConfigFrom&quot;: &#123;
+            &quot;Network&quot;: &quot;&quot;
+        &#125;,
+        &quot;ConfigOnly&quot;: false,
+        &quot;Containers&quot;: &#123;
+            &quot;a65b9eb65fd41e0321e26b7f0b73a55a45edf40016714d1108a39bea1388482a&quot;: &#123;
+                &quot;Name&quot;: &quot;tomcat02&quot;,
+                &quot;EndpointID&quot;: &quot;58a1eda21ee378bfd8c325d685ea44bc924cdca8c6a32f700d1020ffec6bfe3b&quot;,
+                &quot;MacAddress&quot;: &quot;02:42:ac:11:00:03&quot;,
+                &quot;IPv4Address&quot;: &quot;172.17.0.3&#x2F;16&quot;,
+                &quot;IPv6Address&quot;: &quot;&quot;
+            &#125;,
+            &quot;d7679b70e668b7403f0da46845b967ad5135a35a4b6fbfa4549da49462ed3b4c&quot;: &#123;
+                &quot;Name&quot;: &quot;tomcat01&quot;,
+                &quot;EndpointID&quot;: &quot;5f9452a5850efcc7abf8f3bdf2c9300c5fab48f410d8b32357e2cfe84433b33f&quot;,
+                &quot;MacAddress&quot;: &quot;02:42:ac:11:00:02&quot;,
+                &quot;IPv4Address&quot;: &quot;172.17.0.2&#x2F;16&quot;,
+                &quot;IPv6Address&quot;: &quot;&quot;
+            &#125;
+        &#125;,
+        &quot;Options&quot;: &#123;
+            &quot;com.docker.network.bridge.default_bridge&quot;: &quot;true&quot;,
+            &quot;com.docker.network.bridge.enable_icc&quot;: &quot;true&quot;,
+            &quot;com.docker.network.bridge.enable_ip_masquerade&quot;: &quot;true&quot;,
+            &quot;com.docker.network.bridge.host_binding_ipv4&quot;: &quot;0.0.0.0&quot;,
+            &quot;com.docker.network.bridge.name&quot;: &quot;docker0&quot;,
+            &quot;com.docker.network.driver.mtu&quot;: &quot;1500&quot;
+        &#125;,
+        &quot;Labels&quot;: &#123;&#125;
+    &#125;
+]</code></pre></div>
+<p>在创建tomcat03后，可以在docker Inspect中看到</p>
+<p>“Links”: [“/tomcat02:/tomcat03/tomcat02”]</p>
+<p>同时，也在tomcat03的hosts中发现</p>
+<div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell">root@779098da59a7:&#x2F;usr&#x2F;local&#x2F;tomcat# cat &#x2F;etc&#x2F;hosts
+127.0.0.1       localhost
+::1     localhost ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+# 这里，直接把tomcat02写死在这里，甚至包括了id和name
+172.17.0.3      tomcat02 a65b9eb65fd4
+# 这里就是03的id
+172.17.0.4      779098da59a7</code></pre></div>
+<h3 id="自定义网路">自定义网路</h3>
+<p><strong>桥接模式</strong>：bridge（默认），转发</p>
+<p><strong>none</strong>：不配置网络</p>
+<p><strong>host</strong>：和宿主机共享网络</p>
+<p>直接启动的命令，其实有默认的指令（–net bridge）</p>
+<ol>
+<li>创建<br>
+docker network create --driver bridge --subnet 192.168.0.0/24 --gateway 192.168.0.1 zylnet,就创建到network中去了。当然，也会在主机内创建这个网卡（类似docker0）</li>
+<li>这时候创建的容器，如果指定这个网络，那其ip都采用上述的地址</li>
+<li><strong>可以不用使用link直接来ping名字</strong>（自定义的网络能够帮我们维护好对应关系）
+<ul>
+<li>为啥啊？</li>
+</ul>
+</li>
+</ol>
+<h3 id="网络连通">网络连通</h3>
+<p>同一主机下的不同网络，比如docker0 的tomcat和另外一个网卡的tomcat（在不同的网段了）</p>
+<div class="note note-info">
+            <p>能够访问不同网段的ip吗？</p><p><strong>不能</strong></p>
+          </div>
+<p>解决方法：</p>
+<p><strong>一个容器两个IP</strong></p>
+<p>docker network connect 把一个容器连接到一个网络<br>
+就是把tomcat01 放到了另一个网络下</p>
+<p><strong>证实</strong></p>
+<p>通过docker network inspect zylnet，可以看到，</p>
+<p>对tomcat-01,（被连接的container）</p>
+<div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell">root@005986ed8954:&#x2F;usr&#x2F;local&#x2F;tomcat# ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link&#x2F;loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1&#x2F;8 scope host lo
+       valid_lft forever preferred_lft forever
+79: eth0@if80: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default 
+    link&#x2F;ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 172.17.0.2&#x2F;16 brd 172.17.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+# 这里把zylnet的配置也加上了
+81: eth1@if82: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default 
+    link&#x2F;ether 02:42:c0:a8:00:04 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 192.168.0.4&#x2F;24 brd 192.168.0.255 scope global eth1
+       valid_lft forever preferred_lft forever
+</code></pre></div>
+<p>也可以在tomcat-01的hosts文件中发现，添加了 新网段下分配的新的ip地址，也赋给了这个容器id</p>
+<div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell">172.17.0.2      005986ed8954
+192.168.0.4     005986ed8954</code></pre></div>
+<p>这时候，两台容器都可以通过本网段中的ip、名字去互ping，但是<br>
+通过ping外来主机的原网段172.xxx.xx.xx，是ping不到的（可以理解）</p>
+<h2 id="原理-v3">原理</h2>
+<h3 id="概念-v3">概念</h3>
+<p>虚拟机：模拟系统，在软件层面上通过模拟硬件的输入和输出，让虚拟机的操作系统得以运行在没有物理硬件的环境中，能够模拟硬件的输入输出（比如AS的emulator就是这样）</p>
+<ul>
+<li>一般来说虚拟机会有自己的kernel、自己的硬件，虚拟机开机时需要开机自检、启动kernel、用户进程等，十分慢</li>
+<li>如果<strong>虚拟机和宿主机的kernel是一致</strong>的，就不需要做硬件输入输出的搬运工  ---- 操作系统层虚拟化 ---- 容器</li>
+</ul>
+<div class="note note-primary">
+            <p>Docker容器有自己的内核吗？</p><p>没有，docker和宿主机共享kernel</p>
+          </div>
+<h3 id="带入">带入</h3>
+<p>Linux启动流程中的步骤</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211024230125804.png" srcset="/;/img/loading.gif" lazyload alt="image-20211024230125804"></p>
+<h2 id="一些问题">一些问题</h2>
+<p><strong>docker run  attach  exec的区别</strong></p>
+<p><strong>docker push 相同层的时候会怎么做？</strong></p>
+<p>盲猜：不会对比相同的，因为如果要对比是否id相同时，则要花费很多时间？</p>
+<p><strong>能在Mac和Windows平台下跑docker的原因</strong></p>
+<h2 id="实践">实践</h2>
+<h3 id="创建允许SSH的CentOS容器">创建允许SSH的CentOS容器</h3>
+<p>Dockerfile</p>
+<div class="code-wrapper"><pre class="language-dockerfile" data-language="dockerfile"><code class="language-dockerfile">FROM centos:7
+ENV container docker
+RUN (cd &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;sysinit.target.wants&#x2F;; for i in *; do [ $i &#x3D;&#x3D; \
+systemd-tmpfiles-setup.service ] || rm -f $i; done); \
+rm -f &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;multi-user.target.wants&#x2F;*;\
+rm -f &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;*.wants&#x2F;*;\
+rm -f &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;local-fs.target.wants&#x2F;*; \
+rm -f &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;sockets.target.wants&#x2F;*udev*; \
+rm -f &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;sockets.target.wants&#x2F;*initctl*; \
+rm -f &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;basic.target.wants&#x2F;*;\
+rm -f &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;anaconda.target.wants&#x2F;*;
+# Official Resolution Above
+ENV MYPATH &#x2F;usr&#x2F;local
+WORKDIR $MYPATH
+# 带vim和net-tools
+RUN yum -y install vim
+RUN yum -y install net-tools
+RUN yum -y install httpd
+RUN yum -y sudo
+systemctl enable httpd.service
+# 暴露80端口
+EXPOSE 80
+EXPOSE 22
+VOLUME [ &quot;&#x2F;sys&#x2F;fs&#x2F;cgroup&quot; ]
+CMD [&quot;&#x2F;usr&#x2F;sbin&#x2F;init&quot;]
+
+# docker build --rm -t dockerfile
+# docker run -d --name centos7-net-test01 -p 50044:22 -p 50043:80 -p 50042:8080 --privileged&#x3D;true centos:centos7 &#x2F;usr&#x2F;sbin&#x2F;init
+# docker exec -it centos7-net-test01 &#x2F;bin&#x2F;bash
+# yum install -y openssh-clients openssh-server
+# passwd 添加密码</code></pre></div>
+<p><strong>–privileged=true 避免无法Systemctl去启动服务</strong></p>
+<p>开特权。因为Docker的理念是在容器里面不进行后台服务，容器本身就是一个独立的主进程。而Systemctl需要特权去访问linux内核，而容器并非一个完整的操作系统，只是一个文件系统。因此容器的设计原则：<strong>一个容器里运行一个前台服务</strong></p>
+<p><strong>需要映射端口把容器内端口映射到主机下，才能通过主机的ip，预分配的端口号来访问</strong></p>
+<p><strong>centos安装openssh-server</strong></p>
+<p>yum install openssh-server，/etc/ssh/sshd 开启Port 22 Address等，开启PermitRootLogin…开启PermitPasswordAuthenticate.，开启sshd服务 systemctl start sshd.</p>
+<p><strong>动态映射端口到容器</strong></p>
+<p>先暂停docker服务systemctl stop docker</p>
+<p>找到/var/lib/docker/containers/idxxxxx/config.v2.json 添加</p>
+<div class="code-wrapper"><pre class="language-json" data-language="json"><code class="language-json"><span class="token property">"ExposedPorts"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"22/tcp"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"80/tcp"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"8080/tcp"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"Ports"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"22/tcp"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token property">"HostIp"</span><span class="token operator">:</span><span class="token string">"0.0.0.0"</span><span class="token punctuation">,</span><span class="token property">"HostPort"</span><span class="token operator">:</span><span class="token string">"50044"</span><span class="token punctuation">&#125;</span></code></pre></div>
+<p>找到同目录下/hostjson  添加</p>
+<div class="code-wrapper"><pre class="language-json" data-language="json"><code class="language-json"><span class="token property">"PortBindings"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"22/tcp"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token property">"HostIp"</span><span class="token operator">:</span><span class="token string">""</span><span class="token punctuation">,</span><span class="token property">"HostPort"</span><span class="token operator">:</span><span class="token string">"50044"</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token property">"80/tcp"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token property">"HostIp"</span><span class="token operator">:</span><span class="token string">""</span><span class="token punctuation">,</span><span class="token property">"HostPort"</span><span class="token operator">:</span><span class="token string">"50043"</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token property">"8080/tcp"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token property">"HostIp"</span><span class="token operator">:</span><span class="token string">""</span><span class="token punctuation">,</span><span class="token property">"HostPort"</span><span class="token operator">:</span><span class="token string">"50042"</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span></code></pre></div>
+<p>再开启服务，按理说就可以动态映射（未验证）</p>
+
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="post-metas mb-3">
+                                            
+                                                    
+                                                        <div class="post-meta">
+                                                            <i class="iconfont icon-tags"></i>
+                                                            
+                                                                <a class="hover-with-bg" href="/;/tags/Tool/">
+                                                                    Tool
+                                                                </a>
+                                                                
+                                                                <a class="hover-with-bg" href="/;/tags/Linux/">
+                                                                    Linux
+                                                                </a>
+                                                                
+                                                        </div>
+                                                        
+                                        </div>
+                                        
+                                            <p class="note note-warning">
+                                                
+                                                            本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                                                                
+                                            </p>
+                                            
+                                                
+                                                    <div class="post-prevnext">
+                                                        <article class="post-prev col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2021/10/15/Python%E5%AD%A6%E4%B9%A0/">
+                                                                        <i class="iconfont icon-arrowleft"></i>
+                                                                        <span class="hidden-mobile">Python学习</span>
+                                                                        <span class="visible-mobile">上一篇</span>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                        <article class="post-next col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2021/10/09/%E9%97%AE%E9%A2%98%E7%9B%92%E5%AD%90/">
+                                                                        <span class="hidden-mobile">问题盒子</span>
+                                                                        <span class="visible-mobile">下一篇</span>
+                                                                        <i class="iconfont icon-arrowright"></i>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                    </div>
+                                                    
+                                    </div>
+
+                                    
+                                        <!-- Comments -->
+                                        <article class="comments" id="comments" lazyload>
+                                            
+                                                        
+                                                            
+                                                                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Yunlong626/commit-utterances');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+                                        </article>
+                                        
+                        </article>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+                    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+                </div>
+                
+        </div>
+    </div>
+
+    <!-- Custom -->
+    
+    <!--添加我自己的设置页面-->
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+    <!--加入自定义格式的-->
+    <!--自定义的git徽标样式-->
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080" srcset="/;/img/loading.gif" lazyload>
+<br>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,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&style=flat&color=d2c68b" srcset="/;/img/loading.gif" lazyload>
+
+<!-- 自定义显示文章总页数和字数的模块 -->
+<div class="bottom-post-statistic">
+    <div class="bottom-post-count">
+        62&nbsp 篇文章
+    </div>
+    <div class="bottom-post-word">
+        248.9k&nbsp 字
+    </div>
+</div>
+        <div class="footer-content">
+             <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+        </div>
+
+        
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+            
+
+                
+</footer>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/;/js/events.js" ></script>
+<script  src="/;/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/;/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/;/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/;/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/;/js/reset_code_lang.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/;/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?PPLong222";
+            var git_color =['#ebedf0', '#bef5cb', '#bef5cb', '#a9f5b4', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620'];
+            var git_user ="PPLong222";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div id="github-calendar" style="width:100%;height:auto;padding:10px;margin-bottom:20px"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;margin-top:100px;;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/about/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:200px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>#github_container > .position-relative > .border{border:0!important}#github-calendar{position: relative;margin-top: -2rem;background-color: var(--board-bg-color);transition: background-color 0.2s ease-in-out;border-radius: 0.5rem;z-index: 3;-webkit-box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);}</style><!-- hexo injector body_end end --></body>
+</html>

@@ -1,0 +1,818 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/;/gallery/paw_img.jpg">
+  <link rel="icon" href="/;/gallery/paw_img.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="学习疑惑
+
+避免自己忘记，建个合集。学习时所有的疑惑和原理探究都在这儿啦
+
+
+网络
+SSH SFTP原理
+SHA \ RSA过程
+SCP基于SFTP吗
+格式
+JPEG分析
+数据结构
+浮点型到底是什么？
+Random的seed究竟是啥？">
+  <meta name="author" content="PPLong">
+  <meta name="keywords" content="">
+  <!--添加百度站点统计-->
+  <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
+  <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
+  <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
+  <meta name="description" content="学习疑惑  避免自己忘记，建个合集。学习时所有的疑惑和原理探究都在这儿啦   网络 SSH SFTP原理 SHA \ RSA过程 SCP基于SFTP吗 格式 JPEG分析 数据结构 浮点型到底是什么？ Random的seed究竟是啥？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="问题盒子">
+<meta property="og:url" content="http://43.139.93.91/;/2021/10/09/%E9%97%AE%E9%A2%98%E7%9B%92%E5%AD%90/index.html">
+<meta property="og:site_name" content="PPLong的博客">
+<meta property="og:description" content="学习疑惑  避免自己忘记，建个合集。学习时所有的疑惑和原理探究都在这儿啦   网络 SSH SFTP原理 SHA \ RSA过程 SCP基于SFTP吗 格式 JPEG分析 数据结构 浮点型到底是什么？ Random的seed究竟是啥？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211021150922618.png">
+<meta property="article:published_time" content="2021-10-09T04:53:30.000Z">
+<meta property="article:modified_time" content="2022-04-07T01:45:18.000Z">
+<meta property="article:author" content="PPLong">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="总结">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211021150922618.png">
+  
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
+  
+  <title>问题盒子 - PPLong的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/;/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/;/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/;/css/indexing-hover.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"43.139.93.91","root":"/;/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/;/local-search.xml"};
+  </script>
+  <script  src="/;/js/utils.js" ></script>
+  <script  src="/;/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 90vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/;/">
+      <strong>PPLong的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友達
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-link-fill"></i>
+                娱乐
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/movie/">
+                    <i class="iconfont icon-movie"></i>
+                    第二人生
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/shuoshuo/">
+                    <i class="iconfont icon-comment"></i>
+                    唠唠
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/develop/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    尝鲜
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/;/gallery/covers/wallhaven-m928jy.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="问题盒子">
+              
+            </span>
+
+            
+              <div class="mt-3">
+    
+            
+                <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-09 12:53" pubdate>
+        始于: 2021年10月9日下午12点53分
+      </time>
+    </span>
+                
+</div>
+
+<!-- 自定义的更新时间 -->
+<div class="mt-1">
+    
+        <span class="post-meta">
+  <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
+  <time datetime="2022-04-07 09:45" pubdate>
+    更新: 2022年4月7日上午9点45分
+  </time>
+</span>
+        
+</div>
+
+<div class="mt-1">
+    
+        <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.1k 字
+    </span>
+        
+
+            
+                <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10 分钟
+    </span>
+                
+
+                    
+                        
+                            
+                                <!-- LeanCloud 统计文章PV -->
+                                <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span>
+                                 次
+                                    </span>
+                                    
+                                                
+</div>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+    <div class="container-fluid nopadding-x">
+        <div class="row nomargin-x">
+            <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-x-md">
+                <div class="container nopadding-x-md" id="board-ctn">
+                    <div class="py-5" id="board">
+                        <article class="post-content mx-auto">
+                            <!-- SEO header -->
+                            <h1 style="display: none">
+                                问题盒子
+                            </h1>
+                            
+                                    <div class="markdown-body">
+                                        <h1>学习疑惑</h1>
+<blockquote>
+<p>避免自己忘记，建个合集。学习时所有的疑惑和原理探究都在这儿啦</p>
+</blockquote>
+<!--toc-->
+<h2 id="网络">网络</h2>
+<h3 id="SSH-SFTP原理">SSH SFTP原理</h3>
+<h3 id="SHA-RSA过程">SHA \ RSA过程</h3>
+<h3 id="SCP基于SFTP吗">SCP基于SFTP吗</h3>
+<h2 id="格式">格式</h2>
+<h3 id="JPEG分析">JPEG分析</h3>
+<h2 id="数据结构-v2">数据结构</h2>
+<p><strong>浮点型到底是什么</strong>？</p>
+<p><strong>Random的seed究竟是啥？</strong></p>
+<span id="more"></span>
+<h2 id="常识">常识</h2>
+<h3 id="时区-9-00是啥意思？"><strong>时区+9:00是啥意思？</strong></h3>
+<blockquote>
+<p>正式的时区包括24个时区，每个时区由一个英文字母表示，每个经度15°为一个时区，每个时区有一条中央子午线。规定相邻的时区相差1小时。</p>
+<p>但一个国家可能同时跨越多个时区，比如中国跨越了5个时区，但为了方便，还是按照东八时区的标准（以北京时间为准）</p>
+</blockquote>
+<div class="note note-info">
+            <p><strong>历史</strong></p><p>1884年 华盛顿召开国际经度会议，规定全球划分24个时区。英国（格林尼治天文台）为中时区（零时区），东1-12区，西1-12区（东西12区为一个区）。东西12区在两边之间各跨度7.5度而连接。每个时区的中央经线上的时间就是这个时区统一采用的时间，叫区时</p>
+          </div>
+<div class="note note-primary">
+            <p><strong>常识</strong></p><p>UTC+8：中国、新加坡；<br>UTC+9：日本、韩国<br>UTC-5、UTC-6：美国、加拿大</p>
+          </div>
+<h3 id="字符和字节到底怎么区分的呢？"><strong>字符和字节到底怎么区分的呢？</strong></h3>
+<p>字节，基本的数据量单位，一字节 = 8 位<br>
+字符是计算机中使用的字母、数字、字和符号</p>
+<ul>
+<li>ASCII 码中，一个英文字母（不分大小写）为一个字节，一个中文汉字为两个字节。</li>
+<li>UTF-8 编码中，一个英文字为一个字节，一个中文为三个字节。</li>
+<li>Unicode 编码中，一个英文为一个字节，一个中文为两个字节。</li>
+<li>符号：英文标点为一个字节，中文标点为两个字节。例如：英文句号 <strong>.</strong> 占1个字节的大小，中文句号 **。**占2个字节的大小。</li>
+<li>UTF-16 编码中，一个英文字母字符或一个汉字字符存储都需要 2 个字节（Unicode 扩展区的一些汉字存储需要 4 个字节）。</li>
+<li>UTF-32 编码中，世界上任何字符的存储都需要 4 个字节。</li>
+</ul>
+<p>对各种编码格式的解释</p>
+<ul>
+<li>
+<p>ASCII，美国信息交换标准代码</p>
+<ul>
+<li>标准ASCII码，低128位</li>
+<li>扩展ASCII码，高128位，允许将每个字符的第8位用于确定附加的128个特殊符号字符、图形符号</li>
+</ul>
+</li>
+<li>
+<p>Unicode 万国码、单一码。各国合作开发，为每种语言的每一个字符设置了唯一的编码 。Unicode用数字0-0x10FFFF(1114112个位置)来映射这些字符</p>
+<ul>
+<li>Unicode的学名是&quot;Universal Multiple-Octet Coded Character Set&quot;，简称为UCS。</li>
+<li>现在用的是UCS-2，即2个字节编码，而UCS-4是为了防止将来2个字节不够用才开发的。</li>
+</ul>
+</li>
+<li>
+<p>UTF ： UCS Transformation Format的缩写，可以翻译成Unicode字符集转换格式，，即怎样将Unicode定义的数字转换成程序数据</p>
+<ul>
+<li>
+<p>例如，“汉字”对应的数字是0x6c49和0x5b57，而编码的程序数据是：</p>
+<p>BYTE data_utf8[] = {0xE6, 0xB1, 0x89, 0xE5, 0xAD, 0x97}; // UTF-8编码，以八字节对Unicode进行编码,可以多达4个字节，有对应的编码规则</p>
+<p>WORD data_utf16[] = {0x6c49, 0x5b57}; // <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/UTF-16/9032026">UTF-16</a>编码</p>
+<p>DWORD data_utf32[] = {0x6c49, 0x5b57}; // <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/UTF-32/734460">UTF-32</a>编码</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="敲回车后到底增加了是两个字符还是一个字符？"><strong>敲回车后到底增加了是两个字符还是一个字符？</strong></h3>
+<p>先附一张ASCII表</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211021150922618.png" srcset="/;/img/loading.gif" lazyload alt="image-20211021150922618"></p>
+<p>UTF-8中敲回车换行是 0a 而不是回车0d</p>
+<h4 id="回车和换行">回车和换行</h4>
+<ul>
+<li>回车（CR–Carriage Return,\r）：将光标移动到当前行的开头</li>
+<li>换行（LR–Line Feed,\n）：将光标垂直移动到下一行</li>
+</ul>
+<p>不同操作系统下的含义：<br>
+\n:  UNIX 系统行末结束符<br>
+\r\n: window 系统行末结束符(感觉这个从原理上来说更加合理)<br>
+\r:  MAC OS 系统行末结束符</p>
+<div class="note note-primary">
+            <p>经常遇到的一个问题就是，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。</p>
+          </div>
+<h4 id="软回车和硬回车">软回车和硬回车</h4>
+<ul>
+<li>软回车：按回车产生的，换行的同时进行段落分割</li>
+<li>软回车，shift+enter，换行不换段(类似Markdown中的)</li>
+</ul>
+<h2 id="操作系统">操作系统</h2>
+<h3 id="Linux-v2">Linux</h3>
+<p><strong>ifconfig是啥？net-tools包含了啥？</strong></p>
+<p><strong>为什么manjaro可以访问windows的文件但windows却不行？</strong></p>
+<p><strong>Linux shell上突然中断操作是事务类型吗？</strong></p>
+<p><strong>ssh远程两个端口安装软件，会先等一个安装好了，再进行另一个端口上软件的安装</strong></p>
+<h3 id="其他-v3">其他</h3>
+<h4 id="64位、32位操作到底有啥区别？"><strong>64位、32位操作到底有啥区别？</strong></h4>
+<p>见计算机组成原理 “一些问题处”</p>
+<p><strong>GPU、CPU的区别？</strong></p>
+<p>见计算机组成原理</p>
+<h4 id="文件是如何被压缩的？">文件是如何被压缩的？</h4>
+<h2 id="语言">语言</h2>
+<h3 id="C">C</h3>
+<h4 id="EOF指的是啥？">EOF指的是啥？</h4>
+<h2 id="杂七杂八">杂七杂八</h2>
+<p><strong>GIthub的东西都存在哪儿了 ，这么多人都可以免费上传且不限制大小那存储硬盘得有多少？</strong></p>
+<p>Github2018年居然被微软收购了。  微软的互补品策略</p>
+<p>任何在市场中的产品、服务或者软件其实都存在相对应的替代品（Substitutes）和互补品（Complement）</p>
+<ol>
+<li>**替代品（Substitutes）**指的是当用户觉得你的产品价格太贵而考虑其他的其他产品，比如猪肉就是牛肉的替代品，如果你是卖猪肉的，当牛肉价格上涨的时候，很多用户就会来买猪肉代替，你的销量就会上升。</li>
+<li>**互补品（Complement）**指的是跟你的产品一起购买的相互补充的产品，比如汽油就是汽车的互补品，典型的例子比如操作系统和电脑硬件也是互补品，当电脑的价格下降的时候，操作系统的销量就会上升。</li>
+</ol>
+<p>对于公司而言，主要的战略方向就是尽可能地让自身核心产品相对应的<strong>互补品的价格降低</strong>，如果你有能力让互补品的价格降低，你将能获得更多销量和收入并享受由于互补品受众扩大带来的曝光和热度。</p>
+<p>微软改名部今年又将 TSVS 更名为“Azure DevOps” 进行包装与推出。GitHub - Azure Devops - Microsoft Azure 的路径逐渐明了。GitHub 与我们预想的一般，在微软的体系里成为其下游产品的互补品（Complement）。</p>
+<p><strong>DevOps是啥？</strong></p>
+<p>DevOps 是开发 (Dev) 和运营 (Ops) 的复合词，它将人、流程和技术结合起来，不断地为客户提供价值。DevOps 对团队意味着什么？DevOps 使以前孤立的角色（开发、IT 运营、质量工程和安全）可以协调和协作，以生产更好、更可靠的产品。通过采用 DevOps 文化、做法和工具，团队能够更好地响应客户需求，增强对所构建应用程序的信心，更快地实现业务目标。</p>
+<p>个人感觉是大规模的集中运维+开发+测试一站式平台</p>
+<h1>生活常识</h1>
+<h2 id="政治">政治</h2>
+<h3 id="贸易逆差"><strong>贸易逆差</strong></h3>
+<p>国家或者地区在一定时期内进口额 &gt; 出口额的现象，表明已过对外贸易处于不利的地位（资本外流、外债增加）</p>
+<ul>
+<li>贸易黑字、贸易顺差：净出口为正值</li>
+<li>贸易赤字、贸易逆差：净出口为负值</li>
+</ul>
+<p><strong>解析</strong></p>
+<p>如果一个国家经常出现<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%B4%B8%E6%98%93%E8%B5%A4%E5%AD%97">贸易赤字</a>现象，为了要支付<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%BF%9B%E5%8F%A3">进口</a>的债务，必须要在市场上卖出<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9C%AC%E5%B8%81">本币</a>以购买他国的货币来支付<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%87%BA%E5%8F%A3">出口</a>国的债务，这样，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%9B%BD%E6%B0%91%E6%94%B6%E5%85%A5">国民收入</a>便会流出国外，使国家经济表现转弱。政府若要改善这种状况，就必须要把国家的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%B4%A7%E5%B8%81%E8%B4%AC%E5%80%BC">货币贬值</a>，因为币值下降，即变相把出口商品价格降低，可以提高出口产品的竞争能力。因此，当该国外贸<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%B5%A4%E5%AD%97">赤字</a>扩大时，就会利淡该国货币，令该国货币下跌；反之，当出现外贸盈余时，则是利好该种货币的。因此，国际贸易状况是影响<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%A4%96%E6%B1%87%E6%B1%87%E7%8E%87">外汇汇率</a>十分重要的因素。</p>
+<p><strong>观点：</strong></p>
+<p><strong>贸易顺差未必都是好结果</strong></p>
+<ul>
+<li>带来贸易争端</li>
+<li>增加外汇储备，但其实是资源未被充分利用</li>
+<li>持续的顺差将导致人民币升值，进而导致资本净流入增加，进一步导致人民币升值的压力（利于进口，不利于出口，恶性循环）</li>
+<li>转化为货币大量投入的压力，成为通货膨胀率上升的因素</li>
+</ul>
+<p><strong>贸易逆差不一定是坏的</strong></p>
+<ul>
+<li>适当逆差利于环节短期贸易纠纷</li>
+<li>逆差 = 投资购买生产性设备，如果投资得当，能够提高生产能力</li>
+<li>减少人民币升值的预期，减缓资本净流入的速度</li>
+<li>短期的逆差利于缓解通货膨胀的压力</li>
+</ul>
+
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="post-metas mb-3">
+                                            
+                                                    
+                                                        <div class="post-meta">
+                                                            <i class="iconfont icon-tags"></i>
+                                                            
+                                                                <a class="hover-with-bg" href="/;/tags/Java/">
+                                                                    Java
+                                                                </a>
+                                                                
+                                                                <a class="hover-with-bg" href="/;/tags/%E6%80%BB%E7%BB%93/">
+                                                                    总结
+                                                                </a>
+                                                                
+                                                        </div>
+                                                        
+                                        </div>
+                                        
+                                            <p class="note note-warning">
+                                                
+                                                            本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                                                                
+                                            </p>
+                                            
+                                                
+                                                    <div class="post-prevnext">
+                                                        <article class="post-prev col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2021/10/14/Docker%E5%AD%A6%E4%B9%A0/">
+                                                                        <i class="iconfont icon-arrowleft"></i>
+                                                                        <span class="hidden-mobile">Docker学习</span>
+                                                                        <span class="visible-mobile">上一篇</span>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                        <article class="post-next col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2021/09/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                                                        <span class="hidden-mobile">计算机网络</span>
+                                                                        <span class="visible-mobile">下一篇</span>
+                                                                        <i class="iconfont icon-arrowright"></i>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                    </div>
+                                                    
+                                    </div>
+
+                                    
+                                        <!-- Comments -->
+                                        <article class="comments" id="comments" lazyload>
+                                            
+                                                        
+                                                            
+                                                                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Yunlong626/commit-utterances');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+                                        </article>
+                                        
+                        </article>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+                    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+                </div>
+                
+        </div>
+    </div>
+
+    <!-- Custom -->
+    
+    <!--添加我自己的设置页面-->
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+    <!--加入自定义格式的-->
+    <!--自定义的git徽标样式-->
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080" srcset="/;/img/loading.gif" lazyload>
+<br>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,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&style=flat&color=d2c68b" srcset="/;/img/loading.gif" lazyload>
+
+<!-- 自定义显示文章总页数和字数的模块 -->
+<div class="bottom-post-statistic">
+    <div class="bottom-post-count">
+        62&nbsp 篇文章
+    </div>
+    <div class="bottom-post-word">
+        248.9k&nbsp 字
+    </div>
+</div>
+        <div class="footer-content">
+             <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+        </div>
+
+        
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+            
+
+                
+</footer>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/;/js/events.js" ></script>
+<script  src="/;/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/;/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/;/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/;/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/;/js/reset_code_lang.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/;/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?PPLong222";
+            var git_color =['#ebedf0', '#bef5cb', '#bef5cb', '#a9f5b4', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620'];
+            var git_user ="PPLong222";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div id="github-calendar" style="width:100%;height:auto;padding:10px;margin-bottom:20px"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;margin-top:100px;;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/about/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:200px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>#github_container > .position-relative > .border{border:0!important}#github-calendar{position: relative;margin-top: -2rem;background-color: var(--board-bg-color);transition: background-color 0.2s ease-in-out;border-radius: 0.5rem;z-index: 3;-webkit-box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);}</style><!-- hexo injector body_end end --></body>
+</html>

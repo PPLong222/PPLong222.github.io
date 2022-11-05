@@ -1,0 +1,743 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/;/gallery/paw_img.jpg">
+  <link rel="icon" href="/;/gallery/paw_img.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PPLong">
+  <meta name="keywords" content="">
+  <!--添加百度站点统计-->
+  <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
+  <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
+  <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
+  <meta name="description" content="软件体系架构考试复习 基本概念 软件体系架构：软件体系结构是具有一定形式的结构化元素，抽象的讲，软件体系结构包括构成系统的设计元素的描述，设计元素的交互，设计元素组合的模式，以及在这些模式中的约束。具体的讲，体系结构 &#x3D; 组件+连接件+约束 组件：具有某种功能的可重用的软件模块单元，表示了系统中主要的计算单元和数据存储。 连接件：表示了组件之间的交互，简单的连接件有：管道，过程调用，事件广播等，复">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件体系架构考试复习">
+<meta property="og:url" content="http://43.139.93.91/;/2021/11/10/%E8%BD%AF%E4%BB%B6%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84%E8%80%83%E8%AF%95%E5%A4%8D%E4%B9%A0/index.html">
+<meta property="og:site_name" content="PPLong的博客">
+<meta property="og:description" content="软件体系架构考试复习 基本概念 软件体系架构：软件体系结构是具有一定形式的结构化元素，抽象的讲，软件体系结构包括构成系统的设计元素的描述，设计元素的交互，设计元素组合的模式，以及在这些模式中的约束。具体的讲，体系结构 &#x3D; 组件+连接件+约束 组件：具有某种功能的可重用的软件模块单元，表示了系统中主要的计算单元和数据存储。 连接件：表示了组件之间的交互，简单的连接件有：管道，过程调用，事件广播等，复">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211110093740684.png">
+<meta property="article:published_time" content="2021-11-10T01:35:05.000Z">
+<meta property="article:modified_time" content="2022-04-07T01:45:18.000Z">
+<meta property="article:author" content="PPLong">
+<meta property="article:tag" content="Exam">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211110093740684.png">
+  
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
+  
+  <title>软件体系架构考试复习 - PPLong的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/;/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/;/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/;/css/indexing-hover.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"43.139.93.91","root":"/;/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/;/local-search.xml"};
+  </script>
+  <script  src="/;/js/utils.js" ></script>
+  <script  src="/;/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 90vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/;/">
+      <strong>PPLong的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友達
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-link-fill"></i>
+                娱乐
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/movie/">
+                    <i class="iconfont icon-movie"></i>
+                    第二人生
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/shuoshuo/">
+                    <i class="iconfont icon-comment"></i>
+                    唠唠
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/develop/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    尝鲜
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/;/gallery/covers/wallhaven-qde5kr.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="软件体系架构考试复习">
+              
+            </span>
+
+            
+              <div class="mt-3">
+    
+            
+                <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-10 09:35" pubdate>
+        始于: 2021年11月10日上午9点35分
+      </time>
+    </span>
+                
+</div>
+
+<!-- 自定义的更新时间 -->
+<div class="mt-1">
+    
+        <span class="post-meta">
+  <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
+  <time datetime="2022-04-07 09:45" pubdate>
+    更新: 2022年4月7日上午9点45分
+  </time>
+</span>
+        
+</div>
+
+<div class="mt-1">
+    
+        <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+        
+
+            
+                <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      5 分钟
+    </span>
+                
+
+                    
+                        
+                            
+                                <!-- LeanCloud 统计文章PV -->
+                                <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span>
+                                 次
+                                    </span>
+                                    
+                                                
+</div>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+    <div class="container-fluid nopadding-x">
+        <div class="row nomargin-x">
+            <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-x-md">
+                <div class="container nopadding-x-md" id="board-ctn">
+                    <div class="py-5" id="board">
+                        <article class="post-content mx-auto">
+                            <!-- SEO header -->
+                            <h1 style="display: none">
+                                软件体系架构考试复习
+                            </h1>
+                            
+                                    <div class="markdown-body">
+                                        <h1>软件体系架构考试复习</h1>
+<h2 id="基本概念-v3">基本概念</h2>
+<p><strong>软件体系架构</strong>：软件体系结构是具有一定形式的结构化元素，抽象的讲，软件体系结构包括构成系统的设计元素的描述，设计元素的交互，设计元素组合的模式，以及在这些模式中的约束。具体的讲，<strong>体系结构 = 组件+连接件+约束</strong></p>
+<p><strong>组件</strong>：具有某种功能的<strong>可重用的软件模块单元</strong>，表示了系统中<strong>主要的计算单元和数据存储</strong>。</p>
+<p><strong>连接件</strong>：表示了组件之间的交互，简单的连接件有：<strong>管道，过程调用，事件广播</strong>等，复杂的连接件有：<strong>客户-服务器通信协议，数据库和应用之间SQL连接</strong>等。</p>
+<p><strong>约束</strong>：表示了组件和连接件的<strong>拓扑逻辑和约束</strong>。</p>
+<p><strong>管道-过滤器：</strong></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211110093740684.png" srcset="/;/img/loading.gif" lazyload alt="image-20211110093740684"></p>
+<p>每个过滤器都有一组输入集和输出集。过滤器从管道中读入数据流，对输入流进行内部转换和增量计算（丰富，精炼，转换，融合，分解），然后产生输出数据流并写入管道中。</p>
+<p>特点：</p>
+<p>每个过滤器必须是一个独立的实体：过滤器之间无需共享状态，即filter无需知道其输入管道和输出管道所连接的其他过滤器的存在，更不必关注相邻过滤器的实现细节。他仅仅需要对输入数据流进行特定的内部転换和增量计算，筛选出合适的数据。<br>
+数据到来是便被处理，不是收集然后处理，即在输入被完全消费之前，输出便产生了。<br>
+**管道是将数据从一个过滤器的输出端移动到另一个过滤器的输入端，是一个单向流。**不同的管道中流动的数据流，可能具有不同的数据格式。<br>
+应用示例<br>
+编译器、Unix管道、图像处理，信号处理，声音与图像处理</p>
+<p>优点和缺点</p>
+<ul>
+<li>
+<p>优点：</p>
+<p>良好的隐蔽性和高内聚、低耦合：可以将整个系统的输入输出行为看成多个过滤器功能的简单合成。<br>
+支持功能模块的重用：任意两个过滤器只要相互间所传输的数据格式上达成一致，就可以连接在一起<br>
+系统容易维护和拓展：新的过滤器容易加入到系统中，旧的过滤器也可被改进的过滤器替换<br>
+允许对一些如吞吐量，死锁 等属性进行分析<br>
+支持并行执行：每一个过滤器既可以独立运行，也可与其他过滤器并发执行。</p>
+</li>
+<li>
+<p>缺点：</p>
+<p>不适合处理交互的应用<br>
+系统性能不高，并增加了编写过滤器的复杂性：数据传输缺乏通用标准，每个过滤器绝大部分时间消耗在数据格式的解析，转换，合成上。同样也不适用于大量共享数据的应用设置。</p>
+</li>
+</ul>
+<p><strong>调用-返回风格</strong>：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42475914/article/details/108087484">https://blog.csdn.net/qq_42475914/article/details/108087484</a></p>
+<p><strong>七种软件架构模式</strong></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/omnispace/article/details/80224942?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163650884616780271535660%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163650884616780271535660&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-80224942.pc_search_mgc_flag&amp;utm_term=%E8%BD%AF%E4%BB%B6%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F&amp;spm=1018.2226.3001.4187">讲解</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41626229/article/details/85930248?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E8%BD%AF%E4%BB%B6%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-85930248.pc_search_mgc_flag&amp;spm=1018.2226.3001.4187">2</a></p>
+<ul>
+<li>分层架构</li>
+<li>多层架构</li>
+<li>管道过滤器架构</li>
+<li>客户端服务器架构</li>
+<li>模型视图控制器架构</li>
+<li>事件驱动架构</li>
+<li>微服务架构</li>
+<li>黑板模式 <a target="_blank" rel="noopener" href="https://blog.csdn.net/aodya68040/article/details/102171976?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E9%BB%91%E6%9D%BF%E6%A8%A1%E5%BC%8F&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-6-102171976.pc_search_mgc_flag&amp;spm=1018.2226.3001.4187">介绍</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/G66565906/article/details/100762744?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163651249616780262582073%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163651249616780262582073&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-100762744.pc_search_mgc_flag&amp;utm_term=C2%E9%A3%8E%E6%A0%BC&amp;spm=1018.2226.3001.4187">C2风格</a></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yuhao22/article/details/105619370">七种软件架构设计原则</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37174526/article/details/85078396?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E8%BD%AF%E4%BB%B6%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-3-85078396.pc_search_mgc_flag&amp;spm=1018.2226.3001.4187">C/S B/S 比较  三层CS  REST架构风格 黑板模式</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/thinkingforever/article/details/3160305?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163650984816780274121579%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163650984816780274121579&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-3160305.pc_search_mgc_flag&amp;utm_term=%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7&amp;spm=1018.2226.3001.4187">质量属性</a></p>
+<p>可用性、可修改性、性能、安全性、可测试性、易用性</p>
+<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/67784e8dba0d4a7303763a14.html">软件体系结构组成、风格</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41800649/article/details/104650410?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163651135816780366584580%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163651135816780366584580&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-104650410.pc_search_mgc_flag&amp;utm_term=%E8%BD%AF%E4%BB%B6%E5%8D%B1%E6%9C%BA&amp;spm=1018.2226.3001.4187">软件危机</a></p>
+<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/26a5f0aa910ef12d2af9e779.html?rec_flag=default&amp;fr=Recommend_RelativeDoc-40381,60272,40340,60359-kpdrec_doc_pc_view-67784e8dba0d4a7303763a14&amp;sxts=1636511001147">BS CS 三层CS的区别 ，动态软件体系架构，哪些方面去评估软件体系架构</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40949254/article/details/78852620">4+!视图模型 软件危机  DSSA SOA</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37482190/article/details/103774853?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163651141816780269841231%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163651141816780269841231&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-103774853.pc_search_mgc_flag&amp;utm_term=%E8%BD%AF%E4%BB%B6%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84&amp;spm=1018.2226.3001.4187">4+1视图模型 SOA</a></p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/atam/1652710?fr=aladdin">ATAM 架构权衡分析方法</a></p>
+<p>介绍ATAM。<br>
+介绍商业动机；<br>
+介绍体系结构；<br>
+识别体系结构方法；<br>
+生成质量属性效用树。<br>
+分析体系结构方法。<br>
+头脑风暴和设定场景优先级。<br>
+分析体系结构方法；<br>
+提供评估结果；</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/SAAM">SAAM 体系结构分析方法</a></p>
+<p>场景生成；<br>
+体系结构描写叙述；<br>
+场景的分类和优先级确定。<br>
+间接场景的单独评估。<br>
+对场景关联的评估。<br>
+形成整体评估；</p>
+<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/aa0de804e45c3b3567ec8bb5.html">题目1 ATAM表述 管道过滤器特点</a></p>
+<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/718aa2d0fd4ffe4733687e21af45b307e971f9e1.html?rec_flag=default&amp;fr=Recommend_RelativeDoc-40381,60272,40340,60359-kpdrec_doc_pc_view-aa0de804e45c3b3567ec8bb5&amp;sxts=1636512258928">题目2</a></p>
+<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/d809f7d87ed5360cba1aa8114431b90d6d858903.html?rec_flag=default&amp;fr=Recommend_RelativeDoc-40381,60272,40340,60359-kpdrec_doc_pc_view-a88bf77502768e9951e73889&amp;sxts=1636512350407">题目3 名词解释</a></p>
+<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/9249ea5a763231126edb11df.html?rec_flag=default&amp;fr=Recommend_RelativeRecommend-40381,60272,40340,60359-pc_view_otherlike_new-aa0de804e45c3b3567ec8bb5">题目4 名词解释和问答</a></p>
+<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/5deb7e1ca8114431b90dd8eb.html?fixfr=B0DOSKxVyIS3Ey48HcnErQ%253D%253D&amp;fr=income2-wk_go_search-search">题目5 偏画图</a></p>
+<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/7cd76ba8cad376eeaeaad1f34693daef5ff71366.html?fixfr=iCEVfdPyN5u2%252BxPnVoVOQA%253D%253D&amp;fr=income10-wk_go_searchX-search">题目6</a></p>
+<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/25e8606300020740be1e650e52ea551811a6c97d.html?fixfr=CwG8HDA9mdQLnjpnRG2brw%253D%253D&amp;fr=income12-wk_go_searchX-search">题目7 软件体系架构定义 ADD</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.docin.com/p-2325692580.html">用例图类图</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.doc88.com/p-2334903732994.html?r=1">华科原题</a></p>
+<p>重点：BS CS 三层CS  质量属性   ATAM 评估方法步骤</p>
+
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="post-metas mb-3">
+                                            
+                                                    
+                                                        <div class="post-meta">
+                                                            <i class="iconfont icon-tags"></i>
+                                                            
+                                                                <a class="hover-with-bg" href="/;/tags/Exam/">
+                                                                    Exam
+                                                                </a>
+                                                                
+                                                        </div>
+                                                        
+                                        </div>
+                                        
+                                            <p class="note note-warning">
+                                                
+                                                            本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                                                                
+                                            </p>
+                                            
+                                                
+                                                    <div class="post-prevnext">
+                                                        <article class="post-prev col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2022/01/01/%E6%97%A5%E8%AF%AD%E5%AD%A6%E4%B9%A0/">
+                                                                        <i class="iconfont icon-arrowleft"></i>
+                                                                        <span class="hidden-mobile">日语学习</span>
+                                                                        <span class="visible-mobile">上一篇</span>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                        <article class="post-next col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2021/11/05/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E8%80%83%E8%AF%95%E5%A4%8D%E4%B9%A0/">
+                                                                        <span class="hidden-mobile">数字图像处理期末复习</span>
+                                                                        <span class="visible-mobile">下一篇</span>
+                                                                        <i class="iconfont icon-arrowright"></i>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                    </div>
+                                                    
+                                    </div>
+
+                                    
+                                        <!-- Comments -->
+                                        <article class="comments" id="comments" lazyload>
+                                            
+                                                        
+                                                            
+                                                                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Yunlong626/commit-utterances');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+                                        </article>
+                                        
+                        </article>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+                    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+                </div>
+                
+        </div>
+    </div>
+
+    <!-- Custom -->
+    
+    <!--添加我自己的设置页面-->
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+    <!--加入自定义格式的-->
+    <!--自定义的git徽标样式-->
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080" srcset="/;/img/loading.gif" lazyload>
+<br>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,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&style=flat&color=d2c68b" srcset="/;/img/loading.gif" lazyload>
+
+<!-- 自定义显示文章总页数和字数的模块 -->
+<div class="bottom-post-statistic">
+    <div class="bottom-post-count">
+        62&nbsp 篇文章
+    </div>
+    <div class="bottom-post-word">
+        248.9k&nbsp 字
+    </div>
+</div>
+        <div class="footer-content">
+             <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+        </div>
+
+        
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+            
+
+                
+</footer>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/;/js/events.js" ></script>
+<script  src="/;/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/;/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/;/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/;/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/;/js/reset_code_lang.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/;/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?PPLong222";
+            var git_color =['#ebedf0', '#bef5cb', '#bef5cb', '#a9f5b4', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620'];
+            var git_user ="PPLong222";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div id="github-calendar" style="width:100%;height:auto;padding:10px;margin-bottom:20px"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;margin-top:100px;;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/about/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:200px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>#github_container > .position-relative > .border{border:0!important}#github-calendar{position: relative;margin-top: -2rem;background-color: var(--board-bg-color);transition: background-color 0.2s ease-in-out;border-radius: 0.5rem;z-index: 3;-webkit-box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);}</style><!-- hexo injector body_end end --></body>
+</html>

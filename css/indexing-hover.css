@@ -1,0 +1,8 @@
+/*设置index图片的hover动画*/
+/*需要在主题配置文件下设置*/
+.index-img {
+  transition: .4s;           /*动画时间*/
+}
+.index-card:hover .index-img {
+  transform: scale(1.15);    /*放大倍数*/
+}

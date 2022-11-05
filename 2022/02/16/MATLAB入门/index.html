@@ -1,0 +1,978 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/;/gallery/paw_img.jpg">
+  <link rel="icon" href="/;/gallery/paw_img.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PPLong">
+  <meta name="keywords" content="">
+  <!--添加百度站点统计-->
+  <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
+  <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
+  <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
+  <meta name="description" content="MATLAB入门 基本常识 MATLAB默认数据类型是double Inf：无限大 eps：2.2204e-016无限小 不加“；”，则会打印出该等式的结果值 Matlab索引从 1 开始 Calling Priority  %% ：区分一个section 一行打不完 用… 可以在第二行继续写 数组 条件表达式 注意都要有end结尾  if elseif else switch case  oth">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MATLAB入门">
+<meta property="og:url" content="http://43.139.93.91/;/2022/02/16/MATLAB%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="PPLong的博客">
+<meta property="og:description" content="MATLAB入门 基本常识 MATLAB默认数据类型是double Inf：无限大 eps：2.2204e-016无限小 不加“；”，则会打印出该等式的结果值 Matlab索引从 1 开始 Calling Priority  %% ：区分一个section 一行打不完 用… 可以在第二行继续写 数组 条件表达式 注意都要有end结尾  if elseif else switch case  oth">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220216095307953.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220216182508540.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220216175259436.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220216095819976.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217102911572.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217103925576.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217104032664.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217104137982.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217104302289.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217104342873.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217110621149.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217111801286.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217110734864.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217105235650.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220216203657198.png">
+<meta property="article:published_time" content="2022-02-16T01:08:47.000Z">
+<meta property="article:modified_time" content="2022-04-07T01:45:18.000Z">
+<meta property="article:author" content="PPLong">
+<meta property="article:tag" content="MATLAB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220216095307953.png">
+  
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
+  
+  <title>MATLAB入门 - PPLong的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/;/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/;/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/;/css/indexing-hover.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"43.139.93.91","root":"/;/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/;/local-search.xml"};
+  </script>
+  <script  src="/;/js/utils.js" ></script>
+  <script  src="/;/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 90vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/;/">
+      <strong>PPLong的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友達
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-link-fill"></i>
+                娱乐
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/movie/">
+                    <i class="iconfont icon-movie"></i>
+                    第二人生
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/shuoshuo/">
+                    <i class="iconfont icon-comment"></i>
+                    唠唠
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/develop/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    尝鲜
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/;/gallery/covers/wallhaven-wqwgp6.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MATLAB入门">
+              
+            </span>
+
+            
+              <div class="mt-3">
+    
+            
+                <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-16 09:08" pubdate>
+        始于: 2022年2月16日上午9点08分
+      </time>
+    </span>
+                
+</div>
+
+<!-- 自定义的更新时间 -->
+<div class="mt-1">
+    
+        <span class="post-meta">
+  <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
+  <time datetime="2022-04-07 09:45" pubdate>
+    更新: 2022年4月7日上午9点45分
+  </time>
+</span>
+        
+</div>
+
+<div class="mt-1">
+    
+        <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+        
+
+            
+                <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13 分钟
+    </span>
+                
+
+                    
+                        
+                            
+                                <!-- LeanCloud 统计文章PV -->
+                                <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span>
+                                 次
+                                    </span>
+                                    
+                                                
+</div>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+    <div class="container-fluid nopadding-x">
+        <div class="row nomargin-x">
+            <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-x-md">
+                <div class="container nopadding-x-md" id="board-ctn">
+                    <div class="py-5" id="board">
+                        <article class="post-content mx-auto">
+                            <!-- SEO header -->
+                            <h1 style="display: none">
+                                MATLAB入门
+                            </h1>
+                            
+                                    <div class="markdown-body">
+                                        <h1>MATLAB入门</h1>
+<h2 id="基本常识">基本常识</h2>
+<p>MATLAB默认数据类型是double</p>
+<p>Inf：无限大 eps：2.2204e-016无限小</p>
+<p><strong>不加“；”，则会打印出该等式的结果值</strong></p>
+<p><strong>Matlab索引从 1 开始</strong></p>
+<p><strong>Calling Priority</strong></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220216095307953.png" srcset="/;/img/loading.gif" lazyload alt="image-20220216095307953"></p>
+<p>%% ：区分一个section</p>
+<p>一行打不完 用… 可以在第二行继续写</p>
+<h3 id="数组">数组</h3>
+<h3 id="条件表达式">条件表达式</h3>
+<p>注意都要有end结尾</p>
+<ul>
+<li>if elseif else</li>
+<li>switch case  <strong>otherwise</strong></li>
+<li>while</li>
+<li>for n = a:increment:c</li>
+</ul>
+<h3 id="函数">函数</h3>
+<p>function [A B] = …表示结果是多个结果</p>
+<p>function handle</p>
+<div class="code-wrapper"><pre class="language-matlab" data-language="matlab"><code class="language-matlab">f <span class="token operator">=</span> <span class="token operator">@</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token function">exp</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2</span><span class="token operator">*</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+x<span class="token operator">=</span><span class="token number">0</span><span class="token operator">:</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">2</span><span class="token punctuation">;</span></code></pre></div>
+<p>相当于是函数指针 f是指向函数exp(-2*x)的指针</p>
+<h3 id="矩阵">矩阵</h3>
+<h4 id="矩阵查询"><strong>矩阵查询</strong></h4>
+<p>A=[1,2,3;4,5,6;6,7,8],对于通过A(x)查找矩阵中的某个数，是按照列从上至下的顺序来的，而非行<br>
+A([a b c])可查找多个数<br>
+A([a b;a c;])得到矩阵<br>
+A([a b],[a c]) row a b 和 col a c的交集</p>
+<h4 id="矩阵变换"><strong>矩阵变换</strong></h4>
+<p>替换某个数：A(r,c)=x<br>
+等差数列应用 A=[1:5; 2:3:15;-2:0.5:0]</p>
+<p>对A矩阵，A(3,:)=[]可将该行抹掉，达到删除的效果</p>
+<h4 id="矩阵运算"><strong>矩阵运算</strong></h4>
+<p>A.*B：直乘，结果矩阵的（i , j）=A(i,j) * B(i,j)<br>
+./  .^：效果同上</p>
+<h4 id="便捷指令">便捷指令</h4>
+<ul>
+<li>eye(n)：n维单位矩阵</li>
+<li>zeros(r,c)：零矩阵</li>
+<li>ones(r,c)：全为1的矩阵</li>
+<li>diag([a,b,c])：对角矩阵</li>
+<li>max(A)：找到每个<strong>col</strong>中最大的数</li>
+<li>sum  min mean（求平均）同上</li>
+<li>sort(A)：不改变A，另外创建一个矩阵 对每个col按升序排序</li>
+<li>sortrows(A)：基于第一列的元素按升序给矩阵排序，注意这里是一整行的移动，与sort不同</li>
+<li>size(A)：求row 和 col数</li>
+<li>length(A)：求row，即vector</li>
+<li>find(A==x)：求矩阵A中等于x的位置（索引方式返回）</li>
+</ul>
+<h3 id="运算符">运算符</h3>
+<p>*<em>一定要注意./ .<em>的应用，考虑引入向量是否会出错</em></em></p>
+<p><strong>‘：’ (Colon)</strong></p>
+<p>等差数列  A=[1:100] first = 1 end = 100 step = 1<br>
+A=[1:2:100] first = 1 end = 100 step = 2<br>
+与字符混用 str=‘a’:2:‘z’</p>
+<p>表全部：A(3,:)表示矩阵A的row 3的全部</p>
+<p><strong>~=</strong>： 等于！=</p>
+<h3 id="变量">变量</h3>
+<p>变量类型</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220216182508540.png" srcset="/;/img/loading.gif" lazyload alt="image-20220216175259436"></p>
+<p>Matlab类型转换 通过函数进行 例如int16(x)</p>
+<h4 id="字符串">字符串</h4>
+<p>字符串连接Concat: [s1,s2]</p>
+<p>字符串中字符的比较 str=='a’是str每个字符与’a’进行比较，且str==‘a’与’a’==str有不同的意义，一个是一维的比较一个是多维的比较</p>
+<p>字符串查找替换：str(str==‘l’) = ‘L’<br>
+str=='l’返回的是逻辑结果，例如11000010，指示了对应的索引位置—多索引位置的指示</p>
+<h3 id="结构体">结构体</h3>
+<p>可用struct函数去声明一个struct（‘name’,value,‘name’,value,…），<a target="_blank" rel="noopener" href="http://xn--Student-ug4k22bt62ad85bzoyc.name">也可以直接Student.name</a> = …声明</p>
+<p>结构体复用：Student(2).name  …<br>
+这时，Student就从单个变量，变成一维向量了</p>
+<h4 id="结构体函数">结构体函数</h4>
+<ul>
+<li>rmfield</li>
+<li>setfield</li>
+<li>struct</li>
+<li>sturct2cell</li>
+<li>fieldnames</li>
+<li>getfield</li>
+<li>isfield</li>
+<li>…</li>
+</ul>
+<h3 id="Cell-Array">Cell Array</h3>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220216175259436.png" srcset="/;/img/loading.gif" lazyload alt="image-20220216182508540"></p>
+<p>声明一个Cell Array</p>
+<div class="code-wrapper"><pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token function">A</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>xxxx<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token function">A</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>xxxx<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token function">A</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>xxxx<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token function">A</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>xxxxx<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token comment">% 也可以用这种方式A&#123;1,1&#125;=xxxx;</span></code></pre></div>
+<p>每个Entry都有一个pointer指向对应的数据</p>
+<p>查看Cell Array中的<strong>数据类型</strong>：A(1,1)<br>
+查看Cell Array中的数据值：A{1,1}</p>
+<h4 id="Function">Function</h4>
+<ul>
+<li>cell：创建一个Cell Array</li>
+<li>cell2mat</li>
+<li>cell2struct</li>
+<li>cekkduso</li>
+<li>cellfun</li>
+<li>cellplot</li>
+<li>cellstr</li>
+<li>num2cell</li>
+</ul>
+<h4 id="Multidimension-Array">Multidimension Array</h4>
+<p>三维及以上的结构体，除了row 和 col外还有layer等</p>
+<p>A{1,1,1}=xxx;声明一个</p>
+<p>或者用<strong>cat</strong>连接：</p>
+<p>cat(x,A,B)：A B为要连接的Array<br>
+x的值代表不同的维度：1-&gt;row;2-&gt;col;3-&gt;layer</p>
+<p>重塑reshape(A,r,c)：将A Array变换成不同row col排布的Array</p>
+<h3 id="进阶">进阶</h3>
+<h4 id="File-Access">File Access</h4>
+<ul>
+<li>save mydata.mat -ascii ：将workspace所有data存入目标文件，提供不同编码格式的存入</li>
+<li>load(‘filename’,‘-ascii’)：加载mat数据
+<ul>
+<li>还可以读取xlsx文件的指定行列，比较牛逼</li>
+</ul>
+</li>
+<li>xlswrite(‘filename.xlsx’,value,sheetpage,‘E2:E4’)：写数据到xlsx</li>
+<li>xlsread：读取xlsx文件 [Score Header]=xlsread(filename)</li>
+</ul>
+<h5 id="File-I-O">File I/O</h5>
+<ul>
+<li>fopen(filename,‘r’)：返回fid</li>
+<li>fclose</li>
+<li>fscanf(fid,type(‘%d’),size)</li>
+<li>fprintf(fid,format,value)</li>
+<li>feof(fid)：检测文件是否结束
+<ul>
+<li>while ~feof(fid)常用</li>
+</ul>
+</li>
+</ul>
+<h4 id="Graphics">Graphics</h4>
+<p>MATLAB不会直接通过表达式画图，而是通过点来画图</p>
+<p><strong>plot</strong></p>
+<p>plot(x,y, format) / plot(y)  format详细信息搜索linspec</p>
+<p><strong>legend()</strong> 为曲线添加图例</p>
+<p><strong>title()</strong> 添加标题名称<br>
+xlabel()  ylabel()  zlabel()<br>
+text(0.25，2.5，str， ‘Interpreter’，‘latex’) 通过LaTex显示特殊的数学表达式 其中str=‘$ $xxxxx$ $’<br>
+annotation() 指示箭头</p>
+<p>axis normal /equal(x y单位长度一致)/ square(x y 测量长度一样) /tight 限制坐标轴与图像的贴合程度</p>
+<p>hold on hold off 使得能够在一个Figure里展现多个plot图<br>
+figure,plot(x,y) 使得画两个图，但gca和gcf就是新的了<br>
+figure(1)  figure(2) 指定不同的figure<br>
+grid on off 打开网格</p>
+<p>在一个figure上画几个figure：subplot(row,col,index);</p>
+<p><strong>Graphical Object</strong></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220216095819976.png" srcset="/;/img/loading.gif" lazyload alt="image-20220216203657198"></p>
+<p>Utility functions：</p>
+<ul>
+<li>gca  （handle of axes）</li>
+<li>gcf    (handle of figure)</li>
+<li>allchild</li>
+<li>ancestor</li>
+<li>delete</li>
+<li>findall</li>
+<li>get / set 去设置不同property的属性值
+<ul>
+<li>set(get(gca),‘key’,value)</li>
+</ul>
+</li>
+</ul>
+<h5 id="Save">Save</h5>
+<p><strong>save指令</strong></p>
+<p>saveas(gcf,‘filename’,‘formattype’)</p>
+<p>高解析度  使用print</p>
+<h5 id="Advanced">Advanced</h5>
+<p><strong>Logarithm Plots</strong></p>
+<p>semilogx semilogy loglog：以坐标轴的对数差距显示</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217102911572.png" srcset="/;/img/loading.gif" lazyload alt="image-20220217102911572"></p>
+<div class="code-wrapper"><pre class="language-matlab" data-language="matlab"><code class="language-matlab">x<span class="token operator">=</span><span class="token function">logspace</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+y<span class="token operator">=</span>x<span class="token operator">.^</span><span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token function">subplot</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">plot</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">set</span><span class="token punctuation">(</span>gca<span class="token punctuation">,</span><span class="token string">'XTick'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token operator">:</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token function">title</span><span class="token punctuation">(</span><span class="token string">'Plot'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">subplot</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">semilogx</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">title</span><span class="token punctuation">(</span><span class="token string">'Semilogx'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">subplot</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">semilogy</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>YData<span class="token operator">=</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">title</span><span class="token punctuation">(</span><span class="token string">'Semilogy'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">subplot</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">loglog</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>YData<span class="token operator">=</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">title</span><span class="token punctuation">(</span><span class="token string">'LogLog'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">set</span><span class="token punctuation">(</span>gca<span class="token punctuation">,</span><span class="token string">'XGrid'</span><span class="token punctuation">,</span><span class="token string">'on'</span><span class="token punctuation">)</span>
+A<span class="token operator">=</span><span class="token function">get</span><span class="token punctuation">(</span>gca<span class="token punctuation">)</span></code></pre></div>
+<p><strong>plotyy</strong></p>
+<p>两个y轴，一左一右</p>
+<p><strong>Histogram</strong></p>
+<p>hist()  histogram()  直方图</p>
+<p><strong>Bar Charts</strong></p>
+<p>bar()  bar3() 条形图</p>
+<p>Stacked And Horizeontal Bar Charts</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217103925576.png" srcset="/;/img/loading.gif" lazyload alt="image-20220217103925576"></p>
+<p><strong>Pie Charts</strong></p>
+<p>圆饼图 pie()</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217104032664.png" srcset="/;/img/loading.gif" lazyload alt="image-20220217104032664"></p>
+<p><strong>Polar Chart</strong></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217104137982.png" srcset="/;/img/loading.gif" lazyload alt="image-20220217104137982"></p>
+<p><strong>Stairs</strong></p>
+<p>阶梯图 <img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217104302289.png" srcset="/;/img/loading.gif" lazyload alt="image-20220217104302289"></p>
+<p><strong>Stem</strong></p>
+<p>离散数据图<img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217104342873.png" srcset="/;/img/loading.gif" lazyload alt="image-20220217104342873"></p>
+<p><strong>其他的图</strong></p>
+<ul>
+<li>BoxPlot 箱线图</li>
+<li>errorbar</li>
+<li>meshgrid 二三维网格图
+<ul>
+<li><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217110621149.png" srcset="/;/img/loading.gif" lazyload alt="image-20220217110621149"></li>
+<li>搭配colorbar</li>
+<li><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217111801286.png" srcset="/;/img/loading.gif" lazyload alt="image-20220217110734864"></li>
+<li>colormap去优化色调，有不同的色调选择</li>
+</ul>
+</li>
+<li>imagesc</li>
+<li>3D Plot
+<ul>
+<li>plot3</li>
+<li>meshgrid  : mesh  surf的区别<img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217110734864.png" srcset="/;/img/loading.gif" lazyload alt="image-20220217111801286"></li>
+<li>contour：类似地理等高线</li>
+<li>设置View Angle
+<ul>
+<li>view()</li>
+</ul>
+</li>
+<li>sphere 创建球面
+<ul>
+<li>shading flat 去掉曲线</li>
+<li>material shiny 使得对象具有相对于漫反射和环境光更高的镜面反射</li>
+<li>axis vis3d off 去掉坐标轴和3d的拖动功能</li>
+<li>light 打光</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="Draw">Draw</h5>
+<p><strong>Fill</strong></p>
+<p>在x y 点组限定的区域内填充</p>
+<div class="code-wrapper"><pre class="language-matlab" data-language="matlab"><code class="language-matlab">t<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">2</span><span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token keyword">pi</span><span class="token operator">/</span><span class="token number">8</span><span class="token punctuation">;</span>
+x<span class="token operator">=</span><span class="token function">sin</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+y<span class="token operator">=</span><span class="token function">cos</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fill</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span><span class="token string">'r'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+axis square off<span class="token punctuation">;</span>
+<span class="token function">text</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">'STOP'</span><span class="token punctuation">,</span><span class="token string">'Color'</span><span class="token punctuation">,</span><span class="token string">'g'</span><span class="token punctuation">,</span><span class="token string">'FontSize'</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">,</span><span class="token string">'FontWeight'</span><span class="token punctuation">,</span><span class="token string">'bold'</span><span class="token punctuation">,</span><span class="token operator">'</span>HorizontalAlignm</code></pre></div>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220217105235650.png" srcset="/;/img/loading.gif" lazyload alt="image-20220217105235650"></p>
+<h2 id="命令-v2">命令</h2>
+<h3 id="Command"><strong>Command</strong></h3>
+<ul>
+<li>who：查看变量
+<ul>
+<li>whos：查看变量以及Byte Type Size等信息</li>
+</ul>
+</li>
+<li>clear [variable]：清掉一个Variable，不加则清楚所有的variable</li>
+<li>format [style]：设置输出格式
+<ul>
+<li><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220216203657198.png" srcset="/;/img/loading.gif" lazyload alt="image-20220216095819976"></li>
+</ul>
+</li>
+<li>clc：清屏</li>
+<li>disp()：显示变量的值</li>
+<li>prod()：乘、阶乘</li>
+<li>tic toc：在需要之处加，返回中间运行的时间</li>
+<li>close all：关闭所有figure</li>
+<li>which（）：返回文件位置</li>
+<li>cat(): Array concatenation</li>
+<li>reshape()</li>
+<li>linspace  logspace()</li>
+<li>randn(1,x)</li>
+</ul>
+<h3 id="Draw-v2">Draw</h3>
+<ul>
+<li>plot(x,y)：二维线图</li>
+</ul>
+<h3 id="内置变量">内置变量</h3>
+<ul>
+<li>inputname 函数输入的变量名</li>
+<li>mfilename</li>
+<li>nargin 输入参数数目</li>
+<li>nargout</li>
+<li>varargin变长的输入参数列表</li>
+<li>varargout</li>
+</ul>
+<blockquote>
+<p>图片和部分内容来自B站<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GJ41137UH?p=4">MATLAB教程_台大郭彦甫（14课）原视频补档</a> 侵权即删</p>
+</blockquote>
+
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="post-metas mb-3">
+                                            
+                                                <div class="post-meta mr-3">
+                                                    <i class="iconfont icon-category"></i>
+                                                    
+                                                        <a class="hover-with-bg" href="/;/categories/%E5%AD%A6%E4%B9%A0/">
+                                                            学习
+                                                        </a>
+                                                        
+                                                </div>
+                                                
+                                                    
+                                                        <div class="post-meta">
+                                                            <i class="iconfont icon-tags"></i>
+                                                            
+                                                                <a class="hover-with-bg" href="/;/tags/MATLAB/">
+                                                                    MATLAB
+                                                                </a>
+                                                                
+                                                        </div>
+                                                        
+                                        </div>
+                                        
+                                            <p class="note note-warning">
+                                                
+                                                            本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                                                                
+                                            </p>
+                                            
+                                                
+                                                    <div class="post-prevnext">
+                                                        <article class="post-prev col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2022/03/30/%E5%9F%BA%E4%BA%8EWireShark%E7%9A%84%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90/">
+                                                                        <i class="iconfont icon-arrowleft"></i>
+                                                                        <span class="hidden-mobile">基于WireShark的网络分析</span>
+                                                                        <span class="visible-mobile">上一篇</span>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                        <article class="post-next col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2022/02/15/unzip%E4%B8%8Eark%E8%A7%A3%E5%8E%8B%E7%9A%84%E4%B8%8D%E5%90%8C/">
+                                                                        <span class="hidden-mobile">unzip与ark解压踩坑</span>
+                                                                        <span class="visible-mobile">下一篇</span>
+                                                                        <i class="iconfont icon-arrowright"></i>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                    </div>
+                                                    
+                                    </div>
+
+                                    
+                                        <!-- Comments -->
+                                        <article class="comments" id="comments" lazyload>
+                                            
+                                                        
+                                                            
+                                                                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Yunlong626/commit-utterances');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+                                        </article>
+                                        
+                        </article>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+                    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+                </div>
+                
+        </div>
+    </div>
+
+    <!-- Custom -->
+    
+    <!--添加我自己的设置页面-->
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+    <!--加入自定义格式的-->
+    <!--自定义的git徽标样式-->
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080" srcset="/;/img/loading.gif" lazyload>
+<br>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,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&style=flat&color=d2c68b" srcset="/;/img/loading.gif" lazyload>
+
+<!-- 自定义显示文章总页数和字数的模块 -->
+<div class="bottom-post-statistic">
+    <div class="bottom-post-count">
+        62&nbsp 篇文章
+    </div>
+    <div class="bottom-post-word">
+        248.9k&nbsp 字
+    </div>
+</div>
+        <div class="footer-content">
+             <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+        </div>
+
+        
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+            
+
+                
+</footer>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/;/js/events.js" ></script>
+<script  src="/;/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/;/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/;/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/;/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/;/js/reset_code_lang.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/;/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?PPLong222";
+            var git_color =['#ebedf0', '#bef5cb', '#bef5cb', '#a9f5b4', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620'];
+            var git_user ="PPLong222";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div id="github-calendar" style="width:100%;height:auto;padding:10px;margin-bottom:20px"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;margin-top:100px;;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/about/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:200px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>#github_container > .position-relative > .border{border:0!important}#github-calendar{position: relative;margin-top: -2rem;background-color: var(--board-bg-color);transition: background-color 0.2s ease-in-out;border-radius: 0.5rem;z-index: 3;-webkit-box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);}</style><!-- hexo injector body_end end --></body>
+</html>

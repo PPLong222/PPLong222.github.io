@@ -1,0 +1,804 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/;/gallery/paw_img.jpg">
+  <link rel="icon" href="/;/gallery/paw_img.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PPLong">
+  <meta name="keywords" content="">
+  <!--添加百度站点统计-->
+  <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
+  <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
+  <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
+  <meta name="description" content="基于WireShark的网络分析  一直对网络抓包这块很感兴趣，并且WireShark也一直吃灰，借这个机会通过WireShark分析一下传输层和网络层（TCP、IP）具体到数据包的封装细节和具体的工作细节  介绍 WireShark 前称Ethereal，是一个网络封包分析软件，截取网络封装包，尽可能详细地显示网络封包信息 	开源开源开源！ 网络分析 三次握手 主要看传输层的分析 Hello 报">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于WireShark的网络分析">
+<meta property="og:url" content="http://43.139.93.91/;/2022/03/30/%E5%9F%BA%E4%BA%8EWireShark%E7%9A%84%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="PPLong的博客">
+<meta property="og:description" content="基于WireShark的网络分析  一直对网络抓包这块很感兴趣，并且WireShark也一直吃灰，借这个机会通过WireShark分析一下传输层和网络层（TCP、IP）具体到数据包的封装细节和具体的工作细节  介绍 WireShark 前称Ethereal，是一个网络封包分析软件，截取网络封装包，尽可能详细地显示网络封包信息 	开源开源开源！ 网络分析 三次握手 主要看传输层的分析 Hello 报">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210914163318606.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331162210966.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331165900512.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331170950616.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331171820581.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331190932943.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331191642232.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220405130940538.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220405194323205.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220405195326028.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220405144319645.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220405151110207.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331200819661.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331220424436.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331221931572.png">
+<meta property="article:published_time" content="2022-03-30T14:27:56.000Z">
+<meta property="article:modified_time" content="2022-04-07T01:45:18.000Z">
+<meta property="article:author" content="PPLong">
+<meta property="article:tag" content="Network">
+<meta property="article:tag" content="WireShark">
+<meta property="article:tag" content="TCP&#x2F;IP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210914163318606.png">
+  
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
+  
+  <title>基于WireShark的网络分析 - PPLong的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/;/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/;/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/;/css/indexing-hover.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"43.139.93.91","root":"/;/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/;/local-search.xml"};
+  </script>
+  <script  src="/;/js/utils.js" ></script>
+  <script  src="/;/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 90vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/;/">
+      <strong>PPLong的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友達
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-link-fill"></i>
+                娱乐
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/movie/">
+                    <i class="iconfont icon-movie"></i>
+                    第二人生
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/shuoshuo/">
+                    <i class="iconfont icon-comment"></i>
+                    唠唠
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/develop/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    尝鲜
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/;/gallery/covers/wallhaven-z8p9rj.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="基于WireShark的网络分析">
+              
+            </span>
+
+            
+              <div class="mt-3">
+    
+            
+                <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-30 22:27" pubdate>
+        始于: 2022年3月30日晚上10点27分
+      </time>
+    </span>
+                
+</div>
+
+<!-- 自定义的更新时间 -->
+<div class="mt-1">
+    
+        <span class="post-meta">
+  <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
+  <time datetime="2022-04-07 09:45" pubdate>
+    更新: 2022年4月7日上午9点45分
+  </time>
+</span>
+        
+</div>
+
+<div class="mt-1">
+    
+        <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.9k 字
+    </span>
+        
+
+            
+                <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13 分钟
+    </span>
+                
+
+                    
+                        
+                            
+                                <!-- LeanCloud 统计文章PV -->
+                                <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span>
+                                 次
+                                    </span>
+                                    
+                                                
+</div>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+    <div class="container-fluid nopadding-x">
+        <div class="row nomargin-x">
+            <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-x-md">
+                <div class="container nopadding-x-md" id="board-ctn">
+                    <div class="py-5" id="board">
+                        <article class="post-content mx-auto">
+                            <!-- SEO header -->
+                            <h1 style="display: none">
+                                基于WireShark的网络分析
+                            </h1>
+                            
+                                    <div class="markdown-body">
+                                        <h1>基于WireShark的网络分析</h1>
+<blockquote>
+<p>一直对网络抓包这块很感兴趣，并且WireShark也一直吃灰，借这个机会通过WireShark分析一下传输层和网络层（TCP、IP）具体到数据包的封装细节和具体的工作细节</p>
+</blockquote>
+<h2 id="介绍-v6">介绍</h2>
+<p><strong>WireShark</strong></p>
+<p>前称Ethereal，是一个网络封包分析软件，截取网络封装包，尽可能详细地显示网络封包信息 	开源开源开源！</p>
+<h2 id="网络分析">网络分析</h2>
+<h3 id="三次握手">三次握手</h3>
+<p>主要看传输层的分析</p>
+<h4 id="Hello">Hello</h4>
+<p>报文首部结构在这里，可以一一对照</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210914163318606.png" srcset="/;/img/loading.gif" lazyload alt="image-20210914163318606"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331162210966.png" srcset="/;/img/loading.gif" lazyload alt="image-20220331162210966"></p>
+<p>解释一些之前不太懂的含义：</p>
+<ul>
+<li>源端口号是从Linux较靠后的“客户端端口”范围随机提供的（为什么有源端口？-&gt;找得到回来的路），到哪去，肯定是到为HTTP开放的80端口上。</li>
+<li>序列号：客户端系统随机产生的32位，这里wireshark优化了一下 提供了相对的值</li>
+<li>确认序列号：为0，因为是我请求，不需要确认什么</li>
+<li>Flag：
+<ul>
+<li>SYN打开表示建立连接，仅SYN为1的包为SYN包，只有<strong>服务端受到客户端发来的SYN包，才可以建立联系</strong></li>
+</ul>
+</li>
+<li>接受窗口大小：指定窗口大小</li>
+<li>检验和：TCP整体检验（包括载荷）[12字节伪首部]  TCP首部校验和计算三部分：TCP首部+TCP数据+TCP伪首部</li>
+<li><strong>选项</strong>：
+<ul>
+<li>MSS：[限定载荷数据长度]设置了自己的MSS值，以便与服务端进行沟通，选择最小值</li>
+<li>SACK：允许优化的重传方式</li>
+<li>Window Scale：表明自己的窗口扩大因子</li>
+</ul>
+</li>
+</ul>
+<h4 id="I-hear-u">I hear u</h4>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331165900512.png" srcset="/;/img/loading.gif" lazyload alt="image-20220331165900512"></p>
+<p>服务器返回的，从服务端的80端口到客户端指定的端口。这里Sequence Number是服务端选定的，确认号是在客户端的序列号的+1；由于是希望建立连接，所以SYN=1，且表示确认收到信息，所以ACK=1；表明了自己支持的接受窗口大小（这里&lt;客户端）；表明了自己不同的MSS。其他信息意义都相同。也在Option中表明自己是否支持SACK</p>
+<h4 id="Let’s-talk">Let’s talk</h4>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331170950616.png" srcset="/;/img/loading.gif" lazyload alt="image-20220331170950616"></p>
+<p>客户端向服务端表明我知道你能听到我了</p>
+<p>序列号在之前自己发的原有基础+1（与学的不同？）确认号在对方发来的序列号基础上加1；Window size为正确的factor * size值（为什么是这个值？）</p>
+<p><strong>理解Ghost Byte</strong></p>
+<h3 id="正常传输">正常传输</h3>
+<p><strong>发送HTTP请求</strong></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331171820581.png" srcset="/;/img/loading.gif" lazyload alt="image-20220331171820581"></p>
+<p>客户端向服务器发送HTTP GET请求，请求某URL下的资源；从这里开始就有payload了；确认号为之前服务端发来的序列号 +1；PSH（表明是该请求的最后一个数据包，方便通知应用程序及时从网络缓存中去拿数据）和ACK（表示响应，我收到你之前的消息了）都打开；Window Size 采用之前规定好的（但没有factor了，为啥？怎样能确保最终为size*factor?）</p>
+<p><strong>响应</strong></p>
+<p>服务端先回应我收到你HTTP请求的响应，序列号在服务端之前发送给客户端的基础上+1，同时还会有window size的调整。然后就另起数据包，开始发数据了</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331190932943.png" srcset="/;/img/loading.gif" lazyload alt="image-20220331190932943"></p>
+<p>可以看到，<strong>确认号和序列号都不变</strong>，主要是有了payload，开始负载数据。且之后的传输中，确认号都等于对方的序列号+payload长度</p>
+<p><strong>窗口的应用</strong></p>
+<p>发现了有趣之处<img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331191642232.png" srcset="/;/img/loading.gif" lazyload alt="image-20220331191642232">，此时Server同时传了两个TCP PDU给Client，但Client只用了一个ACK包就表明受到，这里就涉及到TCP的窗口知识了</p>
+<p>最终在传完一整个请求的数据包时，Client返回最后一个数据包的ACK包，随之Server向Client传HTTP 200的响应包，（PSH和ACK = 1）<strong>到这里，对服务器来说，才算是把一个请求响应结束！</strong>。Client返回ACK包表示收到，（猜测可能会在这里浏览器会初步加载没有css js等的页面）。</p>
+<p>然后Client可以开始发送新的HTTP请求，比如get css文件等</p>
+<h4 id="TCP-Stream">TCP Stream</h4>
+<p>在这里，对一个返回数据量较大的HTTP请求，WireShark会显示&quot;TCP segment of a reassembled PDU&quot;，这里其实对TCP的知识还不太熟悉。今天看了下先勉强解释下，与IP分片不同，因为一个返回数据量大的请求会把数据从TCP层拆分，他们具有不同的确认号和序列号，以类似流的形式持续达到目的端口，可在WireShark里“Follow TCP Streams”能够看到完整的数据包（对于一个网页请求，完整数据就是一个网页的html代码）。<br>
+<a target="_blank" rel="noopener" href="https://www.wireshark.org/lists/wireshark-users/200805/msg00206.html">🔗 WireShark的对TCP PDU的解释</a>  <a target="_blank" rel="noopener" href="https://www.wireshark.org/docs/wsug_html_chunked/ChAdvReassemblySection.html">🔗 What is Packet Reassembly</a></p>
+<p>对之前的数据包来说，WireShark会标注[Reassembled PDU in frame:xxx]，其中xxx就代表的是HTTP 200等响应的回复，代表这是一个完整的数据</p>
+<p><strong>一个ACK包确认多个发送包</strong></p>
+<p>例如这里便用一个ACK确认了两个发送的包</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220405130940538.png" srcset="/;/img/loading.gif" lazyload alt="image-20220405130940538"></p>
+<h3 id="异常情况分析">异常情况分析</h3>
+<h4 id="Sack">Sack</h4>
+<p>结构：在Option中，1字节表示类型，1字节表示该SACK部分占用字节长度，剩下的字节分别为左右edge的范围 一般总共为10个字节，最多携带3个SACK(留10个字节要给TimeStamp)</p>
+<p><strong>解释一下某些情况下Bytes in flight的猛增现象</strong></p>
+<p>刚看的时候一直被不按 未被ACK的包造成的Bytes in flight猛增现象搞混，分析了一下 。</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220405194323205.png" srcset="/;/img/loading.gif" lazyload alt="image-20220405194323205"></p>
+<p>例如这里，在经历两次Dup ACK 后，Bytes in flight从4194激增到50328，为什么？依次做减法：1122595 - 50328 = 1072267，正是考虑到其实有最初DUP  ACK包的最小SACK的left edge值，说明了什么？其实是到上一个包发送的Seq + length 到 SACK left edge的差，令人惊讶的是，它把没有尚未接受的包也考虑在内</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220405195326028.png" srcset="/;/img/loading.gif" lazyload alt="image-20220405195326028"></p>
+<p>接下来也类似，尽管有两个SACK，但还是将最近包的Seq+length 与最初SACK的left edge做差，表明这之间的包没有收到。尽管两个SACK之间的包。</p>
+<p>这里实践总结就是如果服务端在传大于ACK的其他包，则值为当前Seq+length - 最初SACK left edge；如果正在传当前要的ACK，则SACK最大值的left edge - Seq不过这里还未完全理解</p>
+<p>**其实就是Server发送的，但Client还未接收到的数据的总和，不要搞得太复杂了 **</p>
+<h4 id="Dup-Packet">Dup Packet</h4>
+<p>TCP Duplicate Packet ：指示与之前已ack的包有相同的序列号和确认号，通常是带有SACK的。比如这里：</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220405144319645.png" srcset="/;/img/loading.gif" lazyload alt="image-20220405144319645"></p>
+<p>Server的637693、639091的数据包过快到达（之前的包可能因时延还未到达），但Client无法根据顺序接受这个包，TCP顺序不匹配，所以Client再发送一条ACK 包，确认号和序列号都与上一条相同，所以被标注为TCP Duplicate ACK (Packet)。<br>
+更有意思的是，其TCP Option中带有637693-640489的SACK，表明之前的两个包我有了，但是顺序不对，还没接到从我ACK开始的包</p>
+<p>过多的Duplicate Packet指明可能当前网络丢包率较高</p>
+<h4 id="TCP-Retransmission">TCP Retransmission</h4>
+<p>一个典型的案例：<img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220405151110207.png" srcset="/;/img/loading.gif" lazyload alt="image-20220405151110207"></p>
+<p>这里就比较清楚，之前传的15379的包Client一直没接收到，然后Client就不断的给Server发带有更新SACK的Dup ACK Packet，Server后来接收到这个包，知道自己之前发的15379的包可能loss了，所以重新发了一个15379的包</p>
+<h4 id="Congestion-Control">Congestion Control</h4>
+<p>拥塞控制：<strong>服务端</strong>负荷过重，请求过多</p>
+<h4 id="TCP-Keep-Alive">TCP Keep-Alive</h4>
+<p>长连接 保活，一段时间内一方未回应或未发包，就会发送一个Keep-Alive包 无载荷Seq与上一个包重合，如果对方在线，就会回一个包，来确保连接继续</p>
+<h4 id="Window-Size">Window Size</h4>
+<p>遇到一个坑点，自己用的梯子，所以去访问自己的服务器时，Window Size总是1398,并且访问其他的网站时，也都显示的是从某一个指定的网站上返回过来的数据，难怪去filter host却找不到对应的数据包，原来是我代理的问题，后来把代理改了应该就没有问题了</p>
+<p>但有时候机器性能太好、网络 太好，导致无法捕获到Window Full情况，就需要手动调整Linux TCP的窗口大小：</p>
+<h5 id="Linux设置Window-Size">Linux设置Window Size</h5>
+<ol>
+<li>route -ne查看默认路由表。</li>
+<li>sudo  route del default删除默认路由表</li>
+<li>sudo route add default gw 172.20.10.1 window xxx dev wlo1，增加新的路由表，带有window约束</li>
+</ol>
+<p>（会发现网页的加载都变慢许多）还有一些方法是临时修改/etc/sys/net下的文件，没试过怕改错。</p>
+<h3 id="四次挥手">四次挥手</h3>
+<p>为了直观了解挥手情况，不受其他因素影响，这里我采用的是从ssh断开连接的情况</p>
+<p>输入exit后，敲入回车，Client给Server发回车的数据包，Server发相应的数据包在terminal中显示；Client发ack报表示已经接受</p>
+<p><strong>第一次挥手</strong></p>
+<p>Client - &gt; Server：客户端完成了所有请求，要求断开。FIN 和 ACK均置为1，确认号还是对方发的上一个包的序列号+payload.length</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331200819661.png" srcset="/;/img/loading.gif" lazyload alt="image-20220331200819661"></p>
+<p><strong>第二次挥手</strong></p>
+<p>Server -&gt; Client：表明我已经接收到你的结束请求，ACK=1</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331220424436.png" srcset="/;/img/loading.gif" lazyload alt="image-20220331220424436"></p>
+<p><strong>第三次挥手</strong></p>
+<p><strong>Server-&gt;Client</strong>：表明“那我也走了”，与Client类似，设置FIN和ACK=1，这时<strong>确认号要在第二次的基础上+1</strong></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331221931572.png" srcset="/;/img/loading.gif" lazyload alt="image-20220331221931572"></p>
+<p><strong>第四次挥手</strong></p>
+<p>Client -&gt; Server：客户端说我也知道你要走了，发送后进入2MSL后，进入CLOSED状态。Server接受到这个数据包时，不再发数据包，进入CLOSED状态</p>
+<div class="note note-primary">
+            <p>对四次挥手的细节及原由  移步《计网》</p>
+          </div>
+<h3 id="Telnet过程">Telnet过程</h3>
+<h3 id="SSH过程">SSH过程</h3>
+<h4 id="基于docker的SSH过程">基于docker的SSH过程</h4>
+<h3 id="FTP过程">FTP过程</h3>
+<h3 id="网络拥塞控制分析">网络拥塞控制分析</h3>
+<h3 id="DNS过程">DNS过程</h3>
+<h3 id="TLS过程">TLS过程</h3>
+<p><strong>为什么在三次握手后会有Client Hello</strong></p>
+
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="post-metas mb-3">
+                                            
+                                                    
+                                                        <div class="post-meta">
+                                                            <i class="iconfont icon-tags"></i>
+                                                            
+                                                                <a class="hover-with-bg" href="/;/tags/Network/">
+                                                                    Network
+                                                                </a>
+                                                                
+                                                                <a class="hover-with-bg" href="/;/tags/WireShark/">
+                                                                    WireShark
+                                                                </a>
+                                                                
+                                                                <a class="hover-with-bg" href="/;/tags/TCP-IP/">
+                                                                    TCP/IP
+                                                                </a>
+                                                                
+                                                        </div>
+                                                        
+                                        </div>
+                                        
+                                            <p class="note note-warning">
+                                                
+                                                            本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                                                                
+                                            </p>
+                                            
+                                                
+                                                    <div class="post-prevnext">
+                                                        <article class="post-prev col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2022/04/04/%E6%B5%85%E5%85%A5Git-Hooks/">
+                                                                        <i class="iconfont icon-arrowleft"></i>
+                                                                        <span class="hidden-mobile">初识Git Hooks</span>
+                                                                        <span class="visible-mobile">上一篇</span>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                        <article class="post-next col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2022/02/16/MATLAB%E5%85%A5%E9%97%A8/">
+                                                                        <span class="hidden-mobile">MATLAB入门</span>
+                                                                        <span class="visible-mobile">下一篇</span>
+                                                                        <i class="iconfont icon-arrowright"></i>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                    </div>
+                                                    
+                                    </div>
+
+                                    
+                                        <!-- Comments -->
+                                        <article class="comments" id="comments" lazyload>
+                                            
+                                                        
+                                                            
+                                                                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Yunlong626/commit-utterances');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+                                        </article>
+                                        
+                        </article>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+                    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+                </div>
+                
+        </div>
+    </div>
+
+    <!-- Custom -->
+    
+    <!--添加我自己的设置页面-->
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+    <!--加入自定义格式的-->
+    <!--自定义的git徽标样式-->
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080" srcset="/;/img/loading.gif" lazyload>
+<br>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,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&style=flat&color=d2c68b" srcset="/;/img/loading.gif" lazyload>
+
+<!-- 自定义显示文章总页数和字数的模块 -->
+<div class="bottom-post-statistic">
+    <div class="bottom-post-count">
+        62&nbsp 篇文章
+    </div>
+    <div class="bottom-post-word">
+        248.9k&nbsp 字
+    </div>
+</div>
+        <div class="footer-content">
+             <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+        </div>
+
+        
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+            
+
+                
+</footer>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/;/js/events.js" ></script>
+<script  src="/;/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/;/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/;/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/;/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/;/js/reset_code_lang.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/;/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?PPLong222";
+            var git_color =['#ebedf0', '#bef5cb', '#bef5cb', '#a9f5b4', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620'];
+            var git_user ="PPLong222";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div id="github-calendar" style="width:100%;height:auto;padding:10px;margin-bottom:20px"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;margin-top:100px;;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/about/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:200px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>#github_container > .position-relative > .border{border:0!important}#github-calendar{position: relative;margin-top: -2rem;background-color: var(--board-bg-color);transition: background-color 0.2s ease-in-out;border-radius: 0.5rem;z-index: 3;-webkit-box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);}</style><!-- hexo injector body_end end --></body>
+</html>

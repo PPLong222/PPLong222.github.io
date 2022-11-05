@@ -1,0 +1,1052 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/;/gallery/paw_img.jpg">
+  <link rel="icon" href="/;/gallery/paw_img.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PPLong">
+  <meta name="keywords" content="">
+  <!--添加百度站点统计-->
+  <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
+  <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
+  <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
+  <meta name="description" content="Linux学习  “工欲善其事，必先利其器” 从大二以来一直在用manjaro ，从原来的极为不适应到现在用起来十分“舒心”，Linux确实给我一种更高效、更简洁的操作方式。在大二了解一定的操作系统组成原理时，也对Linux系统的内核构成产生了兴趣，对fork malloc等函数只知其义而不知其意。希望能够通过此篇博客系统的学习，从Linux内核层面去理解操作系统的组成原理。对Linux有一个全局">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux内核学习">
+<meta property="og:url" content="http://43.139.93.91/;/2021/10/25/Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="PPLong的博客">
+<meta property="og:description" content="Linux学习  “工欲善其事，必先利其器” 从大二以来一直在用manjaro ，从原来的极为不适应到现在用起来十分“舒心”，Linux确实给我一种更高效、更简洁的操作方式。在大二了解一定的操作系统组成原理时，也对Linux系统的内核构成产生了兴趣，对fork malloc等函数只知其义而不知其意。希望能够通过此篇博客系统的学习，从Linux内核层面去理解操作系统的组成原理。对Linux有一个全局">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdn.net/20170302212637409?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDQ0NzIzNA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="article:published_time" content="2021-10-25T09:42:41.000Z">
+<meta property="article:modified_time" content="2022-04-07T01:45:18.000Z">
+<meta property="article:author" content="PPLong">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="虚拟机">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20170302212637409?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDQ0NzIzNA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+  
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
+  
+  <title>Linux内核学习 - PPLong的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/;/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/;/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/;/css/indexing-hover.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"43.139.93.91","root":"/;/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/;/local-search.xml"};
+  </script>
+  <script  src="/;/js/utils.js" ></script>
+  <script  src="/;/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 90vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/;/">
+      <strong>PPLong的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友達
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-link-fill"></i>
+                娱乐
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/movie/">
+                    <i class="iconfont icon-movie"></i>
+                    第二人生
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/shuoshuo/">
+                    <i class="iconfont icon-comment"></i>
+                    唠唠
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/develop/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    尝鲜
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/;/gallery/covers/wallhaven-e76jzl.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Linux内核学习">
+              
+            </span>
+
+            
+              <div class="mt-3">
+    
+            
+                <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-25 17:42" pubdate>
+        始于: 2021年10月25日下午5点42分
+      </time>
+    </span>
+                
+</div>
+
+<!-- 自定义的更新时间 -->
+<div class="mt-1">
+    
+        <span class="post-meta">
+  <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
+  <time datetime="2022-04-07 09:45" pubdate>
+    更新: 2022年4月7日上午9点45分
+  </time>
+</span>
+        
+</div>
+
+<div class="mt-1">
+    
+        <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8k 字
+    </span>
+        
+
+            
+                <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26 分钟
+    </span>
+                
+
+                    
+                        
+                            
+                                <!-- LeanCloud 统计文章PV -->
+                                <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span>
+                                 次
+                                    </span>
+                                    
+                                                
+</div>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+    <div class="container-fluid nopadding-x">
+        <div class="row nomargin-x">
+            <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-x-md">
+                <div class="container nopadding-x-md" id="board-ctn">
+                    <div class="py-5" id="board">
+                        <article class="post-content mx-auto">
+                            <!-- SEO header -->
+                            <h1 style="display: none">
+                                Linux内核学习
+                            </h1>
+                            
+                                    <div class="markdown-body">
+                                        <h1>Linux学习</h1>
+<blockquote>
+<p>“工欲善其事，必先利其器”</p>
+<p>从大二以来一直在用manjaro ，从原来的极为不适应到现在用起来十分“舒心”，Linux确实给我一种更高效、更简洁的操作方式。在大二了解一定的操作系统组成原理时，也对Linux系统的内核构成产生了兴趣，对fork malloc等函数只知其义而不知其意。希望能够通过此篇博客系统的学习，从Linux内核层面去理解操作系统的组成原理。对Linux有一个全局的观念，更好地使用Linux系统</p>
+</blockquote>
+<h2 id="历史">历史</h2>
+<h3 id="Unix">Unix</h3>
+<p>从一个失败的多用户操作系统Multics衍生而来</p>
+<p>BSD：加州大学伯克利分校的演化分支</p>
+<p>优点：</p>
+<ul>
+<li>简洁。提供几百个系统调用</li>
+<li>大部分文件被当做文件来对待，使得可用同一套相同的系统调用接口可对数据和设备进行操作</li>
+<li>内核和相关的系统工具软件通过C语言编写，易移植</li>
+<li>创建进程非常迅速，<strong>一次执行保质保量地完成一个任务</strong></li>
+<li>简单而稳定的进程间通信元语，保证这些单一目的的简单程序可以方便的组合在一起</li>
+</ul>
+<h3 id="Linux">Linux</h3>
+<p>1991年 by Linus Torvalds，不能随心所欲地使用Unix。</p>
+<p>类Unix系统，但不是Unix。尽管Linux借鉴了Unix的许多设计并且实现了Unix的API，但Linux没有像其他Unix变种那样直接使用Unix的源代码。但没有抛弃Unix的设计目标并且保证了应用程序编程接口的一致性。</p>
+<p><strong>Linux和Unix区别</strong></p>
+<ul>
+<li>Unix内核是一个不可分割的静态可执行库，必须以巨大、单独的可执行块的形式在一个单独的地址空间中运行。需要硬件提供页机制管理内存。</li>
+</ul>
+<p><strong>单内核和微内核</strong></p>
+<p>单内核，内核从整体上作为一个单独的大过程来实现，运行在一个单独的地址空间上。（通常以单个二进制文件的形式存放在磁盘中）所有的内核服务都在这样的一个大内核地址空间允许。内核可以直接调用函数，简单且高性能。大多数Unix系统设计为单模块</p>
+<p>微内核，功能被划分成多个独立的过程，每个过程叫做一个服务器。所有服务器都保持独立并运行在各自的地址空间上，不能直接进行系统调用，需要通过消息传递处理微内核通信（进程间通信IPC）。各个服务器之间通过IPC机制互通消息，互换服务。各自独立能有效避免一个服务器失效导致全盘都不能用的现象</p>
+<p>Linux也是一个单内核，内核运行在单独的内核地址空间，不过采用了模块化设计、抢占式内核、内核线程以及动态装载内核模块。还能让所有功能运行在内核态，直接调用函数而无需消息传递。</p>
+<ul>
+<li>
+<p>支持动态加载内核模块，能够在需要的时候动态卸载和加载部分内核代码（非耦合的部分吗？）</p>
+</li>
+<li>
+<p>支持对称多处理(SMP)机制</p>
+</li>
+<li>
+<p>内核可以抢占。允许在内核运行的任务优先执行的能力（而大多数Unix内核不支持）</p>
+</li>
+<li>
+<p>内核并不区分线程和其他的一般进程。进程只是其中的一些共享资源罢了</p>
+</li>
+<li>
+<p>提供设备类的面向对象的设备模型、热插事件、用户控件的设备文件系统sysfs</p>
+</li>
+<li>
+<p>忽略了Unix中类似STREAMS的一些特性</p>
+</li>
+</ul>
+<p><strong>Linux的内核版本</strong></p>
+<p>主版本号 . 从版本号 . 修订版本号 (. 稳定版本号)<br>
+从版本号是偶数 -&gt; 内核是稳定版    奇数 -&gt; 开发版</p>
+<h2 id="-v4"></h2>
+<h2 id="开始">开始</h2>
+<h3 id="源码-v2">源码</h3>
+<p>内核源码一般在/usr/src/linux中</p>
+<h4 id="结构-v2">结构</h4>
+<p><img src="https://img-blog.csdn.net/20170302212637409?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDQ0NzIzNA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" srcset="/;/img/loading.gif" lazyload alt="img"></p>
+<h4 id="编译-v2">编译</h4>
+<h3 id="内核开发的特点">内核开发的特点</h3>
+<ul>
+<li>不能访问C库和标准的C头文件（包含C库效率太低下）</li>
+<li>编程时需要用GNU C</li>
+<li>内核编程难以执行浮点运算</li>
+<li>时刻注意同步和并发</li>
+<li>缺乏像用户空间一样的内存保护机制</li>
+</ul>
+<p><strong>头文件</strong></p>
+<p>指内核的头文件</p>
+<p>基本的头文件在include 目录中<br>
+体系结构相关的在arch/{spec_arch}/include/asm目录中</p>
+<p><strong>GNU C</strong></p>
+<p>Linux内核用C语言编写。</p>
+<p><strong>gcc</strong>：由GUN开发的编译器（初衷是位GNU OS编写一款编译器），原名是GNU C Compiler，只能处理C语言，但扩展位可处理C++、Java、go等，改名为GNU编译器套件（GNU Compiler Collection），几乎所有的GCC都由C编写，其中C编译器既可以编译内核也可以编译Linux系统用C写的代码</p>
+<div class="note note-success">
+            <p>什么是内联函数？</p>
+          </div>
+<p>一种编程语言结构，用来建议编译器对一些特殊函数进行内联扩展。（在好吃呢个系的每个调用点上“内联地”展开）<br>
+例如</p>
+<div class="code-wrapper"><pre class="language-c++" data-language="c++"><code class="language-c++">inline int max(int a, int b)
+&#123;
+ return a &gt; b ? a : b;
+&#125;
+&#x2F;&#x2F; 则调用： cout&lt;&lt;max(a, b)&lt;&lt;endl;
+&#x2F;&#x2F; 在编译时展开为： cout&lt;&lt;(a &gt; b ? a : b)&lt;&lt;endl;
+inline void Foo(int x, int y);   &#x2F;&#x2F; inline 仅与函数声明放在一起 不起作用(对C++)</code></pre></div>
+<p>优点： 函数体比较小时，内联函数让目标代码更加高效。<br>
+缺点： 滥用内联导致目标代码量或增或减</p>
+<p>有些函数即使声明为inline但不一定会被编译器内联（递归函数和虚函数）</p>
+<h2 id="进程管理">进程管理</h2>
+<h3 id="进程">进程</h3>
+<p>进程是处于执行器的程序：一段可执行的代码+打开的文件+挂起的信号+内核内部数据+多个执行线程+处理器状态+一个或多个具有内存映射的内存地址空间…<br>
+执行线程：进程中活动的对象，每个线程有独立的PC、进程栈和一组进程寄存器，<strong>内核调度的对象是线程</strong><br>
+程序本身不是进程，进程是处于执行器的程序以及相关资源的总称。（一个程序可能有多个进程，并且进程间可能进行数据共享）</p>
+<p>进程提供两种虚拟机制：虚拟处理器和虚拟内存，给进程一种在独占处理器的假象(实际可能是多个进程使用同一个处理器)</p>
+<h4 id="进程描述符与任务结构">进程描述符与任务结构</h4>
+<p>内核把进程的列表存放在任务队列的双向循环链表中，链表中的每一项都是一个task_struct（这个结构体比较大） 包含了内核管理一个进程所需要的信息。Linux通过slab分配器分配task_struct结构（能达到对象复用和缓存着色的目的）</p>
+<p>2.6以前的内核，task_struct放在进程内核栈的微端，（为了让像x86那样寄存器较少的硬件结构体系通过栈指针就能计算他的位置）；现在使用slab分配器动态生成task_struct，秩序在栈底或者栈顶创建新的结构thread_info（对进程的一个简介？）<br>
+访问任务通常要获得指向其task_struct的指针，但大部分处理进程的代码都是直接通过task_struct进行。通过current宏查找当前正在运行进程的struct。硬件体系不同，宏的实现不同。</p>
+<ul>
+<li>有的硬件体系结构能拿出专门的寄存器来存放当前进程的task_struct指针</li>
+<li>有些x86的体系架构，寄存器少，只能在内核栈的微端创建thread_info，通过计算偏移间接的赵task_struct</li>
+</ul>
+<p>通过预分配和重复使用task_struct能避免动态分配和释放带来的资源消耗 —&gt; 进程的快速创建</p>
+<p>PID：唯一的进程标识符 (/proc/sys/kernel/pid_max 可修改系统中存在进程的最大数目)</p>
+<h4 id="进程的状态">进程的状态</h4>
+<ul>
+<li>TASK_RUNING：进程可执行。要么正在执行，要么在运行队列中等待执行（进程在用户空间中执行的唯一可能状态）</li>
+<li>TASK_INTERRUPTIBLE：进程正在睡眠，被阻塞，等待某些条件达成。会因为接收到信号而而提前被唤醒</li>
+<li>TASK_UNINTERRUPTIBLE：接收到信号也不会被唤醒。对信号不作出响应</li>
+<li>__TASK_TRACED：被其他进程跟踪的进程（对调试进程进行跟踪）</li>
+<li>__TASK_STOPPED：进程停止执行；进程没有投入运行也不能投入运行（接收到SIGSTOP、SIGTSTP、SITTIN、SIGTTOU信号时）。调试期间接收到任何信号都会进入这种状态</li>
+</ul>
+<p><strong>设置当前进程状态</strong><br>
+set_task_state(task, state) --&gt; task-&gt;state = newstate; 并可能会设置内存屏障来强制其他处理器进行重新排序</p>
+<h4 id="进程家族树">进程家族树</h4>
+<p>所有进程都是PID = 1的进程后代，内核在系统启动的最后阶段启动init进程。</p>
+<p>每个task_struct有父进程的指针、children的子进程链表</p>
+<p>通过pstree -p 可观察到这种现象</p>
+<div class="note note-success">
+            <p>parent和realparent的区别？</p>
+          </div>
+<h4 id="创建进程">创建进程</h4>
+<p><strong>写时拷贝</strong></p>
+<p>传统fork()直接把所有的资源复制给新创建的进程  – 效率地下，如果新进程要执行一个新的映像，那之前的拷贝都没用。<br>
+Linux fork采用写时拷贝进行，内核并不复制整个进程的地址空间，而是让父子进程共享同一个拷贝。只有在需要写入时，数据才会被复制，从而让各自进程有各自的拷贝。fork的实际开销就是复制父进程的页表以及给子进程创建唯一的进程描述符，避免拷贝大量根本就不会被使用的数据。</p>
+<h5 id="fork">fork</h5>
+<p>通过拷贝当前今晨创建一个子进程，父子进程的区别仅仅在PID PPID 和某些资源统计量</p>
+<p>fork vfork __clone() 库函数根据各自参数调用 ——&gt; clone() —&gt;do_fork() —&gt;copy_process()</p>
+<p>copy_process完成了创建中的大部分工作</p>
+<p>流程：</p>
+<h5 id="exec">exec</h5>
+<p>负责读取可执行文件并将其载入地址空间开始运行</p>
+<h5 id="vfork">vfork</h5>
+<p>仅仅不拷贝父进程的页表项。子进程作为父进程的一个单独的线程在它的地址空间运行，父进程被阻塞，直到子进程退出或者执行exec()时</p>
+<h4 id="对fork的一些深入探究">对fork的一些深入探究</h4>
+<p>详见文章 《深入Linux fork()函数》</p>
+<p><strong>为啥Manjaro没有include文件夹，并且/usr/include下的sched.h没有task_struct定义，但linux内核源文件就有？</strong></p>
+<p>亲测，这个task_struct结构体相当的长，有很多的ifdef下的struct定义（适配不同的架构吗？）</p>
+<h3 id="线程-v2">线程</h3>
+<h4 id="概述-v3">概述</h4>
+<p>线程机制：提供了同一程序内共享内存地址空间运行的一组线程，在多处理器环境下，能保证真正的并行处理。父子俩共享地址空间、文件资源系统、文件描述符和信号处理程序。本质仍然是线程，</p>
+<div class="note note-primary">
+            <p>Windows下，在啮合中专门提供了支持线程的机制，把线程叫做“轻量级进程”(而在Linux中，进程本身已经足够轻量)。线程被抽象成一种消耗资源较少、运行迅速的执行单元，通常有一个包含指向n个不同线程的指针的进程描述符，线程本身有独立的结构。<br>但Linux下就没有独立的结构，仅仅复用task_struct，建立四个进程时，指定他们共享某些资源</p>
+          </div>
+<h4 id="一些操作方式">一些操作方式</h4>
+<p>pthread_create，</p>
+<div class="code-wrapper"><pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span><span class="token operator">*</span> <span class="token function">thread_fun</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span> arg<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> i <span class="token punctuation">;</span>
+    i <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span> arg<span class="token punctuation">;</span>
+    <span class="token class-name">pthread_t</span>  id <span class="token operator">=</span> <span class="token function">pthread_self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">pid_t</span> pid <span class="token operator">=</span> <span class="token function">getpid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"cur thread %d  thread_self is %lu\n"</span><span class="token punctuation">,</span> i<span class="token punctuation">,</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"cur thread &amp;%d pid is %d\n"</span><span class="token punctuation">,</span>i<span class="token punctuation">,</span> pid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token class-name">pthread_t</span>  id <span class="token operator">=</span> <span class="token function">pthread_self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">pid_t</span> pid <span class="token operator">=</span> <span class="token function">getpid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"cur thread_self is %lu\n"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"cur oud is %d\n"</span><span class="token punctuation">,</span> pid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token class-name">pthread_t</span> tid_1<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">pthread_create</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>tid_1<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> thread_fun<span class="token punctuation">,</span> <span class="token operator">&amp;</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>可以验证，线程内部pid都是相同的，但pthread_self不同</p>
+<p>有个问题，进程退出后线程会退出吗？（感觉不会，因为也是线程，会被分配到其他进程名下？）</p>
+<p>还有为什么在clion中pthread_create 不能直接传void * 类型？g++单独编译就可以？</p>
+<p><strong>可共享全局数据</strong></p>
+<ul>
+<li>pthread_exit，退出单个线程.不能使用exit，会使得整个进程退出（跟pid相关？）（仅在线程内部使用）</li>
+<li>pthread_join(othread_t pthread,void ** retval)，等待一个线程的结束。当前进程就会stuck。成功则返回0
+<ul>
+<li>retval:存储线程结束状态
+<ul>
+<li>如果thread线程通过return返回，retval所指向的单元里存放的是thread线程函数的返回值。</li>
+<li>如果thread线程被别的线程调用pthread_cancel异常终止掉，retval所指向的单元里存放的是常数PTHREAD_CANCELED。</li>
+<li>如果thread线程是自己调用pthread_exit终止的，retval所指向的单元存放的是传给pthread_exit的参数。</li>
+<li>如果对thread线程的终止状态不感兴趣，可以传NULL给retval参数。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>pthread_cancel，杀死线程
+<ul>
+<li>如果线程在sleep则会等到sleep后再cancel</li>
+<li>如果一直是while的状态，则
+<ul>
+<li>有pthread_testcancel(),则就在当前处cancel。会自行设置<strong>取消点</strong></li>
+<li>如果没有，则系统自己判断什么时候会cancel，可能while会执行多次后cancel</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>pthread_detach：线程分离。
+<ul>
+<li>线程主动与主控线程断开关系，线程结束后，退出状态不由其他线程获取，而是自己释放。不能使用pthread_join等待它的终止状态（线程一旦终止就立刻回收它占用的字眼，而不保留终止装填）</li>
+<li>不会产生僵尸进程</li>
+</ul>
+</li>
+</ul>
+<p><strong>内核线程</strong></p>
+<p>独立运行在内核空间的标准进程，区别在与内核线程没有独立的地址空间。只在内核空间运行，从不会切换到内核空间。可以被调度和抢占。内核线程只能由内核线程创建</p>
+<h2 id="进程调度">进程调度</h2>
+<h3 id="概述-v4">概述</h3>
+<p><strong>实时进程和普通进程</strong></p>
+<table>
+<thead>
+<tr>
+<th>交互式进程(interactive process)</th>
+<th>此类进程经常与用户进行交互, 因此需要花费很多时间等待键盘和鼠标操作. 当接受了用户的输入后, 进程必须很快被唤醒, 否则用户会感觉系统反应迟钝</th>
+<th>shell, 文本编辑程序和图形应用程序</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>批处理进程(batch process)</td>
+<td>此类进程不必与用户交互, 因此经常在后台运行. 因为这样的进程不必很快相应, 因此常受到调度程序的怠慢</td>
+<td>程序语言的编译程序, 数据库搜索引擎以及科学计算</td>
+</tr>
+<tr>
+<td>实时进程(real-time process)</td>
+<td>这些进程由很强的调度需要, 这样的进程绝不会被低优先级的进程阻塞. 并且他们的响应时间要尽可能的短</td>
+<td>视频音频应用程序, 机器人控制程序以及从物理传感器上收集数据的程序</td>
+</tr>
+</tbody>
+</table>
+<p>不同分类采用不同的调度策略</p>
+<ul>
+<li>对于实时进程，采用FIFO或者Round Robin的调度策略.</li>
+<li>对于普通进程，则<strong>需要区分交互式和批处理式的不同</strong>。传统Linux调度器提高交互式应用的优先级，使得它们能更快地被调度。而CFS和RSDL等新的调度器的核心思想是”完全公平”。这个设计理念不仅大大简化了调度器的代码复杂度，还对各种调度需求的提供了更完美的支持.</li>
+</ul>
+<h3 id="调度器">调度器</h3>
+<p>最开始是On的调度算法（每次会遍历所有任务，所以是On） —&gt; Linux 2.5 : O(1) —&gt; Linux 2.6 - now CFS</p>
+<p>调度器可以用一种或者多种调度策略</p>
+<table>
+<thead>
+<tr>
+<th>调度器类</th>
+<th>描述</th>
+<th>调度策略</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stop_sched_class</td>
+<td>优先级最高的线程，会中断所有其他线程，且不会被其他任务打断<br/>作用<br/>1.发生在cpu_stop_cpu_callback 进行cpu之间任务migration<br/>2.HOTPLUG_CPU的情况下关闭任务</td>
+<td>无, 不需要调度普通进程</td>
+</tr>
+<tr>
+<td>dl_sched_class</td>
+<td>采用EDF最早截至时间优先算法调度实时进程</td>
+<td>SCHED_DEADLINE</td>
+</tr>
+<tr>
+<td>rt_sched_class</td>
+<td>采用提供 Roound-Robin算法或者FIFO算法调度实时进程<br/>具体调度策略由进程的task_struct-&gt;policy指定</td>
+<td>SCHED_FIFO, SCHED_RR</td>
+</tr>
+<tr>
+<td>fair_sched_clas</td>
+<td>采用CFS算法调度普通的非实时进程</td>
+<td>SCHED_NORMAL, SCHED_BATCH</td>
+</tr>
+<tr>
+<td>idle_sched_class</td>
+<td>采用CFS算法调度idle进程, 每个cup的第一个pid=0线程：swapper，是一个静态线程。调度类属于：idel_sched_class，所以在ps里面是看不到的。一般运行在开机过程和cpu异常的时候做dump</td>
+<td>SCHED_IDLE</td>
+</tr>
+</tbody>
+</table>
+<p><strong>调度实体</strong></p>
+<p>调度体不限于调度进程，还可以调度更大的实体（组调度）</p>
+<table>
+<thead>
+<tr>
+<th>调度实体</th>
+<th><strong>名称</strong></th>
+<th><strong>描述</strong></th>
+<th>对应调度器类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sched_dl_entity</td>
+<td>DEADLINE调度实体</td>
+<td>采用EDF算法调度的实时调度实体</td>
+<td>dl_sched_class</td>
+</tr>
+<tr>
+<td>sched_rt_entity</td>
+<td>RT调度实体</td>
+<td>采用Roound-Robin或者FIFO算法调度的实时调度实体</td>
+<td>rt_sched_class</td>
+</tr>
+<tr>
+<td>sched_entity</td>
+<td>CFS调度实体</td>
+<td>采用CFS算法调度的普通非实时进程的调度实体</td>
+<td>fair_sched_class</td>
+</tr>
+</tbody>
+</table>
+<p>调度器有不同的运行队列</p>
+<h2 id="一些问题-v2">一些问题</h2>
+<h3 id="Unix和Linux到底啥关系？"><strong>Unix和Linux到底啥关系？</strong></h3>
+<h3 id="GNU-GPL">GNU GPL</h3>
+<h3 id="GCC不是用C编译的吗？用C编译的编译器去编译C">GCC不是用C编译的吗？用C编译的编译器去编译C???</h3>
+<p><strong>为什么一些linux可以访问windows磁盘但反过来却不行？</strong></p>
+<h3 id="fs是啥？文件系统？">fs是啥？文件系统？</h3>
+<h4 id="文件系统">文件系统</h4>
+<p><strong>文件系统的基本组成</strong><br>
+文件系统是操作系统中负责管理持久数据的子系统，说简单点，就是负责把用户的文件存到磁盘硬件中，因为即使计算机断电了，磁盘里的数据并不会丢失，所以可以持久化的保存文件。<br>
+文件系统的基本数据单位是文件，它的目的是对磁盘上的文件进行组织管理，那组织的方式不同，就会形成不同的文件系统。<br>
+Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件和目录，就连块设备、管道、socket 等，也都是统一交给文件系统管理的。</p>
+<p>Linux文件系统回味每个文件分配两个数据结构： 索引节点和目录项，记录文件的原信息和目录层次结构</p>
+<ul>
+<li>索引节点：记录文件的元信息</li>
+</ul>
+<h3 id="Linux有事务这个概念吗？">Linux有事务这个概念吗？</h3>
+<h3 id="printk是什么">printk是什么</h3>
+<p>比printf多了个日志级别，类似Android的Log.e Log.w…，当日志级别的数值小于控制台级别(<strong>越小越管用</strong>)，信息才会在控制台打印出来。也可以通过两种方式直接查看命令</p>
+<ul>
+<li>dmesg命令打印</li>
+<li>cat /proc/kmsg打印</li>
+</ul>
+<p>使用时是printk(level “xxxxx”);</p>
+<div class="code-wrapper"><pre class="language-c" data-language="c"><code class="language-c">
+<span class="token keyword">int</span> console_printk<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+	DEFAULT_CONSOLE_LOGLEVEL<span class="token punctuation">,</span>	<span class="token comment">/* console_loglevel 7*/</span>
+	DEFAULT_MESSAGE_LOGLEVEL<span class="token punctuation">,</span>	<span class="token comment">/* default_message_loglevel 4*/</span>
+	MINIMUM_CONSOLE_LOGLEVEL<span class="token punctuation">,</span>	<span class="token comment">/* minimum_console_loglevel 1*/</span>
+	DEFAULT_CONSOLE_LOGLEVEL<span class="token punctuation">,</span>	<span class="token comment">/* default_console_loglevel 7*/</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+</code></pre></div>
+<p>四种不同的console级别☝️</p>
+<p>八种不同的日志级别👇按照紧急和严重程度排序</p>
+<div class="code-wrapper"><pre class="language-c" data-language="c"><code class="language-c">
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span>	<span class="token macro-name">KERN_EMERG</span>	<span class="token string">"&lt;0>"</span>	<span class="token comment">/* system is unusable			*/</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span>	<span class="token macro-name">KERN_ALERT</span>	<span class="token string">"&lt;1>"</span>	<span class="token comment">/* action must be taken immediately	*/</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span>	<span class="token macro-name">KERN_CRIT</span>	<span class="token string">"&lt;2>"</span>	<span class="token comment">/* critical conditions			*/</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span>	<span class="token macro-name">KERN_ERR</span>	<span class="token string">"&lt;3>"</span>	<span class="token comment">/* error conditions			*/</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span>	<span class="token macro-name">KERN_WARNING</span>	<span class="token string">"&lt;4>"</span>	<span class="token comment">/* warning conditions			*/</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span>	<span class="token macro-name">KERN_NOTICE</span>	<span class="token string">"&lt;5>"</span>	<span class="token comment">/* normal but significant condition	*/</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span>	<span class="token macro-name">KERN_INFO</span>	<span class="token string">"&lt;6>"</span>	<span class="token comment">/* informational			*/</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span>	<span class="token macro-name">KERN_DEBUG</span>	<span class="token string">"&lt;7>"</span>	<span class="token comment">/* debug-level messages			*/</span></span></code></pre></div>
+<h3 id="asmlinkage前缀啥意思？">asmlinkage前缀啥意思？</h3>
+<h2 id="参考书目">参考书目</h2>
+<p>《Linux内核设计与实现》(第三版)</p>
+<h2 id="方法文件索引">方法文件索引</h2>
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>功能</th>
+<th>函数\结构体举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kernel/fork.c</td>
+<td>进程创建</td>
+<td>copy_process</td>
+</tr>
+<tr>
+<td>include/linux/sched.c</td>
+<td>进程结构</td>
+<td>task_struct</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="post-metas mb-3">
+                                            
+                                                    
+                                                        <div class="post-meta">
+                                                            <i class="iconfont icon-tags"></i>
+                                                            
+                                                                <a class="hover-with-bg" href="/;/tags/Linux/">
+                                                                    Linux
+                                                                </a>
+                                                                
+                                                                <a class="hover-with-bg" href="/;/tags/C/">
+                                                                    C
+                                                                </a>
+                                                                
+                                                                <a class="hover-with-bg" href="/;/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/">
+                                                                    虚拟机
+                                                                </a>
+                                                                
+                                                        </div>
+                                                        
+                                        </div>
+                                        
+                                            <p class="note note-warning">
+                                                
+                                                            本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                                                                
+                                            </p>
+                                            
+                                                
+                                                    <div class="post-prevnext">
+                                                        <article class="post-prev col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2021/10/27/%E6%B7%B1%E5%85%A5C-C/">
+                                                                        <i class="iconfont icon-arrowleft"></i>
+                                                                        <span class="hidden-mobile">深入C/C++</span>
+                                                                        <span class="visible-mobile">上一篇</span>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                        <article class="post-next col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2021/10/25/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+                                                                        <span class="hidden-mobile">计算机组成原理</span>
+                                                                        <span class="visible-mobile">下一篇</span>
+                                                                        <i class="iconfont icon-arrowright"></i>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                    </div>
+                                                    
+                                    </div>
+
+                                    
+                                        <!-- Comments -->
+                                        <article class="comments" id="comments" lazyload>
+                                            
+                                                        
+                                                            
+                                                                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Yunlong626/commit-utterances');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+                                        </article>
+                                        
+                        </article>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+                    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+                </div>
+                
+        </div>
+    </div>
+
+    <!-- Custom -->
+    
+    <!--添加我自己的设置页面-->
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+    <!--加入自定义格式的-->
+    <!--自定义的git徽标样式-->
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080" srcset="/;/img/loading.gif" lazyload>
+<br>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAdCAYAAAC9pNwMAAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDIgNzkuMTYwOTI0LCAyMDE3LzA3LzEzLTAxOjA2OjM5ICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+nhxg7wAACNlJREFUSInF1mmMVeUdx/Hv2e+5+519mJWBYQZkGxZZxLKJqBXGoLS1iXWrmihotFXaJiTWWlsbl6q1aetWd5u0VkKjNG4YEJSlOCibDLMwM8x679z9nnPP1jcVJUxf+7z6J8+LT37/Z4VvaQhfFS8+sBXbctCDGrVTKlBUH4mxAbI9Hfj0IJLsp6paJ5/tmn20N/D0wKDRMq9F/c3M2U1/V0vDfWMFh+tv/Ig1zYPMabDImPJ52OaXO87W580KggCiiOsJOJ6I3wcNFaaeNKxrt72f2fLGu4FpJ/sDQABRzD22fH7/Yze069vGc6mrDLNIJCDik10sxz2by3VdPM87xzkP9jwPTZFRVI1YUJKH+oy7n3tbvv/P2wW/UQxRWe6w4ZJRptYLHDoCuz8v5cP92XbI762O+h6UVWHnUFbPpU0fEb2A60mMJ7MUi9b/b7UgKhiZMaIxm8YLplLMDPz8hl/EH+rs8TNlUpFf32uyZJGLPDwCiTGUyTWodTN49eUCdz2YwXb9NNcObp1X98WDoufynzMVCEKGn27ayPTWBi5ad8P5iQUkJEnFLjqM9Z+hrVX0vfDe6K2dPRWsW2bwyp9EUifSJB84gdxrkR0eRgv1o/3I4fbbprJ6scqamzVO9pffec1S5ZWY2Nfz5qEy/FqOC2Y3s3j53HMSi18VRjFPwSwg+1RfVbl115vvJrsfej7UGIsYPPGgQ7JXoO+Xx5B3dHEomyJ9x1qiQozkr95h5937aFnVyouPlgJK+Ss7Fxz64OTSxSX+LHYxT2IsRW5kbGI4oHcR0jqoqTjV9se3I7/f8rS/ClS23GxSXhph6L5d9Akm7qqZhHWBQGUJ+CWGFzcg7e7m6D3/ZuW1Ea5YKdA3EojuONi813TqNi+YPYOKUhXDtCeGL26/hakLLiEcdsaHRkRAoLRc4fJrmhnekyF0apgZowWSwwkaa+rw3f8WA1GZZsPP5JEChX8dhZTN6iU6kAcs5s+dHd183SJ0VVKL57pfw6YdRQw23aeWTns47DPTALWlRTR7kMLew6hGgYqUhWXYFFUdPZ6lUBahLA8hVcOftckfi7No7VRAAQqsX1dybfvG1qwriM9mM5mJ4e4jO5Cc01dPqixbr8tWGBQUL4vjGigEEShi+xUmZ2RiR/sJ1pbS8NkgZrKAGw0TsgQsQyFaF/nfYTGprAlMFysbA1pI3mhkR6snhGsaymYGvPyFEb9IdbUE2AzFFTwpRqCtBY0wmdER+hZW4j63gcJj38V+/ErSUZXsYBfjIZHIRW0c2Z8BskCAqN+CbBJBFnyyKjR+Ez57nBxLqpfMUeSISElMBFz6x2Q6OxzWrYjyxWVzEewioU3LCS5vQY6nMUrLwNaxXvoQ59IloFSx54PPAZtQLExVZZDxsVE8J4dn6v4JYatgbSjk0owPw7RGH2ADMo88Z7L20ip8f7gC7fAo0q4+0rt7kEQDvaghVZbiPHUHcyeXcfLjT3jmpR7AYsnSScya3UR8bARVMck7Y/cB75/X6rDf3Fg2dw2jKZm5dXGm1LuAzO5DCo9v6aT0ibco5kzOvLOP+NGTFJtDpPYeZKijk/Rn3QxsfZV7txwhX7ABiZUXBsGvIvguQApNQQva9RMmTvZ2dpVUls+tX/UD7GN/Y8Ws05w6rQF+9vyzg1vZjbvMRJhXiRSU8DpTFFe0QE8S6SfPkOkZoktrB2oAhZWrwljxOPmchiSMYOWNoxNuruFU5vWeXdsojiUon345113dBBQBmTYlTimgdB8nfPo4WjaNFgN9OMEkJ02dnadVt5ki54Esqy+bzKJltVhSPbI3iN2zCyMTeXNCuG7Omm2Zok7PR2+R7jvD8ouruHhmCrB5jVZeYxLdrTP4sr4Vtd9g4MA4qc4c+6cu5NPamfw4P59t2WrA4YdXKkASf7SFivo6PDdEPmf1fRM++zp1bH/0r4I1dD1ODtOWaW4IsvPjL7nqXhloQiSPwjjgMYkMASyGEBkjhISCQwkwzve/18AbT+pk8pVY4UacQi9y+gyZ0eRAw4qHa89LXEx1LXMSPfhDJYRb59BtlLKg2WPT2l6qYl1svtGkrLYckyA1S+t5+2ATm37WCui0LSynsckDNH5zTxAchbQtkx08hDHYiW6NgC0enHBzEZ102UDH8QORdEckjEzZrNWkRydzyx17uGnDXqbUnGZ6dRPjSY91q2TqwjFuvTxLo5Zn5Qo/pumRSFcTLQtybEhGE0fQrDhhJ0VvH2lTnnHPhGtsmWan469apERjI2MH3qN7+7MEfH6ql29CbV7PvsMG32k6yU2XDhEKyZw66eJaRdrXR7CzCcqUNC3zwgymPJRCH4KRRLINimpL14A5Y4GDeOqbsPRVcfuN7Xj44pav/hFfrNT2kr2rsqf2Ibp5pEA14ZIImUyW3t5REkkTXRGQ/DGGhtLginhqCWknQDE5hKf5UFSF9Lj020Q2ul5V1AR2hr+8vuP8Vlc2zMPRxoSjnx7XBC14sDoydahSGq7KdO/HFyrBchxCVfX4fDKp4T7SCQejYODZLrYgIqgKFsNIgQqEYob8mW6yiUyb7Z64LVK/+B85xznnJ3AWzqTzuIX46mr5wLs+UUTyIriBCjRNxguHMJIFDLEEvXEOVRWnSJ0+jCd4CJoGjoedM1CLcXQziW3nMV2TSMBeOx7vWZvPt1r+cMPzE8KunaUkFn0vNrvtqXj34c1W6gzxlEQ6naIoBahtnkMwoFMwIVzSRNguMt53Aj2s4nkSlgPoGqLkICsRNF0gl8rYWuP8+11/w/OOJDEhHPKLCIpOXmi+M9AgP+maiesLifF2T1Rn5ZNj5Lo/Qc/GcPMmhdoqlEgIGzCK4PiCmJKK68p4KfF3qYGuF0qCRUkJTzleUbvQyWRTuE5xYthxQbBs7EISAbkzUFG3VfXXbK2YFi3X/eryfKKnqVBItNjJxDzH8erddC4SqWwcN5WyTtlyO1RP/Lh3eHD76MB40swmiDVJyDLYRhpc5+ub6tse/wWKbvSQEAw1awAAAABJRU5ErkJggg==&style=flat&color=d2c68b" srcset="/;/img/loading.gif" lazyload>
+
+<!-- 自定义显示文章总页数和字数的模块 -->
+<div class="bottom-post-statistic">
+    <div class="bottom-post-count">
+        62&nbsp 篇文章
+    </div>
+    <div class="bottom-post-word">
+        248.9k&nbsp 字
+    </div>
+</div>
+        <div class="footer-content">
+             <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+        </div>
+
+        
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+            
+
+                
+</footer>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/;/js/events.js" ></script>
+<script  src="/;/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/;/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/;/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/;/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/;/js/reset_code_lang.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/;/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?PPLong222";
+            var git_color =['#ebedf0', '#bef5cb', '#bef5cb', '#a9f5b4', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620'];
+            var git_user ="PPLong222";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div id="github-calendar" style="width:100%;height:auto;padding:10px;margin-bottom:20px"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;margin-top:100px;;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/about/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:200px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>#github_container > .position-relative > .border{border:0!important}#github-calendar{position: relative;margin-top: -2rem;background-color: var(--board-bg-color);transition: background-color 0.2s ease-in-out;border-radius: 0.5rem;z-index: 3;-webkit-box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);}</style><!-- hexo injector body_end end --></body>
+</html>

@@ -1,0 +1,1255 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/;/gallery/paw_img.jpg">
+  <link rel="icon" href="/;/gallery/paw_img.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="JAVA WEB 知识
+
+
+知识回顾
+1. IP： 计算机在网络中的唯一标识
+2. 端口号： 应用程序在计算机中的唯一标识 0~65536
+3. 传输协议： 规定数据传输的规则
+ 1. 基础协议：
+    1. Tcp： 安全协议，三次握手，速度稍慢
+    2. Udp：不完全，速度快
+
+Web服务器软件
+
+服务器：安装了服务器软件的计算机
+服务器软件：接受用户请求，处理请求，做出响应
+Web服">
+  <meta name="author" content="PPLong">
+  <meta name="keywords" content="">
+  <!--添加百度站点统计-->
+  <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
+  <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
+  <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
+  <meta name="description" content="JAVA WEB 知识   知识回顾 1. IP： 计算机在网络中的唯一标识 2. 端口号： 应用程序在计算机中的唯一标识 0~65536 3. 传输协议： 规定数据传输的规则  1. 基础协议：     1. Tcp： 安全协议，三次握手，速度稍慢     2. Udp：不完全，速度快  Web服务器软件  服务器：安装了服务器软件的计算机 服务器软件：接受用户请求，处理请求，做出响应 Web服">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web学习">
+<meta property="og:url" content="http://43.139.93.91/;/2019/08/22/Web%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="PPLong的博客">
+<meta property="og:description" content="JAVA WEB 知识   知识回顾 1. IP： 计算机在网络中的唯一标识 2. 端口号： 应用程序在计算机中的唯一标识 0~65536 3. 传输协议： 规定数据传输的规则  1. 基础协议：     1. Tcp： 安全协议，三次握手，速度稍慢     2. Udp：不完全，速度快  Web服务器软件  服务器：安装了服务器软件的计算机 服务器软件：接受用户请求，处理请求，做出响应 Web服">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-08-22T12:05:07.000Z">
+<meta property="article:modified_time" content="2022-04-07T01:45:18.000Z">
+<meta property="article:author" content="PPLong">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary_large_image">
+  
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
+  
+  <title>Web学习 - PPLong的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/;/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/;/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/;/css/indexing-hover.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"43.139.93.91","root":"/;/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/;/local-search.xml"};
+  </script>
+  <script  src="/;/js/utils.js" ></script>
+  <script  src="/;/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 90vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/;/">
+      <strong>PPLong的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友達
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-link-fill"></i>
+                娱乐
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/movie/">
+                    <i class="iconfont icon-movie"></i>
+                    第二人生
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/shuoshuo/">
+                    <i class="iconfont icon-comment"></i>
+                    唠唠
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/develop/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    尝鲜
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/;/gallery/covers/wallhaven-qde5kr.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Web学习">
+              
+            </span>
+
+            
+              <div class="mt-3">
+    
+            
+                <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-08-22 20:05" pubdate>
+        始于: 2019年8月22日晚上8点05分
+      </time>
+    </span>
+                
+</div>
+
+<!-- 自定义的更新时间 -->
+<div class="mt-1">
+    
+        <span class="post-meta">
+  <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
+  <time datetime="2022-04-07 09:45" pubdate>
+    更新: 2022年4月7日上午9点45分
+  </time>
+</span>
+        
+</div>
+
+<div class="mt-1">
+    
+        <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.5k 字
+    </span>
+        
+
+            
+                <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24 分钟
+    </span>
+                
+
+                    
+                        
+                            
+                                <!-- LeanCloud 统计文章PV -->
+                                <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span>
+                                 次
+                                    </span>
+                                    
+                                                
+</div>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+    <div class="container-fluid nopadding-x">
+        <div class="row nomargin-x">
+            <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-x-md">
+                <div class="container nopadding-x-md" id="board-ctn">
+                    <div class="py-5" id="board">
+                        <article class="post-content mx-auto">
+                            <!-- SEO header -->
+                            <h1 style="display: none">
+                                Web学习
+                            </h1>
+                            
+                                    <div class="markdown-body">
+                                        <h1>JAVA WEB 知识</h1>
+<!-- toc -->
+<hr>
+<h2 id="知识回顾">知识回顾</h2>
+<div class="code-wrapper"><pre class="language-none"><code class="language-none">1. IP： 计算机在网络中的唯一标识
+2. 端口号： 应用程序在计算机中的唯一标识 0~65536
+3. 传输协议： 规定数据传输的规则
+ 1. 基础协议：
+    1. Tcp： 安全协议，三次握手，速度稍慢
+    2. Udp：不完全，速度快
+</code></pre></div>
+<h2 id="Web服务器软件">Web服务器软件</h2>
+<ul>
+<li>服务器：安装了服务器软件的计算机</li>
+<li>服务器软件：接受用户请求，处理请求，做出响应</li>
+<li>Web服务器软件：结束后用户请求，处理请求，作出响应
+<ul>
+<li>web服务器软件，可以部署web项目，用户通过浏览器来访问项目</li>
+<li>web容器</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+<h2 id="Tomcat">Tomcat</h2>
+<h3 id="目录结构">目录结构</h3>
+<ol>
+<li>bin ： 可执行文件</li>
+<li>conf：配置文件</li>
+<li>lib：启动依赖的jar包</li>
+<li>logs： 日志文件</li>
+<li>temp：临时文件</li>
+<li><strong>webapps</strong>：放入web项目文件</li>
+<li>work：存放运行时数据</li>
+</ol>
+<h3 id="运行">运行</h3>
+<ol>
+<li>
+<p>启动方式： bin–startup.bat</p>
+</li>
+<li>
+<p>查找：</p>
+<ol>
+<li>127.0.0.1:8080</li>
+<li>localhost:8080</li>
+<li>自己的ip:8080</li>
+</ol>
+</li>
+<li>
+<p>修改端口号： conf–server.xml----“port”</p>
+</li>
+<li>
+<p>关闭：</p>
+<ol>
+<li>正常关闭：
+<ul>
+<li>shutdown.bat</li>
+<li>ctrl+c(命令行中)</li>
+</ul>
+</li>
+<li>强制关闭：
+<ul>
+<li>直接关闭.bat窗口，可能造成文件损失、未保存</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>部署：</p>
+<ol>
+<li>
+<p>直接放项目进入webapps （/项目文件夹/html）</p>
+</li>
+<li>
+<p>简单部署：</p>
+<ol>
+<li>直接将html用war打包软件成.war格式</li>
+<li>直接复制到webapps 中</li>
+<li>war包自动解压缩</li>
+</ol>
+</li>
+<li>
+<p>配置conf/server文件</p>
+<ul>
+<li>
+<p>&lt;HOST</p>
+<p>&lt;Context docbase=“xxx” path=&quot;/xxxx &quot;即替换为xxxx</p>
+</li>
+</ul>
+</li>
+<li>
+<p>conf-Catalina-Localhost -创建xml文件，复制3中的代码</p>
+<p>​	<Context docbase="xxx " />即可</p>
+<p>虚拟目录： xml文件的名称  (推荐)（不需要重启服务器）</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="静态项目与动态项目">静态项目与动态项目</h3>
+<p>动态项目：</p>
+<ul>
+<li>web-inf
+<ul>
+<li>web.xml 项目的核心配置文件</li>
+<li>calsses目录：字节码文件</li>
+<li>lib：依赖的jar包</li>
+</ul>
+</li>
+</ul>
+<h3 id="用IEDA-配置TOMCAT">用IEDA 配置TOMCAT</h3>
+<h2 id="Servlet">Servlet</h2>
+<ul>
+<li>
+<p>概念：运行在服务器端的小程序</p>
+<ul>
+<li>其实就是一个借口，定义了 java类被浏览器访问到的规则</li>
+</ul>
+</li>
+<li>
+<p>实际操作：</p>
+<ol>
+<li>创建java EE项目</li>
+<li>写入servlet包</li>
+<li>创建类 实现 servlet接口</li>
+<li>配置servlet —于 web.xml中配置servlet</li>
+</ol>
+</li>
+<li>
+<div class="code-wrapper"><pre><code class="language-xml"> &lt;servlet&gt;
+        &lt;servlet-name&gt;demo_1&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;Servelet.Myservlet_1&lt;/servlet-class&gt;
+    &lt;/servlet&gt;
+  
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;demo_1&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/urldemo_1&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+<pre class="language-none"><code class="language-none">
+  1. 先通过urlpattern 判断 地址是否和输入相等
+  2. 相等则上移，找到servelet-name
+  3. servlet-name 再找到servlet
+  4. servlet再下移到servet-class
+  5. 加载类进入内存 Class.forname....
+  6. 创造类对象   getInstance()
+  7. 实现方法
+
+### Servlet 生命周期
+
+1. init() Servlet被创建时执行 一次
+   * 可以通过在&lt;servlet&gt;标签下配置改变 servlet的创建时机
+   * &lt;load -on-startup&gt; x&lt;&#x2F;load -on-startup&gt;
+   * x: 负数  ： 第一次被访问时
+   * x: 0或正整数   ：服务器启动时
+2. service() 每一次Servlet被访问时执行（页面的刷新） 多次
+3. destroy() Servlet被关闭时执行  一次
+   * 条件： 服务器**正常关闭** (临终遗言)
+
+### Servlet 3.0
+
+1. 好处： 支持注解配置，不用xml
+2. 关键步骤： **类上使用@Servlet注解**，可以不用web.xml
+
+### Servlet 体系结构
+
+1. Servlet 
+
+2. GenericServlet
+
+   * 抽象类 不用将Servlet接口类的方法完全实现。其他方法为空实现，更简洁 一点， 一般还是不用
+
+3. HttpServlet
+
+   * 封装类，比较常用，不用再判断请求方式是GET&#x2F;POST
+   * 复写 doGet &#x2F;doPost 方法
+
+   一个Servlet能够定义多个访问路径
+
+4.  定义方式： 
+
+   * &#x2F;user   路径匹配
+   * &#x2F;user&#x2F;aaa  多层路径
+   * &#x2F;user&#x2F;* ：哪种都可以访问到
+   * *.do  ： 前面加什么都可以，后面必须跟do   扩展名匹配
+
+## HTTP 超文本传输
+
+### **1. Hyper Text Translation Protocol**
+
+* 目的： 定义了客户端和服务器通信时，发送的数据格式
+
+* 特点： 
+  1. 基于TCP&#x2F;IP的高级协议
+  2. 默认端口号 ：80
+  3. 基于响应和请求一一对应的模式
+  4. 无状态的： 每次请求间相互独立，每次请求一个资源都是独立的，分步进行的
+* 历史版本：
+  * 1.0 每一次 请求都会重新建立链接
+  * 1.1 复用了链接，节约资源
+
+### 2. 请求消息数据格式
+
+1. 请求行
+
+   * 请求方式 请求url 请求协议&#x2F;版本 
+
+     (GET&#x2F; login.html HTTP&#x2F;1.1)
+
+     * GET： 
+       1. 请求参数在请求行中
+       2. 请求url长度有限
+       3. 不太安全
+     * POST: 
+       1. 请求参数在请求体中（专门封装了）
+       2. 请求url长度无限
+       3. 相对安全
+
+2. 请求头 ： 浏览器告诉服务器的信息
+
+   * 请求头名称： 请求头值（键值对）
+
+     常见的请求头:
+
+     * User-Agent: 浏览器告诉服务器，所使用的的浏览器版本信息，解决浏览器兼容问题  包含浏览器的关键字（Chrom Firfox......） 
+     * Accept: 解析什么样格式的页面
+     * ......
+     * Referer：告诉服务器  当前请求从哪里来 （防止盗取连接、便于统计工作）
+       * 盗取超链接：referer来判断当前请求连接是否在指定网站 获取而来
+       * 统计工作：
+     * Connection: 连接是否能被复用
+
+3. 请求空行
+
+   * 空行
+
+4. 请求体（正文）：
+
+   * 封装post请求小心的请求参数  例如：
+
+     username&#x3D;111;
+
+   1. 从流对象中拿去数据
+</code></pre></div>
+</code></pre>
+</li>
+</ul>
+<p>GET /Tomcat_2_war_exploded/index2.html HTTP/1.1<br>
+Host: localhost:8080<br>
+Connection: keep-alive<br>
+Cache-Control: max-age=0<br>
+Upgrade-Insecure-Requests: 1<br>
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36<br>
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,<em>/</em>;q=0.8,application/signed-exchange;v=b3;q=0.9<br>
+Sec-Fetch-Site: none<br>
+Sec-Fetch-Mode: navigate<br>
+Sec-Fetch-User: ?1<br>
+Sec-Fetch-Dest: document<br>
+Accept-Encoding: gzip, deflate, br<br>
+Accept-Language: zh-CN,zh;q=0.9<br>
+Cookie: JSESSIONID=1B454411C9ADDC7AAFFE3D5BF306E302</p>
+<div class="code-wrapper"><pre class="language-none"><code class="language-none">
+### 3. Request 
+
+1. 原理
+
+   1. Request Response对象 均由服务器创建，我们使用
+
+2.  Request： 获取请求操作
+
+   1. 继承结构：
+      * ServletRequest 接口
+      * HttpServletRequest  继承该接口 仍然是接口
+      * Tomcat 中的类 RequestFacede来实现 该接口
+
+3. Request 功能：
+
+   1. 获取请求行数据
+
+      * 获取请求方式 String getMethod();
+
+      * **获取虚拟目录** String getContextPath();
+
+      * 获取Servlet 路径: /demo1   getServletPath();
+
+      * 获取get方式请求参数 getQueryString();
+
+      * **获取请求的URI ** getRequestURL()
+
+        * URL: 统一资源定位符   
+        * URI: 统一资源标识符   范围&gt;URL 
+
+      * 获取协议和版本： getProtocal()
+
+      * 获取客户机的IP: getRemoteAddress();
+
+        
+
+   2. 获取请求头数据
+
+      1. 方法：
+         * getHeader（name） ：通过请求头名称获取请求头的值
+         * getHeaderNames(): 获取所有请求头的名称
+   
+   3. 获取请求体数据
+   
+      步骤：
+   
+      1. 获取流对象
+         * bufferedReader getReader() 字符数据流
+         * ServletInputStream getInputStrea() 获取字节输入流
+      2. 从流对象中拿去数据
+   
+4. 其他功能：
+
+   1. 获取请求参数通用方式： 
+      1. getParameter(string) 根据参数名称获取参数值
+      2. getParameterValues（） 返回参数名称返回参数值的数组（复选框）
+      3. getParameterNames() 获取所有请求的参数名称
+      4. Map&lt;str,str[]&gt; getParameterMap() 获取所有参数的map集
+   2. 中文乱码问题：
+      * get 方式在tomcat 8 已经 被解决
+      * post 在输入中文时易乱码
+      * 在获取参数前修改 编码 使其跟html编码相同
+      * request.setcharartorEncoding（&quot;utf-8&quot;）
+   3. 请求转发： 一种在服务器内部的资源跳转方式
+      1. request. getrequestdispatcher(/uri).forward(request,respose)
+      2. 特点： 
+         1. 浏览器地址栏路径 未发生变化 
+         2. 只能转发到**当前的服务器**内部资源中
+         3. 转发 是一次请求，多个资源间使用同一个请求 
+   4. 共享数据：
+      1. 域对象： 一个有作用范围的对象，可以再范围	内共享数据
+      2. request域： 代表一次请求，一般用于请求转发的多个资源共享数据
+      3. 方法：
+         1. setAttribute(name,obj) 存储数据
+         2. getAttribute(name) 通过键获取值
+         3. removeAttribute(String name) 通过键删除值
+   5.  获取ServletContext（）  对象
+
+### 4. 响应消息数据格式
+
+1. 响应行
+   * 组成 ：协议/版本  响应状态码  状态码描述
+   * 响应状态码： 服务器告诉客户端 浏览器本次请求和响应的一个状态
+   * 状态码都是三位数字
+     * 1. 1XX: 服务器服务器接收客户端消息 未接收完成，等待一段时间后 发送1xx 状态码
+       2. 2XX： 接收成功！ 
+       3. 3XX： 302: 重定向  资源跳转   304: 缓存
+       4. 4XX：客户端错误
+          1. 404： 请求路径无对应资源
+          2. 405：请求方式没有对应的doPost/doGet方法
+       5. 5XX：服务器端错误（比如 类中方法异常）
+2. 响应头
+   1. 常见的响应头：
+      1. Content-type： 服务器告诉客户端响应头的数据格式、编码格式
+      2. Content-dispostion： 服务器告诉客户端 以什么格式打开响应头
+         1. in-line 默认值： 在当前页面打开
+         2. attachment： 以附件形式打开（弹出新窗口）
+3. 响应空行
+4. 响应体
+   1. 发送的数据 ，&lt;html&gt;形式
+
+### 5. Response对象
+
+功能：设置响应消息 
+
+1. 设置响应行
+
+   1. 设置状态码： setStatus(int x)
+
+2. 设置响应头
+
+   1. setHeader(String name,String value)
+
+3. 设置响应体
+
+   1. 获取输出流
+
+      1. 字符输出流 getWriter()
+
+         1. **获取流对象之前**设置编码： resp.setCharsetEncodeing(&quot;xxx&quot;)
+
+         2. **设置浏览器编码**
+
+            resp.setHeader(&quot;content-type&quot;,&quot;text/html;charset=utf-8&quot;)
+
+         3. **简单形式**： 
+
+            resp.setContentType(&quot;text/html;charset=utf-8&quot;)
+
+         
+
+      2. 字节输出流 getoutputStream()
+
+         1. op.write(&quot;xx&quot;.getBytes(&quot;utf-8&quot;))
+         2. 也要setContentType！
+         3. 字节输出流一般用于输出图片
+
+   2. 使用流，将数据输出到客户端浏览器
+
+#### 案例：
+
+1. 重定向的特点：
+
+   1. 地址栏发生变化 
+   2. 可以访问其他服务器的资源&quot;www.baidu.com&quot;
+   3. 两次请求，不能再用request对象共享数据
+
+2. 转发的特点
+
+   1. 服务器地址不变
+   2. 只能访问当前服务器下的资源
+   3. 一次请求，可以用request对象共享数据
+
+3. 路径写法：
+
+   1. 相对路径： 不能确定唯一资源
+
+      * ./index.html  
+
+      * 不以/开头 ，以. 开头
+
+      * 规则：确定访问当前资源和目标资源的相对关系
+
+        * 语法 : ./当前目录
+
+        ​		../ 后退一级的目录
+
+   2. 绝对路径：确定唯一资源
+
+      * ​	如 :http:///ssxxxx.x..xx..x       /xxx/xxx
+      * ​    以 /开头的
+      * 规则： 定义的路径给谁用
+        * 给客户端用： 加虚拟目录
+        * 给服务器： 不用加虚拟目录
+
+   3. 动态获取虚拟目录
+
+      * req.getContextPath(),获取上一级目录
+
+### ServletContext    (interface)
+
+1. 代表： 整个Web应用，可以和程序的容器（服务器）来通信
+
+2. 获取方式：
+
+   1. req.getServletContext();
+   2. this.getServletContext();(必须继承HttpServlet)
+
+3. 功能：
+
+   1. 获取MIME类型：
+
+      * MIME: 互联网通信过程中定义的一种文件数据类型
+        * 比如： text/html    image/jpeg
+      * 获取： getMimeType(str file)
+
+   2. 域对象：共享数据
+
+      1. setAttribute()
+      2. getAttribute()
+      3. removeAttribute()
+         * servletContext域的范围:所有用户请求的数据（类似于一个全局的类对象），使用要谨慎，而且其生命周期很长
+
+   3. 获取文件的真实路径
+
+      1.  getRealPath(str)
+
+         1. &quot;/b.txt&quot; ---Web 目录下的
+
+         2. &quot;/WEB-INF/b.txt&quot;  ---WEB-INF目录下的
+
+         3. &quot;/WEB-INF/classes/a.txt&quot;  ----src目录下的
+
+            因为会自动存储在WEB-INF的classes中的
+
+      2. 注意： ClassLoader只能获取src下的路径（局限）
+
+## **Cookie** 
+
+1. 会话： 一次会话中包含的多次请求和响应
+   
+   1. 一次会话： 浏览器第一次给服务器发送请求，直到一方断开为止
+2. 功能：在一次会话范围内的多次请求间 **共享数据 **
+3. 方式：
+   1. 客户端会话： Cookie  数据存入到客户端
+      1. 使用步骤：
+         1. 创建对像   API  绑定数据
+         2. 发送Cookie
+         3. 获取Cookie，拿到数据
+         
+      2. 创建： new Cookie();
+         * resp.addCookie(cookie)带着Cookie 去下一个地方
+         * req.getCookies()
+         
+      3. 实际原理：
+         
+         * 响应头 ： set-cookie: msg=hello, 变成了键值对的形式，客户端会把这个数据保存到本地，然后带到第二个请求的请求头中 Cookie: msg=hello
+         
+      4. Cookie 细节：
+
+         1. 一次能发送多个Cookie吗？
+            
+         * 可
+           
+         2. Cookie在浏览器重的保存时间
+            * Cookie 不设置下，关闭浏览器再访问就没有了
+            * 设置生命周期：
+              * setMaxAge（int seconds）
+              * 在创建Cookie时使用
+              * x&gt;0 持久化写入到硬盘文件，x代表存活秒数，关闭浏览器再打开，也可以访问到
+              * x&lt;0 默认值
+              * x=0 删除信息
+            
+         3. Tomcat 8 之后才能直接存中文 
+
+         4. Cookie 获取范围
+            1. setPath（） 设置虚拟目录
+            2. 同一个服务器下的多项目
+            
+         5. Cookie  单个：4kb
+
+            ​				同一个域名下 ：20个
+
+         6. Cookie 用来存储**少量不太敏感**的情况
+         7. 在不登陆的情况下，完成**服务器对客户端**的识别
+
+## Session 
+
+1. request.getSession（） getAttribute setAttribute remove....
+
+2. 仅此在一次会话中访问对象  ， 关闭浏览器就没有了 
+
+3. 原理：依赖于Cookie
+
+4. 细节：
+
+   1. 客户端关闭后，两次获取的session不是同一个
+
+      默认不是，设置： 用Cookie保存 id
+
+   2. 客户端不关闭，服务器关闭后两次获取的session不是同一个
+
+      但要确保数据不丢失
+
+      *  session的钝化： 服务器正常关闭前，将session对象序列化存到硬盘上
+      * session的活化： 服务器启动后，将session文件转化到内存中的session对象
+
+   3. 销毁：
+
+      1. 服务器关闭
+      2. 调用invaliddate方法
+      3. 30min后自动关闭
+
+   4. **session可存储任意大小任意 的数据  ， 更安全**
+
+## JSP (Java Server Pages)
+
+1. 概念：既可以有html标签 也可以有java代码   
+2. 目的：简化书写
+3. 原理
+   * JSP 本质上就是一个Servlet
+     * .jsp ----&gt; .java/.class
+4. JSP脚本： 声明java代码的方式    
+   1. &lt;% ......   %&gt;：定义的java代码，在service方法中可以定义的都可
+   2. &lt;%!  ...%&gt;：定义成员变量和成员方法
+   3. &lt;%= ..%&gt;：输出语句 ，（输出成员变量值）
+   4. 内置对象： request  response out，其凡是在jspService中定义的，都可以用
+      1. **response 缓冲永远先于 out 输出不论顺序**，会先找到response缓冲区并拼接到service中
+      2. 所以：尽量不用response.getWriter()写
+   5. 可以截断： 在中部用&#123; &#125; 阶段 并插入html语句
+
+
+
+</code></pre></div>
+
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="post-metas mb-3">
+                                            
+                                                <div class="post-meta mr-3">
+                                                    <i class="iconfont icon-category"></i>
+                                                    
+                                                        <a class="hover-with-bg" href="/;/categories/%E5%AD%A6%E4%B9%A0/">
+                                                            学习
+                                                        </a>
+                                                        
+                                                </div>
+                                                
+                                                    
+                                                        <div class="post-meta">
+                                                            <i class="iconfont icon-tags"></i>
+                                                            
+                                                                <a class="hover-with-bg" href="/;/tags/Java/">
+                                                                    Java
+                                                                </a>
+                                                                
+                                                        </div>
+                                                        
+                                        </div>
+                                        
+                                            <p class="note note-warning">
+                                                
+                                                            本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                                                                
+                                            </p>
+                                            
+                                                
+                                                    <div class="post-prevnext">
+                                                        <article class="post-prev col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2019/12/22/JVM%E5%AD%A6%E4%B9%A0/">
+                                                                        <i class="iconfont icon-arrowleft"></i>
+                                                                        <span class="hidden-mobile">JVM 学习</span>
+                                                                        <span class="visible-mobile">上一篇</span>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                        <article class="post-next col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2019/07/22/Mysql%E5%AD%A6%E4%B9%A0/">
+                                                                        <span class="hidden-mobile">Mysql 学习</span>
+                                                                        <span class="visible-mobile">下一篇</span>
+                                                                        <i class="iconfont icon-arrowright"></i>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                    </div>
+                                                    
+                                    </div>
+
+                                    
+                                        <!-- Comments -->
+                                        <article class="comments" id="comments" lazyload>
+                                            
+                                                        
+                                                            
+                                                                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Yunlong626/commit-utterances');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+                                        </article>
+                                        
+                        </article>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+                    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+                </div>
+                
+        </div>
+    </div>
+
+    <!-- Custom -->
+    
+    <!--添加我自己的设置页面-->
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+    <!--加入自定义格式的-->
+    <!--自定义的git徽标样式-->
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080" srcset="/;/img/loading.gif" lazyload>
+<br>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,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&style=flat&color=d2c68b" srcset="/;/img/loading.gif" lazyload>
+
+<!-- 自定义显示文章总页数和字数的模块 -->
+<div class="bottom-post-statistic">
+    <div class="bottom-post-count">
+        62&nbsp 篇文章
+    </div>
+    <div class="bottom-post-word">
+        248.9k&nbsp 字
+    </div>
+</div>
+        <div class="footer-content">
+             <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+        </div>
+
+        
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+            
+
+                
+</footer>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/;/js/events.js" ></script>
+<script  src="/;/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/;/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/;/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/;/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/;/js/reset_code_lang.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/;/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?PPLong222";
+            var git_color =['#ebedf0', '#bef5cb', '#bef5cb', '#a9f5b4', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620'];
+            var git_user ="PPLong222";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div id="github-calendar" style="width:100%;height:auto;padding:10px;margin-bottom:20px"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;margin-top:100px;;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/about/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:200px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>#github_container > .position-relative > .border{border:0!important}#github-calendar{position: relative;margin-top: -2rem;background-color: var(--board-bg-color);transition: background-color 0.2s ease-in-out;border-radius: 0.5rem;z-index: 3;-webkit-box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);}</style><!-- hexo injector body_end end --></body>
+</html>

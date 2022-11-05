@@ -1,0 +1,1068 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/;/gallery/paw_img.jpg">
+  <link rel="icon" href="/;/gallery/paw_img.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="计网
+
+[toc]
+五层协议
+物理层
+解决在各种传输媒体上传输比特0 和 1 的问题，给数据链路层提供透明传输比特流的服务
+透明： 数据链路层不需要知道物理层使用什么方法传输的">
+  <meta name="author" content="PPLong">
+  <meta name="keywords" content="">
+  <!--添加百度站点统计-->
+  <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
+  <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
+  <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
+  <meta name="description" content="计网  [toc] 五层协议 物理层 解决在各种传输媒体上传输比特0 和 1 的问题，给数据链路层提供透明传输比特流的服务 透明： 数据链路层不需要知道物理层使用什么方法传输的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计网">
+<meta property="og:url" content="http://43.139.93.91/;/2021/01/22/%E8%AE%A1%E7%BD%91/index.html">
+<meta property="og:site_name" content="PPLong的博客">
+<meta property="og:description" content="计网  [toc] 五层协议 物理层 解决在各种传输媒体上传输比特0 和 1 的问题，给数据链路层提供透明传输比特流的服务 透明： 数据链路层不需要知道物理层使用什么方法传输的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331214511474.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331214815983.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331215104288.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331215956065.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331221431870.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401102629080.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401104045712.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401103306939.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401103442613.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401103535405.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401104430428.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401104748601.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401104856860.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401105646563.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401105523344.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401110022989.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401222930927.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401223316294.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401223810852.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401224012968.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401224627313.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401224838914.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401225008037.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401225354928.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401225751543.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401230004953.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401230208878.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401230335803.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401230644359.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210402084027580.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210402084230681.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210402084626964.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210402090132427.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210402091203126.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210402091834330.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210402092118490.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210310221622240.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210310221742708.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210310224715407.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331203958930.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331211800303.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331212813944.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331212910233.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331213047103.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331213204617.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331213442132.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331210025354.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331202037703.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331204004782.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331203219149.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331193813129.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331194703992.png">
+<meta property="article:published_time" content="2021-01-22T10:05:07.000Z">
+<meta property="article:modified_time" content="2022-06-16T02:08:11.000Z">
+<meta property="article:author" content="PPLong">
+<meta property="article:tag" content="TCP&#x2F;IP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331214511474.png">
+  
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
+  
+  <title>计网 - PPLong的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/;/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/;/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/;/css/indexing-hover.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"43.139.93.91","root":"/;/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/;/local-search.xml"};
+  </script>
+  <script  src="/;/js/utils.js" ></script>
+  <script  src="/;/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 90vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/;/">
+      <strong>PPLong的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友達
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-link-fill"></i>
+                娱乐
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/movie/">
+                    <i class="iconfont icon-movie"></i>
+                    第二人生
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/shuoshuo/">
+                    <i class="iconfont icon-comment"></i>
+                    唠唠
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/develop/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    尝鲜
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/;/gallery/covers/wallhaven-o36dym.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="计网">
+              
+            </span>
+
+            
+              <div class="mt-3">
+    
+            
+                <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-22 18:05" pubdate>
+        始于: 2021年1月22日晚上6点05分
+      </time>
+    </span>
+                
+</div>
+
+<!-- 自定义的更新时间 -->
+<div class="mt-1">
+    
+        <span class="post-meta">
+  <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
+  <time datetime="2022-06-16 10:08" pubdate>
+    更新: 2022年6月16日上午10点08分
+  </time>
+</span>
+        
+</div>
+
+<div class="mt-1">
+    
+        <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.4k 字
+    </span>
+        
+
+            
+                <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21 分钟
+    </span>
+                
+
+                    
+                        
+                            
+                                <!-- LeanCloud 统计文章PV -->
+                                <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span>
+                                 次
+                                    </span>
+                                    
+                                                
+</div>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+    <div class="container-fluid nopadding-x">
+        <div class="row nomargin-x">
+            <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-x-md">
+                <div class="container nopadding-x-md" id="board-ctn">
+                    <div class="py-5" id="board">
+                        <article class="post-content mx-auto">
+                            <!-- SEO header -->
+                            <h1 style="display: none">
+                                计网
+                            </h1>
+                            
+                                    <div class="markdown-body">
+                                        <h1>计网</h1>
+<!-- toc -->
+<p>[toc]</p>
+<h2 id="五层协议">五层协议</h2>
+<h3 id="物理层">物理层</h3>
+<p>解决在各种传输媒体上传输比特0 和 1 的问题，给数据链路层提供透明传输比特流的服务</p>
+<p>透明： 数据链路层不需要知道物理层使用什么方法传输的</p>
+<span id="more"></span>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331214511474.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331214511474"></p>
+<h3 id="数据链路层">数据链路层</h3>
+<p>三个重要问题： 封装成帧、差错检测、可靠传输</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331214815983.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331214815983"></p>
+<p>链路：一个节点到相邻节点的一段物理线路，中间没有任何其他的交换节点</p>
+<p>数据链路：实现通信协议的硬件和软件加到连路上，以帧单位封装处理</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331215104288.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331215104288"></p>
+<p>帧传输过程中出现误码（1变成0）</p>
+<p>发送方发送数据前将发送的数据和算法计算出<strong>检错码</strong>，放在帧尾</p>
+<p>接受方再进行验证，如果错误，则不会接受该帧，就丢弃了</p>
+<h4 id="封装成帧">封装成帧</h4>
+<p>给上层交付的协议数据单元添加帧头和帧尾使之成为帧</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331215956065.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331215956065"></p>
+<p>帧头帧尾：进行帧定界  —</p>
+<ol>
+<li>帧定界标志（不一定有）</li>
+<li>物理层添加前导码，帧间隔时间 96bit</li>
+</ol>
+<p>透明传输：数据链路层对上层交付的传输数据没有任何限制，就好像数据链路层不存在一样</p>
+<ul>
+<li>面向字节的物理链路使用字节填充的方法实现透明传输 – ESC 27</li>
+<li>面向比特的物理链路使用比特填充的方法实现透明传输</li>
+</ul>
+<p>如何解决不同方式的误判（与界定符相同）</p>
+<h4 id="差错检测">差错检测</h4>
+<p><strong>比特差错</strong>：比特传输时1 0 可能会改变</p>
+<p>误码率：错误的比特占比</p>
+<p>判断：差错检测码</p>
+<ol>
+<li>
+<p>奇偶校验： 在数据后添加1 是的整个数据 的1 的个数为奇数(奇校验)或者偶数(偶校验)</p>
+<p>缺点，只能检测奇数位的错误</p>
+</li>
+<li>
+<p>循环冗余校验：双方约定好一个生成多项式（多项式的各项系数生成比特串），发送方基于待发送的数据和生成多项式计算出差错检测码，也就是冗余码，添加到带传输的后面一起传输（类似Digest的数字签名），接收方通过此方法判断</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331221431870.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331221431870"></p>
+</li>
+</ol>
+<h4 id="可靠传输">可靠传输</h4>
+<p>向上层的服务类型：</p>
+<p>不可靠传输服务：丢弃有误码的帧，然后什么都不做</p>
+<p>可靠传输服务：发送端发什么就接受什</p>
+<p>一般交由上层处理</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401102629080.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401102629080"></p>
+<p><strong>点对点协议</strong></p>
+<p>PPP Point to Point Protocol</p>
+<p>为在点对点链路传输各种协议数据报提供了标准方法</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401104045712.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401104045712"></p>
+<p>从ISP 互联网服务提供商  中国移动… 获得提供的合法ip地址</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401103306939.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401103306939"></p>
+<p>存在误判 ，解决方法</p>
+<ol>
+<li>
+<p>帧定界</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401103442613.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401103442613"></p>
+</li>
+<li>
+<p>前导码</p>
+</li>
+</ol>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401103535405.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401103535405"></p>
+<h4 id="地址">地址</h4>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401104430428.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401104430428"></p>
+<h5 id="Mac地址">Mac地址</h5>
+<p>点对点信道的数据链路层不需要地址</p>
+<p>使用广播信道的数据链路层需要使用地址来区分</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401104748601.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401104748601"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401104856860.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401104856860"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401105646563.png" srcset="/;/img/loading.gif" lazyload alt=""></p>
+<p>单播  发送Mac地址不匹配，丢弃</p>
+<p>广播帧 目的字段 FFFFFFFFFFFF  接受</p>
+<p>多播  多播地址  多播组列表</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401105523344.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401105523344"></p>
+<h5 id="IP地址">IP地址</h5>
+<p>网际层</p>
+<p>因特网上主机和路由器使用的地址</p>
+<p>网络编号 和 主机编号</p>
+<p>同一网络的网络编号是相同的</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401110022989.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401110022989"></p>
+<p>网络传播需要IP地址和Mac地址</p>
+<p>网络传输中主机有运输层和应用层… 而路由器的最高层就是网络层</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401222930927.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401222930927"></p>
+<p>封装时的地址</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401223316294.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401223316294"></p>
+<h5 id="ARP">ARP</h5>
+<p>IP地址转MAC地址</p>
+<p>地址解析协议</p>
+<p>每个主机都有 ARP高速缓存表 ---- 电话簿</p>
+<p>ARP请求报文发送在MAC帧中 只能在一个网络  一个链路中使用</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401223810852.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401223810852"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401224012968.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401224012968"></p>
+<h3 id="网络层">网络层</h3>
+<p>主要任务：实现网络互连，实现数据包在网络间的传输</p>
+<p>解决问题：网络层寻址问题  提供怎样的服务   路由选择问题（不同路径选择）</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401224627313.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401224627313"></p>
+<p>**网络层提供的两种服务	**</p>
+<p>面向连接的虚电路服务：</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401224838914.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401224838914"></p>
+<ul>
+<li>
+<p>无连接的数据报服务</p>
+<p>TCP/IP体系结构的因特网网际层采用</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401225008037.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401225008037"></p>
+</li>
+</ul>
+<h4 id="IPV4">IPV4</h4>
+<p>因特网每一台主机/路由器 的每一个接口分配在全世界唯一的32比特标识符</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401225354928.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401225354928"></p>
+<h5 id="分类编制">分类编制</h5>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401225751543.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401225751543"></p>
+<p>A类地址</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401230004953.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401230004953"></p>
+<p>B类地址</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401230208878.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401230208878"></p>
+<p>C类地址</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401230335803.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401230335803"></p>
+<p>特殊情况</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210401230644359.png" srcset="/;/img/loading.gif" lazyload alt="image-20210401230644359"></p>
+<h5 id="划分子网">划分子网</h5>
+<p>需要划分子网，利用原有网络中大量剩余的IP地址，分配第三部分…</p>
+<p>因此有了：<strong>子网掩码</strong></p>
+<p>32比特的子网掩码可以表明分类IP地址的主机号部分被借用了几个比特作为子网号</p>
+<p>注意不同的网络类别有不同位数的网络号和主机号</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210402084027580.png" srcset="/;/img/loading.gif" lazyload alt="image-20210402084027580"></p>
+<p>举个例子</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210402084230681.png" srcset="/;/img/loading.gif" lazyload alt="image-20210402084230681"></p>
+<p>如何被划分成两个子网的</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210402084626964.png" srcset="/;/img/loading.gif" lazyload alt="image-20210402084626964"></p>
+<p>默认子网掩码</p>
+<p>A类 8位网络号 ： 255.0.0.0</p>
+<p>B类 16位网络号 255.255.0.0</p>
+<p>C类 24位网络号 255.255.255.0</p>
+<p>注意，主机号为0代表有一个 为1000000 代表有两个 （注意方向和顺序）</p>
+<h5 id="无分类编址">无分类编址</h5>
+<p>数量巨大的C雷王因为地址空间太小并没有充分使用，而IP地址仍在加速消耗，IPV4地址空间紧张</p>
+<p><strong>CIDR Classless Inter Domain Routing</strong></p>
+<p>消除了传统的A\B\C类地址和划分子网的概念，更有效的分配Ipv4地址空间，并且可以在新的Ipv6使用之前允许因特网的规模继续增长</p>
+<p>斜线记法</p>
+<p>128.14.35.7 / 20  代表网络前缀占用的比特数量为20 主机编号就为12</p>
+<p>路由聚合   （构造超网）</p>
+<p>方法： 找共同前缀</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210402090132427.png" srcset="/;/img/loading.gif" lazyload alt="image-20210402090132427"></p>
+<p><strong>IPV4的地址应用规划</strong></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210402091203126.png" srcset="/;/img/loading.gif" lazyload alt="image-20210402091203126"></p>
+<p>定长： 先确定主机数</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210402091834330.png" srcset="/;/img/loading.gif" lazyload alt="image-20210402091834330"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210402092118490.png" srcset="/;/img/loading.gif" lazyload alt="image-20210402092118490"></p>
+<p>变长的子网掩码相当于串行动态分配</p>
+<h2 id="Http">Http</h2>
+<p>HyperTextTransferProtocol  超文本传输协议  用于从WWW服务器传输超文本到本地浏览器的传输协议</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210310221622240.png" srcset="/;/img/loading.gif" lazyload alt="image-20210310221622240"></p>
+<p>所有消息用明文发送  通过公共的互联网</p>
+<h2 id="Https">Https</h2>
+<p>两大法宝</p>
+<p>SSL  Secure Sockets Layer 安全套接层 使用公匙加密  SSL证书</p>
+<p>TLS  Transport Layer Security 传输层安全   最新行业标准加密协议  继承SSL</p>
+<p>非明文</p>
+<h3 id="Http2-0-与-Http-1-x的区别">Http2.0 与 Http 1.x的区别</h3>
+<h4 id="1-多路复用">1. 多路复用</h4>
+<p>​	多路复用技术：单连接多资源的方式，减少服务端的链接压力,内存占用更	少,连接吞吐量更大；由于减少TCP 慢启动时间，提高传输的速度</p>
+<p>​	允许单一HTTP 2 连接同时发起多重的请求 - 响应消息</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210310221742708.png" srcset="/;/img/loading.gif" lazyload alt="image-20210310221742708"></p>
+<p>二进制分帧</p>
+<p>在二进制分帧层中， HTTP/2 会将所有传输的信息分割为帧（frame）,并对它们采用二进制格式的编码 ，其中 首部信息会被封装到 HEADER frame，而相应的 Request Body 则封装到 DATA frame 里面。</p>
+<p>HTTP 性能优化的<strong>关键并不在于高带宽，而是低延迟</strong>。TCP 连接会随着时间进行自我「调谐」，起初会限制连接的最大速度，如果数据成功传输，会随着时间的推移提高传输的速度。这种调谐则被称为 TCP 慢启动。由于这种原因，让原本就具有突发性和短时性的 HTTP 连接变的十分低效。</p>
+<h4 id="2-首部压缩">2. 首部压缩</h4>
+<p>​	 HTTP/1 中，HTTP 请求和响应都是由「状态行、请求 / 响应头部、消息主体」三部分组成。一般而言，消息主体都会经过 gzip 压缩，或者本身传输的就是压缩过后的二进制文件（例如图片、音频），但状态行和头部却没有经过任何压缩，直接以纯文本传输。</p>
+<p>随着 Web 功能越来越复杂，每个页面产生的请求数也越来越多，导致消耗在头部的流量越来越多，尤其是每次都要传输 UserAgent、Cookie 这类不会频繁变动的内容，完全是一种浪费。</p>
+<p>我们再用通俗的语言解释下，压缩的原理。头部压缩需要在支持 HTTP/2 的浏览器和服务端之间：</p>
+<ul>
+<li>维护一份相同的静态字典（Static Table），包含常见的头部名称，以及特别常见的头部名称与值的组合；</li>
+<li>维护一份相同的动态字典（Dynamic Table），可以动态的添加内容；</li>
+<li>支持基于静态哈夫曼码表的哈夫曼编码（Huffman Coding）；</li>
+</ul>
+<p>静态字典的作用有两个：</p>
+<p>1）对于完全匹配的头部键值对，例如 “:method :GET”，可以直接使用一个字符表示；</p>
+<p>2）对于头部名称可以匹配的键值对，例如 “cookie :xxxxxxx”，可以将名称使用一个字符表示。</p>
+<p>HTTP/2 中的静态字典如下（以下只截取了部分，完整表格在这里）：</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210310224715407.png" srcset="/;/img/loading.gif" lazyload alt="image-20210310224715407"></p>
+<p>浏览器和服务端都可以向动态字典中添加键值对，之后这个键值对就可以使用一个字符表示了。需要注意的是，动态字典上下文有关，需要为每个 HTTP/2 连接维护不同的字典。在传输过程中使用，使用字符代替键值对大大减少传输的数据量。</p>
+<h4 id="3-HTTP2支持服务器推送"><strong>3. HTTP2支持服务器推送</strong></h4>
+<p>服务端推送是一种在客户端请求之前发送数据的机制。当代网页使用了许多资源:HTML、样式表、脚本、图片等等。在HTTP/1.x中这些资源每一个都必须明确地请求。这可能是一个很慢的过程。浏览器从获取HTML开始，然后在它解析和评估页面的时候，增量地获取更多的资源。因为服务器必须等待浏览器做每一个请求，网络经常是空闲的和未充分使用的。</p>
+<p>为了改善延迟，HTTP/2引入了server push，它允许服务端推送资源给浏览器，在浏览器明确地请求之前。一个服务器经常知道一个页面需要很多附加资源，在它响应浏览器第一个请求的时候，可以开始推送这些资源。这允许服务端去完全充分地利用一个可能空闲的网络，改善页面加载时间。</p>
+<h2 id="TCP协议">TCP协议</h2>
+<p>Transmission Control Protocol  传输控制协议</p>
+<p>属于哪一层   运输层   网际层都使用IP协议</p>
+<p>面向连接  通信前要建立TCP逻辑连接 — 三次握手、面向字节流、首部开销大 min20字节 max60字节</p>
+<p>可靠传输：重传机制（下文有讲）、流量控制、拥塞控制</p>
+<h3 id="报文信息">报文信息</h3>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331203958930.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331203958930"></p>
+<h3 id="可靠传输-v2">可靠传输</h3>
+<p>以字节为单位的滑动窗口  — 接受窗口和发送窗口</p>
+<p>已收到ack确定的报文可以delete</p>
+<p>未按序到达的数据包一般临时存放在接受窗口中，等到缺少的字节收到后再按序交付上层应用</p>
+<p><strong>累计确认！</strong></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331211800303.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331211800303"></p>
+<h3 id="超时重传时间选择">超时重传时间选择</h3>
+<p>RTT： 报文段往返时间（每次可能不同）</p>
+<p>RTO: 超时重传时间</p>
+<p>如何合理设置RTO时间</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331212813944.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331212813944"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331212910233.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331212910233"></p>
+<p><strong>报文段丢失重发的情况  误判</strong></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331213047103.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331213047103"></p>
+<p><strong>传报文段超时情况</strong></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331213204617.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331213204617"></p>
+<p>针对以上两种情况的新算法：</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331213442132.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331213442132"></p>
+<h3 id="流量控制">流量控制</h3>
+<p>发送方的数据发的太快以至于接收方接受不下，会造成数据的丢失 （2MSL ）</p>
+<p>基于滑动窗口机制</p>
+<p>接受窗口 rwnd</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331210025354.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331210025354"></p>
+<p>解决死锁： 持续计时器</p>
+<p>接收方收到0窗口通知时，开启计时器，超时则发送零窗口的探测报文(携带1字节数据)，如果对方发来的报文创口也是零，则重置计时器继续等待，如果不是零则打破僵局</p>
+<p><strong>既然服务器的窗口为0，那为什么还能接受发送方发来的探测报文段？</strong></p>
+<p>规定接受 0窗口探测报文段、确认报文段、携带紧急数据的报文段</p>
+<p><strong>三次握手</strong></p>
+<p><strong>四次挥手</strong></p>
+<p><strong>为什么一定要三握四挥？</strong></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331202037703.png" srcset="/;/img/loading.gif" lazyload alt="image-20220331202037703"></p>
+<p>四次挥手，是因为</p>
+<p>为什么这里Server的FIN 和 ACK分两次发送呢？因为我们可以得知Client要关闭时，再发送最后一点数据给Client</p>
+<p>为什么要有最后一次的挥手，如果没有这次挥手，则服务端给客户端发送的FIN报文就不一定能接收到，客户端就认为服务端可能还会有数据要发。</p>
+<p><strong>为什么会有2MSL？他有什么作用</strong></p>
+<p>第一，为了保证A发送的最后一个ACK报文能够到达B。这个ACK报文段有可能丢失，因而使处在LAST-ACK状态的B收不到对已发送的FIN+ACK报文段的确认。B会超时重传这个FIN+ACK报文段，而A就能在2MSL时间内收到这个重传的FIN+ACK报文段。如果A在TIME-WAIT状态不等待一段时间，而是在发送完ACK报文段后就立即释放连接，就无法收到B重传的FIN+ACK报文段，因而也不会再发送一次确认报文段。这样，B就无法按照正常的步骤进入CLOSED状态。<br>
+第二，A在发送完ACK报文段后，再经过2MSL时间，就可以使本连接持续的时间所产生的所有报文段都从网络中消失。这样就可以使下一个新的连接中不会出现这种旧的连接请求的报文段</p>
+<h2 id="UDP">UDP</h2>
+<p>User Datagram Protocol</p>
+<p>无连接，可随时发送数据、网络开销小 速度快 、支持一对一 一对多(广播、多播(指定)) 多对一、报文直接打包、首部开销小 8 字节</p>
+<p>面向报文，直接加个报文头就发出去了</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331204004782.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331204004782"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331203219149.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331203219149"></p>
+<h2 id="DNS">DNS</h2>
+<p>Domain Name ( to ip )System 解析域名   电话簿</p>
+<p>过程：</p>
+<ol>
+<li>
+<p>浏览器缓存</p>
+</li>
+<li>
+<p>系统缓存</p>
+</li>
+<li>
+<p>ISP、 因特网服务商</p>
+</li>
+<li>
+<p>根域名服务器  全世界13组 ，可能这个根域名服务器不知道他的ip，但是可以知道谁可以</p>
+<p>.com 顶级域名服务器  TLD(.com   .net  …)</p>
+</li>
+<li>
+<p>TLD也不知道时，给权限名称服务器  啥都知道</p>
+</li>
+</ol>
+<p>回传时，进行保存</p>
+<h2 id="网络拥塞">网络拥塞</h2>
+<p>拥塞： 网络中某一资源的需求 超过了该资源所能提供的可用部分，网络性能将会变差，出现拥塞而不控制，则网络的吞吐量就会随着负荷的增大而下降（堵车）</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331193813129.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331193813129"></p>
+<p>cnwd、ssthresh、rtt、swnd、数据包文段、重传计时器</p>
+<h3 id="TCP-Tahoe">TCP Tahoe</h3>
+<p>慢开始 cnwd &gt;&gt; 1</p>
+<p>拥塞避免   cnwd++</p>
+<h3 id="TCP-Reno-改进后">TCP Reno 改进后</h3>
+<p>原因： 有时 个别报文段在网络中丢失，但实际上网络并未发生拥塞，这将导致发送方超时重传，并误认为网络发生拥塞。发送方错误地启动慢开始算法，降低了传输效率</p>
+<p>快重传  让发送方尽快知道发生了个别报文段的丢失 ，而不是让超市重传计时器超时后再重传  相等的ack  == 3时，则相应的报文段立即重传，不会再等超时计时器超时时再重传，接下来执行快恢复算法</p>
+<p><strong>问题： 重传后那丢失之前的数据包都收到了，那接收方重复确认时收到了之后的报文段吗</strong></p>
+<p>收到了</p>
+<p>快恢复</p>
+<p>ssthresh 和 cwnd值为当前窗口的一半， 执行拥塞避免算法</p>
+<p>也有一些把cwnd = 新的sstresh +3</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331194703992.png" srcset="/;/img/loading.gif" lazyload alt="image-20210331194703992"></p>
+<h2 id="对称加密和非对称加密的区别">对称加密和非对称加密的区别</h2>
+<h3 id="对称加密">对称加密</h3>
+<p>加密和解密使用的秘匙是同一个</p>
+<p>优点：算法公开，计算量小，加密速度快，加密效率高</p>
+<p>缺点：数据传送前，双方必须商定好密匙，保存。如果一方密匙泄露被黑客拦截，则加密信息不安全，每次使用对称加密算法，都需要使用其他人不知道的唯一密匙，是的双方拥有的密匙数量大</p>
+<p>常见： DES  AES 3DES</p>
+<h3 id="非对称加密">非对称加密</h3>
+<p>需要公开密匙和私有密匙，一方加密，另一方的密匙就解密</p>
+<p>过程： 甲方生成密匙 ，将其中一把作为共有的并向其他方公开，得到公有密匙的乙方使用该密匙对机密信息进行加密后发送给甲方，甲方再用私有的密匙对加密信息进行解密</p>
+<p>优点：安全</p>
+<p>缺点：速度慢</p>
+<p>常见：RSA  ECC</p>
+<h2 id="MD5">MD5</h2>
+<p>MD5讯息摘要演算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码杂凑函数，可以产生出一个128位元（16位元组）的散列值（hash value），用于确保信息传输完整一致。</p>
+<p>MD5不可逆的原因是其是一种散列函数，使用的是hash算法，在计算过程中原文的部分信息是丢失了的</p>
+<p>不过有个地方值得指出的是，一个MD5理论上的确是可能对应无数多个原文的，因为MD5是有限多个的而原文可以是无数多个。比如主流使用的MD5将任意长度的“字节串映射为一个128bit的大整数。也就是一共有2<sup>128种可能，大概是3.4*10</sup>38，这个数字是有限多个的，而但是世界上可以被用来加密的原文则会有无数的可能性。</p>
+<h3 id="用途">用途</h3>
+<ol>
+<li>
+<p>防止被篡改</p>
+</li>
+<li>
+<p>防止直接看到明文 ---- 前后比较</p>
+<p>​	现在很多网站在数据库存储用户的密码的时候都是存储用户密码的MD5值。这样就算不法分子得到数据库的用户密码的MD5值，也无法知道用户的密码。（比如在UNIX系统中用户的密码就是以MD5（或其它类似的算法）经加密后存储在文件系统中。当用户登录的时候，系统把用户输入的密码计算成MD5值，然后再去和保存在文件系统中的MD5值进行比较，进而确定输入的密码是否正确。通过这样的步骤，系统在并不知道用户密码的明码的情况下就可以确定用户登录系统的合法性。这不但可以避免用户的密码被具有系统管理员权限的用户知道，而且还在一定程度上增加了密码被破解的难度。）</p>
+</li>
+<li>
+<p>防止抵赖–数字签名</p>
+</li>
+</ol>
+<h3 id="过程">过程</h3>
+<p>对MD5算法简要的叙述可以为：MD5以512位分组来处理输入的信息，且每一分组又被划分为16个32位子分组，经过了一系列的处理后，算法的输出由四个32位分组组成，将这四个32位分组级联后将生成一个128位散列值。</p>
+<h2 id="另外的问题">另外的问题</h2>
+<h3 id="内网和外网的区别">内网和外网的区别</h3>
+<p>内网又称局域网（Local Area Network，LAN）是指在某一区域内由多台计算机互联成的计算机组。一般是方圆几千米以内。</p>
+<p>局域网是封闭型的，可以由办公室内的两台计算机组成，也可以由一个公司内的上千台计算机组成。</p>
+<p>局域网主要特点是：</p>
+<p>1、覆盖的地理范围较小，只在一个相对独立的局部范围内联，如一座或集中的建筑群内。</p>
+<p>2、使用专门铺设的传输介质进行联网，数据传输速率高（10Mb/s～10Gb/s）</p>
+<p>3、通信延迟时间短，可靠性较高</p>
+<p>4、局域网可以支持多种传输介质</p>
+<p>外网又被称为广域网（WAN），就是我们通常所说的Internet，它是一个遍及全世界的网络。它可以连接极其大的物理范围，属于远程性的网络，已经实现了跨国互联，局域网以及城域网都远远比不上外网，外网是许多的计算机相互之间用线路连接形成的。</p>
+<p>目前为止，因特网就是世界上最大的外网，它的覆盖范围无可匹敌。一些相隔较远的设备就需要外网的连接，这些设备中比较常见的是路由器和交换机 。</p>
+<p>外网还分为了好几类，按照网络的使用类型可以分成公共传输、专用传输和无线传输三类网络传输。</p>
+<p><strong>迅雷为什么会员可以加速那么快？</strong></p>
+<p><strong>QQ传文件为什么那么快？</strong></p>
+<h3 id="常见的网络请求码">常见的网络请求码</h3>
+<ul>
+<li>101 等到接受其他部分</li>
+<li>200 处理成功</li>
+<li>201 请求成功服务器创建 了新的资源</li>
+<li>202 服务器接受请求但未处理</li>
+<li>301 永久移动</li>
+<li>302 临时移动</li>
+<li>400 错误请求  语法</li>
+<li>401 未授权  需要登陆</li>
+<li>403 禁止 服务器拒绝请求</li>
+<li>404 u找不到请求页面</li>
+<li>405 禁止请求n中制定的方法</li>
+<li>408 请求超时</li>
+<li>500 服务器内部u错误</li>
+<li>503 服务不可用</li>
+<li>505 http版本不支持</li>
+</ul>
+
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="post-metas mb-3">
+                                            
+                                                <div class="post-meta mr-3">
+                                                    <i class="iconfont icon-category"></i>
+                                                    
+                                                        <a class="hover-with-bg" href="/;/categories/%E5%AD%A6%E4%B9%A0/">
+                                                            学习
+                                                        </a>
+                                                        
+                                                </div>
+                                                
+                                                    
+                                                        <div class="post-meta">
+                                                            <i class="iconfont icon-tags"></i>
+                                                            
+                                                                <a class="hover-with-bg" href="/;/tags/TCP-IP/">
+                                                                    TCP/IP
+                                                                </a>
+                                                                
+                                                        </div>
+                                                        
+                                        </div>
+                                        
+                                            <p class="note note-warning">
+                                                
+                                                            本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                                                                
+                                            </p>
+                                            
+                                                
+                                                    <div class="post-prevnext">
+                                                        <article class="post-prev col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2021/02/23/%E6%A0%BC%E5%BC%8F/">
+                                                                        <i class="iconfont icon-arrowleft"></i>
+                                                                        <span class="hidden-mobile">格式</span>
+                                                                        <span class="visible-mobile">上一篇</span>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                        <article class="post-next col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2021/01/20/Java%E5%AD%A6%E4%B9%A0/">
+                                                                        <span class="hidden-mobile">Java学习</span>
+                                                                        <span class="visible-mobile">下一篇</span>
+                                                                        <i class="iconfont icon-arrowright"></i>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                    </div>
+                                                    
+                                    </div>
+
+                                    
+                                        <!-- Comments -->
+                                        <article class="comments" id="comments" lazyload>
+                                            
+                                                        
+                                                            
+                                                                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Yunlong626/commit-utterances');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+                                        </article>
+                                        
+                        </article>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+                    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+                </div>
+                
+        </div>
+    </div>
+
+    <!-- Custom -->
+    
+    <!--添加我自己的设置页面-->
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+    <!--加入自定义格式的-->
+    <!--自定义的git徽标样式-->
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080" srcset="/;/img/loading.gif" lazyload>
+<br>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,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&style=flat&color=d2c68b" srcset="/;/img/loading.gif" lazyload>
+
+<!-- 自定义显示文章总页数和字数的模块 -->
+<div class="bottom-post-statistic">
+    <div class="bottom-post-count">
+        62&nbsp 篇文章
+    </div>
+    <div class="bottom-post-word">
+        248.9k&nbsp 字
+    </div>
+</div>
+        <div class="footer-content">
+             <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+        </div>
+
+        
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+            
+
+                
+</footer>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/;/js/events.js" ></script>
+<script  src="/;/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/;/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/;/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/;/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/;/js/reset_code_lang.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/;/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?PPLong222";
+            var git_color =['#ebedf0', '#bef5cb', '#bef5cb', '#a9f5b4', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620'];
+            var git_user ="PPLong222";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div id="github-calendar" style="width:100%;height:auto;padding:10px;margin-bottom:20px"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;margin-top:100px;;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/about/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:200px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>#github_container > .position-relative > .border{border:0!important}#github-calendar{position: relative;margin-top: -2rem;background-color: var(--board-bg-color);transition: background-color 0.2s ease-in-out;border-radius: 0.5rem;z-index: 3;-webkit-box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);}</style><!-- hexo injector body_end end --></body>
+</html>

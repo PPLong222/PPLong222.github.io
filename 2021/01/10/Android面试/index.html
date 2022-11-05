@@ -1,0 +1,1332 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/;/gallery/paw_img.jpg">
+  <link rel="icon" href="/;/gallery/paw_img.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Android面试总结
+
+CAS
+IPC进程间通信
+Inter-Process Communication
+
+Windows：通过剪切板、管道、油槽等进行进程间通讯。
+Linux：通过命名空间、共享内容、信号量等进行进程间通讯。
+Android：没有完全继承Linux，比如，其独具特色的通讯方式有Binder、Socket等等。
+">
+  <meta name="author" content="PPLong">
+  <meta name="keywords" content="">
+  <!--添加百度站点统计-->
+  <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
+  <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
+  <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
+  <meta name="description" content="Android面试总结  CAS IPC进程间通信 Inter-Process Communication  Windows：通过剪切板、管道、油槽等进行进程间通讯。 Linux：通过命名空间、共享内容、信号量等进行进程间通讯。 Android：没有完全继承Linux，比如，其独具特色的通讯方式有Binder、Socket等等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android知识总结">
+<meta property="og:url" content="http://43.139.93.91/;/2021/01/10/Android%E9%9D%A2%E8%AF%95/index.html">
+<meta property="og:site_name" content="PPLong的博客">
+<meta property="og:description" content="Android面试总结  CAS IPC进程间通信 Inter-Process Communication  Windows：通过剪切板、管道、油槽等进行进程间通讯。 Linux：通过命名空间、共享内容、信号量等进行进程间通讯。 Android：没有完全继承Linux，比如，其独具特色的通讯方式有Binder、Socket等等。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210321133957552.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210320184127616.png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL3VwbG9hZC1pbWFnZXMuamlhbnNodS5pby91cGxvYWRfaW1hZ2VzLzk0NDM2NS1kM2M3OGIxOTNjM2U4YTM4LnBuZz9pbWFnZU1vZ3IyL2F1dG8tb3JpZW50L3N0cmlwJTdDaW1hZ2VWaWV3Mi8yL3cvMTI0MA">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210320192944412.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210321134303878.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210320192905310.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301164920245.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301174949296.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301180054892.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301182854640.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301182955527.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210314102121692.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210314103217599.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210314103242042.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210305160239366.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210305165916419.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210306140559042.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210316193720147.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210322153358168.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210322153735717.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210329094112507.png">
+<meta property="article:published_time" content="2021-01-10T10:05:07.000Z">
+<meta property="article:modified_time" content="2022-04-10T04:57:21.000Z">
+<meta property="article:author" content="PPLong">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Study">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210321133957552.png">
+  
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
+  
+  <title>Android知识总结 - PPLong的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/;/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/;/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/;/css/indexing-hover.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"43.139.93.91","root":"/;/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/;/local-search.xml"};
+  </script>
+  <script  src="/;/js/utils.js" ></script>
+  <script  src="/;/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 90vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/;/">
+      <strong>PPLong的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友達
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-link-fill"></i>
+                娱乐
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/movie/">
+                    <i class="iconfont icon-movie"></i>
+                    第二人生
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/shuoshuo/">
+                    <i class="iconfont icon-comment"></i>
+                    唠唠
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/develop/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    尝鲜
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/;/gallery/covers/wallhaven-8oky1j.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Android知识总结">
+              
+            </span>
+
+            
+              <div class="mt-3">
+    
+            
+                <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-10 18:05" pubdate>
+        始于: 2021年1月10日晚上6点05分
+      </time>
+    </span>
+                
+</div>
+
+<!-- 自定义的更新时间 -->
+<div class="mt-1">
+    
+        <span class="post-meta">
+  <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
+  <time datetime="2022-04-10 12:57" pubdate>
+    更新: 2022年4月10日下午12点57分
+  </time>
+</span>
+        
+</div>
+
+<div class="mt-1">
+    
+        <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      14k 字
+    </span>
+        
+
+            
+                <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      43 分钟
+    </span>
+                
+
+                    
+                        
+                            
+                                <!-- LeanCloud 统计文章PV -->
+                                <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span>
+                                 次
+                                    </span>
+                                    
+                                                
+</div>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+    <div class="container-fluid nopadding-x">
+        <div class="row nomargin-x">
+            <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-x-md">
+                <div class="container nopadding-x-md" id="board-ctn">
+                    <div class="py-5" id="board">
+                        <article class="post-content mx-auto">
+                            <!-- SEO header -->
+                            <h1 style="display: none">
+                                Android知识总结
+                            </h1>
+                            
+                                    <div class="markdown-body">
+                                        <h1>Android面试总结</h1>
+<!-- toc -->
+<h2 id="CAS">CAS</h2>
+<h3 id="IPC进程间通信">IPC进程间通信</h3>
+<p>Inter-Process Communication</p>
+<ul>
+<li>Windows：通过剪切板、管道、油槽等进行进程间通讯。</li>
+<li>Linux：通过命名空间、共享内容、信号量等进行进程间通讯。</li>
+<li>Android：没有完全继承Linux，比如，其独具特色的通讯方式有Binder、Socket等等。</li>
+<li>
+<span id="more"></span>
+</li>
+</ul>
+<h4 id="线程和进程的关系">线程和进程的关系</h4>
+<p>进程： 一个执行单元 一个程序或者应用</p>
+<p>进程是程序运行和资源分配的基本单位</p>
+<p>线程： CPU调度的最小单元  有限的系统资源</p>
+<p>是cpu调度和分派的基本单位</p>
+<p>Android中 进程空间划分为用户空间和内核空间，进程间用户空间不可分享，但内核空间可分享  所有进程共用一个内核空间</p>
+<p>进程内用户空间 和内核空间交互 要通过系统调用</p>
+<ol>
+<li>copy_from_user（）：将用户空间的数据拷贝到内核空间</li>
+<li>copy_to_user（）：将内核空间的数据拷贝到用户空间</li>
+</ol>
+<h4 id="Android中的IPC">Android中的IPC</h4>
+<h5 id="AIDL">AIDL</h5>
+<p>AIDL     <strong>Android Interface definition language</strong></p>
+<p>C/S 端的AIDL名称  （包名+类名）必须一致</p>
+<p>内部类 Proxy  Stub  都implementes这个接口</p>
+<p>AIDL层双方通信方式类似 符号引用</p>
+<h5 id="Binder">Binder</h5>
+<p>设计基于C/S结构  客户端进程获取服务端进程的代理，并通过向这个代理借口方法中读写数据来完成进程间的数据通信</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210321133957552.png" srcset="/;/img/loading.gif" lazyload alt="image-20210321133957552"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210320184127616.png" srcset="/;/img/loading.gif" lazyload alt="image-20210320184127616"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3VwbG9hZC1pbWFnZXMuamlhbnNodS5pby91cGxvYWRfaW1hZ2VzLzk0NDM2NS1kM2M3OGIxOTNjM2U4YTM4LnBuZz9pbWFnZU1vZ3IyL2F1dG8tb3JpZW50L3N0cmlwJTdDaW1hZ2VWaWV3Mi8yL3cvMTI0MA" srcset="/;/img/loading.gif" lazyload alt="img"></p>
+<p>传统进程通信</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210320192944412.png" srcset="/;/img/loading.gif" lazyload alt="image-20210320192944412"></p>
+<p>Binder通信</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210321134303878.png" srcset="/;/img/loading.gif" lazyload alt="image-20210321134303878"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210320192905310.png" srcset="/;/img/loading.gif" lazyload alt="image-20210320192905310"></p>
+<p>Binder可理解为是一种虚拟的物理设备，它的设备驱动是/dev/binder</p>
+<p>从Android Framework角度来说，Binder是ServiceManager连接各种Manager（ActivityManager、WindowManager，etc）和相应ManagerService的桥梁</p>
+<p>从Android应用层来说，Binder是客户端和服务端进行通信的媒介，当你bindService的时候，服务端会返回一个包含了服务端业务调用的Binder对象，通过这个Binder对象，客户端就可以获取服务端提供的服务或者数据，这里的服务包括普通服务和基于AIDL的服务。</p>
+<p><strong>Binder一个很重要的作用是：将客户端的请求参数通过Parcel包装后传到远程服务端，远程服务端解析数据并执行对应的操作，同时客户端线程挂起，当服务端方法执行完毕后，再将返回结果写入到另外一个Parcel中并将其通过Binder传回到客户端，客户端接收到返回数据的Parcel后，Binder会解析数据包中的内容并将原始结果返回给客户端，至此，整个Binder的工作过程就完成了。由此可见，Binder更像一个数据通道，Parcel对象就在这个通道中跨进程传输，至于双方如何通信，这并不负责，只需要双方按照约定好的规范去打包和解包数据即可。</strong></p>
+<p>三层结构：</p>
+<p>Client：具体和某一个Service通信，先从ServiceManager获取该Service的相关信息，根据得到的Serviice信息和Service所在的Serve进程建立通信</p>
+<p>Server：注册Service到ServiceManager</p>
+<p>ServiceManager： 管理这些Service 并向Client提供相关的接口</p>
+<p>Android系统会为每一个应用分配一个唯一的UID，具有相同UID的应用才能共享数据。要求两个应用具有相同的ShareUID并且签名相同才可以跑在同一个进程中。在这种情况下，它们可以互相访问对方的私有数据，比如data目录、组件信息等，不管它们是否跑在同一个进程中。当然如果它们跑在同一个进程中，那么除了能共享data目录、组件信息，还可以共享内存数据，或者说它们看起来就像是一个应用的两个部分。</p>
+<h5 id="序列化的两种方式">序列化的两种方式</h5>
+<p>Parcelable</p>
+<p>Serializable</p>
+<h2 id="Andoird">Andoird</h2>
+<h3 id="启动原理">启动原理</h3>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/12de32b31836">https://www.jianshu.com/p/12de32b31836</a></p>
+<h2 id=""></h2>
+<h3 id="事件分发机制">事件分发机制</h3>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301164920245.png" srcset="/;/img/loading.gif" lazyload alt="image-20210301164920245"></p>
+<h4 id="dispatchTouchEvent">dispatchTouchEvent</h4>
+<p>true ： 已经进行了处理，不在向下传递，停止分发</p>
+<p>false： 未处理，继续分发    一般默认返回false</p>
+<h4 id="onInterceptTouchEvent">onInterceptTouchEvent</h4>
+<p>Viewgroup特有</p>
+<p>事件传入 dispatch内部 调用这个方法</p>
+<p>false ： 子View 调用dispatc…</p>
+<p>true：交给该Viewgourp的onTouchEvent方法处理 ，不过也要看他自己能不能有没有ontouchEvent</p>
+<h4 id="onTouchEvent">onTouchEvent</h4>
+<p>Activity层</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301174949296.png" srcset="/;/img/loading.gif" lazyload alt="image-20210301174949296"></p>
+<p>ViewGroup层</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301180054892.png" srcset="/;/img/loading.gif" lazyload alt="image-20210301180054892"></p>
+<p>View层</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301182854640.png" srcset="/;/img/loading.gif" lazyload alt="image-20210301182854640"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301182955527.png" srcset="/;/img/loading.gif" lazyload alt="image-20210301182955527"></p>
+<h3 id="View原理">View原理</h3>
+<h4 id="Activty的启动顺序">Activty的启动顺序</h4>
+<p>onCreate – onStart —onResume</p>
+<p>home键返回后  onPause  – onStop   从后台返回时  onStart — onResume</p>
+<p>打开新的activity’时  onpause  --onStop</p>
+<p>关闭程序后  onPuase – onStop – onDestroy – onDetachedFromWindow</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210314102121692.png" srcset="/;/img/loading.gif" lazyload alt="image-20210314102121692"></p>
+<h4 id="Activity启动模式">Activity启动模式</h4>
+<ol>
+<li>
+<p>standard 默认标准模式，每启动一个都会创建实例</p>
+<p>应用： B站视频打开</p>
+</li>
+<li>
+<p>singleTop 栈顶复用，在栈顶 就调用onNewIntent复用</p>
+</li>
+<li>
+<p>singleTask 栈内复用， 本栈内只要用该类型的activty就会将顶部的activity出栈</p>
+</li>
+<li>
+<p>singleInstance 单例模式，单独给activity创建一个栈</p>
+<p>前台任务栈  后台任务栈</p>
+</li>
+</ol>
+<h4 id="对activity进行缓存">对activity进行缓存</h4>
+<ul>
+<li>打开新的Activity / Home键 / 电源键  onStop后会调用onSaveInstanceState 方法，可以在参数bundle中进行保存</li>
+<li>onRestoreInstanceState 对数据进行恢复</li>
+</ul>
+<h4 id="Activity间通信">Activity间通信</h4>
+<ol>
+<li>Intent – Bundle</li>
+<li>Service</li>
+</ol>
+<h4 id="View结构">View结构</h4>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210314103217599.png" srcset="/;/img/loading.gif" lazyload alt="image-20210314103217599"></p>
+<p>View 树结构</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210314103242042.png" srcset="/;/img/loading.gif" lazyload alt="image-20210314103242042"></p>
+<h4 id="View绘制流程">View绘制流程</h4>
+<h5 id="measure">measure</h5>
+<h5 id="layout">layout</h5>
+<h5 id="draw">draw</h5>
+<h3 id="横竖屏切换的生命周期">横竖屏切换的生命周期</h3>
+<h3 id="Gradle">Gradle</h3>
+<h4 id="是什么">是什么</h4>
+<p>Gradle是一个基于Apache Ant和Apache Maven概念的项目自动化构建开源工具。它使用一种基于Groovy的特定领域语言(DSL)来声明项目设置，抛弃了基于XML的各种繁琐配置。</p>
+<ol>
+<li>Gradle是一个自动化构建工具</li>
+<li>兼容Maven等仓库</li>
+<li>基于Groovy的特定领域语言来声明名目设置</li>
+</ol>
+<h4 id="配置文件">配置文件</h4>
+<ol>
+<li>settings.gradle:整个Project的配置文件，可以设置包含哪些module</li>
+<li>build.gradle （Project的gradle文件）:整个Project的配置文件</li>
+<li>build.gradle（Module）：Module的配置文件</li>
+<li>gradle.properties：可以在 gradle.properties 文件中配置一些变量</li>
+</ol>
+<h3 id="Fragment">Fragment</h3>
+<p><span style='color: #00BFFF;font-size:24px'>结合BottomNavigationView使用</span></p>
+<p><span style='color:#3CB371;font-size:24px'>如何减少Fragment切换时的重复创建？transaction.replace方法如何？ 有没有考虑用过hide 、add、show的方法？状态保存？</span></p>
+<p>先创建所有fragment的对象，在需要时初始化，如果切换时隐藏，需要时在利用，这样也能够进行状态的保存了</p>
+<p>fragment中 onHiddenChange方法可以监听 hide状态</p>
+<p><strong>fragmentTransaction  addToBackStack 有什么作用?</strong></p>
+<p>记录当前事务， backPress时 依次弹栈</p>
+<h4 id="与Activity通信的几种方式">与Activity通信的几种方式</h4>
+<ol>
+<li>接口  传入activity的view</li>
+<li>getActivity 调用其中的公共方法</li>
+<li>广播？</li>
+<li>getActivity.getFragmentManager.findFragmentById</li>
+</ol>
+<h3 id="Handler">Handler</h3>
+<h4 id="什么是Handler">什么是Handler</h4>
+<p>Android SDK 处理异步消息的核心类</p>
+<p>子线程与主线程通过Handler 通信，子线程通过Hanlder通知主线程的Ui更新</p>
+<p>Handler  Message  MessageQueue    Looper   Thread</p>
+<h4 id="问题的出发点">问题的出发点</h4>
+<p>Handler 多层嵌套过程如何？</p>
+<p>试图在子线程中更改UI:</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210305160239366.png" srcset="/;/img/loading.gif" lazyload alt="image-20210305160239366"></p>
+<p>在子线程中添加Looper会报错   且通过Looper.getMainLooper  或者myLooper获取的值和主线程的是一样的</p>
+<h4 id="通信原理">通信原理</h4>
+<p>Message内部结构</p>
+<p>clear方法</p>
+<p>MessageQueue 进表出表  enqueueMessage的最终结果  Meeage按照when的时间远近排序  —涉及链表的操作</p>
+<p>Looper—&gt;ThreadLocal</p>
+<p>looper内部   loop()方法    找是否当前when有一个message     如果message自己能处理就自己处理，如果不能自己处理，就看handler是否能够法处理（回调监听器  mCallBack   有bool值 类似ontouch）    最后看回调监听器的返回值，看是否执行重写的handleMessage</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">dispatchMessage</span><span class="token punctuation">(</span><span class="token annotation punctuation">@NonNull</span> <span class="token class-name">Message</span> msg<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>msg<span class="token punctuation">.</span>callback <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">handleCallback</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>mCallback <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>mCallback<span class="token punctuation">.</span><span class="token function">handleMessage</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">return</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token function">handleMessage</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span></code></pre></div>
+<h4 id="线程通信">线程通信</h4>
+<p>Message线程间通信的数据载体</p>
+<h5 id="AsyncTask">AsyncTask</h5>
+<p>异步任务    对Handler 和Thread的封装  更简洁高效   且封装了ThreadPool</p>
+<ul>
+<li>Message视角</li>
+</ul>
+<p><span style='color: #00BFFF;font-size:18px'>一个线程可以有多个Handler，一个线程的多个Handler只能有一个相同的Looper以及Looper的MessageQueue。Handler初始化时会初始化自身持有的Loope以及looper的messageQueue，发送消息时，先进入到handler.post/send中，然后在mQueue中进行enqueueMessage，通过message的when对当前插入的message进行排序（当然肯定是锁了的），确保一个messagequeue中的所有message都是以when进行排序的</span></p>
+<ul>
+<li>
+<p>Handler视角</p>
+<p><span style='color:#3CB371;font-size:24px'>Handler在进行处理时会通过系统持续循环的looper的loop方法进行搜索，判断当前的时间点是否有与when相同的message等待被处理，如果需要被处理，则会有一套分发机制。先看message是否带有callback的回调方法，如果没有，则看当前handler是否有callback的回调，如果还是没有，则去找handler自身写的handlemessage方法，这个方法也是暴露的，可以重写</span></p>
+</li>
+</ul>
+<h4 id="HandlerThread">HandlerThread</h4>
+<p>就是内置handler的thread</p>
+<h4 id="面试问题">面试问题</h4>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210305165916419.png" srcset="/;/img/loading.gif" lazyload alt="image-20210305165916419"></p>
+<p><span style='color:red;font-size:20px;'>一个线程有几个Handler</span></p>
+<p>多个handler</p>
+<p><span style='color:red;font-size:20px;'>一个线程有几个looper，如何保证</span></p>
+<p>只有一个Looper</p>
+<ul>
+<li>线程和looper的关系</li>
+</ul>
+<p><span style='color:red;font-size:20px;'>重点： 内存泄漏</span></p>
+<p>根本原因：内部变量？会持有外部类的引用  ，而activity被handler持有</p>
+<p>MessageQueue  --&gt;Message  --&gt;Handler  -&gt;HandleR  -&gt;this (Activity)   --&gt;拥有大量的内存</p>
+<p>问题转为JVM问题     GC   可达性分析   发现是可达的，故不会GC</p>
+<p>解决方案</p>
+<p>static    弱引用 / 软引用</p>
+<p>destroy时 清理handler 所有的message   messagequeue  quitsafely</p>
+<p><span style='color:red;font-size:20px;'>如何在子线程中使用Handler</span></p>
+<p>HandlerThread</p>
+<p>如何解决      锁机制</p>
+<p><span style='color:red;font-size:20px;'>HandlerThread的不同</span></p>
+<p><span style='color:red;font-size:20px;'>没有消息时会怎么办</span></p>
+<h4 id="额外的问题">额外的问题</h4>
+<p>为什么 runOnUiThread 执行耗时操作还是 会影响主线程的执行</p>
+<h3 id="Intent">Intent</h3>
+<h3 id="RecycleView">RecycleView</h3>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210306140559042.png" srcset="/;/img/loading.gif" lazyload alt="image-20210306140559042"></p>
+<h4 id="与ListVIew的不同点">与ListVIew的不同点</h4>
+<p>缓存机制不同</p>
+<h4 id="滚动机制">滚动机制</h4>
+<p>onTouch  – scrollBy   – fill  –  layoutChunk填充  —next --tryGetViewHolder…复用 —</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java">getItemDecorInsetsForChild  </code></pre></div>
+<p>解决itemdecoration</p>
+<h4 id="四级缓存">四级缓存</h4>
+<p>mAttachedScrap(屏幕内)// mCaneScrap，mCacheViews(屏幕外)，mViewCacheExtension(自定义缓存)，mRecyclerPool(缓存池)</p>
+<p>缓存和复用到底在处理什么？ View ？ ViewHolder？</p>
+<ol>
+<li>首先在mChangeScrap  两种方式  position / id(stable id)</li>
+<li>mattachScrap  和HiddenView 动画和 cachedView   by position/ id</li>
+<li>自定义</li>
+<li>缓存池</li>
+<li>createViewHolder - -onCreateViewHolder创建</li>
+</ol>
+<p><strong>缓存</strong></p>
+<p>Recycler</p>
+<p>fill之前</p>
+<ol>
+<li>
+<p>mCachedView   把索引0 的holder放到pool中</p>
+</li>
+<li>
+<p>pool中存</p>
+<p>根据ViewType</p>
+<p>sparseArray 键值对存储 类似hashmap</p>
+<p>如果同类项的array已经超过5个， 则不放了！</p>
+</li>
+</ol>
+<p>都在内部类Recylcer</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210316193720147.png" srcset="/;/img/loading.gif" lazyload alt="image-20210316193720147"></p>
+<p>缓存池的结构</p>
+<h4 id="嵌套如何解决滑动冲突">嵌套如何解决滑动冲突</h4>
+<h4 id="具体流程和复用机制">具体流程和复用机制</h4>
+<h4 id="内部类">内部类</h4>
+<h5 id="Recyler">Recyler</h5>
+<p>tryGetViewHolderForPositionByDeadline</p>
+<h5 id="RecycledViewPool">RecycledViewPool</h5>
+<h4 id="方法">方法</h4>
+<p>onBindView 缓存的个数  10</p>
+<p>onTouchEvent  触碰关键的函数    ----   滚动机制  scrollBy</p>
+<p>----fill</p>
+<h4 id="LayoutManager">LayoutManager</h4>
+<p>measure方法主要是交给他来做的</p>
+<h3 id="Android启动原理">Android启动原理</h3>
+<p>hhhh</p><q>sbsbsb</q>
+<div class="code-wrapper"><pre class="language-none"><code class="language-none">w;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+</code></pre></div>
+<h3 id="屏幕适配">屏幕适配</h3>
+<h4 id="概念">概念</h4>
+<p>dp ：  	density-independent pixels n个实际像素，与设备dpi相关，与px（像素）换算关系：dp/160 = px/dpi。  px = dp*dpi /160</p>
+<p>那么dp究竟解决了适配上的什么问题？可以看出1dp = 1/160inch；那么它至少能解决一个问题，就是你在布局文件写某个View的宽和高为160dp*160dp，这个View在任何分辨率的屏幕中，显示的尺寸大小是大约是一致的（可能不精确），大概是 1 inch * 1 inch</p>
+<p>dpi:         Dots Per Inch（每英寸所打印的点数）</p>
+<p>px: 1920*1080 (px)</p>
+<h3 id="Framework">Framework</h3>
+<h4 id="概念-v2">概念</h4>
+<h3 id="ContentProvider">ContentProvider</h3>
+<h4 id="作用">作用</h4>
+<h3 id="OkHttp">OkHttp</h3>
+<h4 id="核心类">核心类</h4>
+<ol>
+<li>
+<p>OkHttpClient</p>
+<p>newCall(this,request)   return new ReaCall</p>
+<ol>
+<li>
+<p>RealCall</p>
+<p>final class 、implements Call</p>
+<p>持有一个final的OkHttpCall，持有传来的Request  构造方法</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">void</span> <span class="token function">enqueue</span><span class="token punctuation">(</span><span class="token class-name">Callback</span> responseCallback<span class="token punctuation">,</span> <span class="token keyword">boolean</span> forWebSocket<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>executed<span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalStateException</span><span class="token punctuation">(</span><span class="token string">"Already Executed"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      executed <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    client<span class="token punctuation">.</span><span class="token function">dispatcher</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">enqueue</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">AsyncCall</span><span class="token punctuation">(</span>responseCallback<span class="token punctuation">,</span> forWebSocket<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token annotation punctuation">@Override</span> 
+<span class="token keyword">public</span> <span class="token class-name">Response</span> <span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">//同步为什么还要确保是否执行？</span>
+      <span class="token comment">//可能clone？</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>executed<span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalStateException</span><span class="token punctuation">(</span><span class="token string">"Already Executed"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    executed <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+    client<span class="token punctuation">.</span><span class="token function">dispatcher</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">executed</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">//dispatcher 返回的是Distpatcher ---OkHttpClient持有</span>
+    <span class="token class-name">Response</span> result <span class="token operator">=</span> <span class="token function">getResponseWithInterceptorChain</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>result <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IOException</span><span class="token punctuation">(</span><span class="token string">"Canceled"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+    client<span class="token punctuation">.</span><span class="token function">dispatcher</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">finished</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+</code></pre></div>
+</li>
+<li>
+<p>Dispatcher</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">int</span> maxRequests <span class="token operator">=</span> <span class="token number">64</span><span class="token punctuation">;</span> <span class="token comment">// 最大request数</span>
+<span class="token keyword">private</span> <span class="token keyword">int</span> maxRequestsPerHost <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span> <span class="token comment">// 最大requests/Host数 </span>
+<span class="token comment">/** Executes calls. Created lazily. */</span><span class="token operator">/</span><span class="token operator">/</span>重要！
+<span class="token keyword">private</span> <span class="token class-name">ExecutorService</span> executorService<span class="token punctuation">;</span>
+
+<span class="token comment">/** Ready async calls in the order they'll be run. */</span>
+<span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">Deque</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">AsyncCall</span><span class="token punctuation">></span></span> readyAsyncCalls <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayDeque</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/** Running asynchronous calls. Includes canceled calls that haven't finished yet. */</span>
+<span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">Deque</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">AsyncCall</span><span class="token punctuation">></span></span> runningAsyncCalls <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayDeque</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/** Running synchronous calls. Includes canceled calls that haven't finished yet. */</span>
+<span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">Deque</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">RealCall</span><span class="token punctuation">></span></span> runningSyncCalls <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayDeque</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<p>enqueue 方法</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// 是在runningAsync中添加还是readyAsync中添加 ？？？</span>
+<span class="token comment">//运行队列总数&lt;64 请求所属主机执行的任务数</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>runningAsyncCalls<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> maxRequests <span class="token operator">&amp;&amp;</span> <span class="token function">runningCallsForHost</span><span class="token punctuation">(</span>call<span class="token punctuation">)</span> <span class="token operator">&lt;</span> maxRequestsPerHost<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  runningAsyncCalls<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>call<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//如果是runningAsyncCall中，则直接执行这个call</span>
+  <span class="token comment">//核心</span>
+  <span class="token function">executorService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span>call<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+  readyAsyncCalls<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>call<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>executorService方法</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token class-name">ExecutorService</span> <span class="token function">executorService</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>executorService <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    executorService <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ThreadPoolExecutor</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span>MAX_VALUE<span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">,</span> <span class="token class-name">TimeUnit</span><span class="token punctuation">.</span>SECONDS<span class="token punctuation">,</span>
+        <span class="token keyword">new</span> <span class="token class-name">SynchronousQueue</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Runnable</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token class-name">Util</span><span class="token punctuation">.</span><span class="token function">threadFactory</span><span class="token punctuation">(</span><span class="token string">"OkHttp Dispatcher"</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//注意这里使用的是SynchronousQueue 同步队列</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token comment">//类似单例？</span>
+  <span class="token keyword">return</span> executorService<span class="token punctuation">;</span></code></pre></div>
+<ol>
+<li>
+<p>ExecutorService</p>
+<p>interface  extends Executor Executor只有一个方法execute</p>
+<p>这里使用的构造方法</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">ThreadPoolExecutor</span><span class="token punctuation">(</span><span class="token keyword">int</span> corePoolSize<span class="token punctuation">,</span>
+                            <span class="token keyword">int</span> maximumPoolSize<span class="token punctuation">,</span>
+                            <span class="token keyword">long</span> keepAliveTime<span class="token punctuation">,</span>
+                            <span class="token class-name">TimeUnit</span> unit<span class="token punctuation">,</span>
+                            <span class="token class-name">BlockingQueue</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Runnable</span><span class="token punctuation">></span></span> workQueue<span class="token punctuation">,</span>
+                          <span class="token comment">//注意是Blockqueue</span>
+                            <span class="token class-name">ThreadFactory</span> threadFactory<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">this</span><span class="token punctuation">(</span>corePoolSize<span class="token punctuation">,</span> maximumPoolSize<span class="token punctuation">,</span> keepAliveTime<span class="token punctuation">,</span> unit<span class="token punctuation">,</span> workQueue<span class="token punctuation">,</span>
+           threadFactory<span class="token punctuation">,</span> defaultHandler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span></code></pre></div>
+<p>BlockingQueue  缓存放不下时候的线程</p>
+<ul>
+<li>
+<p>为什么这里用Synchonrous队列？</p>
+</li>
+<li>
+<p>为什么new的ThreadPoolExectuor核心线程数为 0</p>
+<p>线程池概念，减少频繁创建销毁的耗时过程</p>
+</li>
+</ul>
+<ol>
+<li>
+<div class="code-wrapper"><pre><code class="language-java">public void execute(Runnable command) &#123;
+    //任务不能为空
+    if (command == null)
+        throw new NullPointerException();
+    //获取线程状态
+    int c = ctl.get();
+    //1. 
+    if (workerCountOf(c) &lt; corePoolSize) &#123;
+        if (addWorker(command, true))
+            return;
+        //添加线程失败
+        c = ctl.get();
+    &#125;
+    //2.
+    //如果线程池状态是RUNNING 并且任务成功添加到workQueue中
+    if (isRunning(c) &amp;&amp; workQueue.offer(command)) &#123;
+        //再次检查
+        int recheck = ctl.get();
+        //2.1如果线程池状态线程池是`SHUTDOWN`了，并且能成功的把任务从队列中移除
+        if (! isRunning(recheck) &amp;&amp; remove(command))
+	        //拒绝任务
+            reject(command);
+        //2.2任务加入到队列了，但是当前没有工作线程就添加一个线程
+        else if (workerCountOf(recheck) == 0)
+            addWorker(null, false);
+    &#125;
+    //3. 
+    else if (!addWorker(command, false))
+        reject(command);
+&#125;
+<pre class="language-none"><code class="language-none">
+         
+
+      
+
+3. AsyncCall
+
+   final class 、 extends NamedRunnable
+
+   &#96;&#96;&#96;java
+   final class AsyncCall extends NamedRunnable &#123;
+     private final Callback responseCallback;
+     private final boolean forWebSocket;
+   
+     private AsyncCall(Callback responseCallback, boolean forWebSocket) &#123;
+       super(&quot;OkHttp %s&quot;, originalRequest.url().toString());
+       this.responseCallback &#x3D; responseCallback;
+       this.forWebSocket &#x3D; forWebSocket;
+     &#125;</code></pre></div>
+
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>NamedRunnable</p>
+<p>abstract class implments Runnable</p>
+</li>
+</ol>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">protected</span> <span class="token keyword">final</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+   
+<span class="token keyword">public</span> <span class="token class-name">NamedRunnable</span><span class="token punctuation">(</span><span class="token class-name">String</span> format<span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token class-name">String</span><span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>format<span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token annotation punctuation">@Override</span> <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token class-name">String</span> oldName <span class="token operator">=</span> <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span>oldName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">protected</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+</li>
+<li>
+<p>Request</p>
+<p>理解Builder的设计思想</p>
+</li>
+<li>
+<p>Call</p>
+<p>基本的回调接口类</p>
+<p>request 、execute、 enqueue、cancel、isExcuted、isCancled</p>
+</li>
+<li>
+<p>Callback</p>
+</li>
+<li>
+<p>Async</p>
+</li>
+</ol>
+<h4 id="流程分述">流程分述</h4>
+<h5 id="1-如何发送">1. 如何发送</h5>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java">okHttpClient<span class="token punctuation">.</span><span class="token function">newCall</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">enqueue</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">RealCall</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">enqueue</span><span class="token punctuation">(</span><span class="token class-name">Callback</span> responseCallback<span class="token punctuation">,</span> <span class="token keyword">boolean</span> forWebSocket<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>executed<span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalStateException</span><span class="token punctuation">(</span><span class="token string">"Already Executed"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      executed <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    client<span class="token punctuation">.</span><span class="token function">dispatcher</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">enqueue</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">AsyncCall</span><span class="token punctuation">(</span>responseCallback<span class="token punctuation">,</span> forWebSocket<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token keyword">return</span> dispatcher<span class="token punctuation">;</span>
+<span class="token keyword">synchronized</span> <span class="token keyword">void</span> <span class="token function">enqueue</span><span class="token punctuation">(</span><span class="token class-name">AsyncCall</span> call<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>runningAsyncCalls<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> maxRequests <span class="token operator">&amp;&amp;</span> <span class="token function">runningCallsForHost</span><span class="token punctuation">(</span>call<span class="token punctuation">)</span> <span class="token operator">&lt;</span> maxRequestsPerHost<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      runningAsyncCalls<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>call<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">executorService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span>call<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+      readyAsyncCalls<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>call<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token class-name">ExecutorService</span> <span class="token function">executorService</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>executorService <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      executorService <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ThreadPoolExecutor</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span>MAX_VALUE<span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">,</span> <span class="token class-name">TimeUnit</span><span class="token punctuation">.</span>SECONDS<span class="token punctuation">,</span>
+          <span class="token keyword">new</span> <span class="token class-name">SynchronousQueue</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Runnable</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token class-name">Util</span><span class="token punctuation">.</span><span class="token function">threadFactory</span><span class="token punctuation">(</span><span class="token string">"OkHttp Dispatcher"</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> executorService<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token class-name">ThreadPoolExecutor</span><span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">execute</span><span class="token punctuation">(</span><span class="token class-name">Runnable</span> command<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  
+        <span class="token keyword">int</span> c <span class="token operator">=</span> ctl<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">workerCountOf</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token operator">&lt;</span> corePoolSize<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">addWorker</span><span class="token punctuation">(</span>command<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span><span class="token punctuation">;</span>
+            c <span class="token operator">=</span> ctl<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isRunning</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> workQueue<span class="token punctuation">.</span><span class="token function">offer</span><span class="token punctuation">(</span>command<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> recheck <span class="token operator">=</span> ctl<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span> <span class="token function">isRunning</span><span class="token punctuation">(</span>recheck<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">remove</span><span class="token punctuation">(</span>command<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token function">reject</span><span class="token punctuation">(</span>command<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">workerCountOf</span><span class="token punctuation">(</span>recheck<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token function">addWorker</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">addWorker</span><span class="token punctuation">(</span>command<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token function">reject</span><span class="token punctuation">(</span>command<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+</code></pre></div>
+<h5 id="2-被谁处理">2. 被谁处理</h5>
+<h5 id="3-如何维护">3. 如何维护</h5>
+<h5 id="4-建造者模式">4. 建造者模式</h5>
+<p>不需要关注细节，定制、默认</p>
+<p>链式编程   —return this</p>
+<h5 id="5-责任链模式">5. 责任链模式</h5>
+<h3 id="Retrofit">Retrofit</h3>
+<h4 id="好处">好处</h4>
+<p>Retrofit基于okhttp封装的网络请求框架, 网络请求的工作本质上是 OkHttp 完成，而 retrofit 仅负责网络请求接口的封装。</p>
+<p>Retrofit优势，就是简洁易用,解耦,扩展性强,可搭配多种Json解析框架(例如Gson),另外还支持RxJava.网络请求的工作本质上是 <code>OkHttp</code> 完成，而 Retrofit 仅负责 网络请求接口的封装</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210322153358168.png" srcset="/;/img/loading.gif" lazyload alt="image-20210322153358168"></p>
+<p>注解类型</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210322153735717.png" srcset="/;/img/loading.gif" lazyload alt="image-20210322153735717"></p>
+<p>Retrofit不做网络请求，他相当于是一个中间人</p>
+<p>通过接口，对接口方法进行注解</p>
+<h4 id="原理">原理</h4>
+<h5 id="动态代理">动态代理</h5>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token class-name">INetApiService</span> netApiService<span class="token operator">=</span> retrofit<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token class-name">INetApiService</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<p>这里得到的netApiService不是本尊，而只是一个动态代理对象</p>
+<h4 id="类">类</h4>
+<p><strong>Platform</strong></p>
+<p><strong>ServiceMethod</strong>  一个~代表一个请求接口</p>
+<p><strong>CallAdapter</strong></p>
+<p>具体类型不同的adapter  Rxjava Gson Java8 guava rxjava…</p>
+<h4 id="设计模式">设计模式</h4>
+<p>动态代理</p>
+<p>工厂模式</p>
+<p>建造者模式</p>
+<p>外观模式</p>
+<h4 id="差异">差异</h4>
+<p>Retrofit的Call 支持泛型，也就是可以用一个bean类进行包装，然后通过GSON直接返回想得到的对象？</p>
+<h4 id="问题">问题</h4>
+<p>为什么请求在子线程而显示在UI主线程？ 添加了Looper？</p>
+<h3 id="Volley">Volley</h3>
+<h3 id="图片加载框架">图片加载框架</h3>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210329094112507.png" srcset="/;/img/loading.gif" lazyload alt="image-20210329094112507"></p>
+<h3 id="Glide">Glide</h3>
+<p><strong>load</strong></p>
+<p>空白fragment  – 控制生命周期</p>
+<p>为什么Glide不能在子线程中绘制</p>
+<p>子线程中不会添加生命周期机制  主线程才会对空白的fragment监听activiyty  fragment变化</p>
+<p>RequestBuilder</p>
+<p>Retriver</p>
+<p>单例模式</p>
+<p><strong>with</strong></p>
+<p>类型转换</p>
+<p><strong>into</strong></p>
+<p>克隆模式</p>
+<p>享元模式 – SingleRequest.obtain</p>
+<p>Enging层</p>
+<p>运行缓存：   活动缓存（面向用户） – 内存缓存（活动缓存的二级缓存）</p>
+<p>检测有没有正在执行的缓存可用（磁盘缓存）</p>
+<p>网络请求</p>
+<p>高层设计：</p>
+<p>接口</p>
+<p><strong>生命周期</strong></p>
+<p>LifeCycleListener接口</p>
+<p>空白Fragment附着在activity  监听生命周期</p>
+<p>RequestManager 控制 生命周期 onstart方法中有对targetTracker、 requestTracker的生命周期方法调用</p>
+<p>设计模式</p>
+<h4 id="from">from</h4>
+<h4 id="load">load</h4>
+<h4 id="into">into</h4>
+<h3 id="面试问题-v2">面试问题</h3>
+<h4 id="为什么子线程不能更新UI">为什么子线程不能更新UI</h4>
+<p>原因： ViewRootIml.scheduleTraversals对view进行绘制前，对当前线程进行检查是不是主线程</p>
+<p>，多线程加载Ui使得资源抢占，界面更新混乱</p>
+<p>runOnUiThread的作用</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> mUiThread<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//发送消息到主线程的消息队列中</span>
+    mHandler<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//如果是主线程，则直接执行</span>
+    action<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<h4 id="View-post-和-Handler-post的区别">View.post 和 Handler.post的区别</h4>
+<p>在Oncreate里直接调用View.getWidth或者View.getMeasuredWidth返回都是0</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">post</span><span class="token punctuation">(</span><span class="token class-name">Runnable</span> action<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">final</span> <span class="token class-name">AttachInfo</span> attachInfo <span class="token operator">=</span> mAttachInfo<span class="token punctuation">;</span>
+    <span class="token comment">//当前view加入到window中，则直接用ui线程的handler发送消息</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>attachInfo <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> attachInfo<span class="token punctuation">.</span>mHandler<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// Postpone the runnable until we know on which thread it needs to run.</span>
+    <span class="token comment">// Assume that the runnable will be successfully placed after attach.</span>
+    <span class="token comment">//没有加入到wndow中，放入viewrootimpl的Runqueue中</span>
+    <span class="token function">getRunQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>如果View尚未attach到window的话，runnable被放到了ViewRootImpl#RunQueue中，最终也会被处理，但不是通过MessageQueue。</p>
+<p>而是等到ViewRootImpl的下一个performTraversals时候，把RunQueue里的所有runnable都拿出来并执行</p>
+<h4 id="Gradle到底是个啥">Gradle到底是个啥</h4>
+<h2 id="Mysql">Mysql</h2>
+<h3 id="引擎">引擎</h3>
+<h4 id="MyIAsm">MyIAsm</h4>
+<h4 id="Inoodb">Inoodb</h4>
+<h3 id="索引">索引</h3>
+<h4 id="MyIAsm和Inoodb的不同">MyIAsm和Inoodb的不同</h4>
+<h2 id="计算机原理">计算机原理</h2>
+<h2 id="面试">面试</h2>
+<p><strong>系统按什么规则回收后台的app</strong></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010227042/article/details/108451297?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161715872916780264092268%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=161715872916780264092268&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2">https://blog.csdn.net/u010227042/article/details/108451297?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161715872916780264092268%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=161715872916780264092268&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2</a><sub>all</sub>first_rank_v2~rank_v29-1-108451297.pc_search_result_hbase_insert&amp;utm_term=%E7%B3%BB%E7%BB%9F%E6%8C%89%E4%BB%80%E4%B9%88%E8%A7%84%E5%88%99%E5%9B%9E%E6%94%B6%E5%90%8E%E5%8F%B0%E7%9A%84app</p>
+<p><strong>操作系统的IO模型</strong></p>
+<p><strong>Java IO 设计模式</strong></p>
+<p><strong>Linux Unix 区别</strong></p>
+<p><strong>浏览器输入url发生了肾么事</strong></p>
+
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="post-metas mb-3">
+                                            
+                                                <div class="post-meta mr-3">
+                                                    <i class="iconfont icon-category"></i>
+                                                    
+                                                        <a class="hover-with-bg" href="/;/categories/%E5%AD%A6%E4%B9%A0/">
+                                                            学习
+                                                        </a>
+                                                        
+                                                </div>
+                                                
+                                                    
+                                                        <div class="post-meta">
+                                                            <i class="iconfont icon-tags"></i>
+                                                            
+                                                                <a class="hover-with-bg" href="/;/tags/Android/">
+                                                                    Android
+                                                                </a>
+                                                                
+                                                                <a class="hover-with-bg" href="/;/tags/Java/">
+                                                                    Java
+                                                                </a>
+                                                                
+                                                                <a class="hover-with-bg" href="/;/tags/Study/">
+                                                                    Study
+                                                                </a>
+                                                                
+                                                        </div>
+                                                        
+                                        </div>
+                                        
+                                            <p class="note note-warning">
+                                                
+                                                            本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                                                                
+                                            </p>
+                                            
+                                                
+                                                    <div class="post-prevnext">
+                                                        <article class="post-prev col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2021/01/20/Java%E5%AD%A6%E4%B9%A0/">
+                                                                        <i class="iconfont icon-arrowleft"></i>
+                                                                        <span class="hidden-mobile">Java学习</span>
+                                                                        <span class="visible-mobile">上一篇</span>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                        <article class="post-next col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2021/01/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                                                                        <span class="hidden-mobile">设计模式</span>
+                                                                        <span class="visible-mobile">下一篇</span>
+                                                                        <i class="iconfont icon-arrowright"></i>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                    </div>
+                                                    
+                                    </div>
+
+                                    
+                                        <!-- Comments -->
+                                        <article class="comments" id="comments" lazyload>
+                                            
+                                                        
+                                                            
+                                                                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Yunlong626/commit-utterances');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+                                        </article>
+                                        
+                        </article>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+                    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+                </div>
+                
+        </div>
+    </div>
+
+    <!-- Custom -->
+    
+    <!--添加我自己的设置页面-->
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+    <!--加入自定义格式的-->
+    <!--自定义的git徽标样式-->
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080" srcset="/;/img/loading.gif" lazyload>
+<br>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAdCAYAAAC9pNwMAAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDIgNzkuMTYwOTI0LCAyMDE3LzA3LzEzLTAxOjA2OjM5ICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+nhxg7wAACNlJREFUSInF1mmMVeUdx/Hv2e+5+519mJWBYQZkGxZZxLKJqBXGoLS1iXWrmihotFXaJiTWWlsbl6q1aetWd5u0VkKjNG4YEJSlOCibDLMwM8x679z9nnPP1jcVJUxf+7z6J8+LT37/Z4VvaQhfFS8+sBXbctCDGrVTKlBUH4mxAbI9Hfj0IJLsp6paJ5/tmn20N/D0wKDRMq9F/c3M2U1/V0vDfWMFh+tv/Ig1zYPMabDImPJ52OaXO87W580KggCiiOsJOJ6I3wcNFaaeNKxrt72f2fLGu4FpJ/sDQABRzD22fH7/Yze069vGc6mrDLNIJCDik10sxz2by3VdPM87xzkP9jwPTZFRVI1YUJKH+oy7n3tbvv/P2wW/UQxRWe6w4ZJRptYLHDoCuz8v5cP92XbI762O+h6UVWHnUFbPpU0fEb2A60mMJ7MUi9b/b7UgKhiZMaIxm8YLplLMDPz8hl/EH+rs8TNlUpFf32uyZJGLPDwCiTGUyTWodTN49eUCdz2YwXb9NNcObp1X98WDoufynzMVCEKGn27ayPTWBi5ad8P5iQUkJEnFLjqM9Z+hrVX0vfDe6K2dPRWsW2bwyp9EUifSJB84gdxrkR0eRgv1o/3I4fbbprJ6scqamzVO9pffec1S5ZWY2Nfz5qEy/FqOC2Y3s3j53HMSi18VRjFPwSwg+1RfVbl115vvJrsfej7UGIsYPPGgQ7JXoO+Xx5B3dHEomyJ9x1qiQozkr95h5937aFnVyouPlgJK+Ss7Fxz64OTSxSX+LHYxT2IsRW5kbGI4oHcR0jqoqTjV9se3I7/f8rS/ClS23GxSXhph6L5d9Akm7qqZhHWBQGUJ+CWGFzcg7e7m6D3/ZuW1Ea5YKdA3EojuONi813TqNi+YPYOKUhXDtCeGL26/hakLLiEcdsaHRkRAoLRc4fJrmhnekyF0apgZowWSwwkaa+rw3f8WA1GZZsPP5JEChX8dhZTN6iU6kAcs5s+dHd183SJ0VVKL57pfw6YdRQw23aeWTns47DPTALWlRTR7kMLew6hGgYqUhWXYFFUdPZ6lUBahLA8hVcOftckfi7No7VRAAQqsX1dybfvG1qwriM9mM5mJ4e4jO5Cc01dPqixbr8tWGBQUL4vjGigEEShi+xUmZ2RiR/sJ1pbS8NkgZrKAGw0TsgQsQyFaF/nfYTGprAlMFysbA1pI3mhkR6snhGsaymYGvPyFEb9IdbUE2AzFFTwpRqCtBY0wmdER+hZW4j63gcJj38V+/ErSUZXsYBfjIZHIRW0c2Z8BskCAqN+CbBJBFnyyKjR+Ez57nBxLqpfMUeSISElMBFz6x2Q6OxzWrYjyxWVzEewioU3LCS5vQY6nMUrLwNaxXvoQ59IloFSx54PPAZtQLExVZZDxsVE8J4dn6v4JYatgbSjk0owPw7RGH2ADMo88Z7L20ip8f7gC7fAo0q4+0rt7kEQDvaghVZbiPHUHcyeXcfLjT3jmpR7AYsnSScya3UR8bARVMck7Y/cB75/X6rDf3Fg2dw2jKZm5dXGm1LuAzO5DCo9v6aT0ibco5kzOvLOP+NGTFJtDpPYeZKijk/Rn3QxsfZV7txwhX7ABiZUXBsGvIvguQApNQQva9RMmTvZ2dpVUls+tX/UD7GN/Y8Ws05w6rQF+9vyzg1vZjbvMRJhXiRSU8DpTFFe0QE8S6SfPkOkZoktrB2oAhZWrwljxOPmchiSMYOWNoxNuruFU5vWeXdsojiUon345113dBBQBmTYlTimgdB8nfPo4WjaNFgN9OMEkJ02dnadVt5ki54Esqy+bzKJltVhSPbI3iN2zCyMTeXNCuG7Omm2Zok7PR2+R7jvD8ouruHhmCrB5jVZeYxLdrTP4sr4Vtd9g4MA4qc4c+6cu5NPamfw4P59t2WrA4YdXKkASf7SFivo6PDdEPmf1fRM++zp1bH/0r4I1dD1ODtOWaW4IsvPjL7nqXhloQiSPwjjgMYkMASyGEBkjhISCQwkwzve/18AbT+pk8pVY4UacQi9y+gyZ0eRAw4qHa89LXEx1LXMSPfhDJYRb59BtlLKg2WPT2l6qYl1svtGkrLYckyA1S+t5+2ATm37WCui0LSynsckDNH5zTxAchbQtkx08hDHYiW6NgC0enHBzEZ102UDH8QORdEckjEzZrNWkRydzyx17uGnDXqbUnGZ6dRPjSY91q2TqwjFuvTxLo5Zn5Qo/pumRSFcTLQtybEhGE0fQrDhhJ0VvH2lTnnHPhGtsmWan469apERjI2MH3qN7+7MEfH6ql29CbV7PvsMG32k6yU2XDhEKyZw66eJaRdrXR7CzCcqUNC3zwgymPJRCH4KRRLINimpL14A5Y4GDeOqbsPRVcfuN7Xj44pav/hFfrNT2kr2rsqf2Ibp5pEA14ZIImUyW3t5REkkTXRGQ/DGGhtLginhqCWknQDE5hKf5UFSF9Lj020Q2ul5V1AR2hr+8vuP8Vlc2zMPRxoSjnx7XBC14sDoydahSGq7KdO/HFyrBchxCVfX4fDKp4T7SCQejYODZLrYgIqgKFsNIgQqEYob8mW6yiUyb7Z64LVK/+B85xznnJ3AWzqTzuIX46mr5wLs+UUTyIriBCjRNxguHMJIFDLEEvXEOVRWnSJ0+jCd4CJoGjoedM1CLcXQziW3nMV2TSMBeOx7vWZvPt1r+cMPzE8KunaUkFn0vNrvtqXj34c1W6gzxlEQ6naIoBahtnkMwoFMwIVzSRNguMt53Aj2s4nkSlgPoGqLkICsRNF0gl8rYWuP8+11/w/OOJDEhHPKLCIpOXmi+M9AgP+maiesLifF2T1Rn5ZNj5Lo/Qc/GcPMmhdoqlEgIGzCK4PiCmJKK68p4KfF3qYGuF0qCRUkJTzleUbvQyWRTuE5xYthxQbBs7EISAbkzUFG3VfXXbK2YFi3X/eryfKKnqVBItNjJxDzH8erddC4SqWwcN5WyTtlyO1RP/Lh3eHD76MB40swmiDVJyDLYRhpc5+ub6tse/wWKbvSQEAw1awAAAABJRU5ErkJggg==&style=flat&color=d2c68b" srcset="/;/img/loading.gif" lazyload>
+
+<!-- 自定义显示文章总页数和字数的模块 -->
+<div class="bottom-post-statistic">
+    <div class="bottom-post-count">
+        62&nbsp 篇文章
+    </div>
+    <div class="bottom-post-word">
+        248.9k&nbsp 字
+    </div>
+</div>
+        <div class="footer-content">
+             <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+        </div>
+
+        
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+            
+
+                
+</footer>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/;/js/events.js" ></script>
+<script  src="/;/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/;/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/;/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/;/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/;/js/reset_code_lang.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/;/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?PPLong222";
+            var git_color =['#ebedf0', '#bef5cb', '#bef5cb', '#a9f5b4', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620'];
+            var git_user ="PPLong222";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div id="github-calendar" style="width:100%;height:auto;padding:10px;margin-bottom:20px"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;margin-top:100px;;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/about/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:200px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>#github_container > .position-relative > .border{border:0!important}#github-calendar{position: relative;margin-top: -2rem;background-color: var(--board-bg-color);transition: background-color 0.2s ease-in-out;border-radius: 0.5rem;z-index: 3;-webkit-box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);}</style><!-- hexo injector body_end end --></body>
+</html>

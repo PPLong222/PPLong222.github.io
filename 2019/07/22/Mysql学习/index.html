@@ -1,0 +1,2321 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/;/gallery/paw_img.jpg">
+  <link rel="icon" href="/;/gallery/paw_img.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="数据库学习
+
+DDL :
+操作数据库：CRUD  功能    （创建、查询、更新、删除）
+1.查询与创建
+show databases、  create database  xxx  、show create  database xxx(查询名称和字符类型)\
+​		create database xxx if not exists XX(不会报错)
+​		create database xx c">
+  <meta name="author" content="PPLong">
+  <meta name="keywords" content="">
+  <!--添加百度站点统计-->
+  <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
+  <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
+  <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
+  <meta name="description" content="数据库学习  DDL : 操作数据库：CRUD  功能    （创建、查询、更新、删除） 1.查询与创建 show databases、  create database  xxx  、show create  database xxx(查询名称和字符类型)\ ​		create database xxx if not exists XX(不会报错) ​		create database xx c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql 学习">
+<meta property="og:url" content="http://43.139.93.91/;/2019/07/22/Mysql%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="PPLong的博客">
+<meta property="og:description" content="数据库学习  DDL : 操作数据库：CRUD  功能    （创建、查询、更新、删除） 1.查询与创建 show databases、  create database  xxx  、show create  database xxx(查询名称和字符类型)\ ​		create database xxx if not exists XX(不会报错) ​		create database xx c">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211008193310011.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211009124043616.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211009125026467.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211009130912386.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211009130250988.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211005161627866.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211006164521956.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211006165928954.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211009204408842.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211010220425178.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211020103933579.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211020105635279.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211020114931955.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211020115655060.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211020145916673.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211021233658608.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211023214352512.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211023214750401.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211023215943712.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211023211744223.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211023211734818.png">
+<meta property="article:published_time" content="2019-07-22T12:05:07.000Z">
+<meta property="article:modified_time" content="2022-04-10T04:57:42.000Z">
+<meta property="article:author" content="PPLong">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Study">
+<meta property="article:tag" content="Mysql">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211008193310011.png">
+  
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
+  
+  <title>Mysql 学习 - PPLong的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/;/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/;/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/;/css/indexing-hover.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"43.139.93.91","root":"/;/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/;/local-search.xml"};
+  </script>
+  <script  src="/;/js/utils.js" ></script>
+  <script  src="/;/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 90vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/;/">
+      <strong>PPLong的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友達
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-link-fill"></i>
+                娱乐
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/movie/">
+                    <i class="iconfont icon-movie"></i>
+                    第二人生
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/shuoshuo/">
+                    <i class="iconfont icon-comment"></i>
+                    唠唠
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/develop/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    尝鲜
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/;/gallery/covers/wallhaven-rdj8jj.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Mysql 学习">
+              
+            </span>
+
+            
+              <div class="mt-3">
+    
+            
+                <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-07-22 20:05" pubdate>
+        始于: 2019年7月22日晚上8点05分
+      </time>
+    </span>
+                
+</div>
+
+<!-- 自定义的更新时间 -->
+<div class="mt-1">
+    
+        <span class="post-meta">
+  <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
+  <time datetime="2022-04-10 12:57" pubdate>
+    更新: 2022年4月10日下午12点57分
+  </time>
+</span>
+        
+</div>
+
+<div class="mt-1">
+    
+        <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      24k 字
+    </span>
+        
+
+            
+                <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      75 分钟
+    </span>
+                
+
+                    
+                        
+                            
+                                <!-- LeanCloud 统计文章PV -->
+                                <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span>
+                                 次
+                                    </span>
+                                    
+                                                
+</div>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+    <div class="container-fluid nopadding-x">
+        <div class="row nomargin-x">
+            <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-x-md">
+                <div class="container nopadding-x-md" id="board-ctn">
+                    <div class="py-5" id="board">
+                        <article class="post-content mx-auto">
+                            <!-- SEO header -->
+                            <h1 style="display: none">
+                                Mysql 学习
+                            </h1>
+                            
+                                    <div class="markdown-body">
+                                        <h1>数据库学习</h1>
+<!-- toc -->
+<h2 id="DDL">DDL :</h2>
+<p>操作数据库：CRUD  功能    （创建、查询、更新、删除）</p>
+<p>1.<strong>查询与创建</strong></p>
+<p>show databases、  create database  xxx  、show create  database xxx(查询名称和字符类型)\</p>
+<p>​		create database xxx if not exists XX(不会报错)</p>
+<p>​		create database xx character set xxx(utf-8)</p>
+<p>​		可以连用语句   create database xxx if not exists XX character set xxx</p>
+<span id="more"></span>
+<ol start="2">
+<li>
+<p>修改</p>
+<p>alter database xxx  character set xxxx        设置已创建的数据库的字符类型</p>
+</li>
+<li>
+<p>删除</p>
+<p>​	drop database  (if exists xxx)  *要先转到当前的database</p>
+<p>4.使用数据库</p>
+</li>
+</ol>
+<p>​			查询当前的数据库   Select database();</p>
+<p>​			使用数据库            	use xxxx;</p>
+<h2 id="数据结构">数据结构</h2>
+<h3 id="整型">整型</h3>
+<p>默认是有符号的 , unsigned 指定无符号，会设置默认长度，这里<strong>长度不代表范围，范围有类型决定</strong>，长度指的是值的显示宽度，如果小于指定长度，则补齐0（但必须搭配zerofill才行，且加上后就默认变成unsigned了（不支持负数））</p>
+<ul>
+<li>Tinyint</li>
+<li>Smallint</li>
+<li>Mediumint</li>
+<li>Int、integer</li>
+<li>Bigint</li>
+</ul>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211008193310011.png" srcset="/;/img/loading.gif" lazyload alt="image-20211008193310011"></p>
+<p>超出范围 插入时直接报错</p>
+<h3 id="小数">小数</h3>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211009124043616.png" srcset="/;/img/loading.gif" lazyload alt="image-20211009124043616"></p>
+<ul>
+<li>浮点型
+<ul>
+<li>float</li>
+<li>double</li>
+</ul>
+</li>
+<li>定点型
+<ul>
+<li>dec</li>
+<li>decimal</li>
+</ul>
+</li>
+</ul>
+<p>M 代表整数部位 + 小数部位<br>
+D 代表小数部位(自然就限制了整数的位数)<br>
+如果超过范围，则报错。都省略，decimal默认精度是(10,0)</p>
+<h3 id="字符型">字符型</h3>
+<ul>
+<li>
+<p>较短文本</p>
+<ul>
+<li>
+<p>char，固定长度，剩余的用空格补齐,性能更高，默认长度为1（指字符数）char的存储方式是，对英文字符（ASCII）占用1个字节，对一个汉字占用两个字节；</p>
+</li>
+<li>
+<p>varchar，可变长度。varchar的存储方式是，对每个英文字符占用2个字节，<strong><s>汉字也占用2个字节</s>。</strong></p>
+<ul>
+<li>utf-8mb3下汉字占3个字节. mn4占4个字节</li>
+<li>gbk下汉字占2个字节</li>
+</ul>
+</li>
+<li>
+<p>Enum枚举 ENUM(‘男’,‘女’)类似这样，只能插入其中一个</p>
+</li>
+<li>
+<p>Set类型，可以选择多个插入。插入方式…values(‘a’,‘b’,‘c’)</p>
+</li>
+<li>
+<p>binary – varbinary 保存较短的二进制字符串</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211009125026467.png" srcset="/;/img/loading.gif" lazyload alt="image-20211009125026467"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>较长文本</p>
+<ul>
+<li>
+<p>text，只能保存字符数据，例如日记</p>
+</li>
+<li>
+<p>blob，保存二进制数据，只能存字节，例如照片（但一般不会这样）</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211009130912386.png" srcset="/;/img/loading.gif" lazyload alt="image-20211009130912386"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="日期">日期</h3>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211009130250988.png" srcset="/;/img/loading.gif" lazyload alt="image-20211009130250988"></p>
+<p>timestamp和实际时区有关（mysql的time-zone），更能反应实际的日期，datetime只能反应插入时的当地时区。<br>
+timestamp只支持到1970到2038年的某时刻。datetime可以从1000到9999</p>
+<h2 id="操作表">操作表</h2>
+<p>​		CRUD</p>
+<ol>
+<li>
+<p>查询    show tables；</p>
+<p>查询表结构  desc xxx(表名)</p>
+</li>
+<li>
+<p>创建    create table xxx（</p>
+<p>​            列名1  数据类型1，</p>
+<p>​			列名2  数据类型2，</p>
+<p>​			…</p>
+<p>​			列名n  数据类型n</p>
+<p>​			);</p>
+<p>数据库中的数据类型(int 、double（n,m）最多n位，小数点后m位</p>
+<p>​								、date（yyyy-MM-dd）、datetime(yyyy-mm-dd HH:mm:ss)</p>
+<p>​								timestamp（时间戳，若不给这个字段赋值，则默认使用当前系统时间）</p>
+<p>​								varchar(需指定最大字符)</p>
+<p>)</p>
+</li>
+</ol>
+<p>3.删除          drop table xxx /   (if exists xxx)</p>
+<p>4.修改表      修改表名 :  alter table xxx rename to （newxxx）</p>
+<p>​					修改表的字符集  :alter table xxx character set utf-8</p>
+<p>​					添加一列  ：    alter table xx add aaa(new colume)  bbb(数据类型)</p>
+<p>​					修改列名 类型： alter table 表名 change 列名 新列名字  新数据类型</p>
+<p>​												alter table 表名  modify 列名 新数据类型</p>
+<p>​					删除列： alter table 表名 drop 列名;</p>
+<p><strong>5. 复制表</strong></p>
+<ul>
+<li>create table copyxxx like … 仅复制表结构</li>
+<li>create table copyxxx select * from anotherTable; 复制表结构 + 数据</li>
+<li>2的基础加where   只复制部分数据</li>
+</ul>
+<ol start="6">
+<li>
+<p>查看表结构</p>
+<p>show index from  xxx  查看索引</p>
+<p>desc xxx</p>
+</li>
+</ol>
+<h2 id="DML-增删改表中数据">DML 增删改表中数据</h2>
+<ol>
+<li>
+<p>添加数据</p>
+<p><strong>values 方式</strong></p>
+<p>​			insert into (表名)(column , ~, , ,) values  (x,x,x)  // 列名与值必须对应</p>
+<p>​			inster into （表名）valuse （xxxxx）给所有的行列加上值，否则报错</p>
+</li>
+</ol>
+<p>​                  除了数字类型，其他的必须引号，单双都可，支持插入多行、子查询，逗号隔开</p>
+<p>​		<strong>set 方式</strong></p>
+<p>​				    insert into table set col1 = x,col2 =y …</p>
+<ol start="2">
+<li>
+<p>删除数据</p>
+<ul>
+<li>delete from (table) where xxx (condition) 没有where 条件的话则完全删除</li>
+<li>truncate table xxx ，不允许加where，直接删除表</li>
+</ul>
+<p><strong>delete删除后，自增长的值从断点开始，truncate清空后，自增长的值从1开始</strong></p>
+<p><strong>delete删除后有返回值，truncate无返回值（0行受到影响）</strong></p>
+<p><strong>truncate不能回滚</strong></p>
+<div class="code-wrapper"><pre class="language-none"><code class="language-none">		  Truncate table 删除表中所有记录  比  deleye from table  效率更高
+</code></pre></div>
+</li>
+</ol>
+<p>​	3. 修改数据：</p>
+<p>​			update table set colume =x1, … (where  ,)一样可以加入条件<br>
+​			不加条件则会将表中所有数据 都更改</p>
+<h2 id="DQL-查询表中记录-（-）">DQL 查询表中记录 （*）</h2>
+<hr>
+<ol>
+<li>普通查询   select * from 表名</li>
+<li>语法：  select  字段列表   from 表名列表 where 条件列表  group by 分组字段  <br>          order by 排序   limit  分页限定<BR/>          去除重复关键字：  DISTINCT<BR/>         起别名关键字： AS xxx</li>
+<li>基础查询：<br/> 1. 多个字段的查询：  <BR/>            select (DISTINCT)xxx  ,yyy   from table <br/>             select (DISTINCT)xxx +yyy   (AS 总分)  from table 求总合且能够换名字 <br/>             select (DISTINCT)xxx +IFNULL(yyy,0)   from table 解决null无法相加问题</li>
+<li>条件查询<br > 1.  条件语句中的= 只有一个=符号  <br /> 2. &lt;&gt; 与!=  等价    、可以用&amp;&amp;但推荐使用 AND<BR> 3. BETWEEN  AND 关键字 也能处理中间量</li>
+<li>模糊查询<br>
+setlect * from table WHERE  xxx LIKE '_ /‘%’<br>
+_  :  单个字符  %  :多个字符<br>
+—若前面没有字符 ‘’%x%&quot; 一样能查出该条数据！！</li>
+<li>排序查询：’<br>
+select     …  order by xxx DESC/ASC ,aaa …（降序、升序）</li>
+<li>聚合函数：(运算会排除null值)<br>
+count \max\min\sum\avg<br>
+select xxx(colume) from table ;<br>
+select count (ifnull (column,0)) from student;（将null值替换为0）</li>
+<li>分组查询：<br>
+select sex ,avg(column) AS 平均值，count (id) from table Where … GROUP BY sex Having count(column)…;<br>
+—AS xxx 起别名，注意逗号<br>
+—其后可以跟 聚合函数<br>
+—条件语句在 GROUP BY 之前    <strong>不满足 则不参与分组</strong><br>
+—聚合函数在 GROUP BY 之后 且有having关键字  <strong>不满足 则不显示</strong></li>
+<li>分页查询：<br>
+select * from student LIMIT a,b;<br>
+—a : 起始的页数 (0是第一条)  b: 结尾的页数+1 [a,b);</li>
+</ol>
+<h2 id="约束">约束</h2>
+<p>一种限制，限制表中行列数据，保证最终添加到表中的数据是可靠的</p>
+<ul>
+<li>not null</li>
+<li>deafult ，字段有默认值</li>
+<li>primary key 主键，保证该字段的值的<strong>唯一性、非空性</strong>
+<ul>
+<li>可以有组合主键（两个或者多个不能<strong>都</strong>相同）</li>
+</ul>
+</li>
+<li>unique 唯一性，但可以为空，但只能为一个null</li>
+<li>check，检查约束（mysql不支持），对具体填入值的限制</li>
+<li>foreign key 外键约束，在从表中添加，限制两个表的关系，该字段的值必须来自主表的关联值
+<ul>
+<li>主表的关联列(Dep)一般是一个键(主键、唯一键)</li>
+</ul>
+</li>
+</ul>
+<p>约束也分为列级约束、表级约束</p>
+<p><strong>表级约束添加</strong></p>
+<p>可以使用constraint + 自定义keyname  或者直接使用默认</p>
+<p>constraint xxx(casual constraint name) primary key(id)…<br>
+primary key (id)</p>
+<p><strong>修改表时添加约束</strong></p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">alter table xxx modify column aaa int not null; 	# 列级约束
+alter table xxx add primary key(id);	# 表级约束
+# 修改表时删除约束
+alter table xxx modify column aaa int ; # 不要not null ...了
+# 删除主键的两种方法
+alter table xxx modify column aaa int;
+alter table xxx modify drop primary key;  
+# 删除唯一键
+alter table xxx drop index key_name;
+alter table xxx drop foreign key key_name;
+</code></pre></div>
+<h3 id="外键约束">外键约束</h3>
+<ol>
+<li>
+<p>创建： create table xxx(</p>
+<p>​			外键列</p>
+<p>​			costraint 外键名 foreign key （外键列名称）（此处括号必须加） 				     references 主表名称(主表列名称)（一般是主键）</p>
+<p>);</p>
+<p>*<em>外键关联后主表不能被删除</em> *</p>
+</li>
+</ol>
+<p>​    2.删除 ： Alter  table xxx drop foreign key 外键名;</p>
+<p>​    3.添加：  Alter  table xxx add costraint 外键名 foreign key 外键列名称 references 主表名称(主表列名称)（一般是主键）;</p>
+<ol start="4">
+<li>
+<p><em><strong>级联</strong></em>  （外键可以为NULL ）</p>
+<ul>
+<li>创建表后级联更新：Alter table （foreign table） ADD CONSTRAINT … 		ON UPDATE  CASCADE;  (ON DELELTE CASCADE)</li>
+</ul>
+</li>
+</ol>
+<h2 id="标识列">标识列</h2>
+<p>auto_increment   自增长列，系统自动提供值,标识列必须是一个key，且只能有一个标识列</p>
+<p>设置起始值和步长</p>
+<p>variable ： auto_increment _increment步长         auto_increment_offset起始值（mysql不支持修改）<br>
+set auto_increment _increment = 3;</p>
+<h2 id="数据库设计范式">数据库设计范式</h2>
+<p><strong>目的：解决数据库中的问题</strong></p>
+<ol>
+<li>第一范式： 每一列都是不可分割的原子数据项</li>
+<li>第二范式：在第一范式基础上，非码属性必须完全依赖于候选码
+<ul>
+<li>函数依赖 ： 通过A属性（组）的值 可以确定 唯一B属性的值  (B依赖于A)</li>
+<li>完全函数依赖： A是属性组  则B属性值的确定 需要A属性组中<strong>所有的属性值</strong></li>
+<li>部分函数依赖： A是属性组  。。。。。。。只需要依赖A中的部分属性值</li>
+<li>传递函数依赖：A (组)确定 唯一B， B(组)  确定唯一C  则C传递函数依赖于A</li>
+<li>码： 一张表中的 一个属性或属性组被其他所有属性完全依赖，则这个属性为该		      表的码
+<ul>
+<li>主属性：码属性组中的所有属性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第三范式，在第二范式基础上，任何非主属性不依赖其他非主属性</li>
+</ol>
+<h2 id="数据库的备份和还原">数据库的备份和还原</h2>
+<ol>
+<li>命令行：
+<ul>
+<li>mysqldump -uuser -ppassword xxx(database)&gt;path</li>
+<li>使用备份文件 source path;</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="多表查询">多表查询</h2>
+<div class="code-wrapper"><pre class="language-none"><code class="language-none">* 语法：
+select * from  aaa,bbb,......（笛卡尔积方式）
+</code></pre></div>
+<ul>
+<li>
+<p>多表查询的分类</p>
+<ol>
+<li>内连接查询：</li>
+<li>隐式内连接查询：<br>
+Select *(<a target="_blank" rel="noopener" href="http://emp.name">emp.name</a>)  from aaa,bbb WHERE <a target="_blank" rel="noopener" href="http://emp.id=dept.id">emp.id=dept.id</a>;<br>
+规范写法<br>
+Select <a target="_blank" rel="noopener" href="http://t1.name">t1.name</a>,<a target="_blank" rel="noopener" href="http://t2.name">t2.name</a><br>
+from  emp t1, dept t2<br>
+WHERE <a target="_blank" rel="noopener" href="http://t1.id=t2.id">t1.id=t2.id</a>;</li>
+<li>显示内连接：<br>
+select xxx from table (INNER) JOIN table2 on <a target="_blank" rel="noopener" href="http://emp.id=dept.id">emp.id=dept.id</a>;</li>
+<li>外连接查询：<br>
+左外连接：<br>
+SELECT XX FROM TABLE LEFT [OUTER] JOIN table2 ON 					<a target="_blank" rel="noopener" href="http://table.id=table2.id">table.id=table2.id</a>;<br>
+<strong>查询左表所有数据以及交集部分 （避免on 查询中的空值现象）</strong><br>
+右外连接：同上</li>
+<li>子查询：
+<ol>
+<li>结果是单行单列：<br>
+可作为条件，用运算符判断 （比如avg max…）</li>
+<li>结果是多行单列(多个id值)<br>
+in(…)</li>
+<li>结果是多行多列的<br>
+子查询可作为一张虚拟表，作为表的查询</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="事务">事务</h2>
+<ol>
+<li>基本介绍
+<ul>
+<li>概念：包含多个操作的业务，被事务管理时，要么同时成功要么同时失败（例如转账）</li>
+<li>操作：
+<ul>
+<li>
+<ol>
+<li>开启事务-start transaction;</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>回滚-rollback(发现问题时回滚);</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>提交-commit;</li>
+</ol>
+</li>
+<li>Mysql数据库中事务默认自动提交:一条DML自动提交一次事务<br>
+（Oracle是手动提交的）<br>
+查看默认提交方式 select @@autocommit<br>
+修改 ：  set … =0； （手动提交）<br>
+2.事务的四大特征</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>原子性： 是不可分割的最小操作单位</li>
+<li>持久性： 事务一旦提交或回滚，数据库将持久的保存数据</li>
+<li>隔离性： 多个事务之间，相互独立</li>
+<li>一致性： 事务操作前后，数据总量不变（守恒）<br>
+3.事务的隔离级别</li>
+</ol>
+<ul>
+<li>概念： 多个事务操作同一批数据，引发一些问题，设置隔离级别便可以解决			     这些问题</li>
+<li>存在问题：
+<ol>
+<li>脏读： 一个事务读取到另一个事务中未提交的数据</li>
+<li>不可重复读（虚读）：同一个事务中两次得到的数据不一致</li>
+<li>幻读：一个事务操作DML数据表中所有记录，另一个事务添加了一条 					    数据，则第一个事务查询不到自己的修改</li>
+</ol>
+</li>
+<li>隔离级别：
+<ol>
+<li>read uncommitted： 读未提交 （脏读、虚度、幻读）</li>
+<li>read committed ： 读已提交 （不可重复读，幻读）</li>
+<li>repeatable read：可重复度 （幻读）(默认)</li>
+<li>seriablizable： 串行换（解决所有问题）</li>
+</ol>
+</li>
+<li>查询隔离级别：<br>
+select @tx_isolation;<br>
+*设置： set global transaction isolation level …;</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="DCL-：管理用户，授权-：">DCL  ：管理用户，授权  ：</h2>
+<p>DBA: 数据库管理员：<br>
+1. 管理用户：<br>
+* 查询：切换mysql数据库， 查询user表<br>
+% 表示可以再任意主机使用用户登录数据库<br>
+* 创建： Create user ‘namexxx@‘主机名’ indentified by ‘password’<br>
+* 删除： DROP USER ‘namexxx@‘主机名’<br>
+2. 修改用户密码：<br>
+UPDATE USER SET password = password(‘xxx’) where user =‘xxx’’<br>
+set password dor ‘name’@‘zhuji’ =password(‘newpassword’)’<br>
+忘记密码后：<br>
+1. net stop mysql  —停止服务 （需要管理员权限）<br>
+2. mysqld --skip-grant-tables—使用无验证方式启动<br>
+3. 打开新的cmd 窗口，直接输入mysql 命令<br>
+4. user mysql<br>
+5. 使用命令更改 …<br>
+6. 关闭窗口<br>
+7. 打开任务管理器，手动结束mysqld进程<br>
+3. 授权：<br>
+1. 查询权限<br>
+show grants for ‘user’@‘hostxxx’;<br>
+2. 授予权限<br>
+grant 权限列表 on xxxdatabase .xxxtable to ‘xxxUser’@‘host’;<br>
+all（所有权限）<br>
+3. 撤销权限<br>
+revoke xxx on xxxdatabase.xxtable to  ‘xxxUser’@‘host’;</p>
+<hr>
+<h2 id="JDBC-Template-与-连接池">JDBC Template 与 连接池</h2>
+<h3 id="数据库连接池">数据库连接池</h3>
+<ol>
+<li>
+<p>目的：（避免使用后就开除的现象） 节约用户时间，重复使用连接对象。</p>
+</li>
+<li>
+<p>概念： 容器。存放数据库连接，系统初始后容器被创建，容器中申请一些连接对象，用		   户访问数据库时，从容器中获取连接对象，访问后将归还这些连接对象</p>
+</li>
+<li>
+<p>有点： 节约资源， 用户访问高效</p>
+</li>
+<li>
+<p>实现：</p>
+<ol>
+<li>
+<p>接口：datasource</p>
+<ul>
+<li>方法getConnection()获取连接</li>
+<li>若是从连接池中，则connection.close（）代表归还这一个 连接</li>
+<li>由数据库厂商来实现<br>
+2.C3P0:数据库连接池技术</li>
+</ul>
+<ol>
+<li>导入jar包 以及依赖的jar包 放入libs中</li>
+<li><strong>定义配置文件(properties OR xml )并 直接放入src目录</strong><br>
+*一个配置文件可以有多个配置 ，以配置名区别
+<ul>
+<li>设置URL user password</li>
+<li>设置最大连接数与超时连接秒数</li>
+</ul>
+</li>
+<li>创建核心对象<br>
+DataSource ss = new ComboPooledDataSource（x）<br>
+参数为空： 默认配置<br>
+参数为Configname：指定配置<br>
+Connection con=ds.getConnection</li>
+<li>连接</li>
+</ol>
+</li>
+<li>
+<p>Druid：数据库联机吃实现技术，by阿里巴巴	（性能好）</p>
+<ol>
+<li>
+<p>导入jar包</p>
+</li>
+<li>
+<p>配置文件</p>
+<ul>
+<li>properties</li>
+<li>可以任意名称 任意路径，不自动加载</li>
+</ul>
+</li>
+<li>
+<p>获取数据库连接池对象 ：通过工厂类获取<br>
+ds=DruidDataSourceFactory.creteDataSource（需要pro对象）</p>
+<p>thiscalss.class.getClassloaaer()…getReourcesAsStream(“xxx.xx”)</p>
+</li>
+<li>
+<p>连接<br>
+conn=ds.getConnection();</p>
+</li>
+</ol>
+</li>
+<li>
+<p>**定义工具类 **</p>
+</li>
+</ol>
+<h3 id="Spring-JDBC–JDBC-Template">Spring JDBC–JDBC Template</h3>
+<div class="code-wrapper"><pre class="language-none"><code class="language-none"> *Spring 框架对JDBC的简单封装
+</code></pre></div>
+<p>1.导入jar包<br>
+2.创建jdbctemplate对象，依赖于dataSource<br>
+jdbctemplate t=new jdbctemplate(ds）<br>
+3.调用其中方法完成crud操作**（建议查看源码）**<br>
+1. update(sql,?1，？2,?3,?4…)<br>
+不需要手动关闭连接 …自动归还连接<br>
+2. queryformap() <strong>（只能是一个数据行）</strong><br>
+3. queryforlist()  可先将每个计划 封装成map 再 将map作为list的泛型<br>
+4. query() 返回对象为javabean<br>
+1. 参数（sql,new RowMapper<T>(){</p>
+<div class="code-wrapper"><pre class="language-none"><code class="language-none"> 	&#125;）；匿名内部类，自己实现查找方式
+ 	2. （sql，new BeanPropertyRowMapper&lt;T&gt;(T.class)）
+ 		注意：对于数据表中为null的值，普通类型无法识别，会报错，这里使用包装类 进行解决
+ 5. querForobject (sql, xxx.class（xxx:数据类型）)
+</code></pre></div>
+</li>
+</ol>
+<h2 id="基础函数">基础函数</h2>
+<h4 id="日期-v2">日期</h4>
+<p>now() 返回当前系统日期+时间</p>
+<p>curdate() 返回当前时间，不包括具体时分秒</p>
+<p>select year((now)) month\monthname…同理获得当前时间</p>
+<p>str_to_date(xxxxxxx,%c-%m-%Y’)  ：日期格式字符转换成制定格式</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211005161627866.png" srcset="/;/img/loading.gif" lazyload alt="image-20211005161627866"></p>
+<p>date_format:日期转换成字符，一样遵循以上格式</p>
+<h4 id="流程控制函数">流程控制函数</h4>
+<p><strong>if函数</strong></p>
+<p>if(e1,e2,e3)    三元运算符</p>
+<p><strong>case函数</strong></p>
+<p>case …<br>
+when x then y;<br>
+when a then b;<br>
+…<br>
+else n;<br>
+end</p>
+<h3 id="分组函数">分组函数</h3>
+<p>用做统计使用，又叫聚合函数</p>
+<p>sum avg max min count</p>
+<ul>
+<li>忽略null值，有null值的比如avg也就不做分母</li>
+<li>count忽略null值</li>
+<li>max、min、count处理任何类型‘sum、avg处理数值类型’</li>
+<li>和distinct搭配，去重</li>
+</ul>
+<h3 id="分组查询">分组查询</h3>
+<p>筛选分成分组前和分组后的筛选</p>
+<p><strong>分组前</strong></p>
+<p>同一列分组  group by一般在from后           关键字 ：<strong>where</strong></p>
+<p>使用group by需要注意行数统一，可以进行多个分组</p>
+<p><strong>分组后</strong></p>
+<p>关键字：<strong>having</strong></p>
+<p>对group by的具体限制。 属于分组后的筛选</p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">select count(*),dep_id 
+from staff 
+group by dep_id 
+having count(*) &gt;&#x3D; 2;</code></pre></div>
+<h3 id="连接查询（多表查询）">连接查询（多表查询）</h3>
+<p>sq92</p>
+<p><strong>等值连接</strong></p>
+<p>where <a target="_blank" rel="noopener" href="http://s.id">s.id</a> = <a target="_blank" rel="noopener" href="http://d.id">d.id</a>,次次轮循匹配</p>
+<p><strong>非等值连接</strong></p>
+<p><strong>自连接</strong></p>
+<p>emp e,emp e2</p>
+<p>sq99 1999年的新的sql标准</p>
+<p><strong>内连接</strong></p>
+<p>select … from …  <strong>（inner ）join</strong>   emp p  <strong>on</strong> …</p>
+<p>拿一张表去匹配另外一张表</p>
+<p><strong>外连接</strong></p>
+<p>一个表有，另一个表没有的情况 = 内连接结果+主表中有但从表没有的记录</p>
+<p>left outer 左边的是主表  right outer 右边的是主表</p>
+<p><strong>全外连接</strong></p>
+<p>从表中有主表中没有的也能查出来</p>
+<p><strong>交叉连接</strong></p>
+<p>cross join   笛卡尔乘积</p>
+<h3 id="子查询">子查询</h3>
+<p>子查询出现位置</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211006164521956.png" srcset="/;/img/loading.gif" lazyload alt="image-20211006164521956"></p>
+<h4 id="where、having后">where、having后</h4>
+<ol>
+<li>
+<p>标量子查询</p>
+<p>一般用 &gt; &lt; = 这类的符号连接</p>
+<div class="code-wrapper"><pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> salary
+<span class="token keyword">from</span> staff
+<span class="token keyword">where</span> salary <span class="token operator">></span>
+      <span class="token punctuation">(</span><span class="token keyword">select</span> salary <span class="token keyword">from</span> staff
+          <span class="token keyword">where</span> name <span class="token operator">=</span> <span class="token string">'赵云龙'</span><span class="token punctuation">)</span>
+</code></pre></div>
+</li>
+<li>
+<p>列子查询</p>
+<p>使用多行比较操作符</p>
+<p>in/ not in（任意一个）  any/some(某一个)  all(所有)</p>
+</li>
+<li>
+<p>行子查询</p>
+<p>多个字段当成一行来用</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211006165928954.png" srcset="/;/img/loading.gif" lazyload alt="image-20211006165928954"></p>
+</li>
+</ol>
+<h4 id="select后">select后</h4>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 查询部门的人数,也可以用连接查询...
+select d.name,(
+    select count(*)
+    from staff s
+    where s.dep_id &#x3D; d.id
+    )
+from Dep d;
+</code></pre></div>
+<h4 id="from后">from后</h4>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 注意：from后的子查询的表需要起别名
+select salary
+from (
+     select * from staff
+    where salary &lt; 30000
+         ) as staff;</code></pre></div>
+<h4 id="exists后">exists后</h4>
+<p><strong>相关子查询</strong></p>
+<p>1 表示有值      0 表示没有查到</p>
+<h3 id="分页查询">分页查询</h3>
+<p>数据太多</p>
+<p>limit startOffset，size;（起始索引从 <strong>0</strong> 开始）</p>
+<h3 id="联合查询">联合查询</h3>
+<p>将多条查询语句合并成一个结果</p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">select * from staff where dep_id &#x3D; 3 
+union 
+select * from staff where id &lt; 10;
+
+# equivalent to 
+select * from staff where dep_od &#x3D; 3 or id &lt; 10;
+
+# 粗暴拼接，不考虑表类型是否相同，且查询列数量必须相同，查询顺序可以不同，可以不对应
+# 并且会去掉重复项（查询出的值完全相同） --不想去重:  union all
+select id,name from Dep where id &lt; 10 union select levelDes,id from level where id &lt; 10;
+
+</code></pre></div>
+<h2 id="基础进阶">基础进阶</h2>
+<h3 id="事务-v2">事务</h3>
+<p>TCL  Transaction Control Language 事务控制语言</p>
+<p>一组sql语句组成一个执行单元，要么全部执行，要么全部不执行</p>
+<h4 id="存储引擎">存储引擎</h4>
+<p>mysql中的数据用各种不同的技术存储在文件中（决定用什么方式来存）</p>
+<p>show engines</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211009204408842.png" srcset="/;/img/loading.gif" lazyload alt="image-20211009204408842"></p>
+<p>innodb 支持事务，其他的则不支持</p>
+<h4 id="事务的ACID属性"><strong>事务的ACID属性</strong></h4>
+<ul>
+<li>原子性 Atomicity
+<ul>
+<li>指事务是一个<strong>不可分割</strong>的工作单位，事务中的操作要么都发生，要么都不发生</li>
+</ul>
+</li>
+<li>一致性 Consistency
+<ul>
+<li>事务必须使数据库从一个一致性状态转换到另一个一致性状态</li>
+</ul>
+</li>
+<li>隔离性 Isolation
+<ul>
+<li>一个事物的执行不能被其他事务干扰，一个事务内部的操作及使用的数据对并发的其他事务的隔离的。</li>
+</ul>
+</li>
+<li>持久性 Durability
+<ul>
+<li>一个事务一旦被提交，它对数据库中的数据改变就是永久性的（注意commit的地位）</li>
+</ul>
+</li>
+</ul>
+<h4 id="事务的创建">事务的创建</h4>
+<h5 id="隐式事务">隐式事务</h5>
+<p>insert update delete    （但多个sql合在一起就不是了）</p>
+<p>variable ：autocommit决定是否开启隐式事务</p>
+<h5 id="显式事务">显式事务</h5>
+<ol>
+<li>前提：先设置autocommit 为 0 （只针对当前会话）</li>
+<li>start transaction（可不写，默认）</li>
+<li>写sql，执行后在表中值已经被更改但未被commit</li>
+<li>提交事务 commit（或者在commit之前回滚事务，恢复到之前的状态）</li>
+</ol>
+<h4 id="事务的隔离级别">事务的隔离级别</h4>
+<p>同时运行多个事务，访问相同的数据时，没有适当的隔离机制，就会导致各种并发问题</p>
+<ul>
+<li><strong>脏读</strong>：两个事务，T1读取了T2更新了但未commit的字段，若T2回滚，则T1读取的数据就是无效的</li>
+<li><strong>不可重复读</strong>：T1读取了一个字段，然后T2更新了该字段(提交)，之后T1再次读取后，值就不一样了（从自身的角度说，“我什么都没干，但结果却不一样了”）</li>
+<li><strong>幻读</strong>：T1读了一个字段，但T2在表中插入了一些新的行，如果T1再读，就会多出几行
+<ul>
+<li>比如update的时候，一个事务已经提交了，但对另一个事务来说，select只看到三条，但最终比如更新后row的影响条数是五条</li>
+</ul>
+</li>
+</ul>
+<p><strong>事务中delete表后还可以回滚，但truncate不可回滚！</strong></p>
+<p>Mysql中提供的4种隔离级别</p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 查看当前的隔离级别
+select @@tx_isolation
+# 设置隔离级别（只针对当前连接）
+set (global 代表设置全局的)session transaction isolation level xxxx;
+# 实验前提：两个会话都需要都开启一个事务 set autocommit &#x3D; 0;</code></pre></div>
+<ul>
+<li>read- uncommitted 读未提交
+<ul>
+<li>啥都做不了</li>
+</ul>
+</li>
+<li>read committed 读已提交
+<ul>
+<li>避免脏读，但不可重复读、幻读不能避免</li>
+</ul>
+</li>
+<li>repeatable read 可重复读
+<ul>
+<li>避免脏读+不可重复读</li>
+</ul>
+</li>
+<li>serializable 串行化
+<ul>
+<li>都可避免</li>
+<li>会阻塞住,性能十分低下</li>
+</ul>
+</li>
+</ul>
+<h4 id="保存点">保存点</h4>
+<p><strong>savepoint x</strong>只搭配<strong>rollback to x</strong>使用</p>
+<h4 id="视图">视图</h4>
+<p>一种虚拟表，5.1版本后的新特性，通过表动态生成的数据（类似临时拼凑的表，可重复利用）</p>
+<p>只保存sql逻辑，不保存查询结果</p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">create view v1
+as
+select id,name
+from staff
+where dep_id &#x3D; 3;
+
+select * from v1;</code></pre></div>
+<ul>
+<li><strong>视图可重用；减少sql操作</strong></li>
+<li><strong>不必知道查询细节</strong></li>
+<li><strong>保护数据，提高安全性</strong></li>
+</ul>
+<p><strong>操作视图</strong></p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 修改视图
+create or replace view
+as
+...
+
+alter view xxx
+as
+...
+# 删除视图
+drop view xxx
+# 查看视图结构
+desc view;
+# 更新视图（原始表也会有）
+insert into xxx values(.....); 
+update xxx set ....; 
+delete from xxx where ... ;
+
+#视图权限（一般的视图里是不允许更新到真实表中的）</code></pre></div>
+<h4 id="视图权限">视图权限</h4>
+<p>具有一下关键字的sql语句的视图，是不能更新的</p>
+<ul>
+<li>group by  （肯定，因为不知道怎么改）</li>
+<li>常量视图
+<ul>
+<li>create view xxx as  select ‘john’ name;</li>
+<li>update xxx set name =‘avad’;</li>
+</ul>
+</li>
+<li>select中能够包含子查询</li>
+<li>join或者连接（可更新不可插入）</li>
+<li>from一个不能更新的视图</li>
+<li>where子句的子查询引用了from子句中的表
+<ul>
+<li><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211010220425178.png" srcset="/;/img/loading.gif" lazyload alt="image-20211010220425178"></li>
+</ul>
+</li>
+</ul>
+<p><strong>视图和表的区别</strong></p>
+<ul>
+<li>创建语法不同</li>
+<li>视图基本不实际占用物理空间（只保存sql逻辑，不保存数据）</li>
+<li></li>
+</ul>
+<h3 id="变量-v2">变量</h3>
+<h4 id="系统变量">系统变量</h4>
+<p>500条，比较多</p>
+<ul>
+<li>全局变量
+<ul>
+<li>服务器每次启动，将为所有全局变量赋初始值</li>
+<li>针对所有会话连接有效，但不能跨重启（服务器重启默认，需要修改配置文件）</li>
+</ul>
+</li>
+<li>会话变量
+<ul>
+<li>针对当前会话</li>
+</ul>
+</li>
+</ul>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 查看全局&#x2F;会话变量
+show global | session variables (like &#39;....&#39;);
+# 查看制定的系统变量的值
+select @@global.key_name;
+# 赋值（只要没加global，就是session）
+set global|session key_name &#x3D; xxx;
+set @@global|@@session.key_name &#x3D; xxxx;</code></pre></div>
+<h4 id="自定义变量">自定义变量</h4>
+<ul>
+<li>用户变量
+<ul>
+<li>作用域：针对当前会话</li>
+<li>使用：声明、赋值、使用</li>
+</ul>
+</li>
+<li>局部变量
+<ul>
+<li><strong>仅在定义它的begin end块中有效</strong></li>
+</ul>
+</li>
+</ul>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 用户变量声明 、赋值
+set @user_key_name &#x3D; xx;
+set @user_key_name:&#x3D;xx;
+select @user_key_name:&#x3D;xx;
+# 将查询的结果赋值给变量
+select xxx 
+into @user_key_name 
+from xxxxtable;
+# 局部变量声明
+declare key_name type (default xxx);
+# 赋值与以上相同，但set时不加@，第一种select时需要加@</code></pre></div>
+<h3 id="存储过程和函数">存储过程和函数</h3>
+<p>mysql数据库中 proc表包含了function 和 function的统计</p>
+<p>目的： 都是一堆东西，打个包，简化一下</p>
+<ul>
+<li>存储过程
+<ul>
+<li>有0个或多个返回，适合<strong>批量插入、更新</strong></li>
+</ul>
+</li>
+<li>函数
+<ul>
+<li>有且仅有一个返回，适合做处理数据后返回一个结果</li>
+</ul>
+</li>
+</ul>
+<h4 id="存储过程">存储过程</h4>
+<p>一组预先编译好的SQL集合（类似批处理语句）</p>
+<ul>
+<li>提高代码重用性</li>
+<li>简化操作</li>
+<li>减少了 编译次数、减少了和数据库服务器的连接次数，提高了效率</li>
+</ul>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 创建
+create procedure a_name(param_columns...)
+begin
+	...(legal sql dialects)
+	# 存储过程提中的每条SQL语句必须加分号
+	# 存储过程借位使用DELIMITER重新设置
+end
+# param_columns ：参数模式 + 参数名 + 参数类型
+# in&#x2F;out&#x2F;inout name varchar(20)
+# 结束标记,事先设置
+DELIMITER $$
+#调用方法
+call a_name(params...);</code></pre></div>
+<p>注意参数模式，</p>
+<ul>
+<li>in，可以作为输入，该参数需要调用方法传入值</li>
+<li>out，该参数可以作为输出，即参数可以作为返回值</li>
+<li>inout</li>
+</ul>
+<h5 id="空参列表">空参列表</h5>
+<h5 id="in模式">in模式</h5>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">delimiter $;
+create procedure proc2(in sname varchar(20))
+begin
+    select name from staff  s where s.name &#x3D; sname;
+end $
+# 调用
+call proc2(&#39;赵云龙&#39;);</code></pre></div>
+<p>问题： 参数名字和列名冲突（加表名；也可以declare一个局部变量）</p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">declare temp varchar(29) default &#39;&#39;;
+select xxx into temp;</code></pre></div>
+<h5 id="out模式">out模式</h5>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">create procedure proc3(in sname varchar(20),out selfstr varchar(50) )
+begin
+    select self_intro into selfstr # into用来复制，后可跟多个out参数
+    from staff  s
+    where s.name &#x3D; sname;
+end;
+# 通过自定义用户变量来接收这些out值
+CALL proc3(&#39;赵云龙&#39;,@selfStr);
+select @selfStr;</code></pre></div>
+<h5 id="inout模式">inout模式</h5>
+<p>例如，传入的参数都改变的情况，节省了参数个数</p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># **存储过程的删除**
+drop procedure xxx
+# 查看存储过程
+show create procedure xxx;</code></pre></div>
+<h4 id="函数-v2">函数</h4>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 创建
+create function xxx(params...) returns returntype
+begin
+	...
+end
+# parmas: 参数名 + 参数类型
+# 函数体有return语句，但没有也不报错
+
+# 调用
+select xxx(params);
+
+# example
+create function myf3(name varchar(20)) returns varchar(20)
+begin
+    declare c varchar(20) default 0;
+    select self_intro into c
+    from staff
+    where staff.name &#x3D; name;
+    return c;
+end $;
+select   myf3(&#39;赵云龙&#39;);
+# 查看函数
+show create function xxx;
+# 删除
+drop function xxx;</code></pre></div>
+<p>错误示范,不能使用多行</p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">create function myf2(name varchar(20)) returns int
+begin
+    declare c int default 0;
+    select * into c
+    from staff;
+    return c;
+end $;
+select myf2(&#39;赵云龙&#39;);
+# The used SELECT statements have a different number of columns</code></pre></div>
+<h4 id="区别">区别</h4>
+<ul>
+<li>存储过程主要是面向过程，功能比较复杂；只能直接执行；预编译保存在数据库中，需要时直接从库中调用，省去了编译的时间；提高了运行速度，降低网络数据传输量</li>
+<li>函数针对性强，针对某个特定的功能，视为为其他程序服务，只能返回一个变量；可以作为一个sql语句的一部分来调用</li>
+</ul>
+<h3 id="流程控制结构">流程控制结构</h3>
+<ul>
+<li>顺序结构：自上而下</li>
+<li>分支结构：可选分支</li>
+<li>循环结构</li>
+</ul>
+<h4 id="分支结构">分支结构</h4>
+<p><strong>if 函数</strong></p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">if a  and b then ...
+elseif  ... then
+elseif ... then...
+else...
+endif;</code></pre></div>
+<p><strong>case结构</strong></p>
+<ul>
+<li>情况一：类似java中switch进行等值判断。when的是要判断的值
+<ul>
+<li>可以作为表达式，可以放在任何地方</li>
+</ul>
+</li>
+<li>情况二：类似多重if语句，用于实现区间判断。when的是要判断的条件，then的是要做的动作
+<ul>
+<li>可以作为独立的语句。只能放在begin end中</li>
+</ul>
+</li>
+</ul>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">case ...
+when .... then ...
+when ... then ...
+else ...
+end case;</code></pre></div>
+<p>如果else省略，且无匹配，则返回null;</p>
+<h4 id="循环结构">循环结构</h4>
+<p><strong>while</strong></p>
+<p>不一定执行</p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">[tag:] while xxx do
+	# 循环体
+end while[tag];
+# 加上tag可以进行多层的循环控制</code></pre></div>
+<p><strong>loop</strong></p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 可以用来模拟简单的死循环
+[tag:] loop
+	# 循环体
+end loop[tag];</code></pre></div>
+<p><strong>repeat</strong></p>
+<p>肯定执行一次</p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">[tag:] repeat
+	# 循环体
+	until ...
+	end repeat[tag];</code></pre></div>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 平常例子
+create procedure pro_while1(in insertcount int)
+begin
+    declare i int default 1;
+    while i&lt;&#x3D;insertcount do
+        insert into tcl_test values (1000+i,concat(&#39;1000&#39;,i),(1000+i)*10.0);
+        set i&#x3D;i+1;
+        end while ;
+end $;
+# 带tag和if判断退出的循环语句
+# 注意leave的使用
+create procedure pro_while2(in insertcount int)
+begin
+    declare i int default 1;
+    xx: while i&lt;&#x3D;insertcount do
+        insert into tcl_test values (1500+i,concat(&#39;1000&#39;,i),(1500+i)*10.0);
+        if i&gt;20 then leave xx;
+        end if;
+        set i&#x3D;i+1;
+        end while xx;
+end $;</code></pre></div>
+<p>iterator  : 类似java中的continue;</p>
+<h2 id="进阶-v3">进阶</h2>
+<h3 id="自启动服务">自启动服务</h3>
+<p>早就想设置了，赣！</p>
+<p>/usr/lib/systemd/system下新建xx.service文件</p>
+<p><strong>基本位置</strong></p>
+<ul>
+<li>/var/lib/mysql		数据库文件存放路径</li>
+<li>/var/share/mysql     配置文件目录</li>
+<li>/usr/bin                 相关命令脚本</li>
+<li>/etc/init.d/mysql    启停脚本</li>
+</ul>
+<div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell"># 查看安装目录
+ps -ef | grep mysql
+mysql        530       1  0 09:50 ?        00:00:00 &#x2F;usr&#x2F;bin&#x2F;mariadbd
+pplong      3841    3006  0 10:06 pts&#x2F;1    00:00:00 grep --color&#x3D;auto --exclude-dir&#x3D;.bzr --exclude-dir&#x3D;CVS --exclude-dir&#x3D;.git --exclude-dir&#x3D;.hg --exclude-dir&#x3D;.svn --exclude-dir&#x3D;.idea --exclude-dir&#x3D;.tox mysql
+# 查看数据文件位置
+select @@datadir</code></pre></div>
+<h3 id="基本">基本</h3>
+<h4 id="主要配置文件">主要配置文件</h4>
+<ul>
+<li>二进制日志 log-in  主从复制</li>
+<li>错误日志 log-error  默认关闭，记录严重的错误和警告信息，每次启动和关闭的信息</li>
+<li>查询日志log      默认关闭，记录查询的sql语句</li>
+<li>数据文件    /var/lib/mysql</li>
+</ul>
+<h4 id="逻辑架构">逻辑架构</h4>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211020103933579.png" srcset="/;/img/loading.gif" lazyload alt="image-20211020103933579"></p>
+<ul>
+<li>连接层：提供本地Sock通信和大多数基于B-S服务端工具实现的类似TCP/IP通信，完成连接处理、授权认证的工作。引入了<strong>线程池概念</strong>，为通过认证安全介入的客户端提供线程。可以实现基于SSL的安全链接。</li>
+<li>业务逻辑处理层：完成大多数核心功能，SQL接口，SQL分析、优化、内置函数。解析查询病创建内部解析树，对完成相应的优化。对SELECT还会查询内部缓存
+<ul>
+<li>Parser： Lex + YACC</li>
+<li>Optimizer： 优化SQL</li>
+</ul>
+</li>
+<li>数据存储引擎层： 真正负责了MySQL数据的存储和读取，服务器通过API与存储引擎进行通信，不同存储引擎有不同功能。（MyISAM和InnoDB）[目前只有Mysql实现了底层数据存储引擎的插件式管理  --&gt; Mysql可插拔存储引擎特色]</li>
+<li>数据存储层：将数据存储在运行于裸设备的文件系统上，完成与存储引擎的交互</li>
+</ul>
+<h4 id="存储引擎-v2">存储引擎</h4>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 查询当前的存储引擎, 目前默认是InnoDB
+show variables like &#39;%storage_engine%&#39;; 
+
+# 创建表时可以指定 Engine &#x3D; xxx</code></pre></div>
+<p>Mysql中的存储引擎及其特点：</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211020105635279.png" srcset="/;/img/loading.gif" lazyload alt="image-20211020105635279"></p>
+<h5 id="MyIASM和InnoDB">MyIASM和InnoDB</h5>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/mysql-different-nnodb-myisam.html">Mysql和InnoDB区别</a></p>
+<h4 id="-v6"></h4>
+<h3 id="优化原因">优化原因</h3>
+<h4 id="Sql性能下降原因">Sql性能下降原因</h4>
+<ol>
+<li><strong>查询语句太烂</strong></li>
+<li><strong>索引失效</strong>
+<ol>
+<li>单值</li>
+<li>复合</li>
+</ol>
+</li>
+<li>关联查询太多（join）</li>
+<li>服务器调优设置</li>
+</ol>
+<h4 id="Sql执行顺序">Sql执行顺序</h4>
+<ol>
+<li>from .根据查询指定的表格，from计算笛卡尔积。</li>
+<li>on根据join_condition过滤数据。</li>
+<li>join添加相关外部表格数据。</li>
+<li>where根据where_condition过滤数据。</li>
+<li>group by分组。</li>
+<li>having根据having_condition过滤数据。</li>
+<li>选择指定的列。</li>
+<li>distinct指定列去重。</li>
+<li>orderby按order_by_condition排序。</li>
+<li>取出指定的记录量。</li>
+</ol>
+<p><strong>七种JOIN</strong></p>
+<p>针对A\B交并集情况</p>
+<h3 id="索引-v2">索引</h3>
+<h4 id="概念-v7">概念</h4>
+<p>一种 <strong>排好序的快速查找数据结构</strong></p>
+<h4 id="优缺点">优缺点</h4>
+<ul>
+<li><strong>优点：</strong>
+<ul>
+<li>提高数据检索的效率，降低数据库IO成本</li>
+<li>通过索引列对数据进行排序，降低了数据排序的成本，降低CPU消耗</li>
+</ul>
+</li>
+<li><strong>缺点：</strong>
+<ul>
+<li>占据磁盘空间</li>
+<li>降低更新表的效率，每次对表进行操作，Mysql不仅要保存数据，还要保存和更新对应的索引文件</li>
+</ul>
+</li>
+</ul>
+<p>在数据之外，数据库系统还维护这满足特定查找算法的数据结构，以某种方式指向数据，这样就可以在这些数据结构上实现高级查找算法</p>
+<h4 id="B树">B树</h4>
+<p>优化重点：尽量减少磁盘的IO操作，因为每次访问二叉树的一个节点就会发生一个IO<br>
+想减少IO操作  ----&gt; 尽量<strong>降低树的高度</strong></p>
+<p>Mysql的InnoDB存储引擎一次IO读取一页(16K)的数据量，即二叉树一次IO有效数据量只有16K，空间利用率低</p>
+<p><strong>特点</strong></p>
+<ul>
+<li>B树的节点存储多个元素，每个内节点有多个分叉</li>
+<li>节点的元素包含健值和数据，健值从大到小排序</li>
+<li>父节点中的元素不会出现在子节点中</li>
+<li>素有叶子节点位于同一层，叶节点具有相同的深度，叶节点之间无连接</li>
+</ul>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211020114931955.png" srcset="/;/img/loading.gif" lazyload alt="image-20211020114931955"></p>
+<p>相比平衡二叉树，比较的次数没有明显减少，但磁盘IO次数会大大减少(比较在内存中进行，耗时很少？？？)</p>
+<p><strong>可优化之处</strong></p>
+<ol>
+<li>B树不支持范围查询的快速查找，例如查 10 -35 的数据，查到15后，就需要返回到根节点，重新遍历查找。(需要从根节点多次遍历)</li>
+<li>如果data存储的是行记录，则行的大小随着列数的增多，占用空间变大，一页中可存储的数据量就会变少----&gt; 树增高—&gt;磁盘IO次数增多</li>
+</ol>
+<p>因此，就有了 ——–&gt;</p>
+<h4 id="B-树">B+树</h4>
+<p>与B树区别： 只有叶子节点才会存储数据，非叶子节点存储健值，叶子节点之间使用双向指针链接，最底层的叶子节点形成了一个双向有序链表</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211020115655060.png" srcset="/;/img/loading.gif" lazyload alt="image-20211020115655060"></p>
+<p>数据都在最底层的叶子节点上 ---- &gt; 每次查找需要到最底层叶子节点才能找到（这里第二层不是实际数据，只是一个参考值）<br>
+每次的磁盘IO和树高有直接关系<br>
+在叶子节点的搜索这里采用的是逐个比较</p>
+<p>具体搜索过程可参见 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35190492/article/details/109257302?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163470018116780264064360%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163470018116780264064360&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-109257302.pc_search_ecpm_flag&amp;utm_term=Mysql%E7%B4%A2%E5%BC%95&amp;spm=1018.2226.3001.4187">一文搞懂MySQL索引所有知识点</a></p>
+<h4 id="操作">操作</h4>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 创建索引
+create  index idx_name on table(column(xxx))
+alter table xx add index idx_name on (column(xx))</code></pre></div>
+<h4 id="索引类型">索引类型</h4>
+<ol>
+<li>主键索引： 索引列中值唯一，不允许有空值</li>
+<li>普通索引：</li>
+<li>唯一索引： 唯一，可空</li>
+<li>全文索引： 只能在文本类型CHAR VARCHAR TEXT类型字段上创建</li>
+<li>空间索引：</li>
+<li>前缀索引：</li>
+</ol>
+<p><strong>哪些情况需要索引</strong>？</p>
+<ul>
+<li>主键自动建立唯一索引</li>
+<li>频繁作为查询条件的字段</li>
+<li>查询中与其他表关联的字段，外键关系</li>
+<li>频繁更新的字段不适合创建索引</li>
+<li>Where条件里用不到的字段不创建索引</li>
+<li>单键/组合索引如何选择(高并发—&gt;组合)</li>
+<li>查询中排序的字段，排序字段通过索引去访问将大幅提高排序速度</li>
+<li>查询中统计或者分组的字段</li>
+</ul>
+<h3 id="性能分析">性能分析</h3>
+<ol>
+<li>慢查询日志的开启和捕获</li>
+<li>explain+SQL分析</li>
+<li>show profile查询SQL在mysql服务器的执行细节和生命周期</li>
+<li>sql服务器参数调优</li>
+</ol>
+<h4 id="Explain">Explain</h4>
+<p>可以模拟优化器执行SQL查询语句，从而知道Mysql是如何处理SQL语句的</p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">explain select * from xxx; </code></pre></div>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211020145916673.png" srcset="/;/img/loading.gif" lazyload alt="image-20211020145916673"></p>
+<ul>
+<li>
+<p><strong>id</strong></p>
+<p><strong>1. id相同，顺序执行</strong> （注意这里的执行顺序根据SQL的执行顺序来的）</p>
+<p><strong>2. id 不同如果是子查询，则id值越大优先级越高，先被执行</strong></p>
+<p><strong>3. id相同，丛上往下顺序执行，所有组中，id值越大优先级越高</strong></p>
+</li>
+<li>
+<p>select_type</p>
+<ul>
+<li>simple：最简单的select查询，查询中不包含子查询和union</li>
+<li>primary：查询中若包含复杂的字部分，则外层查询被标记为此</li>
+<li>subquery：select或者where表中包含了子查询</li>
+<li>derived：from列表中包含了子查询</li>
+<li>union：第二个select出现在union之后</li>
+<li>union result：从union表中获取的结果的sleect</li>
+</ul>
+</li>
+<li>
+<p>type：访问类型（好到坏,至少达到range和ref级别）</p>
+<ul>
+<li>
+<p>system：表只有一行记录，是const的特列</p>
+</li>
+<li>
+<p>const：通过一次索引就能够找到，用于比较primary key和unique索引，只匹配一行数据，很快</p>
+</li>
+<li>
+<p>eq_ref：唯一性索引扫描，对每个索引建，表中只有一条记录与之匹配</p>
+<ul>
+<li>
+<div class="code-wrapper"><pre><code class="language-mysql">explain select * from t1 ,article where t1.id = article.id  # primary = primary
+<pre class="language-none"><code class="language-none">
+* ref：非唯一性索引扫描，返回匹配某个单独值的所有行，本质是一种索引访问。可能给找到多个匹配的行
+
+  *  
+
+    &#96;&#96;&#96;mysql
+    explain select * from t10 where col2 &#x3D; 1 # col2 is an index</code></pre></div>
+
+
+
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>range：只检索给定范围的行(between\in&lt; &gt;)，只需要开始索引的某一点，结束于另外一点，不用扫描全部索引</p>
+</li>
+<li>
+<p>index：全索引扫描，只遍历索引树，因为索引文件通常比数据文件小、虽然all和index都是读全表，但index从索引中读，all从硬盘中读</p>
+<ul>
+<li>
+<div class="code-wrapper"><pre><code class="language-mysql">explain select col2 from t10 ; # col2 is an index
+<pre class="language-none"><code class="language-none">
+  * all：扫描全表，例如(select t1.name from t1)
+
+* possible_keys: 显示**可能**应用在这张表中的索引
+
+  * 可能有possible_key &#x3D; null 但 key有值的情况
+
+* key：实际用的索引，如果查询中使用了覆盖索引，将会在key中出现
+
+  * 覆盖索引：select查询的字段，和建索引的复合索引的字段的个数和顺序吻合
+
+* key_len：索引中使用的字节数，在不损失精度的情况下，长度越短越好，ken_len显示的是索引字段的最大可能长度，并非实际使用长度。根据表定义得出，而不是
+
+  * 变长字段需要额外2字节，可空字段需要额外1字节
+
+* ref ：显示索引的哪一列引用了啥
+
+  * &#96;&#96;&#96;mysql
+    explain select * from t10,t11 where t10.col2 &#x3D; 1  and t10.col1 &#x3D; t11.col3; #col2-- index   col1 -- index  col3 --any</code></pre></div>
+
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>row：根据表统计信息以及索引选用情况，大致估算处找到所需要记录所需要读取的行数</p>
+</li>
+<li>
+<p>extra：其他信息</p>
+<ul>
+<li>using filesort：说明mysql对数据使用外部的索引排序，而不是按照表内的索引进行读取。无法通过索引完成的排序称作“文件排序” ---- 不太好的情况</li>
+<li>using temporary：使用了临时表保存中间结果（对查询结果进行排序时）  — 非常不好的情况</li>
+<li>using index：相应的 select操作使用了覆盖索引，避免了表的数据行，效率高。
+<ul>
+<li>同时出现using where，表明索引被用来执行索引键值的查找</li>
+<li>没有同时出现using  where，表明索引用来读取数据而并非执行查找动作</li>
+<li>索引覆盖：select的数据列只用从索引中就能够取得，不必读取数据行。</li>
+</ul>
+</li>
+<li>using where：使用where过滤</li>
+<li>using join buffer ：使用连接缓存</li>
+<li>impossible where：where的句子值总是false</li>
+<li>select tables optimized away</li>
+<li>distinct：优化distinct，在找到第一匹配的元祖后停止找同样值的动作</li>
+</ul>
+</li>
+</ul>
+<p><strong>哪些情况不需要索引？</strong></p>
+<ul>
+<li>表记录太少</li>
+<li>经常增删改的表</li>
+<li>数据重复且分布平均的表字段</li>
+</ul>
+<h4 id="个人测试">个人测试</h4>
+<p>这里我用</p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">create table t1(
+    id int primary key not null ,
+    name varchar(20),
+    sex char(1) default &#39;男&#39;,
+    rand_id int
+);
+# procedure
+delimiter $$
+create procedure init_tens(in num int)
+begin
+    declare cols int default 1;
+    declare scope int default num*10;
+    declare isex char default &#39;男&#39;;
+    loop_x1: while cols &lt; num
+
+        do
+        set cols &#x3D; cols + 1;
+
+        if(cols % 2 &#x3D; 0)
+        then
+             set isex &#x3D; &#39;女&#39;;
+        else
+             set isex &#x3D; &#39;男&#39;;
+        end if;
+        insert into pp_test.t1 values (cols,
+                               concat(&#39;id:&#39;,cols),
+                                isex,
+                               round(rand()*scope)
+                              );
+        end while loop_x1;
+end $$</code></pre></div>
+<p>这样的一张表去测试速度，当然call这个procedure num = 500 000时，机器跑了接近6min,数据容量在20MB（10000条跑7s,差不多）</p>
+<p>通过primary key 去query，感觉时间上都是ms级别，没啥差别<br>
+但通过rand_id去query时，时间就非常的慢，至少是20倍</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211021233658608.png" srcset="/;/img/loading.gif" lazyload alt="image-20211021233658608"></p>
+<h4 id="学习测试">学习测试</h4>
+<h5 id="单表">单表</h5>
+<p>测试用例</p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">create table if not exists article(
+    id int(10) unsigned  not null primary key auto_increment,
+    auther_id int unsigned not null,
+    category_id int not null ,
+    views int not null ,
+    comments int not null ,
+    title varbinary(255) not null ,
+    content text not null
+);
+
+explain select id , auther_id from article where category_id &#x3D; 1 and comments &gt;1 order by  views desc limit 1;
+# 如何避免出现filesort 和 all的type？
+</code></pre></div>
+<ol>
+<li>
+<p>where后要建</p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">create index idx_article_ccv on article (category_id,comments,views)create index idx_article_ccv on article (category_id,comments,views)
+# 解决全表扫描问题</code></pre></div>
+</li>
+<li>
+<div class="code-wrapper"><pre><code class="language-mysql">explain select id , auther_id from article where category_id = 1 and comments = 1 order by  views desc limit 1;
+#  comments &gt; 1 的效率完全不一样 ----&gt; 索引失效
+<pre class="language-none"><code class="language-none">
+   
+
+##### 两表
+
+&#96;&#96;&#96;mysql
+create table class(
+    id int not null auto_increment,
+    card int not null ,
+    primary key (id)
+);
+create table book(
+    bookid int not null auto_increment,
+    card int not null ,
+    primary key (bookid)
+);
+
+explain select * from class left join book on class.card &#x3D; book.card
+</code></pre></div>
+
+</code></pre>
+</li>
+</ol>
+<p><strong>有主外键后，索引在哪张表建？</strong></p>
+<p>左右连接的判断就是，哪张表是全的，就不管他，只关心残缺表的查询</p>
+<p><strong>多表</strong></p>
+<h4 id="索引失效">索引失效</h4>
+<ol>
+<li><strong>最佳左前缀法则</strong></li>
+</ol>
+<p>建立索引的第一个index必须有，才能够使用索引查询</p>
+<ul>
+<li><strong>全值匹配最佳</strong></li>
+<li><strong>中间兄弟不能断</strong>，断了则只能使用到断之前的那一个（类似阶梯）</li>
+</ul>
+<ol start="2">
+<li>
+<p>在索引列上左任何操作（计算、函数、类型转换），会导致<strong>索引失效</strong>而转向全表扫描</p>
+</li>
+<li>
+<p>存储引擎不能使用索引中范围条件右边的列</p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">explain select * from t20 where col3 &#x3D; 1 and col4 &#x3D; 2 and ool5 &#x3D; 10;
+# ref &#x3D; const const const
+explain select * from t20 where col3 &#x3D; 1 and col4 &gt; 2 and ool5 &#x3D; 10;
+# ref &#x3D; null
+# 到了范围查找时，就用不上后面的index了</code></pre></div>
+</li>
+<li>
+<p>尽量使用覆盖索引（只访问索引的查询— 查询列和索引列一致  ----&gt; 产生using index），避免select *</p>
+</li>
+<li>
+<p>使用!= &lt; &gt;无法使用索引 — 导致全局扫描</p>
+<ol>
+<li>但manjaro – mariadb10.6.4 是不会失效的</li>
+</ol>
+</li>
+<li>
+<p>is null is not null 无法使用索引</p>
+<ol>
+<li>同上，未失效</li>
+</ol>
+</li>
+<li>
+<p>like以通配符%开头，mysql索引失效</p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">explain select * from t20 where name like &#39;%123&#39;;
+# type and possible key is null
+explain select * from t20 where name like &#39;123%&#39;;
+# type : range ,key is using
+
+# 如何解决 %...% 情况</code></pre></div>
+<p><strong>覆盖索引</strong></p>
+<p>加一个或多个其他列的，这时只要查询列中仅有主键和这些键值的组合，就能够使得type变为index，且使用到key(其他的索引是不行的)</p>
+</li>
+<li>
+<p><strong>字符串不加单引号会使得索引失效</strong></p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">explain select col3 from t20 where name &#x3D; 200;
+# mysql内部自动将200隐式转化为字符串类型
+# 使得possible_key !&#x3D; null 但key为null type 为null</code></pre></div>
+</li>
+<li>
+<p>or导致索引失效</p>
+<p>possible_key != null  但 key为null</p>
+</li>
+</ol>
+<h4 id="show-profile">show profile</h4>
+<h4 id="小表驱动大表">小表驱动大表</h4>
+<p>原由：数据库的连接和释放耗时</p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">select * from A where id in (select id from b)
+# &#x3D; 先去select id from b
+# 如果B的数据集 &lt; A的数据集，则in 优于 exists，反之则exist优于in
+select * from A where exists (select 1 from B where B.id &#x3D; A.id)
+# 注意 上面的两句语句语义相同，这里exists含义不能从where直接true或者false去理解</code></pre></div>
+<h4 id="order-by排序">order by排序</h4>
+<p>Mysql支持两种方式排序，filesort和index，尽量用index方式排序，效率高（尽可能在索引列上排序）</p>
+<ul>
+<li>索引最左前缀</li>
+<li>where自居和order by自居条件咧组合满足最左前缀</li>
+</ul>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">select * from t1 where col1 &gt; 20 order by col1; # 会产生filesort吗(col1 is index)
+select * from t1 where col1 &gt; 20 order by col2; #col1-col2 is co-index  --- using filesort
+select * from t1 order by col1 asc,col2 desc; # col1-col2 is co-index  --- index默认是asc顺序</code></pre></div>
+<p>如果不在索引列上，filesort有两种排序算法：</p>
+<ul>
+<li>双路排序：4.1之前： 两次扫描磁盘 。读取行指针和orderby列，进行排序，然后扫描已经排序好的列表，按照列表中的值重新从列表中读取对应的数据（也即：从磁盘读取排序字段，在buffer进行排序，再从磁盘读取其他字段）</li>
+<li>单路排序：4.1之后，磁盘读取查询需要的所有列，按order by在buffer进行排序，然后扫描排序后的列表输出。
+<ul>
+<li>效率快，避免二次读取数据</li>
+<li>把随机IO变成顺序IO</li>
+<li>占用更多空间，因为每一行都保存在内存中</li>
+<li>存在问题：如果读取的buffer的容量小于读的容量，就会导致每次只能取到buffer的大小，排完一次，创建临时文件，再排一次，还要进行多个临时文件的多路合并
+<ul>
+<li>增大sore_buffer_size</li>
+<li>增大 max_length_for_sort_data</li>
+<li>避免select *</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="补充">补充</h3>
+<p>一个节点的大小 = 一页大小 ，一页大小默认是16K</p>
+<h2 id="原理-v4">原理</h2>
+<h3 id="InnoDB">InnoDB</h3>
+<p>主要优势：</p>
+<ul>
+<li>遵循ACID模型，有事务控制</li>
+<li>行锁</li>
+<li>有聚集索引的主键索引</li>
+<li>支持外键约束</li>
+<li>崩溃后修复：InnoDB崩溃回复后会自动完成崩溃之前提交的更改，病撤销正在进行但并未提交的更改</li>
+<li>维护自己的缓冲池，在住内存缓存表和索引数据。经常使用的数据直接从内存处理</li>
+<li>允许对同意表进行并发读写访问 ，缓存更改的数据以简化磁盘IO</li>
+<li>自适应哈希索引 — 从表中重复访问相应的行</li>
+</ul>
+<h4 id="架构">架构</h4>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211023214352512.png" srcset="/;/img/loading.gif" lazyload alt="image-20211023214352512"></p>
+<h4 id="内存结构">内存结构</h4>
+<h5 id="缓冲池">缓冲池</h5>
+<p>主内存中的一个区域，用于在InnoDB访问时缓存表和索引数据，允许直接从内存访问经常使用的数据</p>
+<p>为了提高大量读取操作的效率，缓冲池被划分可能包含多行的页面<br>
+为了缓存管理的效率，缓冲池被实现为页面的链表</p>
+<p><strong>LRU算法</strong></p>
+<p>当需要空间将新页面加入到缓冲池时，最少使用的页面将会被逐出，并且新页面会加入到列表<strong>中间</strong><br>
+列表划分为两个子列表</p>
+<ul>
+<li>最近访问的新的 年轻的页面的 子列表</li>
+<li>最近访问的久页面的子列表（可能被驱逐的侯选页）</li>
+</ul>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211023214750401.png" srcset="/;/img/loading.gif" lazyload alt="image-20211023214750401"></p>
+<ul>
+<li>默认缓冲池的3/8为旧的子列表</li>
+<li>列表的重点是新的子列表尾部和旧子列表的头部相交之处</li>
+<li>页面插入到缓冲池时，是插入到列表中点</li>
+<li>访问旧子页面中的列表将使得它变young，移动到新子列表的头部
+<ul>
+<li>如果页面是因为用户启动的操作需要它而被读取，则第一次访问会立即发生，并且页面会变年轻。</li>
+<li>如果页面是由于<strong>预读</strong>操作而读取的，则第一次访问不会立即发生，并且在页面被逐出之前可能根本不会发生。</li>
+</ul>
+</li>
+</ul>
+<p>通过show engine innodb status 查看缓冲池的参数指标</p>
+<h5 id="Change-Buffer">Change Buffer</h5>
+<p>更改缓冲是一种特殊的数据结构，当二级缓存页不在缓冲池中时，它会缓存对二级索引页的更改</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211023215943712.png" srcset="/;/img/loading.gif" lazyload alt="image-20211023215943712"></p>
+<h5 id="自适应哈希索引">自适应哈希索引</h5>
+<p>通过innodb_adaptive_hash_index变量启动。根据观察到的搜索模式，使用索引建的前缀构建哈希索引（将索引值转化成指针）</p>
+<h4 id="磁盘结构">磁盘结构</h4>
+<h5 id="索引-v3">索引</h5>
+<p><strong>聚集索引</strong>：与主键同义，存储行数据</p>
+<ul>
+<li>在<code>PRIMARY KEY</code>表上定义 a时， <code>InnoDB</code>将其用作聚集索引。应该为每个表定义一个主键。如果没有逻辑唯一且非空的列或列集使用主键，请添加自动增量列。自动递增列值是唯一的，并在插入新行时自动添加。</li>
+<li>如果您没有<code>PRIMARY KEY</code>为表定义 a ，则<code>InnoDB</code>使用第一个 <code>UNIQUE</code>索引，并将所有键列定义为<code>NOT NULL</code>聚集索引。</li>
+<li>如果表没有索引<code>PRIMARY KEY</code>或没有合适的 <code>UNIQUE</code>索引，则<code>InnoDB</code> 生成以<code>GEN_CLUST_INDEX</code>包含行 ID 值的合成列命名的隐藏聚集索引 。行按<code>InnoDB</code>分配的行 ID 排序。行 ID 是一个 6 字节的字段，随着插入新行而单调增加。因此，按行 ID 排序的行在物理上是按插入顺序排列的。</li>
+</ul>
+<p>在 <code>InnoDB</code>中，<strong>二级索引中的每条记录都包含该行的主键列</strong>，以及为二级索引指定的列。</p>
+<h4 id="文件结构">文件结构</h4>
+<p>查看页的大小 innodb_page_size，多少页就是ibd大小/ page_size .</p>
+<h5 id="frm">frm</h5>
+<p>表定义文件</p>
+<h5 id="ibd">ibd</h5>
+<p>索引和数据文件</p>
+<h2 id="一些问题-v3">一些问题</h2>
+<p><strong>Mysql和Mariadb的区别</strong></p>
+<ul>
+<li>MyISam：
+<ul>
+<li>不支持外键</li>
+<li>不支持事务</li>
+<li>不支持外键</li>
+<li>非聚集索引</li>
+<li>支持FULLTEXT类型的全文索引</li>
+<li>最小粒度锁是表锁</li>
+<li>存储结构
+<ul>
+<li>.frm文件：表的定义</li>
+<li>.MYD：数据文件</li>
+<li>.MYI：索引文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Innodb：
+<ul>
+<li>支持外键</li>
+<li>支持事务（Mysql默认引擎为InnoDB的重要原因）</li>
+<li>支持外键</li>
+<li>聚集索引</li>
+<li>不支持FULLTEXT类型的全文索引</li>
+<li>最小的锁粒度是行锁</li>
+<li>存储结构
+<ul>
+<li>Frm文件：表的定义文件</li>
+<li>Ibd文件：数据和索引存储文件，数据以主键存储，真正的数据在叶子节点中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>解释一下什么是聚簇索引和非聚簇索引</strong></p>
+<ul>
+<li>
+<p>聚簇索引：数据存储和索引放在一个文件，索引结构的叶子节点保存了行数据（索引项的顺序和表中记录的物理顺序一致）</p>
+<ul>
+<li>
+<p>默认是主键</p>
+</li>
+<li>
+<p>如果么有定义主键，InnoDB会选择一个唯一的非空索引代替</p>
+</li>
+<li>
+<p>如果没哟这样的索引，将会在内部生成一个名为GEN_CLUST_INDEX的隐式聚簇索引</p>
+</li>
+<li>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211023211744223.png" srcset="/;/img/loading.gif" lazyload alt="image-20211023211744223"></p>
+<p>注意辅助索引存储的是主键的key</p>
+</li>
+</ul>
+</li>
+<li>
+<p>非聚簇索引： 数据与索引分开存储，表数据存储顺序与索引顺序无关</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211023211734818.png" srcset="/;/img/loading.gif" lazyload alt="image-20211023211734818"></p>
+</li>
+</ul>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">explain select * from t20 where col3 &#x3D; 1 and col4 &gt; 0 and ool5 &#x3D; 1;
+# myisam中 type为system 但innodb却为range？(idx_col_345)</code></pre></div>
+<p><strong>为啥Mysql放弃Full Join？</strong></p>
+<p><strong>order by怎么实现排序的？</strong></p>
+<p><strong>Mysql中数据是如何加密的</strong></p>
+<p><strong>复合索引和最左原则</strong></p>
+<ul>
+<li>单一索引：新建索引的语句只实施在一列上</li>
+<li>复合索引：多个列上建立索引
+<ul>
+<li>数据库操作期间开销小，能代替多个单一索引</li>
+<li>何时使用？根据<strong>where条件</strong>后多字段</li>
+</ul>
+</li>
+<li>最左原则：复合索引的第一个字段必须出现在查询语句中，这样索引才能够被使用（类似查字典）</li>
+</ul>
+<p><strong>sq92 和 99的连接写法有实际差别吗？</strong></p>
+<p><strong>Mysql索引为啥选择B+树？</strong></p>
+<ul>
+<li>哈希索引：很快，但无序—不能进行范围查找、排序操作，不能通过key去做主键。还可能存在哈希碰撞问题</li>
+<li>AVL：树的高度 — 读取磁盘次数增加，可能有回表的现象（查找范围区间）</li>
+<li>B和B+树前面有说：主要还是降低了树的高度</li>
+</ul>
+<p><strong>Mysq索引为啥会失效</strong></p>
+<p>主要是联合索引</p>
+<p>注意联合索引中的值<strong>顺序存储</strong>的方式 ----- &gt; 联合索引如何排序？</p>
+<ul>
+<li>对左前缀原则，为什么没有第一个索引值就会失效呢？
+<ul>
+<li>无法通过第一个值去定位索引所在的位置呀 ---- 由联合索引的<strong>顺序排序</strong>导致的（类似%abc）</li>
+</ul>
+</li>
+<li>对范围查找，为什么之后索引的就会失效呢？
+<ul>
+<li>对符合条件的情况，叶子节点和非叶子节点可能是无序的 — &gt; 不能通过二分查找去找之后索引的数据（不懂就画图）</li>
+</ul>
+</li>
+</ul>
+<h2 id="一些链接">一些链接</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ThinkWon/article/details/104778621?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163470018116780264064360%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163470018116780264064360&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-104778621.pc_search_ecpm_flag&amp;utm_term=Mysql%E7%B4%A2%E5%BC%95&amp;spm=1018.2226.3001.4187">Mysql面试题</a></p>
+<h2 id="常用语法">常用语法</h2>
+<p><strong>查看某个数据库的大小占用</strong></p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">select
+    table_schema as &#39;数据库&#39;,
+    sum(table_rows) as &#39;记录数&#39;,
+    sum(truncate(data_length&#x2F;1024&#x2F;1024, 2)) as &#39;数据容量(MB)&#39;,
+    sum(truncate(index_length&#x2F;1024&#x2F;1024, 2)) as &#39;索引容量(MB)&#39;
+from information_schema.tables
+where table_schema&#x3D;&#39;pp_test&#39;;</code></pre></div>
+<p><strong>查看某表的所有索引</strong></p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">show index from article</code></pre></div>
+<p><strong>查看数据库的表状态</strong></p>
+<div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql">show table status from pp_test
+# 查看表中所有列的字符集
+show full columns from t22;</code></pre></div>
+<p>f</p>
+
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="post-metas mb-3">
+                                            
+                                                <div class="post-meta mr-3">
+                                                    <i class="iconfont icon-category"></i>
+                                                    
+                                                        <a class="hover-with-bg" href="/;/categories/%E5%AD%A6%E4%B9%A0/">
+                                                            学习
+                                                        </a>
+                                                        
+                                                </div>
+                                                
+                                                    
+                                                        <div class="post-meta">
+                                                            <i class="iconfont icon-tags"></i>
+                                                            
+                                                                <a class="hover-with-bg" href="/;/tags/Java/">
+                                                                    Java
+                                                                </a>
+                                                                
+                                                                <a class="hover-with-bg" href="/;/tags/Study/">
+                                                                    Study
+                                                                </a>
+                                                                
+                                                                <a class="hover-with-bg" href="/;/tags/Mysql/">
+                                                                    Mysql
+                                                                </a>
+                                                                
+                                                        </div>
+                                                        
+                                        </div>
+                                        
+                                            <p class="note note-warning">
+                                                
+                                                            本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                                                                
+                                            </p>
+                                            
+                                                
+                                                    <div class="post-prevnext">
+                                                        <article class="post-prev col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2019/08/22/Web%E5%AD%A6%E4%B9%A0/">
+                                                                        <i class="iconfont icon-arrowleft"></i>
+                                                                        <span class="hidden-mobile">Web学习</span>
+                                                                        <span class="visible-mobile">上一篇</span>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                        <article class="post-next col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2019/03/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                                                                        <span class="hidden-mobile">数据结构</span>
+                                                                        <span class="visible-mobile">下一篇</span>
+                                                                        <i class="iconfont icon-arrowright"></i>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                    </div>
+                                                    
+                                    </div>
+
+                                    
+                                        <!-- Comments -->
+                                        <article class="comments" id="comments" lazyload>
+                                            
+                                                        
+                                                            
+                                                                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Yunlong626/commit-utterances');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+                                        </article>
+                                        
+                        </article>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+                    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+                </div>
+                
+        </div>
+    </div>
+
+    <!-- Custom -->
+    
+    <!--添加我自己的设置页面-->
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+    <!--加入自定义格式的-->
+    <!--自定义的git徽标样式-->
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080" srcset="/;/img/loading.gif" lazyload>
+<br>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,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&style=flat&color=d2c68b" srcset="/;/img/loading.gif" lazyload>
+
+<!-- 自定义显示文章总页数和字数的模块 -->
+<div class="bottom-post-statistic">
+    <div class="bottom-post-count">
+        62&nbsp 篇文章
+    </div>
+    <div class="bottom-post-word">
+        248.9k&nbsp 字
+    </div>
+</div>
+        <div class="footer-content">
+             <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+        </div>
+
+        
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+            
+
+                
+</footer>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/;/js/events.js" ></script>
+<script  src="/;/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/;/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/;/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/;/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/;/js/reset_code_lang.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/;/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?PPLong222";
+            var git_color =['#ebedf0', '#bef5cb', '#bef5cb', '#a9f5b4', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620'];
+            var git_user ="PPLong222";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div id="github-calendar" style="width:100%;height:auto;padding:10px;margin-bottom:20px"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;margin-top:100px;;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/about/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:200px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>#github_container > .position-relative > .border{border:0!important}#github-calendar{position: relative;margin-top: -2rem;background-color: var(--board-bg-color);transition: background-color 0.2s ease-in-out;border-radius: 0.5rem;z-index: 3;-webkit-box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);}</style><!-- hexo injector body_end end --></body>
+</html>

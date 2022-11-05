@@ -1,0 +1,65 @@
+.code-tag-label{
+    display: inline;
+    border-radius: 3px;
+    font-size: 85%;
+    margin: 0;
+    padding: .2em .4em;
+    margin-right: .4em;
+    color: #36414f;
+    background: #4792e6;
+}
+.code-tag-time{
+    display: inline;
+    border-radius: 3px;
+    font-size: 85%;
+    margin: 0;
+    padding: .2em .4em;
+    margin-right: .4em;
+    color: #36414f;
+    background: #84a1c8;
+}
+.code-tag-label-dp{
+    background: #4792e6;
+}
+.code-tag-label-greedy{
+    background: #8cd38bc2;
+}
+.code-tag-label-math{
+    background: #CCCCFF;
+}
+.code-tag-label-foreach{
+    background: #CCFFCC;
+}
+.code-tag-label-presum{
+    background: #FFCC99;
+}
+.code-tag-label-hash{
+    background: #99CCCC;
+}
+.code-tag-label-tree{
+    background: #CCFFFF;
+}
+.code-tag-label-presum{
+    background: #FFCC99;
+}
+.code-tag-label-recursion{
+    background: #FF6666;
+}
+.code-tag-label-binary{
+    background: #CCCCCC;
+}
+.code-tag-label-stack{
+    background: #FF99CC;
+}
+.code-tag-label-queue{
+    background: #FFFFCC;
+}
+.code-tag-label-dfs{
+    background: #FF9999;
+}
+.code-tag-label-bfs{
+    background: #9999CC;
+}
+.code-tag-label-sort{
+    background: #fcf1f2;
+}

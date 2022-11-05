@@ -1,0 +1,966 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/;/gallery/paw_img.jpg">
+  <link rel="icon" href="/;/gallery/paw_img.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="数独游戏 (回溯算法)—数据结构课程设计实验报告
+[toc]
+
+
+游戏介绍
+简介
+
+传统的数独游戏，采用 9x9 方格，通过填入数字 1-9 ，确保每行、每列、以及该格所在的 3x3 的方格区域中 不出现相同的数字。
+每个生成的数独只有一个解
+使用 AndroidStudio 平台开发 ，基于Java语言
+">
+  <meta name="author" content="PPLong">
+  <meta name="keywords" content="">
+  <!--添加百度站点统计-->
+  <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
+  <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
+  <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
+  <meta name="description" content="数独游戏 (回溯算法)—数据结构课程设计实验报告 [toc]   游戏介绍 简介  传统的数独游戏，采用 9x9 方格，通过填入数字 1-9 ，确保每行、每列、以及该格所在的 3x3 的方格区域中 不出现相同的数字。 每个生成的数独只有一个解 使用 AndroidStudio 平台开发 ，基于Java语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓数独游戏课设">
+<meta property="og:url" content="http://43.139.93.91/;/2020/12/22/%E5%AE%89%E5%8D%93%E6%95%B0%E7%8B%AC%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="PPLong的博客">
+<meta property="og:description" content="数独游戏 (回溯算法)—数据结构课程设计实验报告 [toc]   游戏介绍 简介  传统的数独游戏，采用 9x9 方格，通过填入数字 1-9 ，确保每行、每列、以及该格所在的 3x3 的方格区域中 不出现相同的数字。 每个生成的数独只有一个解 使用 AndroidStudio 平台开发 ，基于Java语言">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20201222225942614.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20201222111013713.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20201222110639573.png">
+<meta property="article:published_time" content="2020-12-22T12:05:07.000Z">
+<meta property="article:modified_time" content="2022-04-07T01:45:18.000Z">
+<meta property="article:author" content="PPLong">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20201222225942614.png">
+  
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
+  
+  <title>安卓数独游戏课设 - PPLong的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/;/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/;/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/;/css/indexing-hover.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"43.139.93.91","root":"/;/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/;/local-search.xml"};
+  </script>
+  <script  src="/;/js/utils.js" ></script>
+  <script  src="/;/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 90vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/;/">
+      <strong>PPLong的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友達
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-link-fill"></i>
+                娱乐
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/movie/">
+                    <i class="iconfont icon-movie"></i>
+                    第二人生
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/shuoshuo/">
+                    <i class="iconfont icon-comment"></i>
+                    唠唠
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/develop/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    尝鲜
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/;/gallery/covers/wallhaven-qde5kr.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="安卓数独游戏课设">
+              
+            </span>
+
+            
+              <div class="mt-3">
+    
+            
+                <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-22 20:05" pubdate>
+        始于: 2020年12月22日晚上8点05分
+      </time>
+    </span>
+                
+</div>
+
+<!-- 自定义的更新时间 -->
+<div class="mt-1">
+    
+        <span class="post-meta">
+  <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
+  <time datetime="2022-04-07 09:45" pubdate>
+    更新: 2022年4月7日上午9点45分
+  </time>
+</span>
+        
+</div>
+
+<div class="mt-1">
+    
+        <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.1k 字
+    </span>
+        
+
+            
+                <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20 分钟
+    </span>
+                
+
+                    
+                        
+                            
+                                <!-- LeanCloud 统计文章PV -->
+                                <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span>
+                                 次
+                                    </span>
+                                    
+                                                
+</div>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+    <div class="container-fluid nopadding-x">
+        <div class="row nomargin-x">
+            <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-x-md">
+                <div class="container nopadding-x-md" id="board-ctn">
+                    <div class="py-5" id="board">
+                        <article class="post-content mx-auto">
+                            <!-- SEO header -->
+                            <h1 style="display: none">
+                                安卓数独游戏课设
+                            </h1>
+                            
+                                    <div class="markdown-body">
+                                        <h1>数独游戏 (回溯算法)—数据结构课程设计实验报告</h1>
+<p>[toc]</p>
+<!-- toc -->
+<hr>
+<h2 id="游戏介绍">游戏介绍</h2>
+<h3 id="简介-v4">简介</h3>
+<ul>
+<li>传统的数独游戏，采用 9x9 方格，通过填入数字 1-9 ，确保<strong>每行、每列、以及该格所在的 3x3 的方格区域</strong>中 不出现相同的数字。</li>
+<li><strong>每个生成的数独只有一个解</strong></li>
+<li>使用 AndroidStudio 平台开发 ，基于Java语言</li>
+</ul>
+<span id="more"></span>
+<h3 id="实现功能：">实现功能：</h3>
+<ol>
+<li>UI 基本游戏界面的 UI 布局，数独生成与 UI 动态生成的异步处理 ，功能按钮</li>
+<li>AutoDetect 游戏内实时检错并自动删除错误数字</li>
+<li>Show Answer 显示答案功能，动态提示答案</li>
+<li>Reset 重置数独功能，重新生成新的数独</li>
+<li>Timer 计时功能</li>
+<li>Record 记录功能，通过数据库记录每次成功完成数独的题目、答案图像，完成日期，完成时间，以及数独的难度</li>
+</ol>
+<h3 id="游戏操作说明：">游戏操作说明：</h3>
+<ul>
+<li>有安卓手机（版本不低于17)：
+<ol>
+<li>将apk文件  (app-release.apk) 安装至手机，直接启动即可</li>
+<li>进入游戏后，请<strong>先允许该程序访问手机内存</strong>(因为记录保存时要进行数据的存取)，否则程序会自动退出。通过&quot;START&quot;按钮开始游戏，选择难度，进入游戏界面，通过拖动上方较大的1-9的图像，将想要放置的数组拖动到想放置的位置即可。（注：如果是拖动至已生成的原始数独位置，则不会替换为放置的数组，会弹出“The block is origin&quot;提示）。成功完成，则会在中部显示&quot;Congratulation！&quot;的动画提示。</li>
+<li>可通过&quot;RESET&quot;重置该难度下的数独，通过”BACK&quot;返回到游戏主界面，通过“SHOWANSWER”查看答案</li>
+<li>在主界面的Records按钮点击后，可查看已有的记录，通过左右滑动可查看。如果没有记录，则不会显示。</li>
+</ol>
+</li>
+<li>没有安卓手机：
+<ol>
+<li>麻烦老师在PC端下载安卓模拟器，然后将该apk安装至电脑的安卓模拟器中运行（由于兼容问题可能会出现一些异常)。</li>
+<li>游戏内操作步骤同上2-4步。</li>
+</ol>
+</li>
+</ul>
+<p><strong>我自己的测试视频放在了主目录下，如果以上两种情况下都不能运行，可以看我的演示视频。</strong></p>
+<h3 id="项目运行说明-如果需要-：">项目运行说明 (如果需要)：</h3>
+<ul>
+<li>
+<p><strong>JDK :1.8         API :Android 30 Platform</strong></p>
+</li>
+<li>
+<p>下载Android Studio (3.6版本及以上) 官网地址https://developer.android.google.cn/studio/(安装包800M，这里不给出)</p>
+</li>
+<li>
+<p>左上角 ”File“ --”Open“–选择项目文件夹   可以连接安卓手机(需要打开调试模式)，也可以下载Android Studio平台下的安卓手机模拟器(AVD manager —Create New Virtual Device)</p>
+</li>
+<li>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20201222225942614.png" srcset="/;/img/loading.gif" lazyload alt="image-20201222225942614"></p>
+</li>
+</ul>
+<h2 id="游戏设计理念-回溯算法核心部分">游戏设计理念(回溯算法核心部分)</h2>
+<p><strong>核心算法区域： “\app\src\main\java\com\example\sudoku”下的SudoHelper.java文件中</strong></p>
+<h3 id="核心思想：">核心思想：</h3>
+<div class="code-wrapper"><pre class="language-none"><code class="language-none">1. 先通过随机数，生成有n个元素的（n=30）残缺的数组
+2. 通过solveSudoku()将残缺数组生成完整的数独
+3. 将完整的数独进行挖取，每挖一个元素都要确保该位置上的元素不能由其他元素替换
+</code></pre></div>
+<h3 id="isValid-方法："><strong>isValid()方法</strong>：</h3>
+<ul>
+<li>
+<p>说明： 该方法用于判断数组中该行该列 填入数字c 时，是否在该行所有元素、该列所有元素或者该3*3区域中有与c相同的元素，如果有，则说明违反了规则，返回false;</p>
+</li>
+<li>
+<div class="code-wrapper"><pre><code class="language-java"> /**
+     * 判断该二维数组中 row行 col列中填入数字c是否违反规则
+     * @param board 原始的二维数组
+     * @param row   该数字c的行数
+     * @param col   数字c的列数
+     * @param c     数字c
+     * @return
+     */
+    public static boolean isValid(int[][] board, int row, int col, int c) &#123;
+        for (int i = 0; i &lt; 9; i++) &#123;
+            //当前列有没有和数字c重复的
+            if (board[i][col] == c)
+                return false;
+            //当前行有没有和数字c重复的
+            if (board[row][i] == c)
+                return false;
+            //当前的3*3单元格内是否有和数字c重复的
+            if (board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c)
+                return false;
+        &#125;
+        //否则说明没有重复数字，符合规则
+        return true;
+    &#125;
+<pre class="language-none"><code class="language-none">
+### **backTrace()方法**
+
+* 说明：通过迭代进行数独的判断，由不完整的数独生成完整的数独
+
+* &#96;&#96;&#96;java
+  public static boolean backTrace(int[][] board, int row, int col,int num,int spr,int spc) &#123;
+          &#x2F;&#x2F;当row等于board.length的时候表示数独的最后一行全部读遍历完了，说明数独中的值是有效的，直接返回true
+          if (row &#x3D;&#x3D; board.length)
+              return true;
+          &#x2F;&#x2F;如果当前行的最后一列也遍历完了，就从下一行的第一列开始。这里的遍历
+          &#x2F;&#x2F;顺序是从第1行的第1列一直到最后一列，然后第二行的第一列一直到最后
+          if (col &#x3D;&#x3D; board.length)
+              return backTrace(board, row + 1, 0,num,spr,spc);
+          &#x2F;&#x2F;如果当前位置已经有数字了，就不能再填了，直接到这一行的下一列
+          if (board[row][col] !&#x3D; 0)
+              return backTrace(board, row, col + 1,num,spr,spc);
+          &#x2F;&#x2F;如果上面条件都不满足，就从1到9种选择一个合适的数字填入到数独中
+          for (int i &#x3D; 1; i &lt;&#x3D; 9; i++) &#123;
+              &#x2F;&#x2F;判断当前位置[row，col]是否可以放数字i，如果不能放再判断下一个能不能放
+              &#x2F;&#x2F;r行c列已经不能再填入num了，用于isOnlyOne方法
+              if(i&#x3D;&#x3D;num&amp;&amp;spr&#x3D;&#x3D;row&amp;&amp;spc&#x3D;&#x3D;col)
+                  continue;
+              if (!isValid(board, row, col, i))
+                  continue;
+              &#x2F;&#x2F;如果能放数字i，就把数字i放进去
+              board[row][col] &#x3D; i;
+              &#x2F;&#x2F;如果成功就直接返回，不需要再尝试了
+              if (backTrace(board, row, col,num,spr,spc))
+                  return true;
+              &#x2F;&#x2F;否则就撤销重新选择
+              board[row][col] &#x3D; 0;
+          &#125;
+          &#x2F;&#x2F;如果当前位置[row，col]不能放任何数字，直接返回false
+          return false;
+      &#125;
+  </code></pre></div>
+
+</code></pre>
+</li>
+</ul>
+<h3 id="isOnlyOne-方法">isOnlyOne()方法</h3>
+<ul>
+<li>
+<p>说明：判断该行该列上的数字，是否能被其他1-9的数字替代，且不违反规则</p>
+</li>
+<li>
+<div class="code-wrapper"><pre><code class="language-java"> /**
+     * 判断该行该列上的数字，是否能被其他1-9的数字替代，且不违反规则
+     * @param i 行数
+     * @param j 列数
+     * @param b 二维数组
+     * @return
+     */
+    public static boolean isOnlyOne(int i,int j,int[][] b)&#123;  //判断在i,j挖去数字后是否有唯一解
+        int k=b[i][j];  //保存待挖洞的原始数字
+        for(int num=1;num&lt;10;num++)&#123;
+            b[i][j]=0;
+            if(num!=k&amp;&amp;solveSudoku_noChange(b,k))&#123;     //除待挖的数字之外，还有其他的解，则返回false
+                b[i][j]=k;
+                return false;
+            &#125;
+        &#125;
+        return true;     //只有唯一解则返回true
+    &#125;
+<pre class="language-none"><code class="language-none">
+### solveSudoku方法()
+
+* 说明： 用于判断不完整的board数组能否生成为二维数独，如果能，则返回true，且会更改board的元素值，num作为isOnlyOne()方法中的特殊判断条件，检验除了num数字，其他数字是否能填入数组使之构成数独。
+
+* solveSudoku_noChange() 功能与solveSudoku()方法一致，区别是不更改参数board二维数组的值，仅给出是否能生成数独的结果。
+
+* &#96;&#96;&#96;java
+   &#x2F;&#x2F;num 用做isOnlyOne()的特殊判断标志
+      &#x2F;&#x2F;spr spc表示表示该位置上的元素不能填入num值
+      public static boolean solveSudoku(int[][] board,int num,int spr,int spc) &#123;
+          return backTrace(board, 0, 0,num,spr,spc);
+      &#125;
+    
+      public static boolean solveSudoku_noChange(int[][] board,int num,int spr,int spc) &#123;
+          int temp[][]&#x3D;new int[9][9];
+          for(int i&#x3D;0;i&lt;9;i++)&#123;
+              System.arraycopy(board[i],0,temp[i],0,9);
+          &#125;
+          return backTrace(temp, 0, 0,num,spr,spc);
+      &#125;</code></pre></div>
+
+</code></pre>
+</li>
+</ul>
+<h3 id="generateSudoWithLevel-方法">generateSudoWithLevel()方法</h3>
+<ul>
+<li>说明：通过传入参数 int level，生成解法唯一的残缺数独</li>
+<li>流程图：完整图片文件在源文件中</li>
+<li><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B%E5%9B%BE.png" srcset="/;/img/loading.gif" lazyload alt="算法流程图"></li>
+</ul>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">generateSudoWithLevel</span><span class="token punctuation">(</span><span class="token keyword">int</span> level<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+     <span class="token keyword">int</span> temp<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+     <span class="token class-name">Random</span> rand<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">int</span> count<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+     <span class="token comment">//对不同难度进行挖取个数count的选择</span>
+     <span class="token keyword">switch</span> <span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+         <span class="token keyword">case</span> LEVEL_NORMAL<span class="token operator">:</span>
+             count <span class="token operator">=</span> <span class="token number">25</span><span class="token punctuation">;</span>
+             <span class="token keyword">break</span><span class="token punctuation">;</span>
+         <span class="token keyword">case</span> LEVLE_EASY<span class="token operator">:</span>
+             count <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
+             <span class="token keyword">break</span><span class="token punctuation">;</span>
+         <span class="token keyword">case</span> LEVLE_DIF<span class="token operator">:</span>
+             count <span class="token operator">=</span> <span class="token number">35</span><span class="token punctuation">;</span>
+             <span class="token keyword">break</span><span class="token punctuation">;</span>
+     <span class="token punctuation">&#125;</span>
+     <span class="token keyword">int</span> calloc_num <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span>    <span class="token comment">//最初挖取的次数</span>
+     <span class="token keyword">int</span> count_fresh <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>    <span class="token comment">//重新寻找次数</span>
+     <span class="token keyword">boolean</span> flag <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+     <span class="token keyword">do</span> <span class="token punctuation">&#123;</span>
+         <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+             <span class="token keyword">while</span> <span class="token punctuation">(</span>calloc_num <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                 <span class="token keyword">int</span> i <span class="token operator">=</span> rand<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                 <span class="token keyword">int</span> j <span class="token operator">=</span> rand<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                 <span class="token keyword">if</span> <span class="token punctuation">(</span>temp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                     <span class="token keyword">int</span> num <span class="token operator">=</span> rand<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isValid</span><span class="token punctuation">(</span>temp<span class="token punctuation">,</span> i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> num<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                         temp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> num<span class="token punctuation">;</span>
+                         calloc_num<span class="token operator">--</span><span class="token punctuation">;</span>
+                     <span class="token punctuation">&#125;</span>
+                 <span class="token punctuation">&#125;</span>
+             <span class="token punctuation">&#125;</span>
+             <span class="token comment">//如果能生成完整的数独 则退出循环进行下一步</span>
+             <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">solveSudoku</span><span class="token punctuation">(</span>temp<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+             <span class="token comment">//否则重新开始</span>
+             calloc_num <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span>
+             temp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+         <span class="token punctuation">&#125;</span>
+         <span class="token comment">//对完整的数独进行挖取，并确保每一次挖取的元素不能被其他数字替代</span>
+         <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> count <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+             <span class="token keyword">int</span> r <span class="token operator">=</span> rand<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             <span class="token keyword">int</span> c <span class="token operator">=</span> rand<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             <span class="token comment">//如果已经挖取了count个元素，且更新次数&lt;20</span>
+             <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> count <span class="token operator">&amp;&amp;</span> count_fresh <span class="token operator">&lt;=</span> <span class="token number">20</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                 <span class="token keyword">return</span> temp<span class="token punctuation">;</span>
+             <span class="token punctuation">&#125;</span>
+             <span class="token comment">//该位置有值，且能不能被其他值替换，则挖取这个位置的值</span>
+             <span class="token keyword">if</span> <span class="token punctuation">(</span>temp<span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">[</span>c<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isOnlyOne</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> c<span class="token punctuation">,</span> temp<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                 <span class="token keyword">continue</span><span class="token punctuation">;</span>
+             <span class="token comment">//如果能被其他元素取代，则重新寻找次数+1</span>
+             count_fresh<span class="token operator">++</span><span class="token punctuation">;</span>
+             <span class="token comment">//如果寻找次数过多，说明有这是个不太理想的数独，继续寻找可能耗时</span>
+             <span class="token comment">//则重新生成新的数独</span>
+             <span class="token keyword">if</span> <span class="token punctuation">(</span>count_fresh <span class="token operator">></span> <span class="token number">20</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                 flag <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                 <span class="token keyword">break</span><span class="token punctuation">;</span>
+             <span class="token punctuation">&#125;</span>
+             i<span class="token operator">--</span><span class="token punctuation">;</span>
+         <span class="token punctuation">&#125;</span>
+         <span class="token comment">//进行数据的重置以便重新生成数独</span>
+         count_fresh <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+         calloc_num <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span>
+         temp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+     <span class="token punctuation">&#125;</span><span class="token keyword">while</span> <span class="token punctuation">(</span>flag<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+     <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+ <span class="token punctuation">&#125;</span>
+</code></pre></div>
+<h3 id="流程概括">流程概括</h3>
+<ol>
+<li>构建一个不完整的矩阵，其中矩阵中N个元素被填写1-9的数字，且均符合数独的规则 (isValid()==true)</li>
+<li>通过不完整的矩阵，又solveSudo(方法生成一个完整的数独矩阵</li>
+<li>将生成的完整数独矩阵进行元素挖取，每挖一个元素都要保证被挖取的元素不能被其他数字替代(数独解的唯一性)(isOnlyOne())</li>
+<li>3步骤中如果该元素不满足时 重新搜索记录+1,当重新搜索记录大于一定值时，说明这个数独不是一个好的数独，则重新进入步骤一，构建新的数独；反之，则就得到了解唯一的数独，输出即可。</li>
+</ol>
+<h3 id="实验测试—具体耗时">实验测试—具体耗时</h3>
+<ul>
+<li>使用generateSudoWithLevel(int level)函数在IDEA平台上进行数独生成 N次实验，记录每N次的耗时，多次测量并取平均值，画出表格如下</li>
+<li><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20201222111013713.png" srcset="/;/img/loading.gif" lazyload alt="image-20201222111013713"></li>
+<li><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20201222110639573.png" srcset="/;/img/loading.gif" lazyload alt="image-20201222110639573"></li>
+</ul>
+<h3 id="实验分析">实验分析</h3>
+<ul>
+<li>随着难度增加， count 增加，生成完整数独后挖取的元素个数也增加，所以耗时必然是一个递增的过程。但在算法中因为涉及到calloc_fresh ，统计过量寻找可删除元素的判断，所以在遇到不太理想的数独时会进行重新生成操作，使得不同难度下单次生成数独的时间可能有差异。实验中的空间复杂度 : O©  (用到一个9x9的二维数组和常数个变量),  渐进复杂度上界  &gt;=O(9^{9x9})  (原因：加入判断calloc_fresh大于一定值时会重新生成数独重新挖取）</li>
+</ul>
+<h2 id="游戏开发中的其他想法和问题">游戏开发中的其他想法和问题</h2>
+<p>开发中还涉及到一些控件动态生成，UI布局选择和游戏模式的思考。如果老师对这部分有兴趣，请移步主目录中的 <a target="_blank" rel="noopener" href="http://README.md">README.md</a> 或者 README.pdf 文件</p>
+<p>我把开发过程中的想法和解决方法写在了上述文档中</p>
+<p>Github上项目不定时更新  <a target="_blank" rel="noopener" href="https://github.com/Yunlong626/SudokuGame">https://github.com/Yunlong626/SudokuGame</a></p>
+<p>邮箱 <a href="mailto:401177923@qq.com">401177923@qq.com</a></p>
+<h2 id="课设总结">课设总结</h2>
+<p>​	这次课设让我学习了回溯算法，重新认识了数独游戏的定义，让我对求解N皇后和解数独等较为复杂的问题时有了新的思路，解决数独问题还可以通过位运算、舞蹈链等算法，回溯算法只是入门，数据结构和算法对我们来说，课程结束了但是还有很多很多需要今后深入学习。 通过这次课设也让我回顾了之前所学习的java语言和 Android开发的一些基础，发现自己的基础还是不是很牢固，在课设后还需要多巩固多总结。</p>
+<h2 id="感谢-v2">感谢</h2>
+<p>​	感谢老师的阅读，如果在测试中发现了任何的异常或者UI不兼容问题，麻烦老师指出。我会及时对项目进行更新</p>
+
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="post-metas mb-3">
+                                            
+                                                <div class="post-meta mr-3">
+                                                    <i class="iconfont icon-category"></i>
+                                                    
+                                                        <a class="hover-with-bg" href="/;/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/">
+                                                            个人项目
+                                                        </a>
+                                                        
+                                                </div>
+                                                
+                                                    
+                                                        <div class="post-meta">
+                                                            <i class="iconfont icon-tags"></i>
+                                                            
+                                                                <a class="hover-with-bg" href="/;/tags/Android/">
+                                                                    Android
+                                                                </a>
+                                                                
+                                                                <a class="hover-with-bg" href="/;/tags/Java/">
+                                                                    Java
+                                                                </a>
+                                                                
+                                                        </div>
+                                                        
+                                        </div>
+                                        
+                                            <p class="note note-warning">
+                                                
+                                                            本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                                                                
+                                            </p>
+                                            
+                                                
+                                                    <div class="post-prevnext">
+                                                        <article class="post-prev col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2020/12/23/OOP%E5%A4%8D%E4%B9%A0/">
+                                                                        <i class="iconfont icon-arrowleft"></i>
+                                                                        <span class="hidden-mobile">OOP复习</span>
+                                                                        <span class="visible-mobile">上一篇</span>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                        <article class="post-next col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2020/10/22/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
+                                                                        <span class="hidden-mobile">个人项目总结学习</span>
+                                                                        <span class="visible-mobile">下一篇</span>
+                                                                        <i class="iconfont icon-arrowright"></i>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                    </div>
+                                                    
+                                    </div>
+
+                                    
+                                        <!-- Comments -->
+                                        <article class="comments" id="comments" lazyload>
+                                            
+                                                        
+                                                            
+                                                                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Yunlong626/commit-utterances');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+                                        </article>
+                                        
+                        </article>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+                    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+                </div>
+                
+        </div>
+    </div>
+
+    <!-- Custom -->
+    
+    <!--添加我自己的设置页面-->
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+    <!--加入自定义格式的-->
+    <!--自定义的git徽标样式-->
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080" srcset="/;/img/loading.gif" lazyload>
+<br>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAdCAYAAAC9pNwMAAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDIgNzkuMTYwOTI0LCAyMDE3LzA3LzEzLTAxOjA2OjM5ICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+nhxg7wAACNlJREFUSInF1mmMVeUdx/Hv2e+5+519mJWBYQZkGxZZxLKJqBXGoLS1iXWrmihotFXaJiTWWlsbl6q1aetWd5u0VkKjNG4YEJSlOCibDLMwM8x679z9nnPP1jcVJUxf+7z6J8+LT37/Z4VvaQhfFS8+sBXbctCDGrVTKlBUH4mxAbI9Hfj0IJLsp6paJ5/tmn20N/D0wKDRMq9F/c3M2U1/V0vDfWMFh+tv/Ig1zYPMabDImPJ52OaXO87W580KggCiiOsJOJ6I3wcNFaaeNKxrt72f2fLGu4FpJ/sDQABRzD22fH7/Yze069vGc6mrDLNIJCDik10sxz2by3VdPM87xzkP9jwPTZFRVI1YUJKH+oy7n3tbvv/P2wW/UQxRWe6w4ZJRptYLHDoCuz8v5cP92XbI762O+h6UVWHnUFbPpU0fEb2A60mMJ7MUi9b/b7UgKhiZMaIxm8YLplLMDPz8hl/EH+rs8TNlUpFf32uyZJGLPDwCiTGUyTWodTN49eUCdz2YwXb9NNcObp1X98WDoufynzMVCEKGn27ayPTWBi5ad8P5iQUkJEnFLjqM9Z+hrVX0vfDe6K2dPRWsW2bwyp9EUifSJB84gdxrkR0eRgv1o/3I4fbbprJ6scqamzVO9pffec1S5ZWY2Nfz5qEy/FqOC2Y3s3j53HMSi18VRjFPwSwg+1RfVbl115vvJrsfej7UGIsYPPGgQ7JXoO+Xx5B3dHEomyJ9x1qiQozkr95h5937aFnVyouPlgJK+Ss7Fxz64OTSxSX+LHYxT2IsRW5kbGI4oHcR0jqoqTjV9se3I7/f8rS/ClS23GxSXhph6L5d9Akm7qqZhHWBQGUJ+CWGFzcg7e7m6D3/ZuW1Ea5YKdA3EojuONi813TqNi+YPYOKUhXDtCeGL26/hakLLiEcdsaHRkRAoLRc4fJrmhnekyF0apgZowWSwwkaa+rw3f8WA1GZZsPP5JEChX8dhZTN6iU6kAcs5s+dHd183SJ0VVKL57pfw6YdRQw23aeWTns47DPTALWlRTR7kMLew6hGgYqUhWXYFFUdPZ6lUBahLA8hVcOftckfi7No7VRAAQqsX1dybfvG1qwriM9mM5mJ4e4jO5Cc01dPqixbr8tWGBQUL4vjGigEEShi+xUmZ2RiR/sJ1pbS8NkgZrKAGw0TsgQsQyFaF/nfYTGprAlMFysbA1pI3mhkR6snhGsaymYGvPyFEb9IdbUE2AzFFTwpRqCtBY0wmdER+hZW4j63gcJj38V+/ErSUZXsYBfjIZHIRW0c2Z8BskCAqN+CbBJBFnyyKjR+Ez57nBxLqpfMUeSISElMBFz6x2Q6OxzWrYjyxWVzEewioU3LCS5vQY6nMUrLwNaxXvoQ59IloFSx54PPAZtQLExVZZDxsVE8J4dn6v4JYatgbSjk0owPw7RGH2ADMo88Z7L20ip8f7gC7fAo0q4+0rt7kEQDvaghVZbiPHUHcyeXcfLjT3jmpR7AYsnSScya3UR8bARVMck7Y/cB75/X6rDf3Fg2dw2jKZm5dXGm1LuAzO5DCo9v6aT0ibco5kzOvLOP+NGTFJtDpPYeZKijk/Rn3QxsfZV7txwhX7ABiZUXBsGvIvguQApNQQva9RMmTvZ2dpVUls+tX/UD7GN/Y8Ws05w6rQF+9vyzg1vZjbvMRJhXiRSU8DpTFFe0QE8S6SfPkOkZoktrB2oAhZWrwljxOPmchiSMYOWNoxNuruFU5vWeXdsojiUon345113dBBQBmTYlTimgdB8nfPo4WjaNFgN9OMEkJ02dnadVt5ki54Esqy+bzKJltVhSPbI3iN2zCyMTeXNCuG7Omm2Zok7PR2+R7jvD8ouruHhmCrB5jVZeYxLdrTP4sr4Vtd9g4MA4qc4c+6cu5NPamfw4P59t2WrA4YdXKkASf7SFivo6PDdEPmf1fRM++zp1bH/0r4I1dD1ODtOWaW4IsvPjL7nqXhloQiSPwjjgMYkMASyGEBkjhISCQwkwzve/18AbT+pk8pVY4UacQi9y+gyZ0eRAw4qHa89LXEx1LXMSPfhDJYRb59BtlLKg2WPT2l6qYl1svtGkrLYckyA1S+t5+2ATm37WCui0LSynsckDNH5zTxAchbQtkx08hDHYiW6NgC0enHBzEZ102UDH8QORdEckjEzZrNWkRydzyx17uGnDXqbUnGZ6dRPjSY91q2TqwjFuvTxLo5Zn5Qo/pumRSFcTLQtybEhGE0fQrDhhJ0VvH2lTnnHPhGtsmWan469apERjI2MH3qN7+7MEfH6ql29CbV7PvsMG32k6yU2XDhEKyZw66eJaRdrXR7CzCcqUNC3zwgymPJRCH4KRRLINimpL14A5Y4GDeOqbsPRVcfuN7Xj44pav/hFfrNT2kr2rsqf2Ibp5pEA14ZIImUyW3t5REkkTXRGQ/DGGhtLginhqCWknQDE5hKf5UFSF9Lj020Q2ul5V1AR2hr+8vuP8Vlc2zMPRxoSjnx7XBC14sDoydahSGq7KdO/HFyrBchxCVfX4fDKp4T7SCQejYODZLrYgIqgKFsNIgQqEYob8mW6yiUyb7Z64LVK/+B85xznnJ3AWzqTzuIX46mr5wLs+UUTyIriBCjRNxguHMJIFDLEEvXEOVRWnSJ0+jCd4CJoGjoedM1CLcXQziW3nMV2TSMBeOx7vWZvPt1r+cMPzE8KunaUkFn0vNrvtqXj34c1W6gzxlEQ6naIoBahtnkMwoFMwIVzSRNguMt53Aj2s4nkSlgPoGqLkICsRNF0gl8rYWuP8+11/w/OOJDEhHPKLCIpOXmi+M9AgP+maiesLifF2T1Rn5ZNj5Lo/Qc/GcPMmhdoqlEgIGzCK4PiCmJKK68p4KfF3qYGuF0qCRUkJTzleUbvQyWRTuE5xYthxQbBs7EISAbkzUFG3VfXXbK2YFi3X/eryfKKnqVBItNjJxDzH8erddC4SqWwcN5WyTtlyO1RP/Lh3eHD76MB40swmiDVJyDLYRhpc5+ub6tse/wWKbvSQEAw1awAAAABJRU5ErkJggg==&style=flat&color=d2c68b" srcset="/;/img/loading.gif" lazyload>
+
+<!-- 自定义显示文章总页数和字数的模块 -->
+<div class="bottom-post-statistic">
+    <div class="bottom-post-count">
+        62&nbsp 篇文章
+    </div>
+    <div class="bottom-post-word">
+        248.9k&nbsp 字
+    </div>
+</div>
+        <div class="footer-content">
+             <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+        </div>
+
+        
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+            
+
+                
+</footer>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/;/js/events.js" ></script>
+<script  src="/;/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/;/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/;/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/;/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/;/js/reset_code_lang.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/;/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?PPLong222";
+            var git_color =['#ebedf0', '#bef5cb', '#bef5cb', '#a9f5b4', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620'];
+            var git_user ="PPLong222";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div id="github-calendar" style="width:100%;height:auto;padding:10px;margin-bottom:20px"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;margin-top:100px;;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/about/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:200px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>#github_container > .position-relative > .border{border:0!important}#github-calendar{position: relative;margin-top: -2rem;background-color: var(--board-bg-color);transition: background-color 0.2s ease-in-out;border-radius: 0.5rem;z-index: 3;-webkit-box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);}</style><!-- hexo injector body_end end --></body>
+</html>

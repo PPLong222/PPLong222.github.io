@@ -1,0 +1,1011 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/;/gallery/paw_img.jpg">
+  <link rel="icon" href="/;/gallery/paw_img.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PPLong">
+  <meta name="keywords" content="">
+  <!--添加百度站点统计-->
+  <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
+  <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
+  <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
+  <meta name="description" content="Hexo Fluid博客装修  自从博客从Next主题迁移到Fluid后，基本上就没有变动太多东西，但现在看了别人的博客比如基于Butterfly的，就不太满足于目前的Fluid了。ButterFly固然好，但太花哨，适合之后针对前端学习的时候用这款主题，我更喜欢Fluid的整体布局，但细节方面，就需要去自己DIY了，这也就有了这篇文章  Done-TODO List：  增添更新时间模块并自动更">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo Fluid--博客装修整理">
+<meta property="og:url" content="http://43.139.93.91/;/2022/04/07/Hexo-Fluid-%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE/index.html">
+<meta property="og:site_name" content="PPLong的博客">
+<meta property="og:description" content="Hexo Fluid博客装修  自从博客从Next主题迁移到Fluid后，基本上就没有变动太多东西，但现在看了别人的博客比如基于Butterfly的，就不太满足于目前的Fluid了。ButterFly固然好，但太花哨，适合之后针对前端学习的时候用这款主题，我更喜欢Fluid的整体布局，但细节方面，就需要去自己DIY了，这也就有了这篇文章  Done-TODO List：  增添更新时间模块并自动更">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220407212939266.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220407212809434.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220407212023590.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220407213731552.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220407214058095.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220407214022354.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220407215426141.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410161440199.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410172808872.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410162508365.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410162535972.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410162543859.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410162817114.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410165405168.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410165429966.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220411185249424.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220411185306916.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410170438778.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220413101346107.png">
+<meta property="article:published_time" content="2022-04-07T13:02:01.000Z">
+<meta property="article:modified_time" content="2022-04-25T14:29:58.000Z">
+<meta property="article:author" content="PPLong">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Html">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220407212939266.png">
+  
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
+  
+  <title>Hexo Fluid--博客装修整理 - PPLong的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/;/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/;/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/;/css/indexing-hover.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"43.139.93.91","root":"/;/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/;/local-search.xml"};
+  </script>
+  <script  src="/;/js/utils.js" ></script>
+  <script  src="/;/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 90vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/;/">
+      <strong>PPLong的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/;/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友達
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-link-fill"></i>
+                娱乐
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/movie/">
+                    <i class="iconfont icon-movie"></i>
+                    第二人生
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/shuoshuo/">
+                    <i class="iconfont icon-comment"></i>
+                    唠唠
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/;/develop/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    尝鲜
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/;/gallery/covers/wallhaven-e77g8k.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Hexo Fluid--博客装修整理">
+              
+            </span>
+
+            
+              <div class="mt-3">
+    
+            
+                <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-07 21:02" pubdate>
+        始于: 2022年4月7日晚上9点02分
+      </time>
+    </span>
+                
+</div>
+
+<!-- 自定义的更新时间 -->
+<div class="mt-1">
+    
+        <span class="post-meta">
+  <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
+  <time datetime="2022-04-25 22:29" pubdate>
+    更新: 2022年4月25日晚上10点29分
+  </time>
+</span>
+        
+</div>
+
+<div class="mt-1">
+    
+        <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      11k 字
+    </span>
+        
+
+            
+                <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      34 分钟
+    </span>
+                
+
+                    
+                        
+                            
+                                <!-- LeanCloud 统计文章PV -->
+                                <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span>
+                                 次
+                                    </span>
+                                    
+                                                
+</div>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+    <div class="container-fluid nopadding-x">
+        <div class="row nomargin-x">
+            <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-x-md">
+                <div class="container nopadding-x-md" id="board-ctn">
+                    <div class="py-5" id="board">
+                        <article class="post-content mx-auto">
+                            <!-- SEO header -->
+                            <h1 style="display: none">
+                                Hexo Fluid--博客装修整理
+                            </h1>
+                            
+                                    <div class="markdown-body">
+                                        <h1>Hexo Fluid博客装修</h1>
+<blockquote>
+<p>自从博客从Next主题迁移到Fluid后，基本上就没有变动太多东西，但现在看了别人的博客比如基于Butterfly的，就不太满足于目前的Fluid了。ButterFly固然好，但太花哨，适合之后针对前端学习的时候用这款主题，我更喜欢Fluid的整体布局，但细节方面，就需要去自己DIY了，这也就有了这篇文章</p>
+</blockquote>
+<p>Done-TODO List：</p>
+<input type="checkbox" disabled checked="checked"> 增添更新时间模块并自动更新<br>
+<input type="checkbox" disabled checked="checked"> 新增友链<br>
+<input type="checkbox" disabled checked="checked"> 添加总字数<br>
+<input type="checkbox" disabled checked="checked"> 添加Github贡献<br>
+<input type="checkbox" disabled checked="checked"> 使hexo支持md表情<br>
+<input type="checkbox" disabled checked="checked"> 添加唠唠楼<br>
+<ul>
+<li>
+<input type="checkbox" disabled > 美化样式框 <br>
+</li>
+</ul>
+<input type="checkbox" disabled checked="checked"> 新增电影界面 <br>
+<ul>
+<li>
+<input type="checkbox" disabled > 继续美化<br>
+</li>
+</ul>
+<input type="checkbox" disabled checked="checked"> 美化代码板块<br>
+<ul>
+<li>
+<input type="checkbox" disabled checked="checked"> 添加语言识别<br>
+</li>
+<li>
+<input type="checkbox" disabled checked="checked"> 添加代码块折叠<br>
+</li>
+</ul>
+<input type="checkbox" disabled checked="checked"> 添加更新时间<br>
+<ul>
+<li>
+<input type="checkbox" disabled > 手机端显示异常 <br>
+</li>
+</ul>
+<input type="checkbox" disabled > 添加回顾模块的特定样式<br>
+<input type="checkbox" disabled checked="checked"> 添加Github徽标<br>
+<h2 id="更新">更新</h2>
+<h3 id="增添更新时间模块并自动更新">增添更新时间模块并自动更新</h3>
+<p><span class="label label-primary">Time : 2022 / 4 / 7</span></p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220407212939266.png" alt="image-20220407212939266"></div><div class="group-image-wrap"><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220407212809434.png" alt="image-20220407212809434"></div></div></div>
+<h4 id="1-添加脚本">1. 添加脚本</h4>
+<p>网上Copy的js脚本，自动识别目录下的md文档，根据是否有category来增加updated的font-matter，如果有则忽略。比较实用。我改了部分参数，不想把脚本放在_posts下，我放在次目录的另一目录js中，更改了相应的参数</p>
+<div class="code-wrapper"><pre class="language-js" data-language="js"><code class="language-js"><span class="token hashbang comment">#!/usr/bin/env node</span>
+<span class="token comment">/*
+批量更新修改时间
+博客自动更新文章的修改时间
+*/</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'脚本开始运行..'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"fs"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//请求文件系统</span>
+<span class="token keyword">var</span> file <span class="token operator">=</span> <span class="token string">"./txt"</span><span class="token punctuation">;</span> <span class="token comment">//设置读取和写入的文件，当前目录下的test文件</span>
+<span class="token keyword">var</span> RegExp<span class="token operator">=</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">(updated:\s*)((\d&#123;2&#125;(([02468][048])|([13579][26]))[\-\/\s]?((((0?[13578])|(1[02]))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\-\/\s]?((0?[1-9])|([1-2][0-9])))))|(\d&#123;2&#125;(([02468][1235679])|([13579][01345789]))[\-\/\s]?((((0?[13578])|(1[02]))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\-\/\s]?((0?[1-9])|(1[0-9])|(2[0-8]))))))(\s((([0-1][0-9])|(2?[0-3]))\:([0-5]?[0-9])((\s)|(\:([0-5]?[0-9])))))</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">;</span>
+
+fs<span class="token punctuation">.</span><span class="token function">readdir</span><span class="token punctuation">(</span><span class="token string">"../_posts/"</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span>files</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> len<span class="token operator">=</span>files<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+	<span class="token keyword">var</span> file<span class="token operator">=</span><span class="token keyword">null</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>len<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		file<span class="token operator">=</span>files<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+		<span class="token comment">//console.log("读取文件：",file);</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">".md"</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+			console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"正在处理文件："</span><span class="token punctuation">,</span>file<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">writeFileTime</span><span class="token punctuation">(</span>file<span class="token punctuation">,</span>fs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/*
+file:读取时间的文件以及写入内容的文件
+fs: 文件系统
+*/</span>
+<span class="token keyword">function</span> <span class="token function">writeFileTime</span><span class="token punctuation">(</span><span class="token parameter">file<span class="token punctuation">,</span>fs</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    file<span class="token operator">=</span><span class="token string">"../_posts/"</span><span class="token operator">+</span>file<span class="token punctuation">;</span>
+	fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span>file<span class="token punctuation">,</span> <span class="token string">'utf8'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> data</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//读取文件内容</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token keyword">return</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"读取文件内容错误："</span><span class="token punctuation">,</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">//console.log("文件"+file+"的内容：",data);</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>RegExp<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span> <span class="token comment">//如果匹配到`updated`字段</span>
+			fs<span class="token punctuation">.</span><span class="token function">stat</span><span class="token punctuation">(</span>file<span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> stats</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//读取文件信息，创建时间等</span>
+				<span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token keyword">return</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"读取文件信息错误："</span><span class="token punctuation">,</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+				<span class="token keyword">var</span> updateds<span class="token operator">=</span>data<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span>RegExp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+				<span class="token comment">//console.log("updated数组:",updateds);</span>
+				<span class="token keyword">if</span><span class="token punctuation">(</span>updateds<span class="token punctuation">.</span>length<span class="token operator">></span><span class="token number">1</span><span class="token punctuation">)</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"文件"</span><span class="token operator">+</span>file<span class="token operator">+</span><span class="token string">"匹配到多处update字段"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+				<span class="token keyword">var</span> updated<span class="token operator">=</span>updateds<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"updated: "</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">-</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//时间格式化为2018/01/29 21:33:30</span>
+				<span class="token comment">//console.log("updated:",updated);</span>
+				<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>stats<span class="token punctuation">.</span>mtime<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>Date<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>updated<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token number">1000</span><span class="token operator">*</span><span class="token number">60</span><span class="token operator">*</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span> <span class="token comment">// 只要修改时间和文章内updated时间差大于1000毫秒*60*5=5分钟就触发更新</span>
+					<span class="token keyword">var</span> result<span class="token operator">=</span> data<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span>RegExp<span class="token punctuation">,</span><span class="token string">"updated: "</span><span class="token operator">+</span><span class="token function">getFormatDate</span><span class="token punctuation">(</span>stats<span class="token punctuation">.</span>mtime<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//替换更新时间</span>
+					fs<span class="token punctuation">.</span><span class="token function">writeFile</span><span class="token punctuation">(</span>file<span class="token punctuation">,</span> result<span class="token punctuation">,</span> <span class="token string">'utf8'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//写入新的文件内容</span>
+						<span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token keyword">return</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"写文件错误："</span><span class="token punctuation">,</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+						fs<span class="token punctuation">.</span><span class="token function">utimes</span><span class="token punctuation">(</span>file<span class="token punctuation">,</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>stats<span class="token punctuation">.</span>atime<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>stats<span class="token punctuation">.</span>mtime<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>  <span class="token comment">//还原访问时间和修改时间</span>
+							<span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token keyword">return</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"修改时间失败："</span><span class="token punctuation">,</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+							console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>file<span class="token punctuation">,</span><span class="token string">"成功更新时间"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+						<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+					<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+				<span class="token punctuation">&#125;</span>
+			<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/*
+ timeStr:时间，格式可为："September 16,2016 14:15:05、
+ "September 16,2016"、"2016/09/16 14:15:05"、"2016/09/16"、
+ '2014-04-23T18:55:49'和毫秒
+ dateSeparator：年、月、日之间的分隔符，默认为"-"，
+ timeSeparator：时、分、秒之间的分隔符，默认为":"
+ */</span>
+<span class="token keyword">function</span> <span class="token function">getFormatDate</span><span class="token punctuation">(</span><span class="token parameter">timeStr<span class="token punctuation">,</span> dateSeparator<span class="token punctuation">,</span> timeSeparator</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    dateSeparator <span class="token operator">=</span> dateSeparator <span class="token operator">?</span> dateSeparator <span class="token operator">:</span> <span class="token string">"-"</span><span class="token punctuation">;</span>
+    timeSeparator <span class="token operator">=</span> timeSeparator <span class="token operator">?</span> timeSeparator <span class="token operator">:</span> <span class="token string">":"</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> date <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>timeStr<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            year <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getFullYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token comment">// 获取完整的年份(4位,1970)</span>
+            month <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token comment">// 获取月份(0-11,0代表1月,用的时候记得加上1)</span>
+            day <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token comment">// 获取日(1-31)</span>
+            hour <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getHours</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token comment">// 获取小时数(0-23)</span>
+            minute <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMinutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token comment">// 获取分钟数(0-59)</span>
+            seconds <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getSeconds</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token comment">// 获取秒数(0-59)</span>
+            <span class="token constant">Y</span> <span class="token operator">=</span> year <span class="token operator">+</span> dateSeparator<span class="token punctuation">,</span>
+            <span class="token constant">M</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>month <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">9</span> <span class="token operator">?</span> <span class="token punctuation">(</span>month <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token punctuation">(</span><span class="token string">'0'</span> <span class="token operator">+</span> <span class="token punctuation">(</span>month <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> dateSeparator<span class="token punctuation">,</span>
+            <span class="token constant">D</span> <span class="token operator">=</span> <span class="token punctuation">(</span>day <span class="token operator">></span> <span class="token number">9</span> <span class="token operator">?</span> day <span class="token operator">:</span> <span class="token punctuation">(</span><span class="token string">'0'</span> <span class="token operator">+</span> day<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">' '</span><span class="token punctuation">,</span>
+            h <span class="token operator">=</span> <span class="token punctuation">(</span>hour <span class="token operator">></span> <span class="token number">9</span> <span class="token operator">?</span> hour <span class="token operator">:</span> <span class="token punctuation">(</span><span class="token string">'0'</span> <span class="token operator">+</span> hour<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> timeSeparator<span class="token punctuation">,</span>
+            m <span class="token operator">=</span> <span class="token punctuation">(</span>minute <span class="token operator">></span> <span class="token number">9</span> <span class="token operator">?</span> minute <span class="token operator">:</span> <span class="token punctuation">(</span><span class="token string">'0'</span> <span class="token operator">+</span> minute<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> timeSeparator<span class="token punctuation">,</span>
+            s <span class="token operator">=</span> <span class="token punctuation">(</span>seconds <span class="token operator">></span> <span class="token number">9</span> <span class="token operator">?</span> seconds <span class="token operator">:</span> <span class="token punctuation">(</span><span class="token string">'0'</span> <span class="token operator">+</span> seconds<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            formatDate <span class="token operator">=</span> <span class="token constant">Y</span> <span class="token operator">+</span> <span class="token constant">M</span> <span class="token operator">+</span> <span class="token constant">D</span> <span class="token operator">+</span> h <span class="token operator">+</span> m <span class="token operator">+</span> s<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> formatDate<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+</code></pre></div>
+<p>Node.js还是可以呀，能够以脚本方式直接执行，有空可以看看~</p>
+<h4 id="2-补充主脚本">2. 补充主脚本</h4>
+<p>cd到脚本目录js下，执行这个函数就行了</p>
+<h4 id="3-写HTML-JS">3. 写HTML/JS</h4>
+<p>其实这里Fluid已经给出<a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid/issues/162">一种解决方式</a>了，但是因为最终的效果不太好<img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220407212023590.png" alt="image-20220407212023590"></p>
+<p>所以还是选择自定义的方式。</p>
+<p>思路是 先根据文章页Cover上原有的时间HTML，这肯定是通过date的font-matter生成的，于是通过查看网页源代码定位这个模块，然后去找到post-meta.ejs文件，找到两个类似的div，然后仿照date去添加updated，但这里也要注意，还需要在主题配置文件下添加，因为theme.post.meta.updated.enable其实就是去查主题配置文件下的相应字段，然后更改了下基于moment js的时间设置，“LL a” - &gt; “LLL”</p>
+<div class="code-wrapper"><pre class="language-ejs" data-language="ejs"><code class="language-ejs"><span class="token comment">&lt;!-- 自定义的更新时间 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mt-1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token ejs language-ejs"><span class="token delimiter punctuation">&lt;%</span><span class="token language-javascript"> <span class="token keyword">if</span> <span class="token punctuation">(</span>theme<span class="token punctuation">.</span>post<span class="token punctuation">.</span>meta<span class="token punctuation">.</span>updated<span class="token punctuation">.</span>enable<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> </span><span class="token delimiter punctuation">%></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>post-meta<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>iconfont icon-clipcheck<span class="token punctuation">"</span></span> <span class="token attr-name">aria-hidden</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>time</span> <span class="token attr-name">datetime</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token ejs language-ejs"><span class="token delimiter punctuation">&lt;%=</span><span class="token language-javascript"> <span class="token function">full_date</span><span class="token punctuation">(</span>page<span class="token punctuation">.</span>updated<span class="token punctuation">,</span> <span class="token string">'YYYY-MM-DD HH:mm'</span><span class="token punctuation">)</span> </span><span class="token delimiter punctuation">%></span></span><span class="token punctuation">"</span></span> <span class="token attr-name">pubdate</span><span class="token punctuation">></span></span>
+    Updated: <span class="token ejs language-ejs"><span class="token delimiter punctuation">&lt;%=</span><span class="token language-javascript"> <span class="token function">full_date</span><span class="token punctuation">(</span>page<span class="token punctuation">.</span>updated<span class="token punctuation">,</span> theme<span class="token punctuation">.</span>post<span class="token punctuation">.</span>meta<span class="token punctuation">.</span>updated<span class="token punctuation">.</span>format<span class="token punctuation">)</span> </span><span class="token delimiter punctuation">%></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>time</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span> <span class="token ejs language-ejs"><span class="token delimiter punctuation">&lt;%</span><span class="token language-javascript"> <span class="token punctuation">&#125;</span> </span><span class="token delimiter punctuation">%></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div>
+<p>最终大功告成！显示布局方面还需要改变，文字部分太长，但相比官网添加的，我对这个已经很满意了</p>
+<h3 id="新增友链">新增友链</h3>
+<p><span class="label label-primary">Time : 2022 / 4 / 7</span></p>
+<p>一直没增友链，这下增加上去，根据文档改主题配置就行了，记得补充中文翻译</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220407213731552.png" alt="image-20220407213731552"></p>
+<h3 id="添加总字数">添加总字数</h3>
+<p><span class="label label-primary">Time : 2022 / 4 / 7</span></p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220407214058095.png" alt="image-20220407214058095"></div><div class="group-image-wrap"><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220407214022354.png" alt="image-20220407214022354"></div></div></div>
+<p>很久就有的想法了，不过一直受限于思路，以为可能要sh去统计字数，没想到npm 的 hexo-wordcount已经提供了这个功能。传入一个整体网页参数site即可<br>
+思路还是老方法，通过HTML块去定位代码，发现关联部分在archive.ejs和archive-list.ejs，前者传参给后者，后者进行显示。这里我也添加了一个参数计算了总字数，然后在后者中进行显示</p>
+<div class="code-wrapper"><pre class="language-ejs" data-language="ejs"><code class="language-ejs"><span class="token comment">&lt;!-- archive.ejs --></span>    
+<span class="token ejs language-ejs"><span class="token delimiter punctuation">&lt;%-</span><span class="token language-javascript"> <span class="token function">partial</span><span class="token punctuation">(</span><span class="token string">'_partial/archive-list.ejs'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">params</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">postTotal</span><span class="token operator">:</span> site<span class="token punctuation">.</span>posts<span class="token punctuation">.</span>length <span class="token punctuation">,</span><span class="token literal-property property">postBitTotal</span><span class="token operator">:</span> <span class="token function">totalcount</span><span class="token punctuation">(</span>site<span class="token punctuation">)</span><span class="token punctuation">&#125;</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span> </span><span class="token delimiter punctuation">%></span></span>
+<span class="token comment">&lt;!-- archive-list.ejs--></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>label label-primary<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token ejs language-ejs"><span class="token delimiter punctuation">&lt;%=</span><span class="token language-javascript"> <span class="token function">__</span><span class="token punctuation">(</span><span class="token string">'postTotal'</span><span class="token punctuation">,</span> params<span class="token punctuation">.</span>postTotal<span class="token punctuation">)</span>     </span><span class="token delimiter punctuation">%></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>label label-success<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">margin-left</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+        <span class="token ejs language-ejs"><span class="token delimiter punctuation">&lt;%=</span><span class="token language-javascript"> <span class="token function">__</span><span class="token punctuation">(</span><span class="token string">'postBitTotal'</span><span class="token punctuation">,</span> params<span class="token punctuation">.</span>postBitTotal<span class="token punctuation">)</span> </span><span class="token delimiter punctuation">%></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span></code></pre></div>
+<p>还要注意，这里’postTotal’,是一个类似键值对的东西，值是format的string字符串，比如xxxx %d xxx ，所以还需要定位到其语言配置界面设置一下。并且<br>
+我之前似乎wordcount没有更新，或者用的是Fluid的wordcount所以它提示找不到totalcount这个方法，重新npm i save xxxx 一下就OK了。最终用Label修饰了一下，之后可以考虑增大一下字体</p>
+<h3 id="添加Github贡献">添加Github贡献</h3>
+<p><span class="label label-primary">Time : 2022 / 4 / 7</span></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220407215426141.png" alt="image-20220407215426141"></p>
+<p>以为可以直接添加基于博客Local的计数，不过没有找到，只有基于github的计数，所以还又得添加github repo，现在也是双repo了🉑（别问为啥Github提交这么少，因为都是提交到云服务器上的😢 ）</p>
+<p>主要参考小冰的博客<a class="btn" target="_blank" rel="noopener" href="https://zfe.space/post/hexo-githubcalendar.html" title="title">教程：hexo-githubcalendar 插件 1.0</a>，也推一下他的网站，插件都非常不错！通过html的id或name去挂载这个table，三件事：npm下载；站点配置增加；页面嵌入js。还支持修改颜色大小等，都在_config.yaml中，颜色之类的可以后期优化</p>
+<h3 id="添加唠唠楼">添加唠唠楼</h3>
+<p><span class="label label-primary">Time : 2022 / 4 / 8</span></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410161440199.png" alt="image-20220410161440199"></p>
+<p>想添加一个自言自语的模块，这个算是一个初级版本了 😆</p>
+<p>之前有考虑过用现成的叨叨 hexo-daodao，通过vercel搭建，但似乎是用的别人的数据，不太好，后来寻找到了基于Artitalk 和 LeanCloud的解决方案 具体的博客参加<a target="_blank" rel="noopener" href="https://juejin.cn/post/6958014853403377672">使用leanCloud给Hexo博客加上artitalk说说模块</a>。但是css太丑了，就自己找了下artitalk的官网的配置文件，用自己的css稍微改了下，虽然还是不太满意UI，不过自定义的目的算是达到了一半</p>
+<p>之后考虑做成这种效果：<img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410172808872.png" alt="image-20220410172808872">脱离原有的框，一条信息独立成单独的框</p>
+<h3 id="新增电影界面-👍">新增电影界面 👍</h3>
+<p><span class="label label-primary">Time : 2022 / 4 / 8 – 2022 / 4 / 10</span></p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410162508365.png" alt="image-20220410162508365"></div><div class="group-image-wrap"><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410162535972.png" alt="image-20220410162535972"></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410162543859.png" alt="image-20220410162543859"></div></div></div>
+<p>这个算是比较用心做的一个页面了哈哈，准备搞成周更的好电影收集系列。</p>
+<h4 id="溯源">溯源</h4>
+<p>其实最开始想做成Butterfly这种的<img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410162817114.png" alt="image-20220410162817114"></p>
+<p>搜索了下其实是基于hexo-douban的，但是奈何这个npm包是3、4年前才update的，造成了很多依赖的版本冲突问题，自己用上了很多时候没有反应，并且生成界面的时候耗时较长，后来换了个类似的hexo-butterfly-douban但界面又不太好看，且也是经常generate不出来。正好又看到了hexo-douban-card的包，比较喜欢这种卡片的设计，后来一咬牙，自己写页面算了，还可以自定义。麻烦一点，但是可定制性高。</p>
+<h4 id="HTML静态分页">HTML静态分页</h4>
+<p>这里主要复杂点就是这个静态分页，不过查了一下资料，还是比较容易。通过去设置html div style的display属性（但缺陷可能是：后期元素一多静态页面加载很慢，生成很慢，甚至去设置display的时候也会慢一点）。</p>
+<p>这里思路是先统计多少个类名相同的div，然后再去通过当前页面号mask和open对应的div。那如何控制页面？通过js控制，也是抄了点网上的代码，但比较笨，通过不同类名来控制，每次需要手动添加元素到数组中，稍作修改，我这里直接getElementsByClassName就行了，不用手动修改总页数和长度。小贴一下代码</p>
+<div class="code-wrapper"><pre class="language-js" data-language="js"><code class="language-js"><span class="token comment">// 定义一个数组，保存当前所有页面的class name</span>
+   <span class="token keyword">var</span> page_index <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementsByClassName</span><span class="token punctuation">(</span><span class="token string">"my-single-movie"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token comment">// 输入pagename，打开指定的div，隐藏其他的div</span>
+   <span class="token keyword">function</span> <span class="token function">page_option</span><span class="token punctuation">(</span><span class="token parameter">pageIdx</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+       <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> page_index<span class="token punctuation">.</span>length <span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+           <span class="token keyword">if</span><span class="token punctuation">(</span>j <span class="token operator">!=</span> pageIdx<span class="token punctuation">)</span> 
+               page_index<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>style<span class="token punctuation">.</span>display<span class="token operator">=</span><span class="token string">"none"</span><span class="token punctuation">;</span>  
+       <span class="token punctuation">&#125;</span>
+       page_index<span class="token punctuation">[</span>pageIdx<span class="token punctuation">]</span><span class="token punctuation">.</span>style<span class="token punctuation">.</span>display<span class="token operator">=</span><span class="token string">"block"</span><span class="token punctuation">;</span>
+
+   <span class="token punctuation">&#125;</span>
+   <span class="token comment">// 点击 返回第一页按钮 执行的操作</span>
+   <span class="token keyword">function</span> <span class="token function">first_click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+       <span class="token function">page_option</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'currentPage'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span>
+   <span class="token comment">// 点击 跳到最后一页按钮 执行的操作</span>
+   <span class="token keyword">function</span> <span class="token function">last_click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+       <span class="token keyword">var</span> total_page <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'totalPage'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>innerHTML<span class="token punctuation">;</span>
+       <span class="token function">page_option</span><span class="token punctuation">(</span>page_index<span class="token punctuation">[</span>page_index<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'currentPage'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value<span class="token operator">=</span>total_page<span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span>
+   <span class="token comment">// 点击 上一页按钮 执行的操作</span>
+   <span class="token keyword">function</span> <span class="token function">prev_click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+       <span class="token keyword">var</span> cur_page <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'currentPage'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>cur_page <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'currentPage'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value<span class="token operator">=</span><span class="token function">parseInt</span><span class="token punctuation">(</span>cur_page<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+           <span class="token function">page_option</span><span class="token punctuation">(</span><span class="token function">parseInt</span><span class="token punctuation">(</span>cur_page<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span>
+   <span class="token punctuation">&#125;</span>
+   <span class="token comment">// 点击 下一页按钮 执行的操作</span>
+   <span class="token keyword">function</span> <span class="token function">next_click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+       <span class="token keyword">var</span> cur_page <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'currentPage'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+       <span class="token keyword">var</span> total_page <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'totalPage'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>innerHTML<span class="token punctuation">;</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>cur_page <span class="token operator">&lt;</span> total_page<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+           document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'currentPage'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value<span class="token operator">=</span><span class="token function">parseInt</span><span class="token punctuation">(</span>cur_page<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+           <span class="token function">page_option</span><span class="token punctuation">(</span><span class="token function">parseInt</span><span class="token punctuation">(</span>cur_page<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span>
+   <span class="token punctuation">&#125;</span>
+   <span class="token comment">// 手动改变当前页码时执行的操作</span>
+   <span class="token keyword">function</span> <span class="token function">choose_page</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+       <span class="token keyword">var</span> cur_page <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'currentPage'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+       <span class="token function">page_option</span><span class="token punctuation">(</span><span class="token function">parseInt</span><span class="token punctuation">(</span>cur_page<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span></code></pre></div>
+<p>当然啦，也将跳转的按钮小做美化，保持跟Fluid主题样式的一致性，但是添加了hover动效后会偶尔出现Chrome崩溃，我不知道是linux chrome的问题还是代码问题，有待验证。</p>
+<h4 id="hexo-douban-card">hexo-douban-card</h4>
+<p>这个还有个小点，第一点是有时候generate时会通过api爬数据并写进来，比较慢，后期考虑skip-render了；第二点是有时候generate报错，是因为豆瓣的原因，要么是访问限制了 需要自己手动去输入验证码，要么是cookie过期，到时候重新在config里填一下cookie就行了。</p>
+<p>发现css blur好有意思啊，一个参数就设置了想要的背景效果，这种模糊的亚克力般的感觉。当然这个css也是可以更换的🙂，准备后期魔改一下，也有考虑通过api去爬数据然后自己生成html，但是略麻烦，这里暂时先这样。</p>
+<h4 id="美化">美化</h4>
+<ul>
+<li>增加组图的hover效果</li>
+<li>添加英文字体</li>
+<li>修复卡顿崩溃现象</li>
+<li>单图优化，自适应</li>
+<li>跳转动画</li>
+</ul>
+<h4 id="待优化点">待优化点</h4>
+<ul>
+<li><s>首尾页还存在不完善之处</s> 已修复</li>
+<li>整体界面有待继续美化和统一</li>
+<li><s>想把图片展示部分 部分做成hover scale的，但是有点麻烦</s> 已完成</li>
+</ul>
+<h3 id="美化代码板块">美化代码板块</h3>
+<p><span class="label label-primary">Time : 2022 / 4 / 8 – 2022 / 4 / 9</span></p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410165405168.png" alt="image-20220410165405168"></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410165429966.png" alt="image-20220410165429966"></div></div></div>
+<p>用MacPanel的样式，稍微好看了一些。思路还是改css，添加了_custom下的自定义css，但基于主题代码highlight的问题，颜色不易分辨，改了下主题配置文件的highlight库，用了prime.js的。有个坑点是，主题配置下打开linenumber显示行号，css样式会扯掉，所以就先关闭了行号功能</p>
+<p>但这里知乎上看到一篇更好的，Butterfly支持的代码样式，还有折叠代码和显示当前语言功能，但我这里限于主题不能直接copy，准备之后魔改一波。加上代码语言和折叠功能</p>
+<h4 id="显示代码语言">显示代码语言</h4>
+<p><span class="label label-success">Time : 2022 / 4 / 11</span></p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220411185249424.png" alt="image-20220411185249424"></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220411185306916.png" alt="image-20220411185306916"></div></div></div>
+<p>默认代码框不展开，因为展开的时候例如LeetCode页面就太长了，虽然HTML加载是同样的时间，但为了美观还是先设置为不展开。</p>
+<p><strong>获取HTML:before的问题</strong></p>
+<p>支持显示代码语言的思路是：先找到html下对应的代码框block，发现其有内置的代码语言（已经读取并设置到html中），只需要自己添加一个block并获取代码块就行了。但这里我其实最开始想通过设置代码整体框的:before的content值来做的，因为很方便也不用添加什么元素，但这里有一个问题，因为我的最终赋值是在页面加载后通过js代码去读取（未在生成html时就赋值），所以之后就要动态的去get :before这个Element，但:before作为伪元素，其实不是太好get 和 set一些值（尝试了一下不太行，但可能是未onLoad后进行操作导致的），因为最后其实html是当做一个整体来的，所以这里后来换了思路：自己加一个div，通过<strong>绝对布局</strong>，将div固定到固定位置，然后去设置这个div的值，相比只设置div的content，单独加div的可定制度也更高。定位到添加兄弟元素的文件，加上就这一行代码就行了。</p>
+<p><strong>HTML内get元素值的问题</strong></p>
+<p>这里还踩了一个HTML加载的坑，我的自定义js通过fluid是加载在页面底部的。我通过加载页面后去run我的这个js，js中去get对应的div的一些元素值（比如代码语言），但其实运行后得到的值是undefined，log父元素发现并不是有层级的div，而是近乎raw格式的键值对，猜测可能是HTML部分值还没有填入？这里涉及到前端页面的渲染和数值加载的过程，但是应该是页面未完全加载的问题，js中等待页面完全加载好后，再跑这个方法就行，这是js 等待html加载的两种方法。</p>
+<div class="code-wrapper"><pre class="language-js" data-language="js"><code class="language-js"> <span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ready</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 速度更快，还未渲染img等图片</span>
+window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'onload'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">i</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 速度较慢，等页面完全加载好后才调用</span></code></pre></div>
+<h4 id="新增代码框收缩">新增代码框收缩</h4>
+<p><span class="label label-success">Time : 2022 / 4 / 11</span></p>
+<p>支持代码框动态收缩和恢复，这个需求太重要了，早就想做，不过套了下知乎的没用。自己先做了个v1.0版本的。不支持动画效果</p>
+<p>思路：找对应的模块，增加下拉和收缩的iconfont div ，通过js设置click的listener</p>
+<p><strong>js中var const</strong></p>
+<p>var是函数作用域，允许值修改，变量提升，多次重定义<br>
+const作用域与let一样，块作用域，const是基本类型值，值不可变，如果为引用的数据类型，则引用的变量不可变，必须先初始化才能使用</p>
+<p>这里我其实最开始用的var变量，导致一直执行监听函数的是最后一个div块，后来发现才更改为const</p>
+<h4 id="待优化">待优化</h4>
+<ul>
+<li>为代码框收缩添加动画效果</li>
+</ul>
+<h3 id="添加更新时间">添加更新时间</h3>
+<p><span class="label label-primary">Time : 2022 / 4 / 10</span></p>
+<p>本来想按照更新时间排序文章的，这里hexo config也给了可配置的设置，但后来想想还有点早，因为才添加了updated字段，很多文件更新时间不是真实的，先按照date排序吧，就先添加一个顶部的最近更新时间和文章的提醒。（最开始还想通过脚本静态写入并读取的方式解决，但是太麻烦并且也没有必要）</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220410170438778.png" alt="image-20220410170438778"></p>
+<p>数据部分其实还挺有说头的，这里代码段在index.ejs中，如果通过page.posts获取，那么只是得到一页的文章数目。尝试阅读官网文档，发现有list_posts的全局方法，可按照字段排序显示所有的post，但只是名字，不太好。然后突然看到有site这个全局变量…服了，可通过这个变量获取网站基本所有信息，然后就按照updated字段 sort了，得到最近更新文章的post，然后在去取updated和title，但这里updated也是偷了懒，因为之前看fluid issue的时候有人提了一嘴，然后开发人员就出了每篇文章的updated提醒，显示为离现在多少天前更新的，我就用了这个函数，就不用去显示和转换麻烦的Moment&lt;…&gt;了。</p>
+<p>HTML部分的话主要还是ejs不会使用，居然能够直接在html部分通过&lt;%= %&gt;进行赋值！离谱，非常好用，这里解决了href的问题。然后加了下循环飞入和hover暂停的的动画效果，太懒了，直接加在index.styl里的</p>
+<div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">// 自定义顶部更新bar和动画
+.latest_post</span><span class="token punctuation">&#123;</span>
+  <span class="token property">animation</span><span class="token punctuation">:</span> latest_post_ani 10s linear infinite<span class="token punctuation">;</span>  
+  <span class="token property">display</span><span class="token punctuation">:</span> inline-flex<span class="token punctuation">;</span>
+  <span class="token property">float</span><span class="token punctuation">:</span> right<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.latest_post:hover</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">animation-play-state</span><span class="token punctuation">:</span> paused<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token atrule"><span class="token rule">@keyframes</span> latest_post_ani</span> <span class="token punctuation">&#123;</span>
+    <span class="token selector">0%</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">/* 调整初始位置*/</span>
+          <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translateX</span><span class="token punctuation">(</span><span class="token function">calc</span><span class="token punctuation">(</span>100%<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+      <span class="token punctuation">&#125;</span>
+    <span class="token selector">100%</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">/* 父盒子宽度减去100% */</span>
+    <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translateX</span><span class="token punctuation">(</span><span class="token function">calc</span><span class="token punctuation">(</span>600px - 400%<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<h4 id="缺陷">缺陷</h4>
+<p>手机端显示存在缺陷</p>
+<h3 id="添加EChart">添加EChart</h3>
+<h3 id="小优化"><strong>小优化</strong></h3>
+<h4 id="添加Github徽标">添加Github徽标</h4>
+<p><span class="label label-primary">Time : 2022 / 4 / 12</span></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220413101346107.png" alt="image-20220413101346107"></p>
+<p>非常好用，直接去https://shields.io/即可，然后导入到自己 的footer.ejs下就行了</p>
+<h4 id="自定义页面添加FancyBox效果">自定义页面添加FancyBox效果</h4>
+<p><span class="label label-primary">Time : 2022 / 4 / 14</span></p>
+<p>在post界面会自动包含fancybox的div，但自定义界面不行，，plugin.js在生成页面的时候会去追加fancybox。这部分js代码我copy的很冗余，不会写jQuery，我就直接copy了函数体，改了下条件为自定义页面的图片元素，然后修复了下图片高宽不对齐的情况(max-width:100%  追加height:100%)。这部分代码有待优化</p>
+<h4 id="使hexo支持md表情">使hexo支持md表情</h4>
+<p><span class="label label-primary">Time : 2022 / 4 / 7</span></p>
+<p>实现Hexo对markdown的表情符号的支持，npm装什么hexo-emoji啥的就行了，不然网站显示👍 为: +1 :。</p>
+
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="post-metas mb-3">
+                                            
+                                                <div class="post-meta mr-3">
+                                                    <i class="iconfont icon-category"></i>
+                                                    
+                                                        <a class="hover-with-bg" href="/;/categories/%E5%A8%B1%E4%B9%90/">
+                                                            娱乐
+                                                        </a>
+                                                        
+                                                </div>
+                                                
+                                                    
+                                                        <div class="post-meta">
+                                                            <i class="iconfont icon-tags"></i>
+                                                            
+                                                                <a class="hover-with-bg" href="/;/tags/Hexo/">
+                                                                    Hexo
+                                                                </a>
+                                                                
+                                                                <a class="hover-with-bg" href="/;/tags/Html/">
+                                                                    Html
+                                                                </a>
+                                                                
+                                                                <a class="hover-with-bg" href="/;/tags/CSS/">
+                                                                    CSS
+                                                                </a>
+                                                                
+                                                        </div>
+                                                        
+                                        </div>
+                                        
+                                            <p class="note note-warning">
+                                                
+                                                            本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                                                                
+                                            </p>
+                                            
+                                                
+                                                    <div class="post-prevnext">
+                                                        <article class="post-prev col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2022/04/21/Python%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8/">
+                                                                        <i class="iconfont icon-arrowleft"></i>
+                                                                        <span class="hidden-mobile">Python爬虫入门</span>
+                                                                        <span class="visible-mobile">上一篇</span>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                        <article class="post-next col-6">
+                                                            
+                                                                
+                                                                    <a href="/;/2022/04/04/%E6%B5%85%E5%85%A5Git-Hooks/">
+                                                                        <span class="hidden-mobile">初识Git Hooks</span>
+                                                                        <span class="visible-mobile">下一篇</span>
+                                                                        <i class="iconfont icon-arrowright"></i>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                    </div>
+                                                    
+                                    </div>
+
+                                    
+                                        <!-- Comments -->
+                                        <article class="comments" id="comments">
+                                            
+                                                        
+                                                            
+                                                                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Yunlong626/commit-utterances');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+                                        </article>
+                                        
+                        </article>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+                    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+                </div>
+                
+        </div>
+    </div>
+
+    <!-- Custom -->
+    
+    <!--添加我自己的设置页面-->
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+    <!--加入自定义格式的-->
+    <!--自定义的git徽标样式-->
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue">
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a">
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080">
+<br>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,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&style=flat&color=d2c68b">
+
+<!-- 自定义显示文章总页数和字数的模块 -->
+<div class="bottom-post-statistic">
+    <div class="bottom-post-count">
+        62&nbsp 篇文章
+    </div>
+    <div class="bottom-post-word">
+        248.9k&nbsp 字
+    </div>
+</div>
+        <div class="footer-content">
+             <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+        </div>
+
+        
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+            
+
+                
+</footer>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/;/js/events.js" ></script>
+<script  src="/;/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/;/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/;/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/;/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/;/js/reset_code_lang.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/;/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?PPLong222";
+            var git_color =['#ebedf0', '#bef5cb', '#bef5cb', '#a9f5b4', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620'];
+            var git_user ="PPLong222";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div id="github-calendar" style="width:100%;height:auto;padding:10px;margin-bottom:20px"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;margin-top:100px;;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/about/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:200px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>#github_container > .position-relative > .border{border:0!important}#github-calendar{position: relative;margin-top: -2rem;background-color: var(--board-bg-color);transition: background-color 0.2s ease-in-out;border-radius: 0.5rem;z-index: 3;-webkit-box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);}</style><!-- hexo injector body_end end --></body>
+</html>
