@@ -634,13 +634,13 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <div class="code-wrapper"><pre class="language-none"><code class="language-none">w;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 </code></pre></div>
 <h3 id="屏幕适配">屏幕适配</h3>
-<h4 id="概念">概念</h4>
+<h4 id="概念-v2">概念</h4>
 <p>dp ：  	density-independent pixels n个实际像素，与设备dpi相关，与px（像素）换算关系：dp/160 = px/dpi。  px = dp*dpi /160</p>
 <p>那么dp究竟解决了适配上的什么问题？可以看出1dp = 1/160inch；那么它至少能解决一个问题，就是你在布局文件写某个View的宽和高为160dp*160dp，这个View在任何分辨率的屏幕中，显示的尺寸大小是大约是一致的（可能不精确），大概是 1 inch * 1 inch</p>
 <p>dpi:         Dots Per Inch（每英寸所打印的点数）</p>
 <p>px: 1920*1080 (px)</p>
 <h3 id="Framework">Framework</h3>
-<h4 id="概念-v2">概念</h4>
+<h4 id="概念-v3">概念</h4>
 <h3 id="ContentProvider">ContentProvider</h3>
 <h4 id="作用">作用</h4>
 <h3 id="OkHttp">OkHttp</h3>
@@ -900,7 +900,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210322153735717.png" srcset="/img/loading.gif" lazyload alt="image-20210322153735717"></p>
 <p>Retrofit不做网络请求，他相当于是一个中间人</p>
 <p>通过接口，对接口方法进行注解</p>
-<h4 id="原理">原理</h4>
+<h4 id="原理-v3">原理</h4>
 <h5 id="动态代理">动态代理</h5>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token class-name">INetApiService</span> netApiService<span class="token operator">=</span> retrofit<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token class-name">INetApiService</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>这里得到的netApiService不是本尊，而只是一个动态代理对象</p>
@@ -1080,7 +1080,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
       window.UtterancesThemeDark = dark;
       var s = document.createElement('script');
       s.setAttribute('src', 'https://utteranc.es/client.js');
-      s.setAttribute('repo', 'Yunlong626/commit-utterances');
+      s.setAttribute('repo', 'PPLong222/commit-utterances');
       s.setAttribute('issue-term', 'title');
       
       s.setAttribute('label', 'utterances');
