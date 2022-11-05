@@ -370,7 +370,7 @@
 <li>while</li>
 <li>for n = a:increment:c</li>
 </ul>
-<h3 id="函数-v3">函数</h3>
+<h3 id="函数">函数</h3>
 <p>function [A B] = …表示结果是多个结果</p>
 <p>function handle</p>
 <div class="code-wrapper"><pre class="language-matlab" data-language="matlab"><code class="language-matlab">f <span class="token operator">=</span> <span class="token operator">@</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token function">exp</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2</span><span class="token operator">*</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -403,7 +403,7 @@ A([a b],[a c]) row a b 和 col a c的交集</p>
 <li>length(A)：求row，即vector</li>
 <li>find(A==x)：求矩阵A中等于x的位置（索引方式返回）</li>
 </ul>
-<h3 id="运算符-v2">运算符</h3>
+<h3 id="运算符">运算符</h3>
 <p>*<em>一定要注意./ .<em>的应用，考虑引入向量是否会出错</em></em></p>
 <p><strong>‘：’ (Colon)</strong></p>
 <p>等差数列  A=[1:100] first = 1 end = 100 step = 1<br>
@@ -411,7 +411,7 @@ A=[1:2:100] first = 1 end = 100 step = 2<br>
 与字符混用 str=‘a’:2:‘z’</p>
 <p>表全部：A(3,:)表示矩阵A的row 3的全部</p>
 <p><strong>~=</strong>： 等于！=</p>
-<h3 id="变量-v2">变量</h3>
+<h3 id="变量">变量</h3>
 <p>变量类型</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220216182508540.png" srcset="/img/loading.gif" lazyload alt="image-20220216175259436"></p>
 <p>Matlab类型转换 通过函数进行 例如int16(x)</p>
@@ -464,7 +464,7 @@ str=='l’返回的是逻辑结果，例如11000010，指示了对应的索引�
 <p>cat(x,A,B)：A B为要连接的Array<br>
 x的值代表不同的维度：1-&gt;row;2-&gt;col;3-&gt;layer</p>
 <p>重塑reshape(A,r,c)：将A Array变换成不同row col排布的Array</p>
-<h3 id="进阶-v4">进阶</h3>
+<h3 id="进阶">进阶</h3>
 <h4 id="File-Access">File Access</h4>
 <ul>
 <li>save mydata.mat -ascii ：将workspace所有data存入目标文件，提供不同编码格式的存入</li>

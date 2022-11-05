@@ -772,7 +772,7 @@ obj<span class="token punctuation">.</span>stu <span class="token operator">=</s
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233706649.png" srcset="/img/loading.gif" lazyload alt="image-20210313233706649"></p>
 <p>使用 ： 状态标记、单例模式</p>
 <h3 id="JUC">JUC</h3>
-<h4 id="问题-v3">问题</h4>
+<h4 id="问题-v2">问题</h4>
 <h5 id="synchronized到底是什么-原理？">synchronized到底是什么  原理？</h5>
 <p>synchronized是一个重量级锁，实现依赖于JVM 的 monitor 监视器锁。主要使用monitorenter和monitorexit指令来实现方法同步和代码块同步。在编译的是时候，会将monitorexit指令插入到同步代码块的开始位置，而monitorexit插入方法结束处和异常处，并且每一个monitorexit都有一个与之对应的monitorexit。</p>
 <p><strong>任何对象都有一个monitor与之关联</strong>，当一个monitor被持有后，它将被处于锁定状态，线程执行到monitorenter指令时间，会<strong>尝试获取对象所对应的monitor的所有权</strong>，即获取获得对象的锁，由于在编译期会将monitorexit插入到方法结束处和异常处，所以在方法执行完毕或者出现异常的情况会自动释放锁</p>
