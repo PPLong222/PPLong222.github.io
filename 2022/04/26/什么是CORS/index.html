@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
-  <link rel="apple-touch-icon" sizes="76x76" href="/;/gallery/paw_img.jpg">
-  <link rel="icon" href="/;/gallery/paw_img.jpg">
+  <link rel="apple-touch-icon" sizes="76x76" href="/gallery/paw_img.jpg">
+  <link rel="icon" href="/gallery/paw_img.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -24,7 +24,7 @@
   <meta name="description" content="SOP与CORS 问题溯源 为什么我会遇到这个问题呢？如果你也有类似的经历，那么接下来的内容就或许能够帮助你解决问题 1. 通过服务器网页上的js脚本想在线获取leetcode的数据 通过网页上的js脚本给leetcode发送请求，这个bug发现花了很长时间，因为在自己的Chrome上以前也发生过类似的CORS请求失败问题，当时没有深究，查了下 下载了Allow CORS这个插件，立马解决了问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="什么是CORS">
-<meta property="og:url" content="http://43.139.93.91/;/2022/04/26/%E4%BB%80%E4%B9%88%E6%98%AFCORS/index.html">
+<meta property="og:url" content="http://43.139.93.91/2022/04/26/%E4%BB%80%E4%B9%88%E6%98%AFCORS/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="SOP与CORS 问题溯源 为什么我会遇到这个问题呢？如果你也有类似的经历，那么接下来的内容就或许能够帮助你解决问题 1. 通过服务器网页上的js脚本想在线获取leetcode的数据 通过网页上的js脚本给leetcode发送请求，这个bug发现花了很长时间，因为在自己的Chrome上以前也发生过类似的CORS请求失败问题，当时没有深究，查了下 下载了Allow CORS这个插件，立马解决了问题。">
 <meta property="og:locale" content="zh_CN">
@@ -53,7 +53,7 @@
 
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/;/lib/hint/hint.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
@@ -85,22 +85,22 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 
-<link  rel="stylesheet" href="/;/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
   
-<link rel="stylesheet" href="/;/css/indexing-hover.css">
+<link rel="stylesheet" href="/css/indexing-hover.css">
 <link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
 
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"43.139.93.91","root":"/;/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/;/local-search.xml"};
+    var CONFIG = {"hostname":"43.139.93.91","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
-  <script  src="/;/js/utils.js" ></script>
-  <script  src="/;/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 6.0.0"></head>
 
 
@@ -108,7 +108,7 @@
   <header style="height: 90vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/;/">
+    <a class="navbar-brand" href="/">
       <strong>PPLong的博客</strong>
     </a>
 
@@ -127,7 +127,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/">
+              <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
               </a>
@@ -139,7 +139,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/archives/">
+              <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 归档
               </a>
@@ -151,7 +151,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/categories/">
+              <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
                 分类
               </a>
@@ -163,7 +163,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/tags/">
+              <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
               </a>
@@ -175,7 +175,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/about/">
+              <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
               </a>
@@ -187,7 +187,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/links/">
+              <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友達
               </a>
@@ -209,7 +209,7 @@
                   
                   
                   
-                  <a class="dropdown-item" href="/;/movie/">
+                  <a class="dropdown-item" href="/movie/">
                     <i class="iconfont icon-movie"></i>
                     第二人生
                   </a>
@@ -217,7 +217,7 @@
                   
                   
                   
-                  <a class="dropdown-item" href="/;/shuoshuo/">
+                  <a class="dropdown-item" href="/shuoshuo/">
                     <i class="iconfont icon-comment"></i>
                     唠唠
                   </a>
@@ -225,7 +225,7 @@
                   
                   
                   
-                  <a class="dropdown-item" href="/;/develop/">
+                  <a class="dropdown-item" href="/develop/">
                     <i class="iconfont icon-codepen-fill"></i>
                     尝鲜
                   </a>
@@ -253,7 +253,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/;/gallery/covers/wallhaven-x8gejl.jpg') no-repeat center center;
+         style="background: url('/gallery/covers/wallhaven-x8gejl.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -357,7 +357,7 @@
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220426173912299.png" alt="image-20220426173912299"></p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220426174053301.png" alt="image-20220426174053301"></p>
 <p>写完这篇文章后我打开Allow-CORS 抓了下包，发现很多都是CORS error，可能原因是虽然你客户端是不启用CORS了，但我可能有一些脚本不会被Allow-CORS拦截而发送请求。</p>
-<h2 id="介绍-v4">介绍</h2>
+<h2 id="介绍-v5">介绍</h2>
 <p><strong>Cross-Origin Resource Sharing</strong>：一种允许当前域的资源被其他域的脚本请求访问的机制，通常由于<strong>同域安全策略(Same Origin Policy)</strong>，浏览器会禁止这种跨域请求的返回。<strong>（注意，只是过滤掉返回的请求，但实际上请求是成功发送给服务端的, 只是发回来的数据被浏览器扔掉了）</strong></p>
 <p><strong>Domain 域</strong>（协议schema 主机host 端口号port）都必须一致的</p>
 <p>什么又是<strong>同源策略</strong>？举个例子，比如在我的网站上有个js脚本，js脚本要通过get去获取另一个网站的数据并返回，最终在我的网站上显示，这就产生了跨域的请求。本来只是当前浏览器 &lt;—&gt; 我的网站 的双向响应，但由于js脚本发出的请求，就当前浏览器就要去往其他的服务器发送请求（<strong>注意，这里并不是网站的服务器去发送请求，而是访问的客户端去发送</strong>），这往往可能是不安全的，因为我可以根据Cookie去其他的网站上发送请求</p>
@@ -481,7 +481,7 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
 <p>回顾前面的问题，尝试先清空缓存后开启Allow-CORS，然后进行未被允许的CORS请求，发现响应码200并返回正常数据，随后进行抓包发现，只发送了一个GET请求，即浏览器自身直接忽略了预检这一步骤。</p>
 <p>Bilibili CORS Error中，基本上都是js脚本触发的CORS Error，说明可能js脚本中一些xhr类函数的执行没有被Allow-CORS捕获并重新设置，进入到错误js中调试后发现引发了我们都已熟悉了的这个问题</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220426175608360.png" alt="image-20220426175608360"></p>
-<h2 id="总结-v3">总结</h2>
+<h2 id="总结-v14">总结</h2>
 <p>好了，一句话，<s><strong>罪魁祸首：Allow-CORS全锅！</strong></s> 😆</p>
 <p>其实还是一个前后端通信一个比较经典的问题，相信实战的时候肯定还会遇到此类问题，到时候应该还会有新的心得</p>
 
@@ -493,7 +493,7 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
                                                 <div class="post-meta mr-3">
                                                     <i class="iconfont icon-category"></i>
                                                     
-                                                        <a class="hover-with-bg" href="/;/categories/%E5%AD%A6%E4%B9%A0/">
+                                                        <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/">
                                                             学习
                                                         </a>
                                                         
@@ -503,11 +503,11 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
                                                         <div class="post-meta">
                                                             <i class="iconfont icon-tags"></i>
                                                             
-                                                                <a class="hover-with-bg" href="/;/tags/Web/">
+                                                                <a class="hover-with-bg" href="/tags/Web/">
                                                                     Web
                                                                 </a>
                                                                 
-                                                                <a class="hover-with-bg" href="/;/tags/HTTP/">
+                                                                <a class="hover-with-bg" href="/tags/HTTP/">
                                                                     HTTP
                                                                 </a>
                                                                 
@@ -526,7 +526,7 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
                                                         <article class="post-prev col-6">
                                                             
                                                                 
-                                                                    <a href="/;/2022/04/30/Python%E7%88%AC%E8%99%AB%E6%A1%88%E4%BE%8B%E6%95%B4%E5%90%88/">
+                                                                    <a href="/2022/04/30/Python%E7%88%AC%E8%99%AB%E6%A1%88%E4%BE%8B%E6%95%B4%E5%90%88/">
                                                                         <i class="iconfont icon-arrowleft"></i>
                                                                         <span class="hidden-mobile">Python爬虫案例整合</span>
                                                                         <span class="visible-mobile">上一篇</span>
@@ -536,7 +536,7 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
                                                         <article class="post-next col-6">
                                                             
                                                                 
-                                                                    <a href="/;/2022/04/25/%E4%B8%BA%E4%BD%A0%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0LeetCode%E6%97%A5%E5%8E%86/">
+                                                                    <a href="/2022/04/25/%E4%B8%BA%E4%BD%A0%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0LeetCode%E6%97%A5%E5%8E%86/">
                                                                         <span class="hidden-mobile">为你的Hexo博客添加LeetCode日历</span>
                                                                         <span class="visible-mobile">下一篇</span>
                                                                         <i class="iconfont icon-arrowright"></i>
@@ -707,18 +707,18 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
-<script  src="/;/js/events.js" ></script>
-<script  src="/;/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
 
-  <script  src="/;/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
   
-    <script  src="/;/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -745,7 +745,7 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
 
 
 
-  <script defer src="/;/js/leancloud.js" ></script>
+  <script defer src="/js/leancloud.js" ></script>
 
 
 
@@ -787,12 +787,12 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
 
 
   
-<script src="/;/js/reset_code_lang.js"></script>
+<script src="/js/reset_code_lang.js"></script>
 
 
 
 <!-- 主题的启动项 保持在最底部 -->
-<script  src="/;/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
 <!-- hexo injector body_end start -->

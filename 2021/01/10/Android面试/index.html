@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
-  <link rel="apple-touch-icon" sizes="76x76" href="/;/gallery/paw_img.jpg">
-  <link rel="icon" href="/;/gallery/paw_img.jpg">
+  <link rel="apple-touch-icon" sizes="76x76" href="/gallery/paw_img.jpg">
+  <link rel="icon" href="/gallery/paw_img.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -33,7 +33,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
   <meta name="description" content="Android面试总结  CAS IPC进程间通信 Inter-Process Communication  Windows：通过剪切板、管道、油槽等进行进程间通讯。 Linux：通过命名空间、共享内容、信号量等进行进程间通讯。 Android：没有完全继承Linux，比如，其独具特色的通讯方式有Binder、Socket等等。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android知识总结">
-<meta property="og:url" content="http://43.139.93.91/;/2021/01/10/Android%E9%9D%A2%E8%AF%95/index.html">
+<meta property="og:url" content="http://43.139.93.91/2021/01/10/Android%E9%9D%A2%E8%AF%95/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="Android面试总结  CAS IPC进程间通信 Inter-Process Communication  Windows：通过剪切板、管道、油槽等进行进程间通讯。 Linux：通过命名空间、共享内容、信号量等进行进程间通讯。 Android：没有完全继承Linux，比如，其独具特色的通讯方式有Binder、Socket等等。">
 <meta property="og:locale" content="zh_CN">
@@ -75,7 +75,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/;/lib/hint/hint.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
@@ -107,22 +107,22 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 
-<link  rel="stylesheet" href="/;/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
   
-<link rel="stylesheet" href="/;/css/indexing-hover.css">
+<link rel="stylesheet" href="/css/indexing-hover.css">
 <link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
 
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"43.139.93.91","root":"/;/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/;/local-search.xml"};
+    var CONFIG = {"hostname":"43.139.93.91","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
-  <script  src="/;/js/utils.js" ></script>
-  <script  src="/;/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 6.0.0"></head>
 
 
@@ -130,7 +130,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
   <header style="height: 90vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/;/">
+    <a class="navbar-brand" href="/">
       <strong>PPLong的博客</strong>
     </a>
 
@@ -149,7 +149,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/">
+              <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
               </a>
@@ -161,7 +161,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/archives/">
+              <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 归档
               </a>
@@ -173,7 +173,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/categories/">
+              <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
                 分类
               </a>
@@ -185,7 +185,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/tags/">
+              <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
               </a>
@@ -197,7 +197,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/about/">
+              <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
               </a>
@@ -209,7 +209,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/links/">
+              <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友達
               </a>
@@ -231,7 +231,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
                   
                   
                   
-                  <a class="dropdown-item" href="/;/movie/">
+                  <a class="dropdown-item" href="/movie/">
                     <i class="iconfont icon-movie"></i>
                     第二人生
                   </a>
@@ -239,7 +239,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
                   
                   
                   
-                  <a class="dropdown-item" href="/;/shuoshuo/">
+                  <a class="dropdown-item" href="/shuoshuo/">
                     <i class="iconfont icon-comment"></i>
                     唠唠
                   </a>
@@ -247,7 +247,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
                   
                   
                   
-                  <a class="dropdown-item" href="/;/develop/">
+                  <a class="dropdown-item" href="/develop/">
                     <i class="iconfont icon-codepen-fill"></i>
                     尝鲜
                   </a>
@@ -275,7 +275,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/;/gallery/covers/wallhaven-8oky1j.jpg') no-repeat center center;
+         style="background: url('/gallery/covers/wallhaven-8oky1j.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -400,14 +400,14 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <p>AIDL层双方通信方式类似 符号引用</p>
 <h5 id="Binder">Binder</h5>
 <p>设计基于C/S结构  客户端进程获取服务端进程的代理，并通过向这个代理借口方法中读写数据来完成进程间的数据通信</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210321133957552.png" srcset="/;/img/loading.gif" lazyload alt="image-20210321133957552"></p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210320184127616.png" srcset="/;/img/loading.gif" lazyload alt="image-20210320184127616"></p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3VwbG9hZC1pbWFnZXMuamlhbnNodS5pby91cGxvYWRfaW1hZ2VzLzk0NDM2NS1kM2M3OGIxOTNjM2U4YTM4LnBuZz9pbWFnZU1vZ3IyL2F1dG8tb3JpZW50L3N0cmlwJTdDaW1hZ2VWaWV3Mi8yL3cvMTI0MA" srcset="/;/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210321133957552.png" srcset="/img/loading.gif" lazyload alt="image-20210321133957552"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210320184127616.png" srcset="/img/loading.gif" lazyload alt="image-20210320184127616"></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3VwbG9hZC1pbWFnZXMuamlhbnNodS5pby91cGxvYWRfaW1hZ2VzLzk0NDM2NS1kM2M3OGIxOTNjM2U4YTM4LnBuZz9pbWFnZU1vZ3IyL2F1dG8tb3JpZW50L3N0cmlwJTdDaW1hZ2VWaWV3Mi8yL3cvMTI0MA" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>传统进程通信</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210320192944412.png" srcset="/;/img/loading.gif" lazyload alt="image-20210320192944412"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210320192944412.png" srcset="/img/loading.gif" lazyload alt="image-20210320192944412"></p>
 <p>Binder通信</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210321134303878.png" srcset="/;/img/loading.gif" lazyload alt="image-20210321134303878"></p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210320192905310.png" srcset="/;/img/loading.gif" lazyload alt="image-20210320192905310"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210321134303878.png" srcset="/img/loading.gif" lazyload alt="image-20210321134303878"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210320192905310.png" srcset="/img/loading.gif" lazyload alt="image-20210320192905310"></p>
 <p>Binder可理解为是一种虚拟的物理设备，它的设备驱动是/dev/binder</p>
 <p>从Android Framework角度来说，Binder是ServiceManager连接各种Manager（ActivityManager、WindowManager，etc）和相应ManagerService的桥梁</p>
 <p>从Android应用层来说，Binder是客户端和服务端进行通信的媒介，当你bindService的时候，服务端会返回一个包含了服务端业务调用的Binder对象，通过这个Binder对象，客户端就可以获取服务端提供的服务或者数据，这里的服务包括普通服务和基于AIDL的服务。</p>
@@ -425,7 +425,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/12de32b31836">https://www.jianshu.com/p/12de32b31836</a></p>
 <h2 id=""></h2>
 <h3 id="事件分发机制">事件分发机制</h3>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301164920245.png" srcset="/;/img/loading.gif" lazyload alt="image-20210301164920245"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301164920245.png" srcset="/img/loading.gif" lazyload alt="image-20210301164920245"></p>
 <h4 id="dispatchTouchEvent">dispatchTouchEvent</h4>
 <p>true ： 已经进行了处理，不在向下传递，停止分发</p>
 <p>false： 未处理，继续分发    一般默认返回false</p>
@@ -436,19 +436,19 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <p>true：交给该Viewgourp的onTouchEvent方法处理 ，不过也要看他自己能不能有没有ontouchEvent</p>
 <h4 id="onTouchEvent">onTouchEvent</h4>
 <p>Activity层</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301174949296.png" srcset="/;/img/loading.gif" lazyload alt="image-20210301174949296"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301174949296.png" srcset="/img/loading.gif" lazyload alt="image-20210301174949296"></p>
 <p>ViewGroup层</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301180054892.png" srcset="/;/img/loading.gif" lazyload alt="image-20210301180054892"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301180054892.png" srcset="/img/loading.gif" lazyload alt="image-20210301180054892"></p>
 <p>View层</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301182854640.png" srcset="/;/img/loading.gif" lazyload alt="image-20210301182854640"></p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301182955527.png" srcset="/;/img/loading.gif" lazyload alt="image-20210301182955527"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301182854640.png" srcset="/img/loading.gif" lazyload alt="image-20210301182854640"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210301182955527.png" srcset="/img/loading.gif" lazyload alt="image-20210301182955527"></p>
 <h3 id="View原理">View原理</h3>
 <h4 id="Activty的启动顺序">Activty的启动顺序</h4>
 <p>onCreate – onStart —onResume</p>
 <p>home键返回后  onPause  – onStop   从后台返回时  onStart — onResume</p>
 <p>打开新的activity’时  onpause  --onStop</p>
 <p>关闭程序后  onPuase – onStop – onDestroy – onDetachedFromWindow</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210314102121692.png" srcset="/;/img/loading.gif" lazyload alt="image-20210314102121692"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210314102121692.png" srcset="/img/loading.gif" lazyload alt="image-20210314102121692"></p>
 <h4 id="Activity启动模式">Activity启动模式</h4>
 <ol>
 <li>
@@ -477,9 +477,9 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <li>Service</li>
 </ol>
 <h4 id="View结构">View结构</h4>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210314103217599.png" srcset="/;/img/loading.gif" lazyload alt="image-20210314103217599"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210314103217599.png" srcset="/img/loading.gif" lazyload alt="image-20210314103217599"></p>
 <p>View 树结构</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210314103242042.png" srcset="/;/img/loading.gif" lazyload alt="image-20210314103242042"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210314103242042.png" srcset="/img/loading.gif" lazyload alt="image-20210314103242042"></p>
 <h4 id="View绘制流程">View绘制流程</h4>
 <h5 id="measure">measure</h5>
 <h5 id="layout">layout</h5>
@@ -522,7 +522,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <h4 id="问题的出发点">问题的出发点</h4>
 <p>Handler 多层嵌套过程如何？</p>
 <p>试图在子线程中更改UI:</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210305160239366.png" srcset="/;/img/loading.gif" lazyload alt="image-20210305160239366"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210305160239366.png" srcset="/img/loading.gif" lazyload alt="image-20210305160239366"></p>
 <p>在子线程中添加Looper会报错   且通过Looper.getMainLooper  或者myLooper获取的值和主线程的是一样的</p>
 <h4 id="通信原理">通信原理</h4>
 <p>Message内部结构</p>
@@ -559,7 +559,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <h4 id="HandlerThread">HandlerThread</h4>
 <p>就是内置handler的thread</p>
 <h4 id="面试问题">面试问题</h4>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210305165916419.png" srcset="/;/img/loading.gif" lazyload alt="image-20210305165916419"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210305165916419.png" srcset="/img/loading.gif" lazyload alt="image-20210305165916419"></p>
 <p><span style='color:red;font-size:20px;'>一个线程有几个Handler</span></p>
 <p>多个handler</p>
 <p><span style='color:red;font-size:20px;'>一个线程有几个looper，如何保证</span></p>
@@ -583,7 +583,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <p>为什么 runOnUiThread 执行耗时操作还是 会影响主线程的执行</p>
 <h3 id="Intent">Intent</h3>
 <h3 id="RecycleView">RecycleView</h3>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210306140559042.png" srcset="/;/img/loading.gif" lazyload alt="image-20210306140559042"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210306140559042.png" srcset="/img/loading.gif" lazyload alt="image-20210306140559042"></p>
 <h4 id="与ListVIew的不同点">与ListVIew的不同点</h4>
 <p>缓存机制不同</p>
 <h4 id="滚动机制">滚动机制</h4>
@@ -615,7 +615,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 </li>
 </ol>
 <p>都在内部类Recylcer</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210316193720147.png" srcset="/;/img/loading.gif" lazyload alt="image-20210316193720147"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210316193720147.png" srcset="/img/loading.gif" lazyload alt="image-20210316193720147"></p>
 <p>缓存池的结构</p>
 <h4 id="嵌套如何解决滑动冲突">嵌套如何解决滑动冲突</h4>
 <h4 id="具体流程和复用机制">具体流程和复用机制</h4>
@@ -895,9 +895,9 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <h4 id="好处">好处</h4>
 <p>Retrofit基于okhttp封装的网络请求框架, 网络请求的工作本质上是 OkHttp 完成，而 retrofit 仅负责网络请求接口的封装。</p>
 <p>Retrofit优势，就是简洁易用,解耦,扩展性强,可搭配多种Json解析框架(例如Gson),另外还支持RxJava.网络请求的工作本质上是 <code>OkHttp</code> 完成，而 Retrofit 仅负责 网络请求接口的封装</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210322153358168.png" srcset="/;/img/loading.gif" lazyload alt="image-20210322153358168"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210322153358168.png" srcset="/img/loading.gif" lazyload alt="image-20210322153358168"></p>
 <p>注解类型</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210322153735717.png" srcset="/;/img/loading.gif" lazyload alt="image-20210322153735717"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210322153735717.png" srcset="/img/loading.gif" lazyload alt="image-20210322153735717"></p>
 <p>Retrofit不做网络请求，他相当于是一个中间人</p>
 <p>通过接口，对接口方法进行注解</p>
 <h4 id="原理">原理</h4>
@@ -920,7 +920,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <p>为什么请求在子线程而显示在UI主线程？ 添加了Looper？</p>
 <h3 id="Volley">Volley</h3>
 <h3 id="图片加载框架">图片加载框架</h3>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210329094112507.png" srcset="/;/img/loading.gif" lazyload alt="image-20210329094112507"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210329094112507.png" srcset="/img/loading.gif" lazyload alt="image-20210329094112507"></p>
 <h3 id="Glide">Glide</h3>
 <p><strong>load</strong></p>
 <p>空白fragment  – 控制生命周期</p>
@@ -1001,7 +1001,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
                                                 <div class="post-meta mr-3">
                                                     <i class="iconfont icon-category"></i>
                                                     
-                                                        <a class="hover-with-bg" href="/;/categories/%E5%AD%A6%E4%B9%A0/">
+                                                        <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/">
                                                             学习
                                                         </a>
                                                         
@@ -1011,15 +1011,15 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
                                                         <div class="post-meta">
                                                             <i class="iconfont icon-tags"></i>
                                                             
-                                                                <a class="hover-with-bg" href="/;/tags/Android/">
+                                                                <a class="hover-with-bg" href="/tags/Android/">
                                                                     Android
                                                                 </a>
                                                                 
-                                                                <a class="hover-with-bg" href="/;/tags/Java/">
+                                                                <a class="hover-with-bg" href="/tags/Java/">
                                                                     Java
                                                                 </a>
                                                                 
-                                                                <a class="hover-with-bg" href="/;/tags/Study/">
+                                                                <a class="hover-with-bg" href="/tags/Study/">
                                                                     Study
                                                                 </a>
                                                                 
@@ -1038,7 +1038,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
                                                         <article class="post-prev col-6">
                                                             
                                                                 
-                                                                    <a href="/;/2021/01/20/Java%E5%AD%A6%E4%B9%A0/">
+                                                                    <a href="/2021/01/20/Java%E5%AD%A6%E4%B9%A0/">
                                                                         <i class="iconfont icon-arrowleft"></i>
                                                                         <span class="hidden-mobile">Java学习</span>
                                                                         <span class="visible-mobile">上一篇</span>
@@ -1048,7 +1048,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
                                                         <article class="post-next col-6">
                                                             
                                                                 
-                                                                    <a href="/;/2021/01/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                                                                    <a href="/2021/01/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
                                                                         <span class="hidden-mobile">设计模式</span>
                                                                         <span class="visible-mobile">下一篇</span>
                                                                         <i class="iconfont icon-arrowright"></i>
@@ -1152,11 +1152,11 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
   <footer class="text-center mt-5 py-3">
     <!--加入自定义格式的-->
     <!--自定义的git徽标样式-->
-<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue" srcset="/;/img/loading.gif" lazyload>
-<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a" srcset="/;/img/loading.gif" lazyload>
-<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue" srcset="/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a" srcset="/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080" srcset="/img/loading.gif" lazyload>
 <br>
-<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,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&style=flat&color=d2c68b" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,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&style=flat&color=d2c68b" srcset="/img/loading.gif" lazyload>
 
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
@@ -1219,18 +1219,18 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
-<script  src="/;/js/events.js" ></script>
-<script  src="/;/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
 
-  <script  src="/;/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
   
-    <script  src="/;/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -1257,7 +1257,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 
 
 
-  <script defer src="/;/js/leancloud.js" ></script>
+  <script defer src="/js/leancloud.js" ></script>
 
 
 
@@ -1299,12 +1299,12 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 
 
   
-<script src="/;/js/reset_code_lang.js"></script>
+<script src="/js/reset_code_lang.js"></script>
 
 
 
 <!-- 主题的启动项 保持在最底部 -->
-<script  src="/;/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
 <!-- hexo injector body_end start -->

@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
-  <link rel="apple-touch-icon" sizes="76x76" href="/;/gallery/paw_img.jpg">
-  <link rel="icon" href="/;/gallery/paw_img.jpg">
+  <link rel="apple-touch-icon" sizes="76x76" href="/gallery/paw_img.jpg">
+  <link rel="icon" href="/gallery/paw_img.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -24,7 +24,7 @@
   <meta name="description" content="JDK动态代理  Spring AOP 和注解中涉及到一些JDK动态代理的内容，想要理解一下在Java层的动态代理具体过程。 涵盖内容： 代理的例子、静态&#x2F;动态代理概念、JDK中动态代理原理、Java层动态代理过程分析  引入 public class Bird&amp;#123;     public void fly() &amp;#123;         &#x2F;&#x2F; core code         Syst">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JDK动态代理">
-<meta property="og:url" content="http://43.139.93.91/;/2022/06/15/JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/index.html">
+<meta property="og:url" content="http://43.139.93.91/2022/06/15/JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="JDK动态代理  Spring AOP 和注解中涉及到一些JDK动态代理的内容，想要理解一下在Java层的动态代理具体过程。 涵盖内容： 代理的例子、静态&#x2F;动态代理概念、JDK中动态代理原理、Java层动态代理过程分析  引入 public class Bird&amp;#123;     public void fly() &amp;#123;         &#x2F;&#x2F; core code         Syst">
 <meta property="og:locale" content="zh_CN">
@@ -48,7 +48,7 @@
 
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/;/lib/hint/hint.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
@@ -80,22 +80,22 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 
-<link  rel="stylesheet" href="/;/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
   
-<link rel="stylesheet" href="/;/css/indexing-hover.css">
+<link rel="stylesheet" href="/css/indexing-hover.css">
 <link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
 
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"43.139.93.91","root":"/;/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/;/local-search.xml"};
+    var CONFIG = {"hostname":"43.139.93.91","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
-  <script  src="/;/js/utils.js" ></script>
-  <script  src="/;/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 6.0.0"></head>
 
 
@@ -103,7 +103,7 @@
   <header style="height: 90vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/;/">
+    <a class="navbar-brand" href="/">
       <strong>PPLong的博客</strong>
     </a>
 
@@ -122,7 +122,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/">
+              <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
               </a>
@@ -134,7 +134,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/archives/">
+              <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 归档
               </a>
@@ -146,7 +146,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/categories/">
+              <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
                 分类
               </a>
@@ -158,7 +158,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/tags/">
+              <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
               </a>
@@ -170,7 +170,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/about/">
+              <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
               </a>
@@ -182,7 +182,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/links/">
+              <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友達
               </a>
@@ -204,7 +204,7 @@
                   
                   
                   
-                  <a class="dropdown-item" href="/;/movie/">
+                  <a class="dropdown-item" href="/movie/">
                     <i class="iconfont icon-movie"></i>
                     第二人生
                   </a>
@@ -212,7 +212,7 @@
                   
                   
                   
-                  <a class="dropdown-item" href="/;/shuoshuo/">
+                  <a class="dropdown-item" href="/shuoshuo/">
                     <i class="iconfont icon-comment"></i>
                     唠唠
                   </a>
@@ -220,7 +220,7 @@
                   
                   
                   
-                  <a class="dropdown-item" href="/;/develop/">
+                  <a class="dropdown-item" href="/develop/">
                     <i class="iconfont icon-codepen-fill"></i>
                     尝鲜
                   </a>
@@ -248,7 +248,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/;/gallery/covers/wallhaven-6ow9xw.jpg') no-repeat center center;
+         style="background: url('/gallery/covers/wallhaven-6ow9xw.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -720,7 +720,7 @@ Proxy创建动态代理类$Proxy➡️ Proxy对每个方法会执行InvocationHa
                                                 <div class="post-meta mr-3">
                                                     <i class="iconfont icon-category"></i>
                                                     
-                                                        <a class="hover-with-bg" href="/;/categories/%E5%AD%A6%E4%B9%A0/">
+                                                        <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/">
                                                             学习
                                                         </a>
                                                         
@@ -730,11 +730,11 @@ Proxy创建动态代理类$Proxy➡️ Proxy对每个方法会执行InvocationHa
                                                         <div class="post-meta">
                                                             <i class="iconfont icon-tags"></i>
                                                             
-                                                                <a class="hover-with-bg" href="/;/tags/Java/">
+                                                                <a class="hover-with-bg" href="/tags/Java/">
                                                                     Java
                                                                 </a>
                                                                 
-                                                                <a class="hover-with-bg" href="/;/tags/JVM/">
+                                                                <a class="hover-with-bg" href="/tags/JVM/">
                                                                     JVM
                                                                 </a>
                                                                 
@@ -753,7 +753,7 @@ Proxy创建动态代理类$Proxy➡️ Proxy对每个方法会执行InvocationHa
                                                         <article class="post-prev col-6">
                                                             
                                                                 
-                                                                    <a href="/;/2022/06/17/Spring%E6%BA%90%E7%A0%81%E4%B9%8B%E6%97%85/">
+                                                                    <a href="/2022/06/17/Spring%E6%BA%90%E7%A0%81%E4%B9%8B%E6%97%85/">
                                                                         <i class="iconfont icon-arrowleft"></i>
                                                                         <span class="hidden-mobile">Spring源码之旅</span>
                                                                         <span class="visible-mobile">上一篇</span>
@@ -763,7 +763,7 @@ Proxy创建动态代理类$Proxy➡️ Proxy对每个方法会执行InvocationHa
                                                         <article class="post-next col-6">
                                                             
                                                                 
-                                                                    <a href="/;/2022/06/15/%E7%BC%96%E8%AF%91JDK%E6%BA%90%E7%A0%81%E5%B9%B6%E8%B0%83%E8%AF%95Native%E6%96%B9%E6%B3%95/">
+                                                                    <a href="/2022/06/15/%E7%BC%96%E8%AF%91JDK%E6%BA%90%E7%A0%81%E5%B9%B6%E8%B0%83%E8%AF%95Native%E6%96%B9%E6%B3%95/">
                                                                         <span class="hidden-mobile">编译JDK源码并调试Native方法</span>
                                                                         <span class="visible-mobile">下一篇</span>
                                                                         <i class="iconfont icon-arrowright"></i>
@@ -934,18 +934,18 @@ Proxy创建动态代理类$Proxy➡️ Proxy对每个方法会执行InvocationHa
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
-<script  src="/;/js/events.js" ></script>
-<script  src="/;/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
 
-  <script  src="/;/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
   
-    <script  src="/;/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -972,7 +972,7 @@ Proxy创建动态代理类$Proxy➡️ Proxy对每个方法会执行InvocationHa
 
 
 
-  <script defer src="/;/js/leancloud.js" ></script>
+  <script defer src="/js/leancloud.js" ></script>
 
 
 
@@ -1014,12 +1014,12 @@ Proxy创建动态代理类$Proxy➡️ Proxy对每个方法会执行InvocationHa
 
 
   
-<script src="/;/js/reset_code_lang.js"></script>
+<script src="/js/reset_code_lang.js"></script>
 
 
 
 <!-- 主题的启动项 保持在最底部 -->
-<script  src="/;/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
 <!-- hexo injector body_end start -->

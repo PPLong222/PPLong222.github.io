@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
-  <link rel="apple-touch-icon" sizes="76x76" href="/;/gallery/paw_img.jpg">
-  <link rel="icon" href="/;/gallery/paw_img.jpg">
+  <link rel="apple-touch-icon" sizes="76x76" href="/gallery/paw_img.jpg">
+  <link rel="icon" href="/gallery/paw_img.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -24,7 +24,7 @@
   <meta name="description" content="fs是啥？文件系统？  一直不懂make rootfs fs是啥，Linux文件系统怎么存储，看了下博客抄了一些话  文件系统 文件系统的基本组成 文件系统是操作系统中负责管理持久数据的子系统，说简单点，就是负责把用户的文件存到磁盘硬件中，因为即使计算机断电了，磁盘里的数据并不会丢失，所以可以持久化的保存文件。 文件系统的基本数据单位是文件，它的目的是对磁盘上的文件进行组织管理，那组织的方式不同，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux文件系统理解">
-<meta property="og:url" content="http://43.139.93.91/;/2021/11/01/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%90%86%E8%A7%A3/index.html">
+<meta property="og:url" content="http://43.139.93.91/2021/11/01/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%90%86%E8%A7%A3/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="fs是啥？文件系统？  一直不懂make rootfs fs是啥，Linux文件系统怎么存储，看了下博客抄了一些话  文件系统 文件系统的基本组成 文件系统是操作系统中负责管理持久数据的子系统，说简单点，就是负责把用户的文件存到磁盘硬件中，因为即使计算机断电了，磁盘里的数据并不会丢失，所以可以持久化的保存文件。 文件系统的基本数据单位是文件，它的目的是对磁盘上的文件进行组织管理，那组织的方式不同，">
 <meta property="og:locale" content="zh_CN">
@@ -55,7 +55,7 @@
 
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/;/lib/hint/hint.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
@@ -87,22 +87,22 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 
-<link  rel="stylesheet" href="/;/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
   
-<link rel="stylesheet" href="/;/css/indexing-hover.css">
+<link rel="stylesheet" href="/css/indexing-hover.css">
 <link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
 
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"43.139.93.91","root":"/;/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/;/local-search.xml"};
+    var CONFIG = {"hostname":"43.139.93.91","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
-  <script  src="/;/js/utils.js" ></script>
-  <script  src="/;/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 6.0.0"></head>
 
 
@@ -110,7 +110,7 @@
   <header style="height: 90vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/;/">
+    <a class="navbar-brand" href="/">
       <strong>PPLong的博客</strong>
     </a>
 
@@ -129,7 +129,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/">
+              <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
               </a>
@@ -141,7 +141,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/archives/">
+              <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 归档
               </a>
@@ -153,7 +153,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/categories/">
+              <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
                 分类
               </a>
@@ -165,7 +165,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/tags/">
+              <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
               </a>
@@ -177,7 +177,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/about/">
+              <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
               </a>
@@ -189,7 +189,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/;/links/">
+              <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友達
               </a>
@@ -211,7 +211,7 @@
                   
                   
                   
-                  <a class="dropdown-item" href="/;/movie/">
+                  <a class="dropdown-item" href="/movie/">
                     <i class="iconfont icon-movie"></i>
                     第二人生
                   </a>
@@ -219,7 +219,7 @@
                   
                   
                   
-                  <a class="dropdown-item" href="/;/shuoshuo/">
+                  <a class="dropdown-item" href="/shuoshuo/">
                     <i class="iconfont icon-comment"></i>
                     唠唠
                   </a>
@@ -227,7 +227,7 @@
                   
                   
                   
-                  <a class="dropdown-item" href="/;/develop/">
+                  <a class="dropdown-item" href="/develop/">
                     <i class="iconfont icon-codepen-fill"></i>
                     尝鲜
                   </a>
@@ -255,7 +255,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/;/gallery/covers/wallhaven-0p1jzj.jpg') no-repeat center center;
+         style="background: url('/gallery/covers/wallhaven-0p1jzj.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -370,7 +370,7 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
 <h3 id="文件数据如何存在磁盘中？">文件数据如何存在磁盘中？</h3>
 <p>磁盘读最小单位是扇区 —512B ，如果每次都写这么小的单位，则效率很低<br>
 所以fs把多个扇区组成一个逻辑快，每次读写的最小单位就是逻辑块（数据块）。Linux中逻辑块大小为4KB,提高了磁盘读写效率</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101145853363.png" srcset="/;/img/loading.gif" lazyload alt="image-20211101145853363"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101145853363.png" srcset="/img/loading.gif" lazyload alt="image-20211101145853363"></p>
 <p>磁盘格式化时，分成三个存储区域：</p>
 <ul>
 <li>超级块，存储fs的详细信息，块个数、块大小、空闲块。fs挂载时加载到内存</li>
@@ -384,7 +384,7 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
 <blockquote>
 <p>“提供机制，而不是策略。”</p>
 </blockquote>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101150611713.png" srcset="/;/img/loading.gif" lazyload alt="image-20211101150611713"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101150611713.png" srcset="/img/loading.gif" lazyload alt="image-20211101150611713"></p>
 <p>根据存储位置不同，fs可分为三类：</p>
 <ul>
 <li>磁盘的fs，数据直接存储在磁盘中 例如Ext2/3/4、XFS</li>
@@ -454,13 +454,13 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
 <p>在索引数据块中流出一个存放下一个索引数据块的指针，当这个索引数据块的信息用完了，就可以找到下一个索引数据块的信息。但也存在之前链表的问题，指针损坏会导致后面的数据错误</p>
 <p><strong>多级索引块</strong></p>
 <p>索引+索引，通过一个索引块来放多个索引数据块</p>
-<p><img src="/home/pplong/.config/Typora/typora-user-images/image-20211101154444120.png" srcset="/;/img/loading.gif" lazyload alt="image-20211101154444120"></p>
+<p><img src="/home/pplong/.config/Typora/typora-user-images/image-20211101154444120.png" srcset="/img/loading.gif" lazyload alt="image-20211101154444120"></p>
 </li>
 </ol>
 <p><strong>早期Unix的fs</strong></p>
 <p>根据文件所需的数据块数目阈值，通过不同方式存放。<br>
 文件头则可能包含 10、11、12、13个指针</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3hpYW9saW5jb2Rlci9JbWFnZUhvc3QvJUU2JTkzJThEJUU0JUJEJTlDJUU3JUIzJUJCJUU3JUJCJTlGLyVFNiU5NiU4NyVFNCVCQiVCNiVFNyVCMyVCQiVFNyVCQiU5Ri9Vbml4JTIwJUU1JUE0JTlBJUU3JUJBJUE3JUU3JUI0JUEyJUU1JUJDJTk1LnBuZw?x-oss-process=image/format,png" srcset="/;/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3hpYW9saW5jb2Rlci9JbWFnZUhvc3QvJUU2JTkzJThEJUU0JUJEJTlDJUU3JUIzJUJCJUU3JUJCJTlGLyVFNiU5NiU4NyVFNCVCQiVCNiVFNyVCMyVCQiVFNyVCQiU5Ri9Vbml4JTIwJUU1JUE0JTlBJUU3JUJBJUE3JUU3JUI0JUEyJUU1JUJDJTk1LnBuZw?x-oss-process=image/format,png" srcset="/img/loading.gif" lazyload alt=""></p>
 <h3 id="空闲空间管理">空闲空间管理</h3>
 <p>要存一个数据块，则放在磁盘上的哪个位置？</p>
 <h4 id="空闲表法">空闲表法</h4>
@@ -469,7 +469,7 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
 <h4 id="空闲链表法">空闲链表法</h4>
 <p>空闲块中有指针指向下一个空闲块。只需要在主存中保存一个指针，指向第一个空闲块</p>
 <p>简单，但不能随机访问，效率低，IO多，不适合大型文件系统</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101155216951.png" srcset="/;/img/loading.gif" lazyload alt="image-20211101155216951"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101155216951.png" srcset="/img/loading.gif" lazyload alt="image-20211101155216951"></p>
 <h4 id="位图法">位图法</h4>
 <p>利用二进制的一位表示磁盘中的一个盘块情况，所有的盘块都有一个二进制位与之对应。0表示空闲，1表示分配</p>
 <p>Linux fs采用</p>
@@ -478,7 +478,7 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
 <p><strong>块组</strong></p>
 <p>N个块组 --&gt; N大的文件</p>
 <p>Linux Ext2:</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101155902200.png" srcset="/;/img/loading.gif" lazyload alt="image-20211101155902200"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101155902200.png" srcset="/img/loading.gif" lazyload alt="image-20211101155902200"></p>
 <ul>
 <li>引导块：系统启动时来引导</li>
 <li>超级块：文件的重要信息，inode总个数、块总个数</li>
@@ -488,7 +488,7 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
 <li>数据块…</li>
 </ul>
 <h3 id="目录的存储方式">目录的存储方式</h3>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101160219286.png" srcset="/;/img/loading.gif" lazyload alt="image-20211101160219286"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101160219286.png" srcset="/img/loading.gif" lazyload alt="image-20211101160219286"></p>
 <p>通常，第一项是「<code>.</code>」，表示当前目录，第二项是「<code>..</code>」，表示上一级目录，接下来就是一项一项的文件名和 inode。<br>
 可以用vim打开，自测后发现每一行都是其下文件的名字（似乎只读）</p>
 <p>保存目录的格式为哈希表 --&gt; 提高查找效率，但需要避免哈希冲突</p>
@@ -497,11 +497,11 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
 <p>多个目录项中的索引节点指向同一个文件，也就是指向同一个inode。由于inode无法跨越fs，每个fs都有自己的inode的数据结构和列表，所以hard link不能cross fs.由于<strong>多个目录项都指向一个inode</strong>，所以只有删除文件的所有硬链接和源文件时，系统才会彻底删除该文件？？？？<strong>文件在磁盘中只有一次复制，磁盘空间占用小</strong><br>
 不能对文件夹进行硬链接，目的对象不能是已经存在的文件</p>
 <p>源就是我、我就是源  ln 123.txt 1234.txt</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101160922007.png" srcset="/;/img/loading.gif" lazyload alt="image-20211101160922007"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101160922007.png" srcset="/img/loading.gif" lazyload alt="image-20211101160922007"></p>
 <h4 id="软链接">软链接</h4>
 <p>相当于重新创建了一个文件，有<strong>独立的inode</strong>，但文件的内容却是另一个文件的路径。可以跨fs。删除源文件后就变成了死链接，不能使用。重新创建该目录的文件后，能够重新使用。目的对象不能是已经存在的文件</p>
 <p>源就是我、我就是源  ln -s 123.txt 1234.txt</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101161026563.png" srcset="/;/img/loading.gif" lazyload alt="image-20211101161026563"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101161026563.png" srcset="/img/loading.gif" lazyload alt="image-20211101161026563"></p>
 <p><strong>疑问：为啥硬软链接会占用相同大小的空间？？？？不是硬链接在磁盘中只有一个备份吗且软链接只是数据块变成地址吗？为啥？</strong></p>
 <p>举个栗子：</p>
 <p>这里123.txt是源文件、12345.txt是硬链接、1234.txt是软连接</p>
@@ -537,13 +537,13 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
 </li>
 <li>
 <p>非阻塞：read在数据未准备好的情况下立即返回，能继续执行，此时应用程序不断轮训内核，知道数据准备好，内核将数据拷贝到应用程序缓冲区，read调用能获得结果</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101161653344.png" srcset="/;/img/loading.gif" lazyload alt="image-20211101161653344"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101161653344.png" srcset="/img/loading.gif" lazyload alt="image-20211101161653344"></p>
 <p>解决傻乎乎的轮训方式： <strong>IO多路复用</strong> – 类似通知</p>
 <p>实际上，无论是阻塞 I/O、非阻塞 I/O，还是基于非阻塞 I/O 的多路复用都是同步调用。因为它们在 read 调用时，内核将数据从内核空间拷贝到应用程序空间，过程都是需要等待的，也就是说这个<strong>过程是同步</strong>的，如果内核实现的拷贝效率不高，read 调用就会在这个同步过程中等待比较长的时间。</p>
 </li>
 <li>
 <p>异步IO：发起aio_read后 立即返回，内核自动将数据进行拷贝，拷贝过程异步进行</p>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101162010300.png" srcset="/;/img/loading.gif" lazyload alt="image-20211101162010300"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101162010300.png" srcset="/img/loading.gif" lazyload alt="image-20211101162010300"></p>
 </li>
 </ul>
 </li>
@@ -577,11 +577,11 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
                                                         <div class="post-meta">
                                                             <i class="iconfont icon-tags"></i>
                                                             
-                                                                <a class="hover-with-bg" href="/;/tags/Linux/">
+                                                                <a class="hover-with-bg" href="/tags/Linux/">
                                                                     Linux
                                                                 </a>
                                                                 
-                                                                <a class="hover-with-bg" href="/;/tags/File-System/">
+                                                                <a class="hover-with-bg" href="/tags/File-System/">
                                                                     File System
                                                                 </a>
                                                                 
@@ -600,7 +600,7 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
                                                         <article class="post-prev col-6">
                                                             
                                                                 
-                                                                    <a href="/;/2021/11/02/%E8%81%8A%E8%81%8A%E6%9C%80%E8%BF%91%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%84%9F%E5%8F%97/">
+                                                                    <a href="/2021/11/02/%E8%81%8A%E8%81%8A%E6%9C%80%E8%BF%91%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%84%9F%E5%8F%97/">
                                                                         <i class="iconfont icon-arrowleft"></i>
                                                                         <span class="hidden-mobile">聊聊最近学习的感受</span>
                                                                         <span class="visible-mobile">上一篇</span>
@@ -610,7 +610,7 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
                                                         <article class="post-next col-6">
                                                             
                                                                 
-                                                                    <a href="/;/2021/11/01/Linux%E6%8C%87%E4%BB%A4/">
+                                                                    <a href="/2021/11/01/Linux%E6%8C%87%E4%BB%A4/">
                                                                         <span class="hidden-mobile">Linux指令</span>
                                                                         <span class="visible-mobile">下一篇</span>
                                                                         <i class="iconfont icon-arrowright"></i>
@@ -714,11 +714,11 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
   <footer class="text-center mt-5 py-3">
     <!--加入自定义格式的-->
     <!--自定义的git徽标样式-->
-<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue" srcset="/;/img/loading.gif" lazyload>
-<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a" srcset="/;/img/loading.gif" lazyload>
-<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue" srcset="/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a" srcset="/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080" srcset="/img/loading.gif" lazyload>
 <br>
-<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,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&style=flat&color=d2c68b" srcset="/;/img/loading.gif" lazyload>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,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&style=flat&color=d2c68b" srcset="/img/loading.gif" lazyload>
 
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
@@ -781,18 +781,18 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
-<script  src="/;/js/events.js" ></script>
-<script  src="/;/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
 
-  <script  src="/;/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
   
-    <script  src="/;/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -819,7 +819,7 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
 
 
 
-  <script defer src="/;/js/leancloud.js" ></script>
+  <script defer src="/js/leancloud.js" ></script>
 
 
 
@@ -903,12 +903,12 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
 
 
   
-<script src="/;/js/reset_code_lang.js"></script>
+<script src="/js/reset_code_lang.js"></script>
 
 
 
 <!-- 主题的启动项 保持在最底部 -->
-<script  src="/;/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
 <!-- hexo injector body_end start -->
