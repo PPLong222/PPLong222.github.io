@@ -1125,7 +1125,7 @@ delete from xxx where ... ;
 <li>视图基本不实际占用物理空间（只保存sql逻辑，不保存数据）</li>
 <li></li>
 </ul>
-<h3 id="变量-v2">变量</h3>
+<h3 id="变量">变量</h3>
 <h4 id="系统变量">系统变量</h4>
 <p>500条，比较多</p>
 <ul>
@@ -1242,7 +1242,7 @@ select @selfStr;</code></pre></div>
 drop procedure xxx
 # 查看存储过程
 show create procedure xxx;</code></pre></div>
-<h4 id="函数-v3">函数</h4>
+<h4 id="函数">函数</h4>
 <div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 创建
 create function xxx(params...) returns returntype
 begin
@@ -1355,7 +1355,7 @@ begin
         end while xx;
 end $;</code></pre></div>
 <p>iterator  : 类似java中的continue;</p>
-<h2 id="进阶-v4">进阶</h2>
+<h2 id="进阶">进阶</h2>
 <h3 id="自启动服务">自启动服务</h3>
 <p>早就想设置了，赣！</p>
 <p>/usr/lib/systemd/system下新建xx.service文件</p>
@@ -1402,7 +1402,7 @@ show variables like &#39;%storage_engine%&#39;;
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211020105635279.png" srcset="/img/loading.gif" lazyload alt="image-20211020105635279"></p>
 <h5 id="MyIASM和InnoDB">MyIASM和InnoDB</h5>
 <p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/mysql-different-nnodb-myisam.html">Mysql和InnoDB区别</a></p>
-<h4 id="-v5"></h4>
+<h4 id="-v6"></h4>
 <h3 id="优化原因">优化原因</h3>
 <h4 id="Sql性能下降原因">Sql性能下降原因</h4>
 <ol>
