@@ -1125,7 +1125,7 @@ delete from xxx where ... ;
 <li>视图基本不实际占用物理空间（只保存sql逻辑，不保存数据）</li>
 <li></li>
 </ul>
-<h3 id="变量-v2">变量</h3>
+<h3 id="变量">变量</h3>
 <h4 id="系统变量">系统变量</h4>
 <p>500条，比较多</p>
 <ul>
@@ -1242,7 +1242,7 @@ select @selfStr;</code></pre></div>
 drop procedure xxx
 # 查看存储过程
 show create procedure xxx;</code></pre></div>
-<h4 id="函数-v3">函数</h4>
+<h4 id="函数">函数</h4>
 <div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 创建
 create function xxx(params...) returns returntype
 begin
@@ -1355,7 +1355,7 @@ begin
         end while xx;
 end $;</code></pre></div>
 <p>iterator  : 类似java中的continue;</p>
-<h2 id="进阶-v4">进阶</h2>
+<h2 id="进阶">进阶</h2>
 <h3 id="自启动服务">自启动服务</h3>
 <p>早就想设置了，赣！</p>
 <p>/usr/lib/systemd/system下新建xx.service文件</p>
@@ -1863,7 +1863,7 @@ select * from t1 order by col1 asc,col2 desc; # col1-col2 is co-index  --- index
 <p>表定义文件</p>
 <h5 id="ibd">ibd</h5>
 <p>索引和数据文件</p>
-<h2 id="一些问题-v4">一些问题</h2>
+<h2 id="一些问题-v3">一些问题</h2>
 <p><strong>Mysql和Mariadb的区别</strong></p>
 <ul>
 <li>MyISam：
