@@ -4,7 +4,7 @@
     let option;
     let post_count_list = []
     $.get(
-        'http://www.pplong.top/custom_src/data/post-count-rank.json',
+        'http://43.139.93.91/custom_src/data/post-count-rank.json',
         function(_rawData) {
             post_count_list = _rawData
             drawChart(_rawData);

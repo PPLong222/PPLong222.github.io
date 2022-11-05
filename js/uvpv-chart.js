@@ -4,7 +4,7 @@
     let myChart_uvpv = echarts.init(chartDom);
     let option;
     $.get(
-        'http://www.pplong.top/custom_src/data/pvuv.json',
+        'http://43.139.93.91/custom_src/data/pvuv.json',
         function(_rawData) {
             drawChart(_rawData);
         }

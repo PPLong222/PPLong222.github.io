@@ -433,7 +433,7 @@ r<span class="token punctuation">.</span>encoding <span class="token operator">=
 <span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
 <span class="token comment"># 	"resultMsg":"该文章已经下线！",</span></code></pre></div>
 <p>这时就体现出请求头防盗链Referrer的作用了，什么是Referrer，Referrer就是你从哪个页面访问的这个页面，指向的是上一个页面的url，请求头上加上正确的Referrer，则可以访问到数据。这里就说明网站仅对Referrer进行了筛查，正确的Referrer才放行</p>
-<h4 id="注意点-v2">注意点</h4>
+<h4 id="注意点">注意点</h4>
 <h2 id="数据解析">数据解析</h2>
 <p>为什么需要数据解析？</p>
 <p><strong>一些数据没有通过api进行json返回，而是直接嵌在了HTML里面</strong></p>
@@ -501,7 +501,7 @@ result <span class="token operator">=</span> html<span class="token punctuation"
         settings<span class="token punctuation">.</span>py       <span class="token comment"># project settings file</span>
         spiders<span class="token operator">/</span>          <span class="token comment"># a directory where you'll later put your spiders</span>
             __init__<span class="token punctuation">.</span>py</code></pre></div>
-<h3 id="入门">入门</h3>
+<h3 id="入门-v2">入门</h3>
 <p><strong>创建第一个Scrapy脚本</strong></p>
 <div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> scrapy
 
@@ -654,7 +654,7 @@ i <span class="token operator">=</span> <span class="token string">"KERgVgrbxP7Z
 <p>最终能得到正确的结论，注意传参和加解密时很多时候要求的是utf-8形式的编码，然后AES要求编码的data要是16的倍数，key是16 24 32的倍数，所以需要填补缺失的Data，随便填满即可。</p>
 <h3 id="异步爬取一本小说">异步爬取一本小说</h3>
 <p><a target="_blank" rel="noopener" href="https://dushu.baidu.com/pc/reader?gid=4306063500">百度小说–西游记</a></p>
-<h4 id="思路-v3">思路</h4>
+<h4 id="思路">思路</h4>
 <p>这里主要注意一下思路：先<strong>同步</strong>地获取指定一本书的id和章节编号cid，然后根据cid去<strong>异步</strong>的请求每一章节的数据并<strong>异步</strong>地写进文件</p>
 <ul>
 <li><strong>异步的概念</strong>：不仅发送请求是异步的，通过aiofiles实现读写的时候也是异步执行的，这一点就非常的高效。</li>
