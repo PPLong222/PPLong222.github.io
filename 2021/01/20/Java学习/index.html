@@ -583,7 +583,7 @@ obj<span class="token punctuation">.</span>stu <span class="token operator">=</s
 <p>此时操作u2/u1 都会使另一个的值发生改变</p>
 <p>但如果我们不想改变另一个的值就需要使用到clone</p>
 <p>实现Cloneable接口 //Cloneable接口没有具体的实现方法，他相当于是一个标识，如果类没有继承cloneable接口而调用clone方法，会抛出<strong>CloneNotSupportedExcepion异常</strong></p>
-<h2 id="-v2"></h2>
+<h2 id="-v3"></h2>
 <h3 id="深拷贝和浅拷贝">深拷贝和浅拷贝</h3>
 <p>浅拷贝</p>
 <p>clone无法clone 一个对象中的另一个对象，还是是一个reference</p>
@@ -960,7 +960,7 @@ o<span class="token punctuation">[</span><span class="token number">1</span><spa
 <span class="token punctuation">&#125;</span></code></pre></div>
 <h2 id="I-O操作">I/O操作</h2>
 <h3 id="常见几大输入输出类">常见几大输入输出类</h3>
-<h2 id="异常">异常</h2>
+<h2 id="异常-v2">异常</h2>
 <h3 id="Exception和Error关系">Exception和Error关系</h3>
 <p><strong>Exception和Error都可以被catch到</strong></p>
 <p>但不应在代码中catch error</p>

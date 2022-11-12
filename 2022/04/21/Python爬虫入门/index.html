@@ -406,7 +406,7 @@ r<span class="token punctuation">.</span>encoding <span class="token operator">=
 <span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>json<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>headers<span class="token punctuation">)</span></code></pre></div>
 <p><strong>爬取数据后，记得close关闭这个请求</strong></p>
-<h3 id="进阶-v2">进阶</h3>
+<h3 id="进阶-v4">进阶</h3>
 <h4 id="登录处理-Cookie">登录处理 Cookie</h4>
 <p>理解正常登录流程：登录成功后为什么不用再次登录？Cookie中含有加密的信息，与设备信息是绑定的。</p>
 <p>session：一连串的的请求，这个过程中cookie不会消失，通过session.post session.get来保持会话，保存cookie</p>
@@ -501,7 +501,7 @@ result <span class="token operator">=</span> html<span class="token punctuation"
         settings<span class="token punctuation">.</span>py       <span class="token comment"># project settings file</span>
         spiders<span class="token operator">/</span>          <span class="token comment"># a directory where you'll later put your spiders</span>
             __init__<span class="token punctuation">.</span>py</code></pre></div>
-<h3 id="入门">入门</h3>
+<h3 id="入门-v2">入门</h3>
 <p><strong>创建第一个Scrapy脚本</strong></p>
 <div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> scrapy
 
