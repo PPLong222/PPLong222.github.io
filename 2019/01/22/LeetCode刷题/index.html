@@ -61,6 +61,8 @@
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210316225500458.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210428183546466.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210428183707107.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20221114110525822.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20221114112209399.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210307223505616.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210307224350988.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210307230039420.png">
@@ -313,7 +315,7 @@
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220306224704953.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210330202907036.png">
 <meta property="article:published_time" content="2019-01-22T12:05:07.000Z">
-<meta property="article:modified_time" content="2022-11-10T10:20:07.000Z">
+<meta property="article:modified_time" content="2022-11-14T03:26:18.000Z">
 <meta property="article:author" content="PPLong">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="算法">
@@ -556,8 +558,8 @@
     
         <span class="post-meta">
   <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
-  <time datetime="2022-11-10 18:20" pubdate>
-    更新: 2022年11月10日晚上6点20分
+  <time datetime="2022-11-14 11:26" pubdate>
+    更新: 2022年11月14日上午11点26分
   </time>
 </span>
         
@@ -567,7 +569,7 @@
     
         <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      143k 字
+      144k 字
     </span>
         
 
@@ -576,7 +578,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      449 分钟
+      452 分钟
     </span>
                 
 
@@ -1133,6 +1135,52 @@ head<span class="token punctuation">.</span>next <span class="token operator">=<
    <span class="token punctuation">&#125;</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210428183707107.png" srcset="/img/loading.gif" lazyload alt="image-20210428183707107"></p>
 <p>这是合并子序列问题，当这种可选择的，可分成不同数组的I问题，可以采用<strong>合并子序列方法</strong>，多索引判断</p>
+<h2 id="面试-17-10-主要元素-⭐">面试-17.10. 主要元素 ⭐</h2>
+<div class="code-tag-time">2022/11/14 11:05:00</div>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20221114110525822.png" srcset="/img/loading.gif" lazyload alt="image-20221114110525822"></p>
+<h3 id="思考-v9">思考</h3>
+<ul>
+<li>要求在On的时间复杂度内，肯定是一次遍历。最开始尝试用“最近出现最多次”的方法来统计，但最后发现不可行。但想不到其他的办法了</li>
+</ul>
+<h3 id="1-Boyer-Moore-投票算法">1. Boyer-Moore 投票算法</h3>
+<p>自己想的“最近出现最多次”方法的原理与之基本相同，但关键点在于没有对候选元素进行再一次验证。也就是当面对[1,2,3]和 [3,2,3]的情况时想不到处理的对策，这也是自己算法的问题所在，只做了第一步却没有做第二步。</p>
+<div class="code-wrapper"><pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">majorityElement</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> numsSize<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> cur_num <span class="token operator">=</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> numsSize<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      	<span class="token comment">// 优化，如果出现size / 2 + 1次，则说明就是主元素</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>count <span class="token operator">></span> numsSize <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> cur_num<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>cur_num <span class="token operator">==</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            count<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+            count<span class="token operator">--</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">// count为0时，即候选数不间断出现的次数与这之间出现其他不同的数的次数抵消，则替换候选数</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>count <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            cur_num <span class="token operator">=</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            count <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  	<span class="token comment">// 验证候选数是否符合条件</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> numsSize<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> cur_num<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            count<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> count <span class="token operator">></span> numsSize <span class="token operator">/</span> <span class="token number">2</span><span class="token operator">?</span> cur_num <span class="token operator">:</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> 
+<span class="token punctuation">&#125;</span></code></pre></div>
+<blockquote>
+<p>什么当数组中存在主要元素时，Boyer-Moore 投票算法可以确保得到主要元素？</p>
+<p>LeetCode: Boyer-Moore投票算法中，遇到相同的数则将 count 加 1，遇到不同的数则将 count 减 1。根据主要元素的定义，<strong>主要元素的出现次数大于其他元素的出现次数之和</strong>，因此在遍历过程中，主要元素和其他元素两两抵消，最后一定剩下至少一个主要元素，此时candidate 为主要元素，且 count≥1。</p>
+</blockquote>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20221114112209399.png" srcset="/img/loading.gif" lazyload alt="image-20221114112209399"></p>
+<h3 id="总结-v3">总结</h3>
+<ul>
+<li><strong>验证也是设计算法时一个重要的环节 ⚠️ ，再次遍历不会影响On的时间复杂度</strong></li>
+</ul>
 <h2 id="1-两数之和-⭐">1. 两数之和 ⭐</h2>
 <div class="code-tag-time">2021/3/7 23:02:00</div>
 <div class="code-tag-label code-tag-label-foreach">TwinPointer</div>
@@ -1521,7 +1569,7 @@ TAG : Overflow / Decimal</p>
 
  <span class="token punctuation">&#125;</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20201012090139984.png" srcset="/img/loading.gif" lazyload alt="image-20201012090139984"></p>
-<h3 id="思考-v9">思考</h3>
+<h3 id="思考-v10">思考</h3>
 <ul>
 <li>对于判断 和 输出对于字符的思路，我的思路上与题设大体一致</li>
 <li>不能解决 4 -9 的问题，就只能存储进数组中，通过索引解决</li>
@@ -1615,7 +1663,7 @@ TAG : Overflow / Decimal</p>
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20201012205626708.png" srcset="/img/loading.gif" lazyload alt="image-20201012205626708"></p>
-<h3 id="思考-v10">思考</h3>
+<h3 id="思考-v11">思考</h3>
 <p>StringBuilder 确实操作比 String类型快很多很多，且在 空间占用上也远远低于 String</p>
 <p>这还得归结于String 相加时 总会新分配一个String对象进行赋值</p>
 <hr>
@@ -2521,12 +2569,12 @@ TAG : Iteration / Recursion / Complement / Bits</p>
 </blockquote>
 <p>这道题我的问题主要在于：signed int (1 &gt;&gt; 31 - 1)等于多少，这里应该从位的角度先去理解，计算-1的补码然后二者相加，因为是补码运算，所以符号位囊括在计算过程中。（而-a = ~a+1，这一点也很重要，简化理解过程），得到二进制存储后，再根据对应的数据类型去转化，这里得到的其实是1&gt;&gt;31，而又是signed int，所以结果又根据原码-&gt;补码的反操作来求补码-&gt;原码，得到原码的值应该是-1&gt;&gt;31。</p>
 <p>总结一下就是：<strong>完全按照计算机的步骤来，不要自己一会补码运算一会原码相加，把自己都搞混了</strong></p>
-<h3 id="总结-v3">总结</h3>
+<h3 id="总结-v4">总结</h3>
 <p>一直想做这道题，今天终于还是抽时间写了这道题。这道题踩到坑了，最开始用迭代和递归，都没做出来，要么超时要么StackOF。以为是算法本身的问题，但后来实在没办法，想了想后觉得奇怪。一调试发现一个重要的问题！也是非常基础的问题（只怪自己基础不牢固）</p>
 <p>$$int \ n = Integer.MIN_VALUE  \quad then \quad -n = n$$</p>
 <h2 id="53-最大子序和-⭐">53. 最大子序和 ⭐</h2>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210405093158517.png" srcset="/img/loading.gif" lazyload alt="image-20210405093158517"></p>
-<h3 id="思考-v11">思考</h3>
+<h3 id="思考-v12">思考</h3>
 <p>O n 的解法</p>
 <p>动态规划？</p>
 <h3 id="1-My-DP">1. My DP</h3>
@@ -2969,7 +3017,7 @@ dp中记录的是到了当前这一个索引，<strong>还剩下</strong>多少�
        <span class="token keyword">return</span> left<span class="token operator">></span>right<span class="token operator">?</span>left<span class="token operator">:</span>right<span class="token punctuation">;</span>
    <span class="token punctuation">&#125;</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20201013151715852.png" srcset="/img/loading.gif" lazyload alt="image-20201013151715852"></p>
-<h3 id="思考-v12">思考</h3>
+<h3 id="思考-v13">思考</h3>
 <ul>
 <li>
 <p>判断 Null 型对象以后 还是加上try -catch 语句更好</p>
@@ -3254,7 +3302,7 @@ public static int maxProfit_2(int[] prices) &#123;
 <h3 id="2-有限状态自动机（转）">2. 有限状态自动机（转）</h3>
 <h2 id="146-LRU缓存-⭐⭐">146. LRU缓存 ⭐⭐</h2>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210411092859009.png" srcset="/img/loading.gif" lazyload alt="image-20210411092859009"></p>
-<h3 id="思考-v13">思考</h3>
+<h3 id="思考-v14">思考</h3>
 <p>get 和 put的方法说明</p>
 <h3 id="1-My-LruHashMap">1. My LruHashMap</h3>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Node</span> <span class="token punctuation">&#123;</span>
@@ -3472,7 +3520,7 @@ public static int maxProfit_2(int[] prices) &#123;
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210411111403208.png" srcset="/img/loading.gif" lazyload alt="image-20210411111403208"></p>
 <h2 id="155-最小栈-⭐">155. 最小栈 ⭐</h2>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210426175732260.png" srcset="/img/loading.gif" lazyload alt="image-20210426175732260"></p>
-<h3 id="思考-v14">思考</h3>
+<h3 id="思考-v15">思考</h3>
 <h3 id="1-自定义">1. 自定义</h3>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">MinStack</span> <span class="token punctuation">&#123;</span>
 
@@ -3909,7 +3957,7 @@ public static int maxProfit_2(int[] prices) &#123;
             second <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>first <span class="token operator">+</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> second<span class="token punctuation">)</span><span class="token punctuation">;</span>
             first <span class="token operator">=</span> temp<span class="token punctuation">;</span>
         <span class="token punctuation">&#125;</span></code></pre></div>
-<h3 id="总结-v4">总结</h3>
+<h3 id="总结-v5">总结</h3>
 <ul>
 <li>这道题做的很快，因为思路很清楚，为什么思路清楚？因为提到了钱，讨论<strong>钱的最大值</strong>再加上本身<strong>问题有迭代性质因素</strong>，所以想到了贪心和DP</li>
 <li><strong>然后先想清楚了大致思路才写的代码，把一些坑给避开了，这点很重要</strong></li>
@@ -4282,7 +4330,7 @@ remove保证没有过期元素</p>
    <span class="token punctuation">&#125;</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220119112251084.png" srcset="/img/loading.gif" lazyload alt="image-20220119112251084"></p>
 <p>牛逼…</p>
-<h3 id="总结-v5">总结</h3>
+<h3 id="总结-v6">总结</h3>
 <p>这里最开始做的时候思路大体是对的，要数字决定的索引之间的差值关系，就考虑用桶或者哈希，但自己用了哈希后感觉用桶排序会更快，但后面一直纠结实现桶排序但未考虑最大值而超出了内存限制。感觉自己还是一直纠结把索引保存下来，但其实这里不用保存索引关系，考虑了滑动窗口的问题只需要留一段窗口内的值就行了呀…</p>
 <ul>
 <li>看到值决定的索引间关系问题考虑用哈希</li>
@@ -4378,7 +4426,7 @@ remove保证没有过期元素</p>
 <div class="code-tag-label code-tag-label-foreach">Foreach</div>
 <div class="code-tag-label code-tag-label-recursion">Recursion</div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210410093526939.png" srcset="/img/loading.gif" lazyload alt="image-20210410093526939"></p>
-<h3 id="思考-v15">思考</h3>
+<h3 id="思考-v16">思考</h3>
 <p>位运算？</p>
 <h3 id="1-简单递归">1. 简单递归</h3>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isUgly</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -4526,7 +4574,7 @@ remove保证没有过期元素</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220120120554207.png" srcset="/img/loading.gif" lazyload alt="image-20220120120554207"></p>
 <p>空间复杂度 O1<br>
 时间复杂度 $$O(\sqrt n)$$</p>
-<h3 id="总结-v6">总结</h3>
+<h3 id="总结-v7">总结</h3>
 <p>做这一题的时候思路大概上还是对的，想到了动态规划，之后想到了自定义链表进而想到了DFS，但这道题是BFS解的…</p>
 <ul>
 <li>从树的角度：对多叉树的层数解法考虑BFS</li>
@@ -4568,7 +4616,7 @@ remove保证没有过期元素</p>
 <div class="code-tag-label code-tag-label-greedy">Greedy</div>
 <div class="code-tag-label code-tag-label-binary">Binary</div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210330164045435.png" srcset="/img/loading.gif" lazyload alt="image-20210330164045435"></p>
-<h3 id="思考-v16">思考</h3>
+<h3 id="思考-v17">思考</h3>
 <p>可以不连续，  动态规划 dp   通项式</p>
 <h3 id="1-自己写的dp">1. 自己写的dp</h3>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> dp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>nums<span class="token punctuation">.</span>length<span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -4669,7 +4717,7 @@ dp<span class="token punctuation">[</span><span class="token number">0</span><sp
 <div class="code-tag-time">2021/4/6 09:46:00</div>
 <div class="code-tag-label code-tag-label-dp">DP</div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210407093902378.png" srcset="/img/loading.gif" lazyload alt="image-20210407093902378"></p>
-<h3 id="思考-v17">思考</h3>
+<h3 id="思考-v18">思考</h3>
 <p>没有想dp …很拉  有想到DFS 不过没有实现</p>
 <h3 id="1-记忆DFS">1. 记忆DFS</h3>
 <h3 id="2-DP">2. DP</h3>
@@ -5865,7 +5913,7 @@ O(amount * coins.length)的时间复杂度</p>
 <span class="token comment">// 作者：cheungq-6</span>
 <span class="token comment">// 链接：https://leetcode-cn.com/problems/coin-change-2/solution/hua-tu-li-jie-cong-chang-gui-er-wei-dpda-4gfy/</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220121121212373.png" srcset="/img/loading.gif" lazyload alt="image-20220121121212373"></p>
-<h3 id="总结-v7">总结</h3>
+<h3 id="总结-v8">总结</h3>
 <p>自己总算是了确了DFS的执念了，之前一想到啥就容易想到DFS，但确实这类题的背包特点太明显了，自己对背包问题还是不熟悉，最开始想的也是从amount  1-n的迭代，但没想清楚如何用规划来迭代的算</p>
 <ul>
 <li>背包问题先从朴素方法解决，然后再优化到一维</li>
@@ -5986,7 +6034,7 @@ O(amount * coins.length)的时间复杂度</p>
 </code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220118182353926.png" srcset="/img/loading.gif" lazyload alt="image-20220118182353926"></p>
 <p>我只能说，精彩…</p>
-<h3 id="总结-v8">总结</h3>
+<h3 id="总结-v9">总结</h3>
 <ol>
 <li>碰到字符串或数字都可排序的情况，先考虑数字排序，因为可能更快</li>
 <li>不要那些不必要的运算，想清楚…</li>
@@ -6488,7 +6536,7 @@ TAG : DFS \ BFS \ Hash \ InOrder Traversal</p>
 <div class="code-tag-time">2021/4/6 09:46:00</div>
 <div class="code-tag-label code-tag-label-binary">Binary</div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210906184027159.png" srcset="/img/loading.gif" lazyload alt="image-20210906184027159"></p>
-<h3 id="思考-v18">思考</h3>
+<h3 id="思考-v19">思考</h3>
 <p>有序 升序 、返回下标</p>
 <h3 id="1-二分查找">1. 二分查找</h3>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">search</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -6520,7 +6568,7 @@ TAG : DFS \ BFS \ Hash \ InOrder Traversal</p>
 <div class="code-tag-label code-tag-label-presum">Prefix Sum</div>
 <div class="code-tag-label code-tag-label-trietree">Trie Tree</div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220317164310236.png" srcset="/img/loading.gif" lazyload alt="image-20220317164310236"></p>
-<h3 id="思考-v19">思考</h3>
+<h3 id="思考-v20">思考</h3>
 <ol>
 <li>该单词又其他单词逐步添加一个字母组成（不是这样的单词就不是正确答案，可能有其他随意的单词 ），不一定是从一个单词开始添加起（吗？），且可能是乱序。 多个答案则返回<strong>字典序最小</strong>的。</li>
 <li>细节：一个字母后可以跟不同的字母，跟不同字母后最终长度可能变化。</li>
@@ -6791,7 +6839,7 @@ TAG : DFS \ BFS \ Hash \ InOrder Traversal</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331184331762.png" srcset="/img/loading.gif" lazyload alt="image-20220331184331762"></p>
 <h4 id="优化-v7">优化</h4>
 <p>考虑预处理 + 索引，不过意义不是很大感觉</p>
-<h4 id="思考-v20">思考</h4>
+<h4 id="思考-v21">思考</h4>
 <ul>
 <li>先把最简单的做出来再说难的吧</li>
 </ul>
@@ -6837,7 +6885,7 @@ TAG : DFS \ BFS \ Hash \ InOrder Traversal</p>
 <div class="code-tag-label code-tag-label-hash">Hash</div>
 <div class="code-tag-label code-tag-label-math">Math</div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210907152833634.png" srcset="/img/loading.gif" lazyload alt="image-20210907152833634"></p>
-<h3 id="思考-v21">思考</h3>
+<h3 id="思考-v22">思考</h3>
 <p>注意回答是<strong>还有</strong>几只兔子颜色相同，注意相同数字的索引集合数目，是否超过其本身数字，肯定是需要遍历全的，至少On复杂度</p>
 <h3 id="1-哈希表-计数清零">1. 哈希表+计数清零</h3>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">numRabbits</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> answers<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -7366,7 +7414,7 @@ O(n)的空间复杂度</p>
 <span class="token comment">// 作者：LeetCode-Solution</span>
 <span class="token comment">// 链接：https://leetcode-cn.com/problems/array-of-doubled-pairs/solution/er-bei-shu-dui-shu-zu-by-leetcode-soluti-2mqj/</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220402093819482.png" srcset="/img/loading.gif" lazyload alt="image-20220402093819482"></p>
-<h3 id="总结-v9">总结</h3>
+<h3 id="总结-v10">总结</h3>
 <ul>
 <li>🙅 被初始直接算法困扰。虽然做题原则上是从直接到进阶做，但是有时候直接的算法比较冗余，特殊情况较多，如果没写清楚，就容易混乱，导致恶性循环，也没心情想好的思路的。所以以后直接思路的实现比较繁琐时且知道效率不高时，要考虑去思考其他的方法了，不应该把重心放在冗余上。</li>
 <li>⚠️ 排序数组在负数与正数在倍数关系上的相反情况！还有一些特殊情况的查找，以后读题时<strong>对关键条件要先找到特殊情况</strong></li>
@@ -7377,7 +7425,7 @@ O(n)的空间复杂度</p>
 </ul>
 <h2 id="1221-分割平衡字符串-⭐">1221. 分割平衡字符串 ⭐</h2>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210907150251964.png" srcset="/img/loading.gif" lazyload alt="image-20210907150251964"></p>
-<h3 id="思考-v22">思考</h3>
+<h3 id="思考-v23">思考</h3>
 <p>每个字符串都是平衡字符串，这里父子存在相同关系，想到分治</p>
 <p>列举不可能</p>
 <p>长度为偶数、排除二分法、分支感觉无法完成</p>
@@ -7521,7 +7569,7 @@ O(n)的空间复杂度</p>
 <div class="code-tag-time">2022/8/21 23:48:00</div>
 <div class="code-tag-label code-tag-label-foreach">Foreach</div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220821183032495.png" srcset="/img/loading.gif" lazyload alt="image-20220821183032495"></p>
-<h3 id="思考-v23">思考</h3>
+<h3 id="思考-v24">思考</h3>
 <ul>
 <li>输入是任何单词的前导连续子字符串</li>
 <li>一次遍历</li>
@@ -7588,7 +7636,7 @@ O(n)的空间复杂度</p>
        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
    <span class="token punctuation">&#125;</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220821224515819.png" srcset="/img/loading.gif" lazyload alt="image-20220821224515819"></p>
-<h3 id="总结-v10">总结</h3>
+<h3 id="总结-v11">总结</h3>
 <p>状态机的思想：</p>
 <ul>
 <li>能够在简化空间复杂度上有</li>
@@ -7914,7 +7962,7 @@ TAG : Foreach</p>
 <span class="token comment">// 作者：wa-pian-d</span>
 <span class="token comment">// 链接：https://leetcode-cn.com/problems/maximize-the-confusion-of-an-exam/solution/2024-kao-shi-de-zui-da-kun-rao-du-java-b-86wg/</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220330102422950.png" srcset="/img/loading.gif" lazyload alt="image-20220330102422950"></p>
-<h3 id="总结-v11">总结</h3>
+<h3 id="总结-v12">总结</h3>
 <ul>
 <li>
 <p>滑动窗口不熟悉，做的时候没有想到滑动窗口。好久没有做到滑动窗口的题了。滑动窗口题型的特点：<strong>有限定值，计算范围内的值（连续的），最好是在数组中进行的</strong>。巩固一下</p>
@@ -8119,7 +8167,7 @@ TAG : Foreach</p>
 <span class="token punctuation">&#125;</span>
 </code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220124112935563.png" srcset="/img/loading.gif" lazyload alt="image-20220124112935563"></p>
-<h3 id="总结-v12">总结</h3>
+<h3 id="总结-v13">总结</h3>
 <ul>
 <li>TreeMap不熟悉，根本没考虑，有空再了解一下<strong>TreeMap</strong>。HashMap看不上，觉得没有链表快…</li>
 <li>以后还是要多想一下，毕竟链表在插入时还是On的复杂度，但HashMap基本是O1，还是没有想清楚，所以会造成超时的问题。</li>
@@ -8604,7 +8652,7 @@ public:
 &#125;;
 &#x2F;&#x2F; 链接：https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;find-good-days-to-rob-the-bank&#x2F;solution&#x2F;gua-he-da-jie-yin-xing-de-ri-zi-by-leetc-z6r1&#x2F;1418616</code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220306224704953.png" srcset="/img/loading.gif" lazyload alt="image-20220306224704953"></p>
-<h3 id="总结-v13">总结</h3>
+<h3 id="总结-v14">总结</h3>
 <ul>
 <li>Queue还不是很熟悉</li>
 <li>没想到dp…偏偏这次没想到</li>
@@ -8812,7 +8860,7 @@ public:
         62&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        249.2k&nbsp 字
+        249.7k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
