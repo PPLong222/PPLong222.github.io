@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// js脚本, 仅仅在本地运行
 // 防君子不防小人
 // 在/etc/hosts配置了 dns映射， 后期ip更新后可能有错误
 const appId= "9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI"
