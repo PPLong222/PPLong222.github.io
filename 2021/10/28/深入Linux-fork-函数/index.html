@@ -511,7 +511,7 @@ Process finished with exit code 0</code></pre></div>
 <p>linux内核为每个进程都提供了一个内核栈。linux内核支持不同体系，但不同体系可能进程需要存储的信息不同（后面会提到），则需要一种通用的方式，将体系结构相关的部分和无关的部分区分。也就是为什么会有task_struct和thread_info。<br>
 task_struct提供了一种通用的方式来描述进程。<br>
 thread_info使得特定体系需要访问的那部分进程的数据，能<strong>通过thread_info来找到task_struct</strong></p>
-<h4 id="结构-v4">结构</h4>
+<h4 id="结构-v3">结构</h4>
 <div class="code-wrapper"><pre class="language-c" data-language="c"><code class="language-c"><span class="token comment">// kernel 2.6.32.20</span>
 <span class="token keyword">struct</span> <span class="token class-name">thread_info</span> <span class="token punctuation">&#123;</span>
 	<span class="token keyword">struct</span> <span class="token class-name">task_struct</span>	<span class="token operator">*</span>task<span class="token punctuation">;</span>		<span class="token comment">/* main task structure */</span>

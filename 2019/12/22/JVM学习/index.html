@@ -586,7 +586,7 @@ JRE中包含虚拟机JVM</p>
 <p>作用：主管java程序的运行，保存方法的局部变量，部分结果，参与方法的调用和返回</p>
 <p>优点： 访问速度快  <strong>不存在垃圾回收问题</strong> <strong>GC</strong>   (只有进栈出栈操作) 但可能存在OOM</p>
 <p>设置栈大小 VMOptions: -Xss256k</p>
-<h4 id="异常-v2">异常</h4>
+<h4 id="异常">异常</h4>
 <ul>
 <li>JVM允许java栈大小是动态或者固定的</li>
 <li>栈溢出异常： 线程的请求分配的栈容量超过JAVA虚拟机允许的最大容量，将抛出Stack Overflow异常</li>
@@ -1748,7 +1748,7 @@ syso s2<span class="token punctuation">.</span>name<span class="token punctuatio
 <p>将java源码编译成字节码的前端编译器   IDEA 默认</p>
 <p>类似的  ECJ (Eclipse Compiler for Java) 编译效率高，编译时并非全量编译，只编译为编译部分的源码进行编译</p>
 <p>Eclipse 和 Tomcat默认使用</p>
-<h4 id="-v3"></h4>
+<h4 id="-v2"></h4>
 <p><span style='color:red;font-size:24px'>Integer的自动装箱</span></p>
 <p>内置的IntegerCache</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span> a <span class="token operator">=</span> <span class="token number">127</span><span class="token punctuation">;</span>
