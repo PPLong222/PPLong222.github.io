@@ -24,7 +24,7 @@
   <meta name="description" content="初识Git Hooks  最近因为想充利用服务器的即时服务功能，希望把Hexo上的文档直接转化成PDF格式，不用电脑上操作，直接手机上通过FTP获取即可。所以本篇涉及到一些Linux简单脚本、pandoc命令和hexo操作、git知识  背景 希望能够通过钩子和Git仓库将我的Hexo博客的md文档同步到Server的仓库中，因为hexo部署的文件项目是public的html网页而非pdf，所以当">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初识Git Hooks">
-<meta property="og:url" content="http://43.139.93.91/2022/04/04/%E6%B5%85%E5%85%A5Git-Hooks/index.html">
+<meta property="og:url" content="http://114.115.150.92/2022/04/04/%E6%B5%85%E5%85%A5Git-Hooks/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="初识Git Hooks  最近因为想充利用服务器的即时服务功能，希望把Hexo上的文档直接转化成PDF格式，不用电脑上操作，直接手机上通过FTP获取即可。所以本篇涉及到一些Linux简单脚本、pandoc命令和hexo操作、git知识  背景 希望能够通过钩子和Git仓库将我的Hexo博客的md文档同步到Server的仓库中，因为hexo部署的文件项目是public的html网页而非pdf，所以当">
 <meta property="og:locale" content="zh_CN">
@@ -87,7 +87,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"43.139.93.91","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -363,7 +363,7 @@
 </ul>
 <h2 id="应用">应用</h2>
 <p>初衷：hexo -d后执行hooks，将blog原仓库同步到Server中</p>
-<h3 id="问题-v5">问题</h3>
+<h3 id="问题-v4">问题</h3>
 <ol>
 <li>
 <p>Hexo仓库太大，且我只需要Post的md文件就行，没必要占用多的空间</p>
@@ -549,7 +549,7 @@
         62&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        249.7k&nbsp 字
+        250.2k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
@@ -691,7 +691,11 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
-
+  <!-- 暂时先不引入该功能 -->
+  <!-- 引入JQuery -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> -->
+  <!-- 引入自定义的页面访问和ip统计脚本 -->
+  <!-- <script src="/js/send_req_info.js"></script> --> -->
 <!-- hexo injector body_end start -->
   <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
   <script data-pjax>

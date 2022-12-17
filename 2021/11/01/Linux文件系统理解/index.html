@@ -24,13 +24,13 @@
   <meta name="description" content="fs是啥？文件系统？  一直不懂make rootfs fs是啥，Linux文件系统怎么存储，看了下博客抄了一些话  文件系统 文件系统的基本组成 文件系统是操作系统中负责管理持久数据的子系统，说简单点，就是负责把用户的文件存到磁盘硬件中，因为即使计算机断电了，磁盘里的数据并不会丢失，所以可以持久化的保存文件。 文件系统的基本数据单位是文件，它的目的是对磁盘上的文件进行组织管理，那组织的方式不同，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux文件系统理解">
-<meta property="og:url" content="http://43.139.93.91/2021/11/01/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%90%86%E8%A7%A3/index.html">
+<meta property="og:url" content="http://114.115.150.92/2021/11/01/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%90%86%E8%A7%A3/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="fs是啥？文件系统？  一直不懂make rootfs fs是啥，Linux文件系统怎么存储，看了下博客抄了一些话  文件系统 文件系统的基本组成 文件系统是操作系统中负责管理持久数据的子系统，说简单点，就是负责把用户的文件存到磁盘硬件中，因为即使计算机断电了，磁盘里的数据并不会丢失，所以可以持久化的保存文件。 文件系统的基本数据单位是文件，它的目的是对磁盘上的文件进行组织管理，那组织的方式不同，">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101145853363.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101150611713.png">
-<meta property="og:image" content="http://43.139.93.91/home/pplong/.config/Typora/typora-user-images/image-20211101154444120.png">
+<meta property="og:image" content="http://114.115.150.92/home/pplong/.config/Typora/typora-user-images/image-20211101154444120.png">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3hpYW9saW5jb2Rlci9JbWFnZUhvc3QvJUU2JTkzJThEJUU0JUJEJTlDJUU3JUIzJUJCJUU3JUJCJTlGLyVFNiU5NiU4NyVFNCVCQiVCNiVFNyVCMyVCQiVFNyVCQiU5Ri9Vbml4JTIwJUU1JUE0JTlBJUU3JUJBJUE3JUU3JUI0JUEyJUU1JUJDJTk1LnBuZw?x-oss-process=image/format,png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101155216951.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211101155902200.png">
@@ -99,7 +99,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"43.139.93.91","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -726,7 +726,7 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
         62&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        249.7k&nbsp 字
+        250.2k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
@@ -910,7 +910,11 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
-
+  <!-- 暂时先不引入该功能 -->
+  <!-- 引入JQuery -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> -->
+  <!-- 引入自定义的页面访问和ip统计脚本 -->
+  <!-- <script src="/js/send_req_info.js"></script> --> -->
 <!-- hexo injector body_end start -->
   <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
   <script data-pjax>

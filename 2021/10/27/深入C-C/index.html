@@ -21,15 +21,15 @@
   <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
   <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
   <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
-  <meta name="description" content="深入C &#x2F; C++ 一些问题 如何在C中使用汇编代码？ 宏到底有什么好处？ 预编译吗？ 预处理命令（以#开头的都是预处理命令） 优点：  方便程序修改，在编译期间会被替换（而全局变量需要在运行时才被）  运行中没有宏这个概念，仅仅是内容 宏定义赋值后不能被修改   高效。  缺点：  占用编译时间 源程序展开后很长  C语言中宏定义的使用 EOF是什么">
+  <meta name="description" content="深入C &#x2F; C++ 一些问题 如何在C中使用汇编代码？ 宏到底有什么好处？ 预编译吗？ 预处理命令（以#开头的都是预处理命令） 优点：  方便程序修改，在编译期间会被替换（而全局变量需要在运行时才被）  运行中没有宏这个概念，仅仅是内容 宏定义赋值后不能被修改   高效。  缺点：  占用编译时间 源程序展开后很长  C语言中宏定义的使用 EOF是什么 指针 数组与指针 为什么在函数中对数组使用s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入C&#x2F;C++">
-<meta property="og:url" content="http://43.139.93.91/2021/10/27/%E6%B7%B1%E5%85%A5C-C/index.html">
+<meta property="og:url" content="http://114.115.150.92/2021/10/27/%E6%B7%B1%E5%85%A5C-C/index.html">
 <meta property="og:site_name" content="PPLong的博客">
-<meta property="og:description" content="深入C &#x2F; C++ 一些问题 如何在C中使用汇编代码？ 宏到底有什么好处？ 预编译吗？ 预处理命令（以#开头的都是预处理命令） 优点：  方便程序修改，在编译期间会被替换（而全局变量需要在运行时才被）  运行中没有宏这个概念，仅仅是内容 宏定义赋值后不能被修改   高效。  缺点：  占用编译时间 源程序展开后很长  C语言中宏定义的使用 EOF是什么">
+<meta property="og:description" content="深入C &#x2F; C++ 一些问题 如何在C中使用汇编代码？ 宏到底有什么好处？ 预编译吗？ 预处理命令（以#开头的都是预处理命令） 优点：  方便程序修改，在编译期间会被替换（而全局变量需要在运行时才被）  运行中没有宏这个概念，仅仅是内容 宏定义赋值后不能被修改   高效。  缺点：  占用编译时间 源程序展开后很长  C语言中宏定义的使用 EOF是什么 指针 数组与指针 为什么在函数中对数组使用s">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-27T15:22:18.000Z">
-<meta property="article:modified_time" content="2022-04-07T01:45:18.000Z">
+<meta property="article:modified_time" content="2022-11-30T12:42:11.405Z">
 <meta property="article:author" content="PPLong">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="C">
@@ -87,7 +87,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"43.139.93.91","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -270,8 +270,8 @@
     
         <span class="post-meta">
   <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
-  <time datetime="2022-04-07 09:45" pubdate>
-    更新: 2022年4月7日上午9点45分
+  <time datetime="2022-11-30 20:42" pubdate>
+    更新: 2022年11月30日晚上8点42分
   </time>
 </span>
         
@@ -281,7 +281,7 @@
     
         <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      153 字
+      888 字
     </span>
         
 
@@ -290,7 +290,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1 分钟
+      3 分钟
     </span>
                 
 
@@ -359,12 +359,62 @@
 </ol>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/imgosty/article/details/81901183">C语言中宏定义的使用</a></p>
 <h3 id="EOF是什么">EOF是什么</h3>
+<h2 id="指针">指针</h2>
+<h3 id="数组与指针">数组与指针</h3>
+<p><strong>为什么在函数中对数组使用sizeof得不到数组的容量，而在外部使用sizeof却能正确得到？</strong></p>
+<p>理解数组在函数的参数中传递时的退化，即数组不再在内存中没有实际地址，而是有实际地址存储的指针，此时就转化为一级指针。也就是在这个过程中，其实函数的参数是由一个指针负责，这个指针在内存中存在，并且指针指向的是这个数组的首地址，所以在内层函数运行时，实质就是一个指针了，此时sizeof获得的也就只是指针所占字节的大小，也就是8个字节。</p>
+<div class="code-wrapper"><pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">innerVoid</span><span class="token punctuation">(</span><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> 
+<span class="token punctuation">&#123;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%p\n"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%p\n"</span><span class="token punctuation">,</span> arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">void</span> <span class="token function">testArrPoint</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%p\n"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%p\n"</span><span class="token punctuation">,</span> arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">innerVoid</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/*
+36
+2
+0x16fdff114
+8
+0x16fdff0d8
+0x16fdff114
+*/</span></code></pre></div>
+<h3 id="局部变量内存在外部函数访问">局部变量内存在外部函数访问</h3>
+<p>内部函数开创局部变量空间后，执行完毕，返回局部变量的内存地址给外部函数，外部函数会出现不同的值。这是为什么？</p>
+<div class="code-wrapper"><pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span><span class="token function">getPointer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">3000</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">&amp;</span>a<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+ 	<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> 
+    <span class="token keyword">int</span> <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token function">getPointer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//3000     -2076835839</span></code></pre></div>
 
                                     </div>
                                     <hr>
                                     <div>
                                         <div class="post-metas mb-3">
                                             
+                                                <div class="post-meta mr-3">
+                                                    <i class="iconfont icon-category"></i>
+                                                    
+                                                        <a class="hover-with-bg" href="/categories/Study/">
+                                                            Study
+                                                        </a>
+                                                        
+                                                </div>
+                                                
                                                     
                                                         <div class="post-meta">
                                                             <i class="iconfont icon-tags"></i>
@@ -518,7 +568,7 @@
         62&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        249.7k&nbsp 字
+        250.2k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
@@ -660,7 +710,11 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
-
+  <!-- 暂时先不引入该功能 -->
+  <!-- 引入JQuery -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> -->
+  <!-- 引入自定义的页面访问和ip统计脚本 -->
+  <!-- <script src="/js/send_req_info.js"></script> --> -->
 <!-- hexo injector body_end start -->
   <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
   <script data-pjax>

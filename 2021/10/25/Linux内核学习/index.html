@@ -24,7 +24,7 @@
   <meta name="description" content="Linux学习  “工欲善其事，必先利其器” 从大二以来一直在用manjaro ，从原来的极为不适应到现在用起来十分“舒心”，Linux确实给我一种更高效、更简洁的操作方式。在大二了解一定的操作系统组成原理时，也对Linux系统的内核构成产生了兴趣，对fork malloc等函数只知其义而不知其意。希望能够通过此篇博客系统的学习，从Linux内核层面去理解操作系统的组成原理。对Linux有一个全局">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux内核学习">
-<meta property="og:url" content="http://43.139.93.91/2021/10/25/Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:url" content="http://114.115.150.92/2021/10/25/Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="Linux学习  “工欲善其事，必先利其器” 从大二以来一直在用manjaro ，从原来的极为不适应到现在用起来十分“舒心”，Linux确实给我一种更高效、更简洁的操作方式。在大二了解一定的操作系统组成原理时，也对Linux系统的内核构成产生了兴趣，对fork malloc等函数只知其义而不知其意。希望能够通过此篇博客系统的学习，从Linux内核层面去理解操作系统的组成原理。对Linux有一个全局">
 <meta property="og:locale" content="zh_CN">
@@ -90,7 +90,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"43.139.93.91","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -390,7 +390,7 @@
 <p><strong>Linux的内核版本</strong></p>
 <p>主版本号 . 从版本号 . 修订版本号 (. 稳定版本号)<br>
 从版本号是偶数 -&gt; 内核是稳定版    奇数 -&gt; 开发版</p>
-<h2 id="-v4"></h2>
+<h2 id="-v5"></h2>
 <h2 id="开始">开始</h2>
 <h3 id="源码-v2">源码</h3>
 <p>内核源码一般在/usr/src/linux中</p>
@@ -884,7 +884,7 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
         62&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        249.7k&nbsp 字
+        250.2k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
@@ -1026,7 +1026,11 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
-
+  <!-- 暂时先不引入该功能 -->
+  <!-- 引入JQuery -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> -->
+  <!-- 引入自定义的页面访问和ip统计脚本 -->
+  <!-- <script src="/js/send_req_info.js"></script> --> -->
 <!-- hexo injector body_end start -->
   <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
   <script data-pjax>

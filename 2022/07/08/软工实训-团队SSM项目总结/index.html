@@ -24,7 +24,7 @@
   <meta name="description" content="Echo-软工实训-团队SpringBoot项目总结  忙碌了4周，终于结束了学院的实训课程，也是大学以来最后一个由团队协作完成的实训项目，也算是自己比较用心与团队成员一起完成的项目了。虽然最终效果还不是很好，但自己还是花了许多时间与精力，第一次比较正规的组织开发，在此进行一下复盘，总结一下组织开发时自己一些疏忽之处与项目开发时所遇到的问题。也算是自己后端实际开发所码的第一块砖了  介绍 所选定的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Echo-软工实训-团队SpringBoot项目总结">
-<meta property="og:url" content="http://43.139.93.91/2022/07/08/%E8%BD%AF%E5%B7%A5%E5%AE%9E%E8%AE%AD-%E5%9B%A2%E9%98%9FSSM%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:url" content="http://114.115.150.92/2022/07/08/%E8%BD%AF%E5%B7%A5%E5%AE%9E%E8%AE%AD-%E5%9B%A2%E9%98%9FSSM%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="Echo-软工实训-团队SpringBoot项目总结  忙碌了4周，终于结束了学院的实训课程，也是大学以来最后一个由团队协作完成的实训项目，也算是自己比较用心与团队成员一起完成的项目了。虽然最终效果还不是很好，但自己还是花了许多时间与精力，第一次比较正规的组织开发，在此进行一下复盘，总结一下组织开发时自己一些疏忽之处与项目开发时所遇到的问题。也算是自己后端实际开发所码的第一块砖了  介绍 所选定的">
 <meta property="og:locale" content="zh_CN">
@@ -100,7 +100,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"43.139.93.91","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -385,7 +385,7 @@
 <h3 id="数据库">数据库</h3>
 <p>数据库主要还是采用Mysql与Redis，对单条数据量大且数据条数多的实体(例如用户、文章信息等)都存储在Mysql中，对一些经常访问且数据量较小的条目（例如用户Token验证与用户关注列表等）就放在Redis中存储，Redis与Mysql都是通过Docker部署在一台服务器的不同端口上，与本地端口与数据文件地址形成映射关系。</p>
 <p>用户上传的图片不由服务器保存，而直接交由第三方COS对象存储服务（Tencent COS）。</p>
-<h2 id="问题-v6">问题</h2>
+<h2 id="问题-v5">问题</h2>
 <p>这次开发中其实有非常多的问题，第一个问题就是没有在开发时遇到的这些问题及时记录，而是拖到项目结束才来复盘 😓，这里分类来列出</p>
 <p><strong>团队合作</strong></p>
 <ol>
@@ -406,7 +406,7 @@
 <input type="checkbox" disabled > 对Service层中因Dao层的查询可能导致的异常没有进行捕获，导致请求返回不规范</br>
 <input type="checkbox" disabled > 对Java8 中出现的Stream和Lambda等特性一点都不熟悉，有场景需要使用时不能使用这样更快捷的编程方式（Mybatis-Plus）</br>
 <p><strong>前端</strong></p>
-<h2 id="总结-v16">总结</h2>
+<h2 id="总结-v4">总结</h2>
 
                                     </div>
                                     <hr>
@@ -579,7 +579,7 @@
         62&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        249.7k&nbsp 字
+        250.2k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
@@ -721,7 +721,11 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
-
+  <!-- 暂时先不引入该功能 -->
+  <!-- 引入JQuery -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> -->
+  <!-- 引入自定义的页面访问和ip统计脚本 -->
+  <!-- <script src="/js/send_req_info.js"></script> --> -->
 <!-- hexo injector body_end start -->
   <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
   <script data-pjax>

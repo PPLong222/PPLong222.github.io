@@ -24,7 +24,7 @@
   <meta name="description" content="Java8特性学习  Mybatis中出现了一些与Lambda相关的函数方法，使得在编程时非常的方便，但自己却不知道如何使用基于Java8的语法  概述 优点  大数量下处理集合效率高 代码可读性高，代码简洁，开发快速 易于并发编程 减少嵌套  函数式编程思想 面向对象的思想关注的说用什么对象完成什么事情，而函数式编程关注是对数据进行了什么操作 Lambda表达式 本质是JDK8 的语法糖，能对某">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java8特性学习">
-<meta property="og:url" content="http://43.139.93.91/2022/07/30/Java8%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:url" content="http://114.115.150.92/2022/07/30/Java8%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="Java8特性学习  Mybatis中出现了一些与Lambda相关的函数方法，使得在编程时非常的方便，但自己却不知道如何使用基于Java8的语法  概述 优点  大数量下处理集合效率高 代码可读性高，代码简洁，开发快速 易于并发编程 减少嵌套  函数式编程思想 面向对象的思想关注的说用什么对象完成什么事情，而函数式编程关注是对数据进行了什么操作 Lambda表达式 本质是JDK8 的语法糖，能对某">
 <meta property="og:locale" content="zh_CN">
@@ -86,7 +86,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"43.139.93.91","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -418,7 +418,7 @@
 <p>对流中的数据按照制定的计算方式给出一个结果（缩紧操作）。可以直接给出初值也可以不设置初值（不设置时第一个元素为初值）</p>
 <h2 id="Optional">Optional</h2>
 <p>优雅地避免空指针异常，减少非空判断对代码行数。每次通过查询或计算得到结果时，若方法内部没有处理空数据的逻辑，则在外部代码部分就必须判断结果是否为空</p>
-<h3 id="使用">使用</h3>
+<h3 id="使用-v2">使用</h3>
 <p>类似包装类</p>
 <p>将一个对象封装成Optional</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token class-name">Optional</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Person</span><span class="token punctuation">></span></span> person1 <span class="token operator">=</span> <span class="token class-name">Optional</span><span class="token punctuation">.</span><span class="token function">ofNullable</span><span class="token punctuation">(</span>person<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -616,7 +616,7 @@
         62&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        249.7k&nbsp 字
+        250.2k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
@@ -758,7 +758,11 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
-
+  <!-- 暂时先不引入该功能 -->
+  <!-- 引入JQuery -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> -->
+  <!-- 引入自定义的页面访问和ip统计脚本 -->
+  <!-- <script src="/js/send_req_info.js"></script> --> -->
 <!-- hexo injector body_end start -->
   <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
   <script data-pjax>

@@ -11,3 +11,4 @@ $.ajax({
 		//请求失败后回调函数
 	},
 })
+console.log(window.location.href)

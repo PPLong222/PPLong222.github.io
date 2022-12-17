@@ -24,7 +24,7 @@
   <meta name="description" content="计算机组成原理 运算方法与运算器 基本运算 位运算 &amp; | ~ ^：可直接采用逻辑门实现，运算延迟为一级门电路延迟 逻辑运算 &amp;&amp; || ! ： 非数值运算，操作数只能是0或者1 --&gt; 逻辑运算翻译成汇编语言时不会对应具体的运算指令，而是变成相应的程序分支结构(cmp \ je) 移位运算 &lt;&lt; &gt;&gt; : 2x 4x x&#x2F;16等都会转换成相应">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机组成原理">
-<meta property="og:url" content="http://43.139.93.91/2021/10/25/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:url" content="http://114.115.150.92/2021/10/25/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="计算机组成原理 运算方法与运算器 基本运算 位运算 &amp; | ~ ^：可直接采用逻辑门实现，运算延迟为一级门电路延迟 逻辑运算 &amp;&amp; || ! ： 非数值运算，操作数只能是0或者1 --&gt; 逻辑运算翻译成汇编语言时不会对应具体的运算指令，而是变成相应的程序分支结构(cmp \ je) 移位运算 &lt;&lt; &gt;&gt; : 2x 4x x&#x2F;16等都会转换成相应">
 <meta property="og:locale" content="zh_CN">
@@ -45,8 +45,8 @@
 <meta property="article:published_time" content="2021-10-25T01:12:36.000Z">
 <meta property="article:modified_time" content="2022-04-07T01:45:18.000Z">
 <meta property="article:author" content="PPLong">
-<meta property="article:tag" content="考研">
 <meta property="article:tag" content="计算机原理">
+<meta property="article:tag" content="考研">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220405102442407.png">
   
@@ -102,7 +102,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"43.139.93.91","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -976,7 +976,7 @@ VPN = TLBT + TLBI  + VPO<br>
 <p>书中P.145有具体图</p>
 <p><strong>书后习题非常重要，注意这章的概念解释</strong></p>
 <h2 id="指令系统">指令系统</h2>
-<h3 id="概述-v5">概述</h3>
+<h3 id="概述-v11">概述</h3>
 <p>指令：用户使用计算机与计算机本身运行的基本功能单位<br>
 机器指令：计算机硬件与软件的界面，用户操作和使用计算机硬件的接口</p>
 <p>一条高级语言 —&gt; 多条机器指令<br>
@@ -1334,12 +1334,12 @@ SIMD Unit(单指令多数据流,以同步方式，在同一时间内执行同一
                                                         <div class="post-meta">
                                                             <i class="iconfont icon-tags"></i>
                                                             
-                                                                <a class="hover-with-bg" href="/tags/%E8%80%83%E7%A0%94/">
-                                                                    考研
-                                                                </a>
-                                                                
                                                                 <a class="hover-with-bg" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/">
                                                                     计算机原理
+                                                                </a>
+                                                                
+                                                                <a class="hover-with-bg" href="/tags/%E8%80%83%E7%A0%94/">
+                                                                    考研
                                                                 </a>
                                                                 
                                                         </div>
@@ -1483,7 +1483,7 @@ SIMD Unit(单指令多数据流,以同步方式，在同一时间内执行同一
         62&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        249.7k&nbsp 字
+        250.2k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
@@ -1667,7 +1667,11 @@ SIMD Unit(单指令多数据流,以同步方式，在同一时间内执行同一
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
-
+  <!-- 暂时先不引入该功能 -->
+  <!-- 引入JQuery -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> -->
+  <!-- 引入自定义的页面访问和ip统计脚本 -->
+  <!-- <script src="/js/send_req_info.js"></script> --> -->
 <!-- hexo injector body_end start -->
   <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
   <script data-pjax>

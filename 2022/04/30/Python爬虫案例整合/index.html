@@ -24,18 +24,18 @@
   <meta name="description" content="Python爬虫案例整合  整合一下自己写的一些爬虫案例，涉及一些常见的反爬机制和思路梳理  Github仓库地址：PythonSpiderCases 樱花动漫网站视频爬取 (樱花动漫)[http:&#x2F;&#x2F;dmh8.com]  一直想做一个自动更新追番的题型，以及做一个简易的搜索爬取。  Version 1：  支持在本地输入名称查询，获取对应的名称列表，选择序号，并获取对应的URL，获取该番剧的集数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python爬虫案例整合">
-<meta property="og:url" content="http://43.139.93.91/2022/04/30/Python%E7%88%AC%E8%99%AB%E6%A1%88%E4%BE%8B%E6%95%B4%E5%90%88/index.html">
+<meta property="og:url" content="http://114.115.150.92/2022/04/30/Python%E7%88%AC%E8%99%AB%E6%A1%88%E4%BE%8B%E6%95%B4%E5%90%88/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="Python爬虫案例整合  整合一下自己写的一些爬虫案例，涉及一些常见的反爬机制和思路梳理  Github仓库地址：PythonSpiderCases 樱花动漫网站视频爬取 (樱花动漫)[http:&#x2F;&#x2F;dmh8.com]  一直想做一个自动更新追番的题型，以及做一个简易的搜索爬取。  Version 1：  支持在本地输入名称查询，获取对应的名称列表，选择序号，并获取对应的URL，获取该番剧的集数">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://43.139.93.91/home/pplong/.config/Typora/typora-user-images/image-20220430230303132.png">
-<meta property="og:image" content="http://43.139.93.91/home/pplong/.config/Typora/typora-user-images/image-20220430232928248.png">
-<meta property="og:image" content="http://43.139.93.91/home/pplong/.config/Typora/typora-user-images/image-20220501002215451.png">
+<meta property="og:image" content="http://114.115.150.92/home/pplong/.config/Typora/typora-user-images/image-20220430230303132.png">
+<meta property="og:image" content="http://114.115.150.92/home/pplong/.config/Typora/typora-user-images/image-20220430232928248.png">
+<meta property="og:image" content="http://114.115.150.92/home/pplong/.config/Typora/typora-user-images/image-20220501002215451.png">
 <meta property="article:published_time" content="2022-04-30T14:59:25.000Z">
 <meta property="article:modified_time" content="2022-05-01T01:57:32.000Z">
 <meta property="article:author" content="PPLong">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://43.139.93.91/home/pplong/.config/Typora/typora-user-images/image-20220430230303132.png">
+<meta name="twitter:image" content="http://114.115.150.92/home/pplong/.config/Typora/typora-user-images/image-20220430230303132.png">
   
     <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
   
@@ -89,7 +89,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"43.139.93.91","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -604,7 +604,7 @@
         62&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        249.7k&nbsp 字
+        250.2k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
@@ -746,7 +746,11 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
-
+  <!-- 暂时先不引入该功能 -->
+  <!-- 引入JQuery -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> -->
+  <!-- 引入自定义的页面访问和ip统计脚本 -->
+  <!-- <script src="/js/send_req_info.js"></script> --> -->
 <!-- hexo injector body_end start -->
   <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
   <script data-pjax>

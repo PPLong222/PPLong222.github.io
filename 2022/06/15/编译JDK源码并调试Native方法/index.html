@@ -24,7 +24,7 @@
   <meta name="description" content="编译JDK源码并调试Native方法  在学习反射的过程中核心方法Native反射的invoke0方法是Native的，还想多研究一下C层的代码，于是开始捣鼓如何调试JDK源码中Native方法。 概要：编译自己的JDK源码、通过Clion与IDEA调试Native方法  编译JDK源码              个人环境Linux: 5.10.121-1-MANJAROgcc&#x2F;g++: 12.1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编译JDK源码并调试Native方法">
-<meta property="og:url" content="http://43.139.93.91/2022/06/15/%E7%BC%96%E8%AF%91JDK%E6%BA%90%E7%A0%81%E5%B9%B6%E8%B0%83%E8%AF%95Native%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:url" content="http://114.115.150.92/2022/06/15/%E7%BC%96%E8%AF%91JDK%E6%BA%90%E7%A0%81%E5%B9%B6%E8%B0%83%E8%AF%95Native%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="编译JDK源码并调试Native方法  在学习反射的过程中核心方法Native反射的invoke0方法是Native的，还想多研究一下C层的代码，于是开始捣鼓如何调试JDK源码中Native方法。 概要：编译自己的JDK源码、通过Clion与IDEA调试Native方法  编译JDK源码              个人环境Linux: 5.10.121-1-MANJAROgcc&#x2F;g++: 12.1">
 <meta property="og:locale" content="zh_CN">
@@ -91,7 +91,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"43.139.93.91","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -572,7 +572,7 @@ Compiling 2 files for BUILD_TOOLS
         62&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        249.7k&nbsp 字
+        250.2k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
@@ -714,7 +714,11 @@ Compiling 2 files for BUILD_TOOLS
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
-
+  <!-- 暂时先不引入该功能 -->
+  <!-- 引入JQuery -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> -->
+  <!-- 引入自定义的页面访问和ip统计脚本 -->
+  <!-- <script src="/js/send_req_info.js"></script> --> -->
 <!-- hexo injector body_end start -->
   <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
   <script data-pjax>
