@@ -2,7 +2,7 @@
   let chartDom = document.getElementById("uv-pv-chart");
   let myChart_uvpv = echarts.init(chartDom);
   let option;
-  $.get("http://114.115.150.92/custom_src/data/pvuv.json", function (_rawData) {
+  $.get("https://114.115.150.92/custom_src/data/pvuv.json", function (_rawData) {
     drawChart(_rawData);
   });
 

@@ -1,7 +1,7 @@
 // 获取IP地址
 $.ajax({
   type: "GET",
-  url: "http://114.115.150.92:8080/net/getIp",
+  url: "https://114.115.150.92:8080/net/getIp",
   dataType: "json",
   success: function (data) {
     //请求成功后回调函数
