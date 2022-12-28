@@ -31,7 +31,7 @@ show databases、  create database  xxx  、show create  database xxx(查询名�
   <meta name="description" content="数据库学习  DDL : 操作数据库：CRUD  功能    （创建、查询、更新、删除） 1.查询与创建 show databases、  create database  xxx  、show create  database xxx(查询名称和字符类型)\ ​		create database xxx if not exists XX(不会报错) ​		create database xx c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql 学习">
-<meta property="og:url" content="http://114.115.150.92/2019/07/22/Mysql%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:url" content="https://www.pplong.top/2019/07/22/Mysql%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="数据库学习  DDL : 操作数据库：CRUD  功能    （创建、查询、更新、删除） 1.查询与创建 show databases、  create database  xxx  、show create  database xxx(查询名称和字符类型)\ ​		create database xxx if not exists XX(不会报错) ​		create database xx c">
 <meta property="og:locale" content="zh_CN">
@@ -117,7 +117,7 @@ show databases、  create database  xxx  、show create  database xxx(查询名�
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"www.pplong.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -1125,7 +1125,7 @@ delete from xxx where ... ;
 <li>视图基本不实际占用物理空间（只保存sql逻辑，不保存数据）</li>
 <li></li>
 </ul>
-<h3 id="变量-v2">变量</h3>
+<h3 id="变量">变量</h3>
 <h4 id="系统变量">系统变量</h4>
 <p>500条，比较多</p>
 <ul>
@@ -1242,7 +1242,7 @@ select @selfStr;</code></pre></div>
 drop procedure xxx
 # 查看存储过程
 show create procedure xxx;</code></pre></div>
-<h4 id="函数-v3">函数</h4>
+<h4 id="函数">函数</h4>
 <div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 创建
 create function xxx(params...) returns returntype
 begin
@@ -1355,7 +1355,7 @@ begin
         end while xx;
 end $;</code></pre></div>
 <p>iterator  : 类似java中的continue;</p>
-<h2 id="进阶-v4">进阶</h2>
+<h2 id="进阶">进阶</h2>
 <h3 id="自启动服务">自启动服务</h3>
 <p>早就想设置了，赣！</p>
 <p>/usr/lib/systemd/system下新建xx.service文件</p>
@@ -1402,7 +1402,7 @@ show variables like &#39;%storage_engine%&#39;;
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211020105635279.png" srcset="/img/loading.gif" lazyload alt="image-20211020105635279"></p>
 <h5 id="MyIASM和InnoDB">MyIASM和InnoDB</h5>
 <p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/mysql-different-nnodb-myisam.html">Mysql和InnoDB区别</a></p>
-<h4 id="-v6"></h4>
+<h4 id="-v9"></h4>
 <h3 id="优化原因">优化原因</h3>
 <h4 id="Sql性能下降原因">Sql性能下降原因</h4>
 <ol>
@@ -1863,7 +1863,7 @@ select * from t1 order by col1 asc,col2 desc; # col1-col2 is co-index  --- index
 <p>表定义文件</p>
 <h5 id="ibd">ibd</h5>
 <p>索引和数据文件</p>
-<h2 id="一些问题-v4">一些问题</h2>
+<h2 id="一些问题-v3">一些问题</h2>
 <p><strong>Mysql和Mariadb的区别</strong></p>
 <ul>
 <li>MyISam：

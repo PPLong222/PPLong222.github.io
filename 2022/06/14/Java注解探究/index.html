@@ -24,7 +24,7 @@
   <meta name="description" content="Java注解探究              为什么学习？以前只是初步了解注解的概念，但实际应用场景寥寥无几。因为最近才开始深入的学习Spring，希望从底层弄懂其原理，当然作为Spring一定会用到的关键的注解，例如@Autowired之类的，要弄清其原理则肯定首先要弄懂Java的注解机制，因此才有了本文关于本文你可能需要提前了解：📖 Java的反射、📖 JDK动态代理机制关于本文包含的内容：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java注解探究">
-<meta property="og:url" content="http://114.115.150.92/2022/06/14/Java%E6%B3%A8%E8%A7%A3%E6%8E%A2%E7%A9%B6/index.html">
+<meta property="og:url" content="https://www.pplong.top/2022/06/14/Java%E6%B3%A8%E8%A7%A3%E6%8E%A2%E7%A9%B6/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="Java注解探究              为什么学习？以前只是初步了解注解的概念，但实际应用场景寥寥无几。因为最近才开始深入的学习Spring，希望从底层弄懂其原理，当然作为Spring一定会用到的关键的注解，例如@Autowired之类的，要弄清其原理则肯定首先要弄懂Java的注解机制，因此才有了本文关于本文你可能需要提前了解：📖 Java的反射、📖 JDK动态代理机制关于本文包含的内容：">
 <meta property="og:locale" content="zh_CN">
@@ -89,7 +89,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"www.pplong.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -340,7 +340,7 @@
                                     <div class="markdown-body">
                                         <h1>Java注解探究</h1>
 <div class="note note-info">
-            <p>为什么学习？以前只是初步了解注解的概念，但实际应用场景寥寥无几。因为最近才开始深入的学习Spring，希望从底层弄懂其原理，当然作为Spring一定会用到的关键的注解，例如@Autowired之类的，要弄清其原理则肯定首先要弄懂Java的注解机制，因此才有了本文</p><p>关于本文你可能需要提前了解：📖 <a target="_blank" rel="noopener" href="http://www.pplong.top/2022/06/14/Java%E5%8F%8D%E5%B0%84%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/">Java的反射</a>、📖 <a target="_blank" rel="noopener" href="http://www.pplong.top/2022/06/15/JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/">JDK动态代理机制</a><br>关于本文包含的内容：注解的概念、注解的结构、自定义注解、注解字节码层面和Java层面探究</p>
+            <p>为什么学习？以前只是初步了解注解的概念，但实际应用场景寥寥无几。因为最近才开始深入的学习Spring，希望从底层弄懂其原理，当然作为Spring一定会用到的关键的注解，例如@Autowired之类的，要弄清其原理则肯定首先要弄懂Java的注解机制，因此才有了本文</p><p>关于本文你可能需要提前了解：📖 <a href="http://www.pplong.top/2022/06/14/Java%E5%8F%8D%E5%B0%84%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/">Java的反射</a>、📖 <a href="http://www.pplong.top/2022/06/15/JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/">JDK动态代理机制</a><br>关于本文包含的内容：注解的概念、注解的结构、自定义注解、注解字节码层面和Java层面探究</p>
           </div>
 <h2 id="介绍-v2">介绍</h2>
 <p>Java 注解（Annotation）又称 Java 标注，是 JDK5.0 引入的一种注释机制。</p>
@@ -481,7 +481,7 @@
 </code></pre></div>
 <p>一个Annotation与一个RetentionPolicy关联，并且与1-n个ElementType关联；ElementType来指定Annotation的类型，指明Annotation的用途；RetentionPolicy指定Annotation的作用域，三种作用域的作用在上述注解中均已说明。</p>
 <h2 id="实验-v2">实验</h2>
-<h3 id="使用-v2">使用</h3>
+<h3 id="使用-v3">使用</h3>
 <p>getAnnotation指定的注解来获取指定的注解类型，可直接调用该<strong>注解对象</strong>下的方法，进而获取其中的数据</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token class-name">ElementType</span><span class="token punctuation">.</span>FIELD<span class="token punctuation">,</span> <span class="token class-name">ElementType</span><span class="token punctuation">.</span>METHOD<span class="token punctuation">,</span> <span class="token class-name">ElementType</span><span class="token punctuation">.</span>TYPE<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token class-name">RetentionPolicy</span><span class="token punctuation">.</span>RUNTIME<span class="token punctuation">)</span>

@@ -24,7 +24,7 @@
   <meta name="description" content="CSRF介绍  看了CORS和SOP后还想继续了解一下Web安全的一些攻防，怕以后搭建后端的时候可能会有坑，这里先入个门  介绍 Cross-Site Request Forgery 跨站请求伪造，也可称为“One  Click Attack” 或者 “Session Riding”。通过伪装网站受信任的用户发送的请求来破坏数据 引入 为什么会发生CSRF攻击？ ——浏览器的隐式认证 一般网站不会">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSRF介绍">
-<meta property="og:url" content="http://114.115.150.92/2022/05/04/CSRF%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:url" content="https://www.pplong.top/2022/05/04/CSRF%E4%BB%8B%E7%BB%8D/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="CSRF介绍  看了CORS和SOP后还想继续了解一下Web安全的一些攻防，怕以后搭建后端的时候可能会有坑，这里先入个门  介绍 Cross-Site Request Forgery 跨站请求伪造，也可称为“One  Click Attack” 或者 “Session Riding”。通过伪装网站受信任的用户发送的请求来破坏数据 引入 为什么会发生CSRF攻击？ ——浏览器的隐式认证 一般网站不会">
 <meta property="og:locale" content="zh_CN">
@@ -90,7 +90,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"www.pplong.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>

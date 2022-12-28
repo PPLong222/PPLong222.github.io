@@ -33,7 +33,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
   <meta name="description" content="Android面试总结  CAS IPC进程间通信 Inter-Process Communication  Windows：通过剪切板、管道、油槽等进行进程间通讯。 Linux：通过命名空间、共享内容、信号量等进行进程间通讯。 Android：没有完全继承Linux，比如，其独具特色的通讯方式有Binder、Socket等等。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android知识总结">
-<meta property="og:url" content="http://114.115.150.92/2021/01/10/Android%E9%9D%A2%E8%AF%95/index.html">
+<meta property="og:url" content="https://www.pplong.top/2021/01/10/Android%E9%9D%A2%E8%AF%95/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="Android面试总结  CAS IPC进程间通信 Inter-Process Communication  Windows：通过剪切板、管道、油槽等进行进程间通讯。 Linux：通过命名空间、共享内容、信号量等进行进程间通讯。 Android：没有完全继承Linux，比如，其独具特色的通讯方式有Binder、Socket等等。">
 <meta property="og:locale" content="zh_CN">
@@ -119,7 +119,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"www.pplong.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -634,13 +634,13 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <div class="code-wrapper"><pre class="language-none"><code class="language-none">w;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 </code></pre></div>
 <h3 id="屏幕适配">屏幕适配</h3>
-<h4 id="概念-v2">概念</h4>
+<h4 id="概念">概念</h4>
 <p>dp ：  	density-independent pixels n个实际像素，与设备dpi相关，与px（像素）换算关系：dp/160 = px/dpi。  px = dp*dpi /160</p>
 <p>那么dp究竟解决了适配上的什么问题？可以看出1dp = 1/160inch；那么它至少能解决一个问题，就是你在布局文件写某个View的宽和高为160dp*160dp，这个View在任何分辨率的屏幕中，显示的尺寸大小是大约是一致的（可能不精确），大概是 1 inch * 1 inch</p>
 <p>dpi:         Dots Per Inch（每英寸所打印的点数）</p>
 <p>px: 1920*1080 (px)</p>
 <h3 id="Framework">Framework</h3>
-<h4 id="概念-v3">概念</h4>
+<h4 id="概念-v2">概念</h4>
 <h3 id="ContentProvider">ContentProvider</h3>
 <h4 id="作用">作用</h4>
 <h3 id="OkHttp">OkHttp</h3>
@@ -900,7 +900,7 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210322153735717.png" srcset="/img/loading.gif" lazyload alt="image-20210322153735717"></p>
 <p>Retrofit不做网络请求，他相当于是一个中间人</p>
 <p>通过接口，对接口方法进行注解</p>
-<h4 id="原理-v3">原理</h4>
+<h4 id="原理">原理</h4>
 <h5 id="动态代理">动态代理</h5>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token class-name">INetApiService</span> netApiService<span class="token operator">=</span> retrofit<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token class-name">INetApiService</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>这里得到的netApiService不是本尊，而只是一个动态代理对象</p>

@@ -24,7 +24,7 @@
   <meta name="description" content="将Hexo从Github Pages迁移到服务器              服务器一直空着，之前Hexo博客又搭在Github上有时候从手机上访问图片加载很慢。一直想着迁移到云服务器上，奈何拖延症晚期，昨天终于是弄好了，不过还是踩了个终极沙币坑            步骤 服务器方面   按照必要的git和nginx   建立hexo 部署后的public文件夹的实际保存地址 (&#x2F;home&#x2F;www">
 <meta property="og:type" content="article">
 <meta property="og:title" content="将Hexo从Github Pages迁移到服务器">
-<meta property="og:url" content="http://114.115.150.92/2022/01/21/%E8%BF%81%E7%A7%BBHexo/index.html">
+<meta property="og:url" content="https://www.pplong.top/2022/01/21/%E8%BF%81%E7%A7%BBHexo/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="将Hexo从Github Pages迁移到服务器              服务器一直空着，之前Hexo博客又搭在Github上有时候从手机上访问图片加载很慢。一直想着迁移到云服务器上，奈何拖延症晚期，昨天终于是弄好了，不过还是踩了个终极沙币坑            步骤 服务器方面   按照必要的git和nginx   建立hexo 部署后的public文件夹的实际保存地址 (&#x2F;home&#x2F;www">
 <meta property="og:locale" content="zh_CN">
@@ -89,7 +89,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"www.pplong.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -385,7 +385,7 @@ git --work-tree&#x3D;&#x2F;var&#x2F;www&#x2F;hexo --git-dir&#x3D;&#x2F;var&#x2F;
 <p>这里巨坑。我最开始hexo在fluid主题下的配置，有一个选项是force-https，强制升级https链接，本意是强制所有链接升级为 HTTPS（适用于图片等资源出现 HTTP 混入报错），我以为没事我就打开了。</p>
 <p>后头这里发布后，在本地能够成功预览，但deploy到服务器上，服务器本身没有错，但访问css等资源报错，但我通过浏览器输入路径访问有时候能够成功有时候不能访问成功，后头才发现是http和https的问题，https的时候就不能访问，http就能访问，这也是这里的问题。后头把这个选项改成false瞬间就好了。。。。找了半天，离大谱。<img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/2022-01-20_21-10.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <div class="note note-success">
-            <p>最后再标记一下博客的内、外国访问地址</p><p>Github Pages：<a target="_blank" rel="noopener" href="https://pplong.top">https://pplong.top</a><br>Cloud Tencent(Shanghai)：<a target="_blank" rel="noopener" href="http://www.pplong.top">http://www.pplong.top</a></p>
+            <p>最后再标记一下博客的内、外国访问地址</p><p>Github Pages：<a target="_blank" rel="noopener" href="https://pplong.top">https://pplong.top</a><br>Cloud Tencent(Shanghai)：<a href="http://www.pplong.top">http://www.pplong.top</a></p>
           </div>
 
                                     </div>

@@ -35,7 +35,7 @@ DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是�
   <meta name="description" content="Java SE  集合 ArrayList  允许添加多个null值  属性 size 是指 elementData 中实际有多少个元素，而 elementData.length 为集合容量   DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是否有initialCapacity 第一次添加元素时扩容   默认初始的集合容量">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java学习">
-<meta property="og:url" content="http://114.115.150.92/2021/01/20/Java%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:url" content="https://www.pplong.top/2021/01/20/Java%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="Java SE  集合 ArrayList  允许添加多个null值  属性 size 是指 elementData 中实际有多少个元素，而 elementData.length 为集合容量   DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是否有initialCapacity 第一次添加元素时扩容   默认初始的集合容量">
 <meta property="og:locale" content="zh_CN">
@@ -107,7 +107,7 @@ DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是�
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"www.pplong.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -772,7 +772,7 @@ obj<span class="token punctuation">.</span>stu <span class="token operator">=</s
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233706649.png" srcset="/img/loading.gif" lazyload alt="image-20210313233706649"></p>
 <p>使用 ： 状态标记、单例模式</p>
 <h3 id="JUC">JUC</h3>
-<h4 id="问题-v2">问题</h4>
+<h4 id="问题-v3">问题</h4>
 <h5 id="synchronized到底是什么-原理？">synchronized到底是什么  原理？</h5>
 <p>synchronized是一个重量级锁，实现依赖于JVM 的 monitor 监视器锁。主要使用monitorenter和monitorexit指令来实现方法同步和代码块同步。在编译的是时候，会将monitorexit指令插入到同步代码块的开始位置，而monitorexit插入方法结束处和异常处，并且每一个monitorexit都有一个与之对应的monitorexit。</p>
 <p><strong>任何对象都有一个monitor与之关联</strong>，当一个monitor被持有后，它将被处于锁定状态，线程执行到monitorenter指令时间，会<strong>尝试获取对象所对应的monitor的所有权</strong>，即获取获得对象的锁，由于在编译期会将monitorexit插入到方法结束处和异常处，所以在方法执行完毕或者出现异常的情况会自动释放锁</p>

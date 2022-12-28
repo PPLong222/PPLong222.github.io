@@ -24,7 +24,7 @@
   <meta name="description" content="SOP与CORS 问题溯源 为什么我会遇到这个问题呢？如果你也有类似的经历，那么接下来的内容就或许能够帮助你解决问题 1. 通过服务器网页上的js脚本想在线获取leetcode的数据 通过网页上的js脚本给leetcode发送请求，这个bug发现花了很长时间，因为在自己的Chrome上以前也发生过类似的CORS请求失败问题，当时没有深究，查了下 下载了Allow CORS这个插件，立马解决了问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="什么是CORS">
-<meta property="og:url" content="http://114.115.150.92/2022/04/26/%E4%BB%80%E4%B9%88%E6%98%AFCORS/index.html">
+<meta property="og:url" content="https://www.pplong.top/2022/04/26/%E4%BB%80%E4%B9%88%E6%98%AFCORS/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="SOP与CORS 问题溯源 为什么我会遇到这个问题呢？如果你也有类似的经历，那么接下来的内容就或许能够帮助你解决问题 1. 通过服务器网页上的js脚本想在线获取leetcode的数据 通过网页上的js脚本给leetcode发送请求，这个bug发现花了很长时间，因为在自己的Chrome上以前也发生过类似的CORS请求失败问题，当时没有深究，查了下 下载了Allow CORS这个插件，立马解决了问题。">
 <meta property="og:locale" content="zh_CN">
@@ -97,7 +97,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"www.pplong.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -357,7 +357,7 @@
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220426173912299.png" alt="image-20220426173912299"></p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220426174053301.png" alt="image-20220426174053301"></p>
 <p>写完这篇文章后我打开Allow-CORS 抓了下包，发现很多都是CORS error，可能原因是虽然你客户端是不启用CORS了，但我可能有一些脚本不会被Allow-CORS拦截而发送请求。</p>
-<h2 id="介绍-v6">介绍</h2>
+<h2 id="介绍-v5">介绍</h2>
 <p><strong>Cross-Origin Resource Sharing</strong>：一种允许当前域的资源被其他域的脚本请求访问的机制，通常由于<strong>同域安全策略(Same Origin Policy)</strong>，浏览器会禁止这种跨域请求的返回。<strong>（注意，只是过滤掉返回的请求，但实际上请求是成功发送给服务端的, 只是发回来的数据被浏览器扔掉了）</strong></p>
 <p><strong>Domain 域</strong>（协议schema 主机host 端口号port）都必须一致的</p>
 <p>什么又是<strong>同源策略</strong>？举个例子，比如在我的网站上有个js脚本，js脚本要通过get去获取另一个网站的数据并返回，最终在我的网站上显示，这就产生了跨域的请求。本来只是当前浏览器 &lt;—&gt; 我的网站 的双向响应，但由于js脚本发出的请求，就当前浏览器就要去往其他的服务器发送请求（<strong>注意，这里并不是网站的服务器去发送请求，而是访问的客户端去发送</strong>），这往往可能是不安全的，因为我可以根据Cookie去其他的网站上发送请求</p>
@@ -481,7 +481,7 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
 <p>回顾前面的问题，尝试先清空缓存后开启Allow-CORS，然后进行未被允许的CORS请求，发现响应码200并返回正常数据，随后进行抓包发现，只发送了一个GET请求，即浏览器自身直接忽略了预检这一步骤。</p>
 <p>Bilibili CORS Error中，基本上都是js脚本触发的CORS Error，说明可能js脚本中一些xhr类函数的执行没有被Allow-CORS捕获并重新设置，进入到错误js中调试后发现引发了我们都已熟悉了的这个问题</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220426175608360.png" alt="image-20220426175608360"></p>
-<h2 id="总结-v3">总结</h2>
+<h2 id="总结-v15">总结</h2>
 <p>好了，一句话，<s><strong>罪魁祸首：Allow-CORS全锅！</strong></s> 😆</p>
 <p>其实还是一个前后端通信一个比较经典的问题，相信实战的时候肯定还会遇到此类问题，到时候应该还会有新的心得</p>
 

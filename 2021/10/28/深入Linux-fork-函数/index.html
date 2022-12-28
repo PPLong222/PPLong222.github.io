@@ -24,7 +24,7 @@
   <meta name="description" content="深入理解Linux 线程函数  在读《Linux内核设计与实现》时对Linux进程实现非常感兴趣，并且之前就一直想了解一下原理。于是还是抽空深入了一下。想结合一下新版本和旧版本的实现差异，所参考的源码版本是2.6.32.20和5.14.15  fork 一些例子 fork调用一次，能够返回两次。在子进程中返回0，父进程中返回子进程的id void fork_test_1() &amp;#123;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入Linux fork()函数">
-<meta property="og:url" content="http://114.115.150.92/2021/10/28/%E6%B7%B1%E5%85%A5Linux-fork-%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:url" content="https://www.pplong.top/2021/10/28/%E6%B7%B1%E5%85%A5Linux-fork-%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="深入理解Linux 线程函数  在读《Linux内核设计与实现》时对Linux进程实现非常感兴趣，并且之前就一直想了解一下原理。于是还是抽空深入了一下。想结合一下新版本和旧版本的实现差异，所参考的源码版本是2.6.32.20和5.14.15  fork 一些例子 fork调用一次，能够返回两次。在子进程中返回0，父进程中返回子进程的id void fork_test_1() &amp;#123;">
 <meta property="og:locale" content="zh_CN">
@@ -87,7 +87,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"www.pplong.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>

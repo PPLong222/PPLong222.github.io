@@ -24,7 +24,7 @@
   <meta name="description" content="Qemu+GDB调试linux内核  在学习Linux内核的时候，想看一下内部是如何执行C语言代码的，能不能深入具体的内核源码层面，就像Android源码一样，或者Java的jdk源码。经过搜索后，发现还是很困难，这点让我还是比较吃惊。可能是C本来就是基于Linux的某一内核？所以要调试系统层面的调用的话非常困难，需要一些仿真和模拟的手段。这里我搜索到的工具方法是通过qemu + gdb + vs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Qemu+GDB调试Linux内核">
-<meta property="og:url" content="http://114.115.150.92/2021/10/30/%E8%B0%83%E8%AF%95Linux%E5%86%85%E6%A0%B8/index.html">
+<meta property="og:url" content="https://www.pplong.top/2021/10/30/%E8%B0%83%E8%AF%95Linux%E5%86%85%E6%A0%B8/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="Qemu+GDB调试linux内核  在学习Linux内核的时候，想看一下内部是如何执行C语言代码的，能不能深入具体的内核源码层面，就像Android源码一样，或者Java的jdk源码。经过搜索后，发现还是很困难，这点让我还是比较吃惊。可能是C本来就是基于Linux的某一内核？所以要调试系统层面的调用的话非常困难，需要一些仿真和模拟的手段。这里我搜索到的工具方法是通过qemu + gdb + vs">
 <meta property="og:locale" content="zh_CN">
@@ -88,7 +88,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"www.pplong.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>

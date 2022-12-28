@@ -24,7 +24,7 @@
   <meta name="description" content="Linux学习  “工欲善其事，必先利其器” 从大二以来一直在用manjaro ，从原来的极为不适应到现在用起来十分“舒心”，Linux确实给我一种更高效、更简洁的操作方式。在大二了解一定的操作系统组成原理时，也对Linux系统的内核构成产生了兴趣，对fork malloc等函数只知其义而不知其意。希望能够通过此篇博客系统的学习，从Linux内核层面去理解操作系统的组成原理。对Linux有一个全局">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux内核学习">
-<meta property="og:url" content="http://114.115.150.92/2021/10/25/Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:url" content="https://www.pplong.top/2021/10/25/Linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="Linux学习  “工欲善其事，必先利其器” 从大二以来一直在用manjaro ，从原来的极为不适应到现在用起来十分“舒心”，Linux确实给我一种更高效、更简洁的操作方式。在大二了解一定的操作系统组成原理时，也对Linux系统的内核构成产生了兴趣，对fork malloc等函数只知其义而不知其意。希望能够通过此篇博客系统的学习，从Linux内核层面去理解操作系统的组成原理。对Linux有一个全局">
 <meta property="og:locale" content="zh_CN">
@@ -90,7 +90,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"114.115.150.92","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"www.pplong.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -390,13 +390,13 @@
 <p><strong>Linux的内核版本</strong></p>
 <p>主版本号 . 从版本号 . 修订版本号 (. 稳定版本号)<br>
 从版本号是偶数 -&gt; 内核是稳定版    奇数 -&gt; 开发版</p>
-<h2 id="-v3"></h2>
+<h2 id="-v4"></h2>
 <h2 id="开始">开始</h2>
 <h3 id="源码-v2">源码</h3>
 <p>内核源码一般在/usr/src/linux中</p>
 <h4 id="结构-v2">结构</h4>
 <p><img src="https://img-blog.csdn.net/20170302212637409?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDQ0NzIzNA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" srcset="/img/loading.gif" lazyload alt="img"></p>
-<h4 id="编译">编译</h4>
+<h4 id="编译-v2">编译</h4>
 <h3 id="内核开发的特点">内核开发的特点</h3>
 <ul>
 <li>不能访问C库和标准的C头文件（包含C库效率太低下）</li>
@@ -478,7 +478,7 @@ Linux fork采用写时拷贝进行，内核并不复制整个进程的地址空�
 <p><strong>为啥Manjaro没有include文件夹，并且/usr/include下的sched.h没有task_struct定义，但linux内核源文件就有？</strong></p>
 <p>亲测，这个task_struct结构体相当的长，有很多的ifdef下的struct定义（适配不同的架构吗？）</p>
 <h3 id="线程-v2">线程</h3>
-<h4 id="概述-v2">概述</h4>
+<h4 id="概述-v3">概述</h4>
 <p>线程机制：提供了同一程序内共享内存地址空间运行的一组线程，在多处理器环境下，能保证真正的并行处理。父子俩共享地址空间、文件资源系统、文件描述符和信号处理程序。本质仍然是线程，</p>
 <div class="note note-primary">
             <p>Windows下，在啮合中专门提供了支持线程的机制，把线程叫做“轻量级进程”(而在Linux中，进程本身已经足够轻量)。线程被抽象成一种消耗资源较少、运行迅速的执行单元，通常有一个包含指向n个不同线程的指针的进程描述符，线程本身有独立的结构。<br>但Linux下就没有独立的结构，仅仅复用task_struct，建立四个进程时，指定他们共享某些资源</p>
@@ -549,7 +549,7 @@ Linux fork采用写时拷贝进行，内核并不复制整个进程的地址空�
 <p><strong>内核线程</strong></p>
 <p>独立运行在内核空间的标准进程，区别在与内核线程没有独立的地址空间。只在内核空间运行，从不会切换到内核空间。可以被调度和抢占。内核线程只能由内核线程创建</p>
 <h2 id="进程调度">进程调度</h2>
-<h3 id="概述-v3">概述</h3>
+<h3 id="概述-v4">概述</h3>
 <p><strong>实时进程和普通进程</strong></p>
 <table>
 <thead>
