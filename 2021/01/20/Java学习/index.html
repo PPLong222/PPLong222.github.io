@@ -22,22 +22,21 @@ ArrayList
 允许添加多个null值
 
 属性 size 是指 elementData 中实际有多少个元素，而 elementData.length 为集合容量
-
-
 DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是否有initialCapacity
-第一次添加元素时扩容   默认初始的集合容量 ">
+
+第一次添加元素时扩容   默认初始的集合容量 1">
   <meta name="author" content="PPLong">
   <meta name="keywords" content="">
   <!--添加百度站点统计-->
   <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
   <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
   <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
-  <meta name="description" content="Java SE  集合 ArrayList  允许添加多个null值  属性 size 是指 elementData 中实际有多少个元素，而 elementData.length 为集合容量   DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是否有initialCapacity 第一次添加元素时扩容   默认初始的集合容量">
+  <meta name="description" content="Java SE  集合 ArrayList  允许添加多个null值  属性 size 是指 elementData 中实际有多少个元素，而 elementData.length 为集合容量 DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是否有initialCapacity  第一次添加元素时扩容   默认初始的集合容量 1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java学习">
 <meta property="og:url" content="https://www.pplong.top/2021/01/20/Java%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="PPLong的博客">
-<meta property="og:description" content="Java SE  集合 ArrayList  允许添加多个null值  属性 size 是指 elementData 中实际有多少个元素，而 elementData.length 为集合容量   DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是否有initialCapacity 第一次添加元素时扩容   默认初始的集合容量">
+<meta property="og:description" content="Java SE  集合 ArrayList  允许添加多个null值  属性 size 是指 elementData 中实际有多少个元素，而 elementData.length 为集合容量 DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是否有initialCapacity  第一次添加元素时扩容   默认初始的集合容量 1">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210228192712917.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210307090828271.png">
@@ -48,7 +47,7 @@ DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是�
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210428192019015.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210428185332025.png">
 <meta property="article:published_time" content="2021-01-20T10:05:07.000Z">
-<meta property="article:modified_time" content="2022-08-02T08:25:32.000Z">
+<meta property="article:modified_time" content="2023-02-25T11:02:48.000Z">
 <meta property="article:author" content="PPLong">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Study">
@@ -290,8 +289,8 @@ DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是�
     
         <span class="post-meta">
   <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
-  <time datetime="2022-08-02 16:25" pubdate>
-    更新: 2022年8月2日下午4点25分
+  <time datetime="2023-02-25 19:02" pubdate>
+    更新: 2023年2月25日晚上7点02分
   </time>
 </span>
         
@@ -301,7 +300,7 @@ DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是�
     
         <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      15k 字
+      17k 字
     </span>
         
 
@@ -310,7 +309,7 @@ DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是�
       <i class="iconfont icon-clock-fill"></i>
       
       
-      49 分钟
+      55 分钟
     </span>
                 
 
@@ -364,18 +363,23 @@ DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是�
 <li>允许添加多个null值
 <ul>
 <li>属性 size 是指 elementData 中实际有多少个元素，而 elementData.length 为集合容量</li>
+<li>DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是否有initialCapacity
+<ul>
+<li>第一次添加元素时扩容   默认初始的集合容量 10</li>
 </ul>
 </li>
-<li>DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是否有initialCapacity</li>
-<li>第一次添加元素时扩容   默认初始的集合容量 10</li>
-<li>每次增删都使modCount增加 ，并且增删会进行modCount的检查，例如在迭代时进行增删操作时 会报错，Itr中的expectedModCount与modCount不一致！</li>
+</ul>
+</li>
+<li>grow()： 数组扩容策略，1.5倍且与最小容量进行比较</li>
+<li>每次增删都使modCount增加 ，并且增删会进行modCount的检查，例如在迭代时进行增删操作时 会报错，Itr中的expectedModCount与modCount不一致！因此ArrayList是不支持多线程的</li>
 </ul>
 <p><span style='color:red;font-size:20px;'>面试：优化数组 </span></p>
 <span id="more"></span>
 <p>标记-清除法</p>
 <h3 id="HashMap">HashMap</h3>
 <p>内部hash函数</p>
-<p>put前要进行对再次对hashcode再次hash，也就是高16 和低 16做异或运算</p>
+<p>put前要进行对再次对hashcode再次hash，也就是高16 和低 16做异或运算：<strong>增大散列程度</strong>。高位特征不变，低位也具有高位特征。避免容量小时key的高位不参与运算问题</p>
+<p>‘&gt;&gt;&gt;’无符号右移</p>
 <p><strong>为什么要重写equals 和hascode方法	，puVal方法中有提到</strong></p>
 <p>注意区分Node的hash 和 key的hashcode</p>
 <p>基本类型的hashcode方法</p>
@@ -537,6 +541,18 @@ table <span class="token operator">=</span> newTab<span class="token punctuation
 </li>
 </ul>
 <p>发生hash碰撞时 当前的元素生成新的节点保存在链表的尾部</p>
+<h4 id="HM的线程安全方式">HM的线程安全方式</h4>
+<ul>
+<li>Collections.synchronizedMap（）返回一个新的Map：使用synchronized进行互斥。使用代理new了一个新的🥱，直接锁住方法</li>
+<li>ConccurentHashMap：使用新的锁机制，将HM进行拆分。</li>
+</ul>
+<h4 id="HM-JDK1-8后扩容上的优化">HM JDK1.8后扩容上的优化</h4>
+<ul>
+<li>1.7之前：重新hash计算</li>
+<li>1.8：只比较扩容后最高位, resize时索引增加到oldSize位即可</li>
+</ul>
+<h4 id="线程不安全造成了什么问题？">线程不安全造成了什么问题？</h4>
+<p>产生环形链表</p>
 <h3 id="LinkedHashMap">LinkedHashMap</h3>
 <p><strong>结构</strong></p>
 <p>accessOrder有什么用？</p>
@@ -546,8 +562,13 @@ table <span class="token operator">=</span> newTab<span class="token punctuation
 <p><strong>hashmap留的后门</strong></p>
 <p>哪种情况下get也会使得重新排序</p>
 <h3 id="Hashtable">Hashtable</h3>
-<p>Hashtable既不支持Null key也不支持Null value</p>
-<p>为啥？</p>
+<p><strong>与HashTable区别</strong></p>
+<ul>
+<li>HT线程同步，HM线程不同步（实质就是每个方法都加了synchronized锁）</li>
+<li>HT不允许有键值有空值</li>
+<li>HM默认数量是16, 2倍增长库容，HT数组默认为11，增长 2x+1</li>
+</ul>
+<h4 id="既不支持Null-key也不支持Null-value">既不支持Null key也不支持Null value</h4>
 <p>这是因为Hashtable使用的是安全失败机制（fail-safe），这种机制会使你此次读到的数据不一定是最新的数据。</p>
 <p>如果你使用null值，就会使得其无法判断对应的key是不存在还是为空，因为你无法再调用一次contain(key）来对key是否存在进行判断，ConcurrentHashMap同理。</p>
 <p><strong>解决问题</strong></p>
@@ -556,10 +577,12 @@ table <span class="token operator">=</span> newTab<span class="token punctuation
 <p><strong>如何实现</strong></p>
 <p>synchronized 锁方法</p>
 <h3 id="ConcurrentHashMap">ConcurrentHashMap</h3>
+<p><strong>JDK1.8中以CAS与synchronized 锁头节点方式实现线程安全，锁的粒度更细</strong></p>
 <p>优先选择-- 性能效率更高</p>
 <p>能说说什么是快速失败什么是安全失败吗？</p>
 <p>快速失败  modCount 不能在多线程下并发修改</p>
 <p>安全失败  concurrent包下的容器都是</p>
+<h4 id="1-7版本">1.7版本</h4>
 <h3 id="SynchronizedMap">SynchronizedMap</h3>
 <p>排斥所 Object mutex</p>
 <p>就是加锁</p>
@@ -583,7 +606,7 @@ obj<span class="token punctuation">.</span>stu <span class="token operator">=</s
 <p>此时操作u2/u1 都会使另一个的值发生改变</p>
 <p>但如果我们不想改变另一个的值就需要使用到clone</p>
 <p>实现Cloneable接口 //Cloneable接口没有具体的实现方法，他相当于是一个标识，如果类没有继承cloneable接口而调用clone方法，会抛出<strong>CloneNotSupportedExcepion异常</strong></p>
-<h2 id="-v2"></h2>
+<h2 id="-v4"></h2>
 <h3 id="深拷贝和浅拷贝">深拷贝和浅拷贝</h3>
 <p>浅拷贝</p>
 <p>clone无法clone 一个对象中的另一个对象，还是是一个reference</p>
@@ -714,6 +737,11 @@ obj<span class="token punctuation">.</span>stu <span class="token operator">=</s
 <p>如何看待接口和抽象类？</p>
 <p>你怎么理解泛型？有什么作用？</p>
 <h2 id="深入Synchronized">深入Synchronized</h2>
+<h4 id="synchronized到底是什么">synchronized到底是什么</h4>
+<p>synchronized是一个<strong>重量级锁</strong>，实现<strong>依赖于JVM 的 monitor 监视器锁</strong>。主要使用monitorenter和monitorexit指令来实现方法同步和代码块同步。<br>
+在编译时，会将monitorexit指令插入到同步代码块的开始位置，而monitorexit插入方法结束处和异常处，并且每一个monitorenter都有一个与之对应的monitorexit。</p>
+<p><strong>任何对象都有一个monitor与之关联</strong>，当一个monitor被持有后，它将被处于锁定状态，线程执行到monitorenter指令时间，会<strong>尝试获取对象所对应的monitor的所有权</strong>，即获取获得对象的锁，由于在编译期会将monitorexit插入到方法结束处和异常处，所以在方法执行完毕或者出现异常的情况会自动释放锁</p>
+<p>synchronized一段代码块或者方法后，其实是将内部设涉及到的变量从CPU缓存中移除，必须去主存中拿数据。</p>
 <p><strong>Java中的锁类型</strong></p>
 <p>可重入锁、公平锁、互斥锁、自旋锁、偏向锁、轻量级锁、读写锁、共享锁</p>
 <p>ReentrantLock 加锁原理： 更改标识符的值</p>
@@ -730,15 +758,32 @@ obj<span class="token punctuation">.</span>stu <span class="token operator">=</s
 <p><strong>为什么早期是重量级锁</strong></p>
 <p>同时我们还必须注意到的是在Java早期版本中，synchronized属于重量级锁，效率低下，因为监视器锁（monitor）是依赖于底层的操作系统的Mutex Lock来实现的，而操作系统实现线程之间的切换时需要从用户态转换到核心态，这个状态之间的转换需要相对比较长的时间，时间成本相对较高</p>
 <h3 id="JVM对锁的优化"><strong>JVM对锁的优化</strong></h3>
+<p><strong>锁升级</strong></p>
 <p>锁的升级： 无锁–偏向–轻量–重量</p>
+<p>为什么升级： 1.6前只要拿不到锁，就要挂起当前线程，性能差</p>
+<ul>
+<li>
+<p><strong>无锁、匿名偏向锁</strong>：当前对象没有作为锁存在</p>
+</li>
+<li>
 <p><strong>偏向锁</strong></p>
-<p>在大多数情况下，锁不仅不存在多线程竞争，而且总是由同一线程多次获得，因此为了减少同一线程获取锁(会涉及到一些CAS操作,耗时)的代价而引入偏向锁。偏向锁的核心思想是，如果一个线程获得了锁，那么锁就进入偏向模式，此时Mark Word 的结构也变为偏向锁结构，当这个线程再次请求锁时，无需再做任何同步操作，即获取锁的过程，这样就省去了大量有关锁申请的操作，从而也就提供程序的性能。所以，对于没有锁竞争的场合，偏向锁有很好的优化效果，毕竟极有可能连续多次是同一个线程申请相同的锁。但是对于锁竞争比较激烈的场合，偏向锁就失效了，因为这样场合极有可能每次申请锁的线程都是不相同的，因此这种场合下不应该使用偏向锁，否则会得不偿失，需要注意的是，偏向锁失败后，并不会立即膨胀为重量级锁，而是先升级为轻量级锁</p>
+<p>在大多数情况下，锁不仅不存在多线程竞争，而且总是由同一线程多次获得，因此为了减少同一线程获取锁(会涉及到一些CAS操作,耗时)的代价而引入偏向锁。偏向锁的核心思想是，如果一个线程获得了锁，那么锁就进入偏向模式，此时Mark Word 的结构也变为偏向锁结构，<strong>当这个线程再次请求锁时，无需再做任何同步操作，即获取锁的过程，这样就省去了大量有关锁申请的操作，从而也就提供程序的性能</strong>。所以，对于没有锁竞争的场合，偏向锁有很好的优化效果，毕竟极有可能连续多次是同一个线程申请相同的锁。但是对于锁竞争比较激烈的场合，偏向锁就失效了，因为这样场合极有可能每次申请锁的线程都是不相同的，因此这种场合下不应该使用偏向锁，否则会得不偿失，需要注意的是，偏向锁失败后，并不会立即膨胀为重量级锁，而是先升级为轻量级锁</p>
+</li>
+<li>
 <p><strong>轻量级锁</strong></p>
-<p>倘若偏向锁失败，虚拟机并不会立即升级为重量级锁，它还会尝试使用一种称为轻量级锁的优化手段(1.6之后加入的)，此时Mark Word 的结构也变为轻量级锁的结构。轻量级锁能够提升程序性能的依据是“对绝大部分的锁，在整个同步周期内都不存在竞争”，注意这是经验数据。需要了解的是，轻量级锁所适应的场景是线程交替执行同步块的场合，如果存在同一时间访问同一锁的场合，就会导致轻量级锁膨胀为重量级锁。</p>
-<p><strong>自旋锁</strong></p>
-<p>轻量级锁失败后，虚拟机为了避免线程真实地在操作系统层面挂起，还会进行一项称为自旋锁的优化手段。这是基于在大多数情况下，线程持有锁的时间都不会太长，如果直接挂起操作系统层面的线程可能会得不偿失，毕竟操作系统实现线程之间的切换时需要从用户态转换到核心态，这个状态之间的转换需要相对比较长的时间，时间成本相对较高，因此自旋锁会假设在不久将来，当前的线程可以获得锁，因此虚拟机会让当前想要获取锁的线程做几个空循环(这也是称为自旋的原因)，一般不会太久，可能是50个循环或100循环，在经过若干次循环后，如果得到锁，就顺利进入临界区。如果还不能获得锁，那就会将线程在操作系统层面挂起，这就是自旋锁的优化方式，这种方式确实也是可以提升效率的。最后没办法也就只能升级为重量级锁了</p>
+<p>倘若偏向锁失败，虚拟机并不会立即升级为重量级锁，它还会尝试使用一种称为轻量级锁的优化手段(<strong>1.6之后加入的</strong>)，此时Mark Word 的结构也变为轻量级锁的结构。<br>
+<strong>采用自旋的方式，以CAS的形式获取锁资源</strong></p>
+<p>轻量级锁能够提升程序性能的依据是“对绝大部分的锁，在整个同步周期内都不存在竞争”，注意这是经验数据。需要了解的是，轻量级锁所适应的场景是线程交替执行同步块的场合，如果存在同一时间访问同一锁的场合，就会导致轻量级锁膨胀为重量级锁。</p>
+</li>
+<li>
+<p><strong>自旋锁</strong><br>
+轻量级锁失败后，虚拟机为了避免线程真实地在操作系统层面挂起，还会进行一项称为自旋锁的优化手段。这是基于在大多数情况下，线程持有锁的时间都不会太长，如果直接挂起操作系统层面的线程可能会得不偿失，毕竟操作系统实现线程之间的切换时需要从用户态转换到核心态，这个状态之间的转换需要相对比较长的时间，时间成本相对较高，因此自旋锁会假设在不久将来，当前的线程可以获得锁，因此虚拟机会让当前想要获取锁的线程做几个空循环(这也是称为自旋的原因)，一般不会太久，可能是50个循环或100循环，在经过若干次循环后，如果得到锁，就顺利进入临界区。如果还不能获得锁，那就会将线程在操作系统层面挂起，这就是自旋锁的优化方式，这种方式确实也是可以提升效率的。最后没办法也就只能升级为重量级锁了</p>
+</li>
+</ul>
 <p><strong>锁消除</strong></p>
-<p>ava虚拟机在JIT编译时(可以简单理解为当某段代码即将第一次被执行时进行编译，又称即时编译)，通过对运行上下文的扫描，去除不可能存在共享资源竞争的锁，通过这种方式消除没有必要的锁，可以节省毫无意义的请求锁时间，如下StringBuffer的append是一个同步方法，但是在add方法中的StringBuffer属于一个局部变量，并且不会被其他线程所使用，因此StringBuffer不可能存在共享资源竞争的情景，JVM会自动将其锁消除</p>
+<p>虚拟机在JIT编译时(可以简单理解为当某段代码即将第一次被执行时进行编译，又称即时编译)，通过对运行上下文的扫描，去除不可能存在共享资源竞争的锁，通过这种方式消除没有必要的锁，可以节省毫无意义的请求锁时间，如下StringBuffer的append是一个同步方法，但是在add方法中的StringBuffer属于一个局部变量，并且不会被其他线程所使用，因此StringBuffer不可能存在共享资源竞争的情景，JVM会自动将其锁消除</p>
+<p><strong>锁膨胀</strong></p>
+<p>一个循环中频繁的获取和释放资源，开销很大，锁会扩大到循环外。</p>
 <h3 id="自旋锁">自旋锁</h3>
 <p>CAS   没有获取到锁的线程是不会阻塞的，要通过控制循环值不断获取</p>
 <p>3个操作数  内存值 V（共享） 旧的预期值E（缓存） 要修改的新值N，仅当E == N时，才会修改  E!=N时，则再次查询主存中的V 使 E == N</p>
@@ -764,19 +809,22 @@ obj<span class="token punctuation">.</span>stu <span class="token operator">=</s
 </ol>
 <h4 id="happens-before-原则">happens - before 原则</h4>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233650045.png" srcset="/img/loading.gif" lazyload alt="image-20210313233650045"></p>
-<h4 id="volatile-到底锁什么？">volatile 到底锁什么？</h4>
 <h4 id="为什么不能保证-count-原子性？">为什么不能保证 count++ 原子性？</h4>
-<p>单个变量的读写 具有原子性</p>
-<p>但复合操作则不行</p>
+<p>单个变量的读写 具有原子性 i = 100</p>
+<p>但复合操作则不行   i++</p>
 <p>底层机制：内存屏障</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233706649.png" srcset="/img/loading.gif" lazyload alt="image-20210313233706649"></p>
 <p>使用 ： 状态标记、单例模式</p>
 <h3 id="JUC">JUC</h3>
-<h4 id="问题-v3">问题</h4>
-<h5 id="synchronized到底是什么-原理？">synchronized到底是什么  原理？</h5>
-<p>synchronized是一个重量级锁，实现依赖于JVM 的 monitor 监视器锁。主要使用monitorenter和monitorexit指令来实现方法同步和代码块同步。在编译的是时候，会将monitorexit指令插入到同步代码块的开始位置，而monitorexit插入方法结束处和异常处，并且每一个monitorexit都有一个与之对应的monitorexit。</p>
-<p><strong>任何对象都有一个monitor与之关联</strong>，当一个monitor被持有后，它将被处于锁定状态，线程执行到monitorenter指令时间，会<strong>尝试获取对象所对应的monitor的所有权</strong>，即获取获得对象的锁，由于在编译期会将monitorexit插入到方法结束处和异常处，所以在方法执行完毕或者出现异常的情况会自动释放锁</p>
+<p>并发编程三大特性： 原子性、可见性、有序性</p>
 <h4 id="锁">锁</h4>
+<h5 id="锁的分类">锁的分类</h5>
+<ul>
+<li>可重入、不可重入</li>
+<li>悲观锁、乐观锁</li>
+<li>公平锁、非公平锁</li>
+<li>互斥锁、共享锁</li>
+</ul>
 <p>结构  可重入锁 读锁 写锁</p>
 <p>将大的方法加入同步锁会影响执行效率</p>
 <p>sleep 抱着锁睡觉</p>
@@ -805,6 +853,17 @@ obj<span class="token punctuation">.</span>stu <span class="token operator">=</s
 <h4 id="Condition">Condition</h4>
 <p>精准唤醒和停止   顺序唤醒</p>
 <h4 id="⑧锁问题">⑧锁问题</h4>
+<h4 id="AQS">AQS</h4>
+<p>AbstractQueuedSynchronizer抽象类， JUC包下的一个基类。<strong>是一个用于构建锁、同步器等线程协作工具类的框架</strong>ReentrantLock、ThreadPoolExecutor、Semaphore等。有了 AQS 以后，很多用于线程协作的工具类就都可以很方便的被写出来，有了 AQS 之后，可以让更上层的开发极大的减少工作量，避免重复造轮子，同时也避免了上层因处理不当而导致的线程安全问题，因为 AQS 把这些事情都做好了</p>
+<p><strong>特点</strong></p>
+<ul>
+<li>提供volatile修饰的state对象，采用CAS方式修改</li>
+<li>维护FIFO双向链表Node表示等待队列</li>
+<li>采用模板模式（protected方法）</li>
+<li>主要方法tryAcquire/acquire/addWaiter/tryRelease(CAS轮训、挂起线程)</li>
+<li>判断当前线程是否应该被挂起：看前一个节点的状态</li>
+<li>Release时特点：从尾到头释放</li>
+</ul>
 <h3 id="向下转型和向上转型">向下转型和向上转型</h3>
 <p>将整个继承关系想像成由上至下</p>
 <p>向上转型   子转父（包括接口） 丢失方法</p>
@@ -861,7 +920,13 @@ obj<span class="token punctuation">.</span>stu <span class="token operator">=</s
 <span class="token punctuation">&#125;</span></code></pre></div>
 <p>涉及到的静态内部类的知识</p>
 <p>静态内部类只会在使用到该内部类时才会加载，否则是不会加载的，也就是只有使用到new Integer的valueOf方法时，才会加载该内部类</p>
-<h2 id="线程">线程</h2>
+<h3 id="CAS-v2">CAS</h3>
+<p><strong>原理</strong></p>
+<p>若：内存位置的值 == 预期原值 -&gt; 则赋予新值。通过while循环完成。</p>
+<p>优点：不用进行用户态 内核态的切换</p>
+<p>缺点：自旋时间不确定</p>
+<p>增加版本控制： AtomicStampedReference，不但会判断原值，还会比较版本信息</p>
+<h2 id="线程-v2">线程</h2>
 <h3 id="Callable和Runnable"><strong>Callable和Runnable</strong></h3>
 <p>callable可以有h返回子，且可以抛出异常</p>
 <p>Callable.call（） 会调用该线程，阻塞等待结果</p>
@@ -888,6 +953,13 @@ obj<span class="token punctuation">.</span>stu <span class="token operator">=</s
     <span class="token punctuation">&#125;</span></code></pre></div>
 <p><strong>延伸</strong></p>
 <p>Thread.start如何启动？Threadgroup？</p>
+<h3 id="如何停止线程">如何停止线程</h3>
+<p><strong>stop方法</strong></p>
+<p>立即停止线程 释放锁</p>
+<p>为什么stop方法是Deprecated的？数据不一致问题</p>
+<p><strong>interrupt方法</strong></p>
+<p>设置中断标志位，在外部配合isInterrupted()或者interrupted方法进行判断</p>
+<p>两者区别： interrupted会把标志位清空（所以：连续两次调用该方法时第二次返回false）</p>
 <h2 id="泛型">泛型</h2>
 <p><strong>为什么我们需要泛型？</strong></p>
 <p>没有泛型之前我们是怎么做到？我们可以通过Object存储任意的对象，然后使用时再强转成对应的类型就行了（但如果我们不清楚对象的类型，那么在转换时就kennel出现ClassCast Exception）</p>
@@ -960,12 +1032,34 @@ o<span class="token punctuation">[</span><span class="token number">1</span><spa
 <span class="token punctuation">&#125;</span></code></pre></div>
 <h2 id="I-O操作">I/O操作</h2>
 <h3 id="常见几大输入输出类">常见几大输入输出类</h3>
-<h2 id="异常">异常</h2>
+<h2 id="异常-v2">异常</h2>
 <h3 id="Exception和Error关系">Exception和Error关系</h3>
 <p><strong>Exception和Error都可以被catch到</strong></p>
 <p>但不应在代码中catch error</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210428185332025.png" srcset="/img/loading.gif" lazyload alt="image-20210428185332025"></p>
 <p>checkedException ： 编译期异常，易处理，易出错的</p>
+<h2 id="ThreadPoolExecutor">ThreadPoolExecutor</h2>
+<p><strong>意义</strong></p>
+<p>减少开销，创建和销毁资源存在时间成本，进行一组线程的管理</p>
+<h3 id="自身状态">自身状态</h3>
+<p>高三位表示状态, 低29位表示线程数目</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"> <span class="token comment">// 状态ctl是由Atmoic类管理的</span>
+<span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">AtomicInteger</span> ctl <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AtomicInteger</span><span class="token punctuation">(</span><span class="token function">ctlOf</span><span class="token punctuation">(</span>RUNNING<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 111 0000000..000</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> RUNNING    <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> COUNT_BITS<span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> SHUTDOWN   <span class="token operator">=</span>  <span class="token number">0</span> <span class="token operator">&lt;&lt;</span> COUNT_BITS<span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> STOP       <span class="token operator">=</span>  <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> COUNT_BITS<span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> TIDYING    <span class="token operator">=</span>  <span class="token number">2</span> <span class="token operator">&lt;&lt;</span> COUNT_BITS<span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> TERMINATED <span class="token operator">=</span>  <span class="token number">3</span> <span class="token operator">&lt;&lt;</span> COUNT_BITS<span class="token punctuation">;</span></code></pre></div>
+<ul>
+<li>Running：接受新任务，也能处理阻塞队列的任务</li>
+<li>SHUTDOWN：不接受新任务但可以处理阻塞队列的任务</li>
+<li>STOP：不接受新任务，不处理阻塞队列里的任务，中断处理过程中的任务</li>
+<li>TIDYING：当前线程池没有工作线程，调用terminated方法</li>
+<li>TERMINATED： terminated方法调用完成</li>
+</ul>
+<p><strong>线程池Worker作用</strong></p>
+<p><strong>线程池添加任务和添加Worker的详细流程是什么</strong></p>
 <h2 id="面试问题-v3">面试问题</h2>
 <p>为什么0.1+0.2= 0.30000000004</p>
 <p>short s1 = 1; s1 = s1 + 1;</p>
@@ -1150,10 +1244,10 @@ o<span class="token punctuation">[</span><span class="token number">1</span><spa
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        62&nbsp 篇文章
+        63&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        250.2k&nbsp 字
+        251.3k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

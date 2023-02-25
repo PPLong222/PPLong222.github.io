@@ -406,7 +406,7 @@ r<span class="token punctuation">.</span>encoding <span class="token operator">=
 <span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>json<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>headers<span class="token punctuation">)</span></code></pre></div>
 <p><strong>爬取数据后，记得close关闭这个请求</strong></p>
-<h3 id="进阶-v3">进阶</h3>
+<h3 id="进阶-v4">进阶</h3>
 <h4 id="登录处理-Cookie">登录处理 Cookie</h4>
 <p>理解正常登录流程：登录成功后为什么不用再次登录？Cookie中含有加密的信息，与设备信息是绑定的。</p>
 <p>session：一连串的的请求，这个过程中cookie不会消失，通过session.post session.get来保持会话，保存cookie</p>
@@ -501,7 +501,7 @@ result <span class="token operator">=</span> html<span class="token punctuation"
         settings<span class="token punctuation">.</span>py       <span class="token comment"># project settings file</span>
         spiders<span class="token operator">/</span>          <span class="token comment"># a directory where you'll later put your spiders</span>
             __init__<span class="token punctuation">.</span>py</code></pre></div>
-<h3 id="入门">入门</h3>
+<h3 id="入门-v2">入门</h3>
 <p><strong>创建第一个Scrapy脚本</strong></p>
 <div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> scrapy
 
@@ -594,7 +594,7 @@ f<span class="token operator">:</span> <span class="token string">"00e0b509f6259
 g<span class="token operator">:</span> <span class="token string">"0CoJUm6Qyw8W8jud"</span>
 <span class="token comment">// 随机生成16位字符</span>
 i<span class="token operator">:</span> <span class="token string">"lmkFmnPxWkSzB2OD"</span></code></pre></div>
-<h4 id="代码-v2">代码</h4>
+<h4 id="代码">代码</h4>
 <p>原始参数是可以直接模仿的，主要是如何加密的过程。所以要自动化发送请求，就要<strong>模拟它的加密过程</strong>。这里暂时不研究RSA加密，只关注AES加密。</p>
 <div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> json
 <span class="token keyword">from</span> base64 <span class="token keyword">import</span> b64encode
@@ -659,7 +659,7 @@ i <span class="token operator">=</span> <span class="token string">"KERgVgrbxP7Z
 <ul>
 <li><strong>异步的概念</strong>：不仅发送请求是异步的，通过aiofiles实现读写的时候也是异步执行的，这一点就非常的高效。</li>
 </ul>
-<h4 id="代码-v3">代码</h4>
+<h4 id="代码-v2">代码</h4>
 <div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> json
 <span class="token keyword">import</span> aiofiles
 <span class="token keyword">import</span> requests
@@ -867,10 +867,10 @@ i <span class="token operator">=</span> <span class="token string">"KERgVgrbxP7Z
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        62&nbsp 篇文章
+        63&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        250.2k&nbsp 字
+        251.3k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
