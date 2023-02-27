@@ -390,7 +390,7 @@
 <p><strong>Linux的内核版本</strong></p>
 <p>主版本号 . 从版本号 . 修订版本号 (. 稳定版本号)<br>
 从版本号是偶数 -&gt; 内核是稳定版    奇数 -&gt; 开发版</p>
-<h2 id="-v3"></h2>
+<h2 id="-v4"></h2>
 <h2 id="开始">开始</h2>
 <h3 id="源码-v2">源码</h3>
 <p>内核源码一般在/usr/src/linux中</p>
@@ -477,7 +477,7 @@ Linux fork采用写时拷贝进行，内核并不复制整个进程的地址空�
 <p>详见文章 《深入Linux fork()函数》</p>
 <p><strong>为啥Manjaro没有include文件夹，并且/usr/include下的sched.h没有task_struct定义，但linux内核源文件就有？</strong></p>
 <p>亲测，这个task_struct结构体相当的长，有很多的ifdef下的struct定义（适配不同的架构吗？）</p>
-<h3 id="线程">线程</h3>
+<h3 id="线程-v3">线程</h3>
 <h4 id="概述-v3">概述</h4>
 <p>线程机制：提供了同一程序内共享内存地址空间运行的一组线程，在多处理器环境下，能保证真正的并行处理。父子俩共享地址空间、文件资源系统、文件描述符和信号处理程序。本质仍然是线程，</p>
 <div class="note note-primary">
@@ -881,10 +881,10 @@ Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件�
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        63&nbsp 篇文章
+        64&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        251.3k&nbsp 字
+        255.1k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

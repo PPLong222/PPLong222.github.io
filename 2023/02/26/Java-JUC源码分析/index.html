@@ -1,0 +1,1163 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/gallery/paw_img.jpg">
+  <link rel="icon" href="/gallery/paw_img.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PPLong">
+  <meta name="keywords" content="">
+  <!--添加百度站点统计-->
+  <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
+  <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
+  <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
+  <meta name="description" content="Java JUC源码分析 概念 三大特性 原子性 一个或者多个操作在CPU执行的过程中不被中断的特性 可见性 一个线程修改一个变量后，其他线程能够立即得知这个修改 各自的线程有其工作内存，即保存时的副本存储的空间 有序性 代码的执行顺序 编译器 和 处理器执行指令时会进行从排序，改变语序   这里注意什么时候能改什么时候不能改！ Volatile   保证不同线程对变量操作的内存可见性（修改变量直">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java JUC源码分析">
+<meta property="og:url" content="https://www.pplong.top/2023/02/26/Java-JUC%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="PPLong的博客">
+<meta property="og:description" content="Java JUC源码分析 概念 三大特性 原子性 一个或者多个操作在CPU执行的过程中不被中断的特性 可见性 一个线程修改一个变量后，其他线程能够立即得知这个修改 各自的线程有其工作内存，即保存时的副本存储的空间 有序性 代码的执行顺序 编译器 和 处理器执行指令时会进行从排序，改变语序   这里注意什么时候能改什么时候不能改！ Volatile   保证不同线程对变量操作的内存可见性（修改变量直">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233725385.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233650045.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233706649.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210303172037854.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210307090828271.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210428192019015.png">
+<meta property="article:published_time" content="2023-02-26T01:22:52.000Z">
+<meta property="article:modified_time" content="2023-02-27T04:28:13.000Z">
+<meta property="article:author" content="PPLong">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233725385.png">
+  
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
+  
+  <title>Java JUC源码分析 - PPLong的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/indexing-hover.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.pplong.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 90vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PPLong的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友達
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-link-fill"></i>
+                娱乐
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/movie/">
+                    <i class="iconfont icon-movie"></i>
+                    第二人生
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/shuoshuo/">
+                    <i class="iconfont icon-comment"></i>
+                    唠唠
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/develop/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    尝鲜
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/gallery/covers/wallhaven-6or7gx.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java JUC源码分析">
+              
+            </span>
+
+            
+              <div class="mt-3">
+    
+            
+                <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-02-26 09:22" pubdate>
+        始于: 2023年2月26日上午9点22分
+      </time>
+    </span>
+                
+</div>
+
+<!-- 自定义的更新时间 -->
+<div class="mt-1">
+    
+        <span class="post-meta">
+  <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
+  <time datetime="2023-02-27 12:28" pubdate>
+    更新: 2023年2月27日中午12点28分
+  </time>
+</span>
+        
+</div>
+
+<div class="mt-1">
+    
+        <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      12k 字
+    </span>
+        
+
+            
+                <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      38 分钟
+    </span>
+                
+
+                    
+                        
+                            
+                                <!-- LeanCloud 统计文章PV -->
+                                <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span>
+                                 次
+                                    </span>
+                                    
+                                                
+</div>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+    <div class="container-fluid nopadding-x">
+        <div class="row nomargin-x">
+            <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-x-md">
+                <div class="container nopadding-x-md" id="board-ctn">
+                    <div class="py-5" id="board">
+                        <article class="post-content mx-auto">
+                            <!-- SEO header -->
+                            <h1 style="display: none">
+                                Java JUC源码分析
+                            </h1>
+                            
+                                    <div class="markdown-body">
+                                        <h1>Java JUC源码分析</h1>
+<h2 id="概念-v4">概念</h2>
+<h3 id="三大特性">三大特性</h3>
+<h4 id="原子性">原子性</h4>
+<p>一个或者多个操作在CPU执行的过程中不被中断的特性</p>
+<h4 id="可见性">可见性</h4>
+<p>一个线程修改一个变量后，其他线程能够立即得知这个修改</p>
+<p>各自的线程有其工作内存，即保存时的副本存储的空间</p>
+<h4 id="有序性">有序性</h4>
+<p>代码的执行顺序</p>
+<p>编译器 和 处理器执行指令时会进行从排序，改变语序   这里<strong>注意什么时候能改什么时候不能改！</strong></p>
+<h3 id="Volatile">Volatile</h3>
+<ol>
+<li>
+<p>保证不同线程对变量操作的内存可见性（修改变量直接刷新回主存），使缓存行无效</p>
+</li>
+<li>
+<p><strong>禁止指令重排序</strong>   注意是并不是完全就是一样的顺序，只保证先后顺序</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233725385.png" alt="image-20210313233725385"></p>
+</li>
+</ol>
+<h4 id="happens-before-原则">happens - before 原则</h4>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233650045.png" alt="image-20210313233650045"></p>
+<h4 id="为什么不能保证-count-原子性？">为什么不能保证 count++ 原子性？</h4>
+<p>单个变量的读写 具有原子性 i = 100</p>
+<p>但复合操作则不行   i++</p>
+<p>底层机制：内存屏障</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233706649.png" alt="image-20210313233706649"></p>
+<p>使用 ： 状态标记、单例模式</p>
+<h2 id="锁">锁</h2>
+<h3 id="锁的分类">锁的分类</h3>
+<ul>
+<li>可重入、不可重入</li>
+<li>悲观锁、乐观锁</li>
+<li>公平锁、非公平锁</li>
+<li>互斥锁、共享锁</li>
+</ul>
+<p>结构  可重入锁 读锁 写锁</p>
+<p>将大的方法加入同步锁会影响执行效率</p>
+<p><strong>sleep 抱着锁睡觉</strong></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210303172037854.png" alt="image-20210303172037854"></p>
+<h3 id="锁到底锁什么">锁到底锁什么</h3>
+<p>synchronized 默认锁的是this  方法的调用者</p>
+<p>但是this 中的对象则不能同步 ，要同步哪个对象 就锁哪个</p>
+<h4 id="死锁">死锁</h4>
+<p><strong>两个或多个线程在等待对方释放资源；某个同步块同时拥有两个以上对象的锁</strong></p>
+<p>产生死锁的条件<br>
+1.互斥条件：一个资源每次只能被一个进程使用。<br>
+2.请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。<br>
+3.不剥夺条件:进程已获得的资源，在末使用完之前，不能强行剥夺。<br>
+4.循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。</p>
+<h4 id="Synchronized和Lock的区别">Synchronized和Lock的区别</h4>
+<ul>
+<li>Lock可以判断是否获取到了锁</li>
+<li>lock必须要手动释放，如果不释放锁，则出现死锁</li>
+<li>Lock不一定会等待下去</li>
+<li>可重入锁，不可中断，非公平</li>
+<li>Lock适合锁大量的代码</li>
+</ul>
+<h4 id="虚假唤醒">虚假唤醒</h4>
+<h2 id="Synchronized">Synchronized</h2>
+<h3 id="synchronized到底是什么">synchronized到底是什么</h3>
+<p>synchronized是一个<strong>重量级锁</strong>，实现<strong>依赖于JVM 的 monitor 监视器锁</strong>。主要使用monitorenter和monitorexit指令来实现方法同步和代码块同步。<br>
+在编译时，会将monitorexit指令插入到同步代码块的开始位置，而monitorexit插入方法结束处和异常处，并且每一个monitorenter都有一个与之对应的monitorexit。</p>
+<p><strong>任何对象都有一个monitor与之关联</strong>，当一个monitor被持有后，它将被处于锁定状态，线程执行到monitorenter指令时间，会<strong>尝试获取对象所对应的monitor的所有权</strong>，即获取获得对象的锁，由于在编译期会将monitorexit插入到方法结束处和异常处，所以在方法执行完毕或者出现异常的情况会自动释放锁</p>
+<p>synchronized一段代码块或者方法后，其实是将内部设涉及到的变量从CPU缓存中移除，必须去主存中拿数据。</p>
+<p><strong>Java中的锁类型</strong></p>
+<p>可重入锁、公平锁、互斥锁、自旋锁、偏向锁、轻量级锁、读写锁、共享锁</p>
+<p>ReentrantLock 加锁原理： 更改标识符的值</p>
+<p>synchronized 到底改变的是对象的什么属性？？？</p>
+<p><strong>对象头</strong></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210307090828271.png" alt="image-20210307090828271"></p>
+<p><strong>隐式</strong></p>
+<p>synchronized方法 monitorexit</p>
+<p>JVM可以从方法常量池中的方法表结构(method_info Structure) 中的 ACC_SYNCHRONIZED 访问标志区分一个方法是否同步方法</p>
+<p>当方法调用时，调用指令将会 检查方法的 ACC_SYNCHRONIZED 访问标志是否被设置，如果设置了，执行线程将先持有monitor（虚拟机规范中用的是管程一词）， 然后再执行方法，最后再方法完成(无论是正常完成还是非正常完成)时释放monitor</p>
+<p><strong>为何class文件会有两个monitorexit</strong></p>
+<p>synchronized代码块  会有monitorenter…</p>
+<p>为了保证在方法异常完成时 monitorenter 和 monitorexit 指令依然可以正确配对执行，编译器会自动产生一个异常处理器，这个异常处理器声明可处理所有的异常，它的目的就是用来执行 monitorexit 指令。从字节码中也可以看出多了一个monitorexit指令，它就是异常结束时被执行的释放monitor 的指令。</p>
+<p><strong>为什么早期是重量级锁</strong></p>
+<p>同时我们还必须注意到的是在Java早期版本中，synchronized属于重量级锁，效率低下，因为监视器锁（monitor）是依赖于底层的操作系统的Mutex Lock来实现的，而操作系统实现线程之间的切换时需要从用户态转换到核心态，这个状态之间的转换需要相对比较长的时间，时间成本相对较高</p>
+<h3 id="JVM对锁的优化"><strong>JVM对锁的优化</strong></h3>
+<p><strong>锁升级</strong></p>
+<p>锁的升级： 无锁–偏向–轻量–重量</p>
+<p>为什么升级： 1.6前只要拿不到锁，就要挂起当前线程，性能差</p>
+<ul>
+<li>
+<p><strong>无锁、匿名偏向锁</strong>：当前对象没有作为锁存在</p>
+</li>
+<li>
+<p><strong>偏向锁</strong></p>
+<p>在大多数情况下，锁不仅不存在多线程竞争，而且总是由同一线程多次获得，因此为了减少同一线程获取锁(会涉及到一些CAS操作,耗时)的代价而引入偏向锁。偏向锁的核心思想是，如果一个线程获得了锁，那么锁就进入偏向模式，此时Mark Word 的结构也变为偏向锁结构，<strong>当这个线程再次请求锁时，无需再做任何同步操作，即获取锁的过程，这样就省去了大量有关锁申请的操作，从而也就提供程序的性能</strong>。所以，对于没有锁竞争的场合，偏向锁有很好的优化效果，毕竟极有可能连续多次是同一个线程申请相同的锁。但是对于锁竞争比较激烈的场合，偏向锁就失效了，因为这样场合极有可能每次申请锁的线程都是不相同的，因此这种场合下不应该使用偏向锁，否则会得不偿失，需要注意的是，偏向锁失败后，并不会立即膨胀为重量级锁，而是先升级为轻量级锁</p>
+</li>
+<li>
+<p><strong>轻量级锁</strong></p>
+<p>倘若偏向锁失败，虚拟机并不会立即升级为重量级锁，它还会尝试使用一种称为轻量级锁的优化手段(<strong>1.6之后加入的</strong>)，此时Mark Word 的结构也变为轻量级锁的结构。<br>
+<strong>采用自旋的方式，以CAS的形式获取锁资源</strong></p>
+<p>轻量级锁能够提升程序性能的依据是“对绝大部分的锁，在整个同步周期内都不存在竞争”，注意这是经验数据。需要了解的是，轻量级锁所适应的场景是线程交替执行同步块的场合，如果存在同一时间访问同一锁的场合，就会导致轻量级锁膨胀为重量级锁。</p>
+</li>
+<li>
+<p><strong>自旋锁</strong><br>
+轻量级锁失败后，虚拟机为了避免线程真实地在操作系统层面挂起，还会进行一项称为自旋锁的优化手段。这是基于在大多数情况下，线程持有锁的时间都不会太长，如果直接挂起操作系统层面的线程可能会得不偿失，毕竟操作系统实现线程之间的切换时需要从用户态转换到核心态，这个状态之间的转换需要相对比较长的时间，时间成本相对较高，因此自旋锁会假设在不久将来，当前的线程可以获得锁，因此虚拟机会让当前想要获取锁的线程做几个空循环(这也是称为自旋的原因)，一般不会太久，可能是50个循环或100循环，在经过若干次循环后，如果得到锁，就顺利进入临界区。如果还不能获得锁，那就会将线程在操作系统层面挂起，这就是自旋锁的优化方式，这种方式确实也是可以提升效率的。最后没办法也就只能升级为重量级锁了</p>
+</li>
+</ul>
+<p><strong>锁消除</strong></p>
+<p>虚拟机在JIT编译时(可以简单理解为当某段代码即将第一次被执行时进行编译，又称即时编译)，通过对运行上下文的扫描，去除不可能存在共享资源竞争的锁，通过这种方式消除没有必要的锁，可以节省毫无意义的请求锁时间，如下StringBuffer的append是一个同步方法，但是在add方法中的StringBuffer属于一个局部变量，并且不会被其他线程所使用，因此StringBuffer不可能存在共享资源竞争的情景，JVM会自动将其锁消除</p>
+<p><strong>锁膨胀</strong></p>
+<p>一个循环中频繁的获取和释放资源，开销很大，锁会扩大到循环外。</p>
+<h3 id="自旋锁">自旋锁</h3>
+<p>CAS   没有获取到锁的线程是不会阻塞的，要通过控制循环值不断获取</p>
+<p>3个操作数  内存值 V（共享） 旧的预期值E（缓存） 要修改的新值N，仅当E == N时，才会修改  E!=N时，则再次查询主存中的V 使 E == N</p>
+<p>底层：硬件</p>
+<h2 id="AQS">AQS</h2>
+<h3 id="AbstractQueuedSynchronizer">AbstractQueuedSynchronizer</h3>
+<p>AbstractQueuedSynchronizer抽象类， JUC包下的一个基类。是一个用于构建锁、同步器等线程协作工具类的框架ReentrantLock、ThreadPoolExecutor、Semaphore等。有了 AQS 以后，很多用于线程协作的工具类就都可以很方便的被写出来，有了 AQS 之后，可以让更上层的开发极大的减少工作量，避免重复造轮子，同时也避免了上层因处理不当而导致的线程安全问题，因为 AQS 把这些事情都做好了</p>
+<p><strong>特点</strong></p>
+<ul>
+<li>提供volatile修饰的state对象，采用CAS方式修改。支持可重入的特点</li>
+<li>维护FIFO双向链表Node表示等待队列</li>
+<li>采用模板模式（protected方法）</li>
+<li>主要方法tryAcquire/acquire/addWaiter/tryRelease(CAS轮训、挂起线程)</li>
+<li>判断当前线程是否应该被挂起：看前一个节点的状态</li>
+<li>Release时特点：从尾到头释放</li>
+</ul>
+<h4 id="方法解读">方法解读</h4>
+<ul>
+<li>tryAcquire：尝试获取锁，立即返回结果</li>
+<li>acquire： 进入队列等待，直到获取</li>
+</ul>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// 供上层编写, 模板方式</span>
+<span class="token keyword">protected</span> <span class="token keyword">boolean</span> <span class="token function">tryAcquire</span><span class="token punctuation">(</span><span class="token keyword">int</span> arg<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">UnsupportedOperationException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token keyword">int</span> arg<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">tryAcquire</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+        <span class="token function">acquireQueued</span><span class="token punctuation">(</span><span class="token function">addWaiter</span><span class="token punctuation">(</span><span class="token class-name">Node</span><span class="token punctuation">.</span>EXCLUSIVE<span class="token punctuation">)</span><span class="token punctuation">,</span> arg<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token function">selfInterrupt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">private</span> <span class="token class-name">Node</span> <span class="token function">addWaiter</span><span class="token punctuation">(</span><span class="token class-name">Node</span> mode<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Node</span> node <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> mode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// Try the fast path of enq; backup to full enq on failure</span>
+    <span class="token class-name">Node</span> pred <span class="token operator">=</span> tail<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>pred <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        node<span class="token punctuation">.</span>prev <span class="token operator">=</span> pred<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">compareAndSetTail</span><span class="token punctuation">(</span>pred<span class="token punctuation">,</span> node<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            pred<span class="token punctuation">.</span>next <span class="token operator">=</span> node<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> node<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  	<span class="token comment">// 完整入队</span>
+    <span class="token function">enq</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> node<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">private</span> <span class="token class-name">Node</span> <span class="token function">enq</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token class-name">Node</span> node<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Node</span> t <span class="token operator">=</span> tail<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>t <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// Must initialize</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">compareAndSetHead</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                tail <span class="token operator">=</span> head<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+          	<span class="token comment">// 该编写逻辑决定了后续为何要从尾到头遍历</span>
+            node<span class="token punctuation">.</span>prev <span class="token operator">=</span> t<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">compareAndSetTail</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span> node<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                t<span class="token punctuation">.</span>next <span class="token operator">=</span> node<span class="token punctuation">;</span>
+                <span class="token keyword">return</span> t<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">acquireQueued</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token class-name">Node</span> node<span class="token punctuation">,</span> <span class="token keyword">int</span> arg<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">boolean</span> failed <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">boolean</span> interrupted <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">final</span> <span class="token class-name">Node</span> p <span class="token operator">=</span> node<span class="token punctuation">.</span><span class="token function">predecessor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>p <span class="token operator">==</span> head <span class="token operator">&amp;&amp;</span> <span class="token function">tryAcquire</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token function">setHead</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                p<span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span> <span class="token comment">// help GC</span>
+                failed <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token keyword">return</span> interrupted<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldParkAfterFailedAcquire</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span> node<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+                <span class="token function">parkAndCheckInterrupt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                interrupted <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>failed<span class="token punctuation">)</span>
+            <span class="token function">cancelAcquire</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">parkAndCheckInterrupt</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">LockSupport</span><span class="token punctuation">.</span><span class="token function">park</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">interrupted</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<h5 id="aquire方法"><strong>aquire方法</strong></h5>
+<ul>
+<li>先进行一次基于派生类实现的tryAcquire(有各自不同的特点)获取,若没有获取到锁</li>
+<li>将当前等待获取锁的线程封装为一个Node，将其插入到FIFO的双向队列中。但这里插入的方式有快速插入和完全插入两种：
+<ul>
+<li>快速插入：一次CAS比较</li>
+<li>完全插入：自旋 + CAS方式</li>
+</ul>
+</li>
+<li>插入成功后，就要根据当前队列的状态判断该线程是否需要被挂起
+<ul>
+<li>如果当前线程节点处于头节点的后一个(头节点只占位用),则通过自旋的方式去拿锁</li>
+<li>否则判断该线程是否应该被挂起（以避免无用自旋消耗CPU），判断当前节点的前置节点的waitStatus
+<ul>
+<li>SIGNAL：前置节点也在等待拿锁，当前节点肯定也要挂起</li>
+<li>大于0: 前置节点被取消，删除前面所有ws大于0的节点</li>
+<li>其他状态: 尝试将前置节点ws置为SIGNAL</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>AQS Node 中SIGNAL状态的意义：只要前置节点释放锁，则就会通知标识为SIGNAL状态的后续节点的线程</p>
+<p>CANCELLED状态的意义：在同步队列等待的线程等待超时或被中断，则需要从同步队列中取消该Node节点</p>
+</blockquote>
+<blockquote>
+<p><strong>LockSupport.part作用是什么？为什么又有Thread.intterupted()?</strong></p>
+<p>先说结论：处于等待队列中的线程无法响应外部的中断请求，只有当队列中的线程拿到锁后才去响应之前的中断请求</p>
+<p>基础：当其他线程试图通过interrupt去中断一个处于wait或sleep的线程时则会产生异常。而LockSupport.part可以让线程进入waiting(jvm)/sleep(os)的状态，只能通过LockSupport.unpark或者interrupt方法去唤醒该线程。</p>
+<p>所以等待线程在park后就被挂起了，如果有其他线程对其进行interrupt中断，则会return中断标志位(此时就为true) (但线程此时没有被中断)。在acquireQueued方法中通过成员变量interrupted存储了这个中断标志值，当线程获取到锁的时候，则会返回这个值(其意义就是，该线程获取到锁了，但需要被中断)。所以就会运行到acquire方法下的selfInterrupt方法中进行此线程的interrupt()</p>
+</blockquote>
+<h5 id="release方法"><strong>release方法</strong></h5>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">release</span><span class="token punctuation">(</span><span class="token keyword">int</span> arg<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">tryRelease</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Node</span> h <span class="token operator">=</span> head<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>h <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> h<span class="token punctuation">.</span>waitStatus <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token function">unparkSuccessor</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">unparkSuccessor</span><span class="token punctuation">(</span><span class="token class-name">Node</span> node<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> ws <span class="token operator">=</span> node<span class="token punctuation">.</span>waitStatus<span class="token punctuation">;</span>
+  	<span class="token comment">// 将当前线程ws状态置为0以便不影响其他判断</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ws <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token function">compareAndSetWaitStatus</span><span class="token punctuation">(</span>node<span class="token punctuation">,</span> ws<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">Node</span> s <span class="token operator">=</span> node<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>s <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> s<span class="token punctuation">.</span>waitStatus <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        s <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Node</span> t <span class="token operator">=</span> tail<span class="token punctuation">;</span> t <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> t <span class="token operator">!=</span> node<span class="token punctuation">;</span> t <span class="token operator">=</span> t<span class="token punctuation">.</span>prev<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>t<span class="token punctuation">.</span>waitStatus <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                s <span class="token operator">=</span> t<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>s <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+        <span class="token class-name">LockSupport</span><span class="token punctuation">.</span><span class="token function">unpark</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>thread<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<ul>
+<li>尝试释放当前线程持有的锁，如果成功释放，则</li>
+<li>CAS操作改变当前线程ws 以便不影响并发情况下其他线程的判断</li>
+<li>判断下一个节点是否有效
+<ul>
+<li>无效：从尾到头去找有效节点（从尾找到头，而不会在中途停止） <em>为什么要从尾到头</em></li>
+<li>有效：通过LockSupport.unpark去释放锁</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>为什么这里是从尾到头去寻找有效节点？</strong></p>
+<p>关键还要看enq方法，enq方法中的关键语句：</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java">node<span class="token punctuation">.</span>prev <span class="token operator">=</span> t<span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">compareAndSetTail</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span> node<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    t<span class="token punctuation">.</span>next <span class="token operator">=</span> node<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> t<span class="token punctuation">;</span></code></pre></div>
+<p>CAS操作不能保证if代码块的线程安全，也就是在CAS操作与<em>t.next=node</em>之间可能有其他线程进行操作，进而导致 tail指向prev但prev未指向tail(<em>尽管最后都会顺利连接上</em>)，在这个过程中，如果有线程执行unparkSuccessor且按照从头到尾的顺序去遍历，就无法遍历到所有的节点，但从尾到头遍历是可以保证的，这主要是取决于<em>enq</em>方法中代码编写逻辑来决定的。</p>
+</blockquote>
+<h3 id="ReentrantLock">ReentrantLock</h3>
+<p>基于AQS，JUC编程中可以实现公平锁和非公平锁来对共享资源进行同步，与synchronized一样支持可重入，在调度上更灵活，支持更多功能.同时还可以支持可中断锁机制的实现实现</p>
+<p>实现Lock接口，具有lock tryLock unlock newCondition等方法</p>
+<p>核心类 Sync 派生出公平锁FairSync和非公平锁NonfairSync</p>
+<h4 id="Sync">Sync</h4>
+<p>继承自AQS等抽象类，暴露lock方法用于派生类实现</p>
+<h5 id="NonfairSync">NonfairSync</h5>
+<blockquote>
+<p><strong>为什么会有非公平锁？为什么非公平锁的效率比公平锁更高？</strong></p>
+<p>个人理解：因为线程的挂起和唤醒需要一段时间，有一定开销，那么如果按照公平锁的方式，那肯定是当前线程释放锁后，肯定还需要唤醒下一个线程。但如果按照非公平锁的方式，如果当前线程释放锁后，存在一个刚开启的线程，它刚好被创建，则这个时候就不用被唤醒而直接进入就绪状态了。</p>
+</blockquote>
+<p>主要就两个方法：基于对Sync抽象父类实现的lock方法以及对AQS抽象父类实现的tryAcquire方法</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// NonfairSync</span>
+<span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">compareAndSetState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token function">setExclusiveOwnerThread</span><span class="token punctuation">(</span><span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">protected</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">tryAcquire</span><span class="token punctuation">(</span><span class="token keyword">int</span> acquires<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token function">nonfairTryAcquire</span><span class="token punctuation">(</span>acquires<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p><strong>lock方法</strong></p>
+<p>lock方法实质就是先来一次CAS看锁是否被占用（不管前面是否有其他线程在等待），如果没有被占用，则占用该锁。如果这次没有获得锁，则会进入acquire方法。而aquire方法是AQS中的final修饰已实现的方法，内部会调用到tryAcquire这个方法，而NonfairSync中则重写了这个protected的方法</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// AQS</span>
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token keyword">int</span> arg<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">tryAcquire</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+        <span class="token function">acquireQueued</span><span class="token punctuation">(</span><span class="token function">addWaiter</span><span class="token punctuation">(</span><span class="token class-name">Node</span><span class="token punctuation">.</span>EXCLUSIVE<span class="token punctuation">)</span><span class="token punctuation">,</span> arg<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token function">selfInterrupt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">// Sync</span>
+<span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">nonfairTryAcquire</span><span class="token punctuation">(</span><span class="token keyword">int</span> acquires<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">final</span> <span class="token class-name">Thread</span> current <span class="token operator">=</span> <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> c <span class="token operator">=</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">compareAndSetState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> acquires<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">setExclusiveOwnerThread</span><span class="token punctuation">(</span>current<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>current <span class="token operator">==</span> <span class="token function">getExclusiveOwnerThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      	<span class="token comment">// 可重入性的体现</span>
+        <span class="token keyword">int</span> nextc <span class="token operator">=</span> c <span class="token operator">+</span> acquires<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>nextc <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment">// overflow</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"Maximum lock count exceeded"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">setState</span><span class="token punctuation">(</span>nextc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>通过NonfairSync的lock方法顺序是：</p>
+<ul>
+<li>先进行CAS来一次插队的非公平查看锁，如果锁被占用</li>
+<li>再来一次非公平的CAS，并且这次是<strong>支持可重入</strong>的，如果锁被其他线程占用</li>
+<li>走公平机制，进行排队获取</li>
+</ul>
+<blockquote>
+<p>实现可重入方式的时候为什么要比较nextc正负？</p>
+<p>因为state是基于int的，而当nextc正溢出时，则会产生负数，所以需要进行非负判断。也就可以说，可重入最大数目其实是有符号int表示的正数范围</p>
+</blockquote>
+<h5 id="FairSync">FairSync</h5>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// FairSync</span>
+<span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">protected</span> <span class="token keyword">final</span> <span class="token keyword">boolean</span> <span class="token function">tryAcquire</span><span class="token punctuation">(</span><span class="token keyword">int</span> acquires<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">final</span> <span class="token class-name">Thread</span> current <span class="token operator">=</span> <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> c <span class="token operator">=</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">hasQueuedPredecessors</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+            <span class="token function">compareAndSetState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> acquires<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">setExclusiveOwnerThread</span><span class="token punctuation">(</span>current<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">// 满足可重入特点</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>current <span class="token operator">==</span> <span class="token function">getExclusiveOwnerThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> nextc <span class="token operator">=</span> c <span class="token operator">+</span> acquires<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>nextc <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"Maximum lock count exceeded"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">setState</span><span class="token punctuation">(</span>nextc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>FairSync要求线程在获取锁时：</p>
+<ul>
+<li>如果锁没被占用，则查看是否有排在当前线程前等待获取锁的线程，如果没有</li>
+<li>如果当前锁正在被当前线程持有，还要满足可重入的特点</li>
+<li>否则，则返回false，进行排队</li>
+</ul>
+<h4 id="ReentrantLock-v2">ReentrantLock</h4>
+<p>默认的无参构造是非公平锁机制</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">ReentrantLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    sync <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NonfairSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">public</span> <span class="token class-name">ReentrantLock</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> fair<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    sync <span class="token operator">=</span> fair <span class="token operator">?</span> <span class="token keyword">new</span> <span class="token class-name">FairSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">NonfairSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> 
+
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    sync<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">tryLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> sync<span class="token punctuation">.</span><span class="token function">nonfairTryAcquire</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">// 实现可中断锁机制</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">lockInterruptibly</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">&#123;</span>
+    sync<span class="token punctuation">.</span><span class="token function">acquireInterruptibly</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>值得注意的是，不管Sync是公平还是非公平的，这里tryLock其实是非公平获取锁的机制，这也就是为什么nonfairTryAcquire方法要在Sync中进行实现了</p>
+<h5 id="可中断锁机制的实现"><strong>可中断锁机制的实现</strong></h5>
+<p>Sync实现Lock接口提供了lock和lockInterruptibly方法。</p>
+<p>lock方法与lockInterruptibly区别在于：</p>
+<ul>
+<li>lock考虑获取锁，获取锁后才响应之前的中断</li>
+<li>lockInterruptibly优先考虑响应中断</li>
+</ul>
+<p>最终会进入到AQS到方法中。与之前的acquireQueued方法大同小异，作用就是线程通过这种方式等待获取锁时，在LockSupport.park挂起后，可以经过其他线程的interrupt唤醒，然后抛出异常。最终效果，也就是使得让等待中的线程立即中止。</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// AQS</span>
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">doAcquireInterruptibly</span><span class="token punctuation">(</span><span class="token keyword">int</span> arg<span class="token punctuation">)</span>
+    <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">final</span> <span class="token class-name">Node</span> node <span class="token operator">=</span> <span class="token function">addWaiter</span><span class="token punctuation">(</span><span class="token class-name">Node</span><span class="token punctuation">.</span>EXCLUSIVE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">boolean</span> failed <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">final</span> <span class="token class-name">Node</span> p <span class="token operator">=</span> node<span class="token punctuation">.</span><span class="token function">predecessor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>p <span class="token operator">==</span> head <span class="token operator">&amp;&amp;</span> <span class="token function">tryAcquire</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token function">setHead</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                p<span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span> <span class="token comment">// help GC</span>
+                failed <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token keyword">return</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldParkAfterFailedAcquire</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span> node<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+                <span class="token function">parkAndCheckInterrupt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+              	<span class="token comment">// 关键语句</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">InterruptedException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>failed<span class="token punctuation">)</span>
+            <span class="token function">cancelAcquire</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<h4 id="Condition">Condition</h4>
+<p>对于synchornized关键字，其内部可以用wait 和 notify进行线程等待或唤醒(wait必须在线程同步的代码块中使用)。但在Lock实现类例如ReentrantLock中，则可以通过Condition的await、signal来进行等待和唤醒</p>
+<p>且ReentrantLock可以唤醒指定条件的线程，而Object的唤醒是随机的</p>
+<h4 id="与Synchronized区别">与Synchronized区别</h4>
+<p>共同点：</p>
+<ul>
+<li>用来协调多进程对共享对象的访问</li>
+<li>可重入锁，保证可见性和互斥性</li>
+</ul>
+<p>不同点：</p>
+<ul>
+<li>Re显示获得锁释放锁，sy隐式获得锁</li>
+<li>Re属于API级别锁，sy属于JVM层的锁</li>
+<li>Re<strong>可响应中断</strong>，sy不可以响应中断</li>
+<li>Re实现公平锁</li>
+<li>Re可通过Condition绑定多个条件</li>
+<li>发生异常时 Re如果没有unlock去释放锁，则可能造成死锁，而sy会自动释放锁</li>
+<li>Lock可以让等待锁的线程响应中断，而sy不鞥，使用sy时等待锁的线程会一直等待而不会响应线程</li>
+<li>通过Lock可以知道线程是否获得了锁，而sy无法的得知</li>
+</ul>
+<h2 id="CAS-v2">CAS</h2>
+<p><strong>原理</strong></p>
+<p>若：内存位置的值 == 预期原值 -&gt; 则赋予新值。通过while循环完成。</p>
+<p>优点：不用进行用户态 内核态的切换</p>
+<p>缺点：自旋时间不确定</p>
+<p>增加版本控制： AtomicStampedReference，不但会判断原值，还会比较版本信息</p>
+<h2 id="线程">线程</h2>
+<h3 id="Callable和Runnable"><strong>Callable和Runnable</strong></h3>
+<p>callable可以有h返回子，且可以抛出异常</p>
+<p>Callable.call（） 会调用该线程，阻塞等待结果</p>
+<h3 id="Future"><strong>Future</strong></h3>
+<p>futurei提供了五个方法，用于cancel  isCancel isDone</p>
+<p>get   get(timeout)</p>
+<p><strong>Thread只支持Runnable接口</strong></p>
+<p>通过线程池方式，submit一个callable ，同时线程池也i支持runnable形式，也一个 支持runnbale 的 返回一个future</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210428192019015.png" alt="image-20210428192019015"></p>
+<h3 id="FutureTask">FutureTask</h3>
+<p>futureTask实现了runnable和callable接口</p>
+<p>直接调用futuretask的get方法，会一直阻塞  为什么一直a阻塞？</p>
+<p>FutureTask get 中涉及的方法有死循环</p>
+<p>futuretask必须放在thread中 ，start后才能进行isdone等的操作</p>
+<p>（如何判断isDone isCancel   ？  状态量）</p>
+<p>threadpool无法执行futuetask,会返回null</p>
+<p><strong>但是</strong></p>
+<p>其实executor.submit a Future 其实也是跑了一个futuretask</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">Future</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span> <span class="token function">submit</span><span class="token punctuation">(</span><span class="token class-name">Runnable</span> task<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>task <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NullPointerException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">RunnableFuture</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Void</span><span class="token punctuation">></span></span> ftask <span class="token operator">=</span> <span class="token function">newTaskFor</span><span class="token punctuation">(</span>task<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 返回一个futuretask</span>
+        <span class="token function">execute</span><span class="token punctuation">(</span>ftask<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> ftask<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span></code></pre></div>
+<p><strong>延伸</strong></p>
+<p>Thread.start如何启动？Threadgroup？</p>
+<p><strong>如何停止线程</strong></p>
+<p><strong>stop方法</strong></p>
+<p>立即停止线程 释放锁</p>
+<p>为什么stop方法是Deprecated的？数据不一致问题</p>
+<p><strong>interrupt方法</strong></p>
+<p>设置中断标志位，在外部配合isInterrupted()或者interrupted方法进行判断</p>
+<p>两者区别： interrupted会把标志位清空（所以：连续两次调用该方法时第二次返回false）</p>
+<h3 id="ThreadPoolExecutor">ThreadPoolExecutor</h3>
+<p><strong>意义</strong></p>
+<p>减少开销，创建和销毁资源存在时间成本，进行一组线程的管理</p>
+<h4 id="自身状态">自身状态</h4>
+<p>高三位表示状态, 低29位表示线程数目</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"> <span class="token comment">// 状态ctl是由Atmoic类管理的</span>
+<span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">AtomicInteger</span> ctl <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AtomicInteger</span><span class="token punctuation">(</span><span class="token function">ctlOf</span><span class="token punctuation">(</span>RUNNING<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 111 0000000..000</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> RUNNING    <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> COUNT_BITS<span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> SHUTDOWN   <span class="token operator">=</span>  <span class="token number">0</span> <span class="token operator">&lt;&lt;</span> COUNT_BITS<span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> STOP       <span class="token operator">=</span>  <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> COUNT_BITS<span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> TIDYING    <span class="token operator">=</span>  <span class="token number">2</span> <span class="token operator">&lt;&lt;</span> COUNT_BITS<span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> TERMINATED <span class="token operator">=</span>  <span class="token number">3</span> <span class="token operator">&lt;&lt;</span> COUNT_BITS<span class="token punctuation">;</span></code></pre></div>
+<ul>
+<li>Running：接受新任务，也能处理阻塞队列的任务</li>
+<li>SHUTDOWN：不接受新任务但可以处理阻塞队列的任务</li>
+<li>STOP：不接受新任务，不处理阻塞队列里的任务，中断处理过程中的任务</li>
+<li>TIDYING：当前线程池没有工作线程，调用terminated方法</li>
+<li>TERMINATED： terminated方法调用完成</li>
+</ul>
+<p><strong>线程池Worker作用</strong></p>
+<p><strong>线程池添加任务和添加Worker的详细流程是什么</strong></p>
+
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="post-metas mb-3">
+                                            
+                                                <div class="post-meta mr-3">
+                                                    <i class="iconfont icon-category"></i>
+                                                    
+                                                        <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/">
+                                                            学习
+                                                        </a>
+                                                        
+                                                </div>
+                                                
+                                                    
+                                        </div>
+                                        
+                                            <p class="note note-warning">
+                                                
+                                                            本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                                                                
+                                            </p>
+                                            
+                                                
+                                                    <div class="post-prevnext">
+                                                        <article class="post-prev col-6">
+                                                            
+                                                                
+                                                        </article>
+                                                        <article class="post-next col-6">
+                                                            
+                                                                
+                                                                    <a href="/2022/12/31/SpringSecurity%E5%AD%A6%E4%B9%A0%E6%8E%A2%E8%A7%A3/">
+                                                                        <span class="hidden-mobile">SpringSecurity学习探解</span>
+                                                                        <span class="visible-mobile">下一篇</span>
+                                                                        <i class="iconfont icon-arrowright"></i>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                    </div>
+                                                    
+                                    </div>
+
+                                    
+                                        <!-- Comments -->
+                                        <article class="comments" id="comments">
+                                            
+                                                        
+                                                            
+                                                                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'PPLong222/commit-utterances');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+                                        </article>
+                                        
+                        </article>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+                    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+                </div>
+                
+        </div>
+    </div>
+
+    <!-- Custom -->
+    
+    <!--添加我自己的设置页面-->
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+    <!--加入自定义格式的-->
+    <!--自定义的git徽标样式-->
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue">
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a">
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080">
+<br>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,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&style=flat&color=d2c68b">
+
+<!-- 自定义显示文章总页数和字数的模块 -->
+<div class="bottom-post-statistic">
+    <div class="bottom-post-count">
+        64&nbsp 篇文章
+    </div>
+    <div class="bottom-post-word">
+        255.1k&nbsp 字
+    </div>
+</div>
+        <div class="footer-content">
+             <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+        </div>
+
+        
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+            
+
+                
+</footer>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/reset_code_lang.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+  <!-- 暂时先不引入该功能 -->
+  <!-- 引入JQuery -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> -->
+  <!-- 引入自定义的页面访问和ip统计脚本 -->
+  <!-- <script src="/js/send_req_info.js"></script> --> -->
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?PPLong222";
+            var git_color =['#ebedf0', '#bef5cb', '#bef5cb', '#a9f5b4', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620'];
+            var git_user ="PPLong222";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div id="github-calendar" style="width:100%;height:auto;padding:10px;margin-bottom:20px"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;margin-top:100px;;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/about/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:200px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>#github_container > .position-relative > .border{border:0!important}#github-calendar{position: relative;margin-top: -2rem;background-color: var(--board-bg-color);transition: background-color 0.2s ease-in-out;border-radius: 0.5rem;z-index: 3;-webkit-box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);}</style><!-- hexo injector body_end end --></body>
+</html>

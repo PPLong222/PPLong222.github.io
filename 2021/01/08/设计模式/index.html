@@ -394,7 +394,7 @@
 </ol>
 <p>为什么用while 不用 if？</p>
 <p>while 自旋锁，防止虚假唤醒</p>
-<h3 id="虚假唤醒-v2">虚假唤醒</h3>
+<h3 id="虚假唤醒-v3">虚假唤醒</h3>
 <p>虚假唤醒就是一些obj.wait()会在除了obj.notify()和obj.notifyAll()的其他情况被唤醒</p>
 <p>举个例子，我们现在有一个生产者-消费者队列和三个线程。</p>
 <p><strong>1）</strong> 1号线程从队列中获取了一个元素，此时队列变为空。</p>
@@ -605,10 +605,10 @@ ConcreteDecorator：具体的装饰器实现者，负责实现装饰器角色定
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        63&nbsp 篇文章
+        64&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        251.3k&nbsp 字
+        255.1k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

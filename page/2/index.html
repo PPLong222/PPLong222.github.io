@@ -250,14 +250,77 @@
  
 <div style="margin-bottom: 20px;margin-left:10px;margin-right: 10px;">
     <div class="note note-info" style="position: relative;overflow: hidden;">
-      <p class="latest_post" id="latest_post_p" tag-time="1677322968000">最近更新时间:
+      <p class="latest_post" id="latest_post_p" tag-time="1677472093000">最近更新时间:
         &nbsp;&nbsp;&nbsp;&nbsp;
         更新文章: 《 
-        <a href="/2021/01/20/Java学习/" >Java学习》</a>
+        <a href="/2023/02/26/Java-JUC源码分析/" >Java JUC源码分析》</a>
       </p>
     </div>
 </div>
 
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/06/15/%E7%BC%96%E8%AF%91JDK%E6%BA%90%E7%A0%81%E5%B9%B6%E8%B0%83%E8%AF%95Native%E6%96%B9%E6%B3%95/" target="_self">
+          <img src="/gallery/covers/wallhaven-e766xw.jpg" srcset="/img/loading.gif" lazyload alt="编译JDK源码并调试Native方法">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/06/15/%E7%BC%96%E8%AF%91JDK%E6%BA%90%E7%A0%81%E5%B9%B6%E8%B0%83%E8%AF%95Native%E6%96%B9%E6%B3%95/" target="_self">
+          编译JDK源码并调试Native方法
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/06/15/%E7%BC%96%E8%AF%91JDK%E6%BA%90%E7%A0%81%E5%B9%B6%E8%B0%83%E8%AF%95Native%E6%96%B9%E6%B3%95/" target="_self">
+          
+          
+            
+          
+          编译JDK源码并调试Native方法
+
+在学习反射的过程中核心方法Native反射的invoke0方法是Native的，还想多研究一下C层的代码，于是开始捣鼓如何调试JDK源码中Native方法。
+概要：编译自己的JDK源码、通过Clion与IDEA调试Native方法
+
+编译JDK源码
+
+            个人环境Linux: 5.10.121-1-MANJAROgcc/g++: 12.1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-15 10:59" pubdate>
+              2022-06-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
 
   <div class="row mx-auto index-card">
     
@@ -842,69 +905,6 @@ Web: Request Response Cookie Session
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2022/04/04/%E6%B5%85%E5%85%A5Git-Hooks/" target="_self">
-          <img src="/gallery/covers/wallhaven-z83o6y.jpg" srcset="/img/loading.gif" lazyload alt="初识Git Hooks">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/04/04/%E6%B5%85%E5%85%A5Git-Hooks/" target="_self">
-          初识Git Hooks
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/04/04/%E6%B5%85%E5%85%A5Git-Hooks/" target="_self">
-          
-          
-            
-          
-          初识Git Hooks
-
-最近因为想充利用服务器的即时服务功能，希望把Hexo上的文档直接转化成PDF格式，不用电脑上操作，直接手机上通过FTP获取即可。所以本篇涉及到一些Linux简单脚本、pandoc命令和hexo操作、git知识
-
-背景
-希望能够通过钩子和Git仓库将我的Hexo博客的md文档同步到Server的仓库中，因为hexo部署的文件项目是public的html网页而非pdf，所以当
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-04-04 21:35" pubdate>
-              2022-04-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">Linux</a>
-            
-              <a href="/tags/Git/">Git</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
@@ -969,10 +969,10 @@ Web: Request Response Cookie Session
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        63&nbsp 篇文章
+        64&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        251.3k&nbsp 字
+        255.1k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
