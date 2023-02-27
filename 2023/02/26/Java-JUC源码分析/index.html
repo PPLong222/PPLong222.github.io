@@ -342,7 +342,7 @@
                             
                                     <div class="markdown-body">
                                         <h1>Java JUC源码分析</h1>
-<h2 id="概念-v4">概念</h2>
+<h2 id="概念-v7">概念</h2>
 <h3 id="三大特性">三大特性</h3>
 <h4 id="原子性">原子性</h4>
 <p>一个或者多个操作在CPU执行的过程中不被中断的特性</p>
@@ -370,8 +370,8 @@
 <p>底层机制：内存屏障</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233706649.png" alt="image-20210313233706649"></p>
 <p>使用 ： 状态标记、单例模式</p>
-<h2 id="锁">锁</h2>
-<h3 id="锁的分类">锁的分类</h3>
+<h2 id="锁-v2">锁</h2>
+<h3 id="锁的分类-v2">锁的分类</h3>
 <ul>
 <li>可重入、不可重入</li>
 <li>悲观锁、乐观锁</li>
@@ -382,17 +382,17 @@
 <p>将大的方法加入同步锁会影响执行效率</p>
 <p><strong>sleep 抱着锁睡觉</strong></p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210303172037854.png" alt="image-20210303172037854"></p>
-<h3 id="锁到底锁什么">锁到底锁什么</h3>
+<h3 id="锁到底锁什么-v2">锁到底锁什么</h3>
 <p>synchronized 默认锁的是this  方法的调用者</p>
 <p>但是this 中的对象则不能同步 ，要同步哪个对象 就锁哪个</p>
-<h4 id="死锁">死锁</h4>
+<h4 id="死锁-v2">死锁</h4>
 <p><strong>两个或多个线程在等待对方释放资源；某个同步块同时拥有两个以上对象的锁</strong></p>
 <p>产生死锁的条件<br>
 1.互斥条件：一个资源每次只能被一个进程使用。<br>
 2.请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。<br>
 3.不剥夺条件:进程已获得的资源，在末使用完之前，不能强行剥夺。<br>
 4.循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。</p>
-<h4 id="Synchronized和Lock的区别">Synchronized和Lock的区别</h4>
+<h4 id="Synchronized和Lock的区别-v2">Synchronized和Lock的区别</h4>
 <ul>
 <li>Lock可以判断是否获取到了锁</li>
 <li>lock必须要手动释放，如果不释放锁，则出现死锁</li>
@@ -400,7 +400,7 @@
 <li>可重入锁，不可中断，非公平</li>
 <li>Lock适合锁大量的代码</li>
 </ul>
-<h4 id="虚假唤醒">虚假唤醒</h4>
+<h4 id="虚假唤醒-v2">虚假唤醒</h4>
 <h2 id="Synchronized">Synchronized</h2>
 <h3 id="synchronized到底是什么">synchronized到底是什么</h3>
 <p>synchronized是一个<strong>重量级锁</strong>，实现<strong>依赖于JVM 的 monitor 监视器锁</strong>。主要使用monitorenter和monitorexit指令来实现方法同步和代码块同步。<br>
@@ -453,7 +453,7 @@
 <p>CAS   没有获取到锁的线程是不会阻塞的，要通过控制循环值不断获取</p>
 <p>3个操作数  内存值 V（共享） 旧的预期值E（缓存） 要修改的新值N，仅当E == N时，才会修改  E!=N时，则再次查询主存中的V 使 E == N</p>
 <p>底层：硬件</p>
-<h2 id="AQS">AQS</h2>
+<h2 id="AQS-v2">AQS</h2>
 <h3 id="AbstractQueuedSynchronizer">AbstractQueuedSynchronizer</h3>
 <p>AbstractQueuedSynchronizer抽象类， JUC包下的一个基类。是一个用于构建锁、同步器等线程协作工具类的框架ReentrantLock、ThreadPoolExecutor、Semaphore等。有了 AQS 以后，很多用于线程协作的工具类就都可以很方便的被写出来，有了 AQS 之后，可以让更上层的开发极大的减少工作量，避免重复造轮子，同时也避免了上层因处理不当而导致的线程安全问题，因为 AQS 把这些事情都做好了</p>
 <p><strong>特点</strong></p>
@@ -760,7 +760,7 @@
             <span class="token function">cancelAcquire</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre></div>
-<h4 id="Condition">Condition</h4>
+<h4 id="Condition-v2">Condition</h4>
 <p>对于synchornized关键字，其内部可以用wait 和 notify进行线程等待或唤醒(wait必须在线程同步的代码块中使用)。但在Lock实现类例如ReentrantLock中，则可以通过Condition的await、signal来进行等待和唤醒</p>
 <p>且ReentrantLock可以唤醒指定条件的线程，而Object的唤醒是随机的</p>
 <h4 id="与Synchronized区别">与Synchronized区别</h4>
@@ -780,23 +780,23 @@
 <li>Lock可以让等待锁的线程响应中断，而sy不鞥，使用sy时等待锁的线程会一直等待而不会响应线程</li>
 <li>通过Lock可以知道线程是否获得了锁，而sy无法的得知</li>
 </ul>
-<h2 id="CAS-v2">CAS</h2>
+<h2 id="CAS-v3">CAS</h2>
 <p><strong>原理</strong></p>
 <p>若：内存位置的值 == 预期原值 -&gt; 则赋予新值。通过while循环完成。</p>
 <p>优点：不用进行用户态 内核态的切换</p>
 <p>缺点：自旋时间不确定</p>
 <p>增加版本控制： AtomicStampedReference，不但会判断原值，还会比较版本信息</p>
-<h2 id="线程">线程</h2>
-<h3 id="Callable和Runnable"><strong>Callable和Runnable</strong></h3>
+<h2 id="线程-v2">线程</h2>
+<h3 id="Callable和Runnable-v2"><strong>Callable和Runnable</strong></h3>
 <p>callable可以有h返回子，且可以抛出异常</p>
 <p>Callable.call（） 会调用该线程，阻塞等待结果</p>
-<h3 id="Future"><strong>Future</strong></h3>
+<h3 id="Future-v2"><strong>Future</strong></h3>
 <p>futurei提供了五个方法，用于cancel  isCancel isDone</p>
 <p>get   get(timeout)</p>
 <p><strong>Thread只支持Runnable接口</strong></p>
 <p>通过线程池方式，submit一个callable ，同时线程池也i支持runnable形式，也一个 支持runnbale 的 返回一个future</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210428192019015.png" alt="image-20210428192019015"></p>
-<h3 id="FutureTask">FutureTask</h3>
+<h3 id="FutureTask-v2">FutureTask</h3>
 <p>futureTask实现了runnable和callable接口</p>
 <p>直接调用futuretask的get方法，会一直阻塞  为什么一直a阻塞？</p>
 <p>FutureTask get 中涉及的方法有死循环</p>
@@ -820,10 +820,10 @@
 <p><strong>interrupt方法</strong></p>
 <p>设置中断标志位，在外部配合isInterrupted()或者interrupted方法进行判断</p>
 <p>两者区别： interrupted会把标志位清空（所以：连续两次调用该方法时第二次返回false）</p>
-<h3 id="ThreadPoolExecutor">ThreadPoolExecutor</h3>
+<h3 id="ThreadPoolExecutor-v2">ThreadPoolExecutor</h3>
 <p><strong>意义</strong></p>
 <p>减少开销，创建和销毁资源存在时间成本，进行一组线程的管理</p>
-<h4 id="自身状态">自身状态</h4>
+<h4 id="自身状态-v2">自身状态</h4>
 <p>高三位表示状态, 低29位表示线程数目</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"> <span class="token comment">// 状态ctl是由Atmoic类管理的</span>
 <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">AtomicInteger</span> ctl <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AtomicInteger</span><span class="token punctuation">(</span><span class="token function">ctlOf</span><span class="token punctuation">(</span>RUNNING<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -875,8 +875,8 @@
                                                         <article class="post-next col-6">
                                                             
                                                                 
-                                                                    <a href="/2022/12/31/SpringSecurity%E5%AD%A6%E4%B9%A0%E6%8E%A2%E8%A7%A3/">
-                                                                        <span class="hidden-mobile">SpringSecurity学习探解</span>
+                                                                    <a href="/2022/07/30/Java8%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/">
+                                                                        <span class="hidden-mobile">Java8特性学习</span>
                                                                         <span class="visible-mobile">下一篇</span>
                                                                         <i class="iconfont icon-arrowright"></i>
                                                                     </a>
@@ -988,7 +988,7 @@
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        64&nbsp 篇文章
+        63&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
         255.1k&nbsp 字

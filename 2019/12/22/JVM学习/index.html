@@ -573,7 +573,7 @@ JRE中包含虚拟机JVM</p>
 <p><span style='color:red;'> 一个JVM实例对应一个RunTime实例</span></p>
 <p>HotSpot JVM每个线程对应操作胸膛的本地线程直接映射</p>
 <h3 id="虚拟机栈">虚拟机栈</h3>
-<h4 id="概念-v5">概念</h4>
+<h4 id="概念-v4">概念</h4>
 <p>内部保存一个个的栈帧，对应着一次次的java方法调用（线程私有）</p>
 <ul>
 <li>
@@ -1480,7 +1480,7 @@ A：true，因为final变量在编译后会直接替换成对应的值，所以�
 <h4 id="分区算法">分区算法</h4>
 <p>堆空间越大 GC时间越长</p>
 <p>分割内存区域为多个小块 region ，减少目标停顿时间，每次合理地回收若干个小空间 而不是整个堆空间</p>
-<h3 id="概念-v6">概念</h3>
+<h3 id="概念-v5">概念</h3>
 <h4 id="System-gy">System,gy()</h4>
 <p>Runtijme.getRunTime().gc() 显示触发 Full GC</p>
 <p>但是附带<strong>免责声明</strong>，无法保证对垃圾收集器的调用</p>
@@ -1801,7 +1801,7 @@ syso s2<span class="token punctuation">.</span>name<span class="token punctuatio
 <span class="token punctuation">&#125;</span></code></pre></div>
 <p>涉及到的静态内部类的知识</p>
 <p>静态内部类只会在使用到该内部类时才会加载，否则是不会加载的，也就是只有使用到new Integer的valueOf方法时，才会加载该内部类</p>
-<h3 id="概念-v7">概念</h3>
+<h3 id="概念-v6">概念</h3>
 <p>字节码指令是一个一个字节长度，代表某种特定含义的操作码，以及跟随其后的参数—操作数构成的。</p>
 <h4 id="Class文件">Class文件</h4>
 <p>不一定以磁盘文件形式存在，是一组以8字节为基础单位的二进制流</p>
@@ -2162,7 +2162,7 @@ syso s2<span class="token punctuation">.</span>name<span class="token punctuatio
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        64&nbsp 篇文章
+        63&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
         255.1k&nbsp 字
