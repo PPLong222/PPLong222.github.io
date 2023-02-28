@@ -33,9 +33,10 @@
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233706649.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210303172037854.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210307090828271.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230228093431667.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210428192019015.png">
 <meta property="article:published_time" content="2023-02-26T01:22:52.000Z">
-<meta property="article:modified_time" content="2023-02-27T04:28:13.000Z">
+<meta property="article:modified_time" content="2023-02-28T04:50:13.000Z">
 <meta property="article:author" content="PPLong">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233725385.png">
@@ -275,8 +276,8 @@
     
         <span class="post-meta">
   <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
-  <time datetime="2023-02-27 12:28" pubdate>
-    更新: 2023年2月27日中午12点28分
+  <time datetime="2023-02-28 12:50" pubdate>
+    更新: 2023年2月28日下午12点50分
   </time>
 </span>
         
@@ -286,7 +287,7 @@
     
         <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      12k 字
+      19k 字
     </span>
         
 
@@ -295,7 +296,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      38 分钟
+      60 分钟
     </span>
                 
 
@@ -370,8 +371,8 @@
 <p>底层机制：内存屏障</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233706649.png" alt="image-20210313233706649"></p>
 <p>使用 ： 状态标记、单例模式</p>
-<h2 id="锁-v2">锁</h2>
-<h3 id="锁的分类-v2">锁的分类</h3>
+<h2 id="锁">锁</h2>
+<h3 id="锁的分类">锁的分类</h3>
 <ul>
 <li>可重入、不可重入</li>
 <li>悲观锁、乐观锁</li>
@@ -382,17 +383,17 @@
 <p>将大的方法加入同步锁会影响执行效率</p>
 <p><strong>sleep 抱着锁睡觉</strong></p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210303172037854.png" alt="image-20210303172037854"></p>
-<h3 id="锁到底锁什么-v2">锁到底锁什么</h3>
+<h3 id="锁到底锁什么">锁到底锁什么</h3>
 <p>synchronized 默认锁的是this  方法的调用者</p>
 <p>但是this 中的对象则不能同步 ，要同步哪个对象 就锁哪个</p>
-<h4 id="死锁-v2">死锁</h4>
+<h4 id="死锁">死锁</h4>
 <p><strong>两个或多个线程在等待对方释放资源；某个同步块同时拥有两个以上对象的锁</strong></p>
 <p>产生死锁的条件<br>
 1.互斥条件：一个资源每次只能被一个进程使用。<br>
 2.请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。<br>
 3.不剥夺条件:进程已获得的资源，在末使用完之前，不能强行剥夺。<br>
 4.循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。</p>
-<h4 id="Synchronized和Lock的区别-v2">Synchronized和Lock的区别</h4>
+<h4 id="Synchronized和Lock的区别">Synchronized和Lock的区别</h4>
 <ul>
 <li>Lock可以判断是否获取到了锁</li>
 <li>lock必须要手动释放，如果不释放锁，则出现死锁</li>
@@ -400,7 +401,7 @@
 <li>可重入锁，不可中断，非公平</li>
 <li>Lock适合锁大量的代码</li>
 </ul>
-<h4 id="虚假唤醒-v2">虚假唤醒</h4>
+<h4 id="虚假唤醒">虚假唤醒</h4>
 <h2 id="Synchronized">Synchronized</h2>
 <h3 id="synchronized到底是什么">synchronized到底是什么</h3>
 <p>synchronized是一个<strong>重量级锁</strong>，实现<strong>依赖于JVM 的 monitor 监视器锁</strong>。主要使用monitorenter和monitorexit指令来实现方法同步和代码块同步。<br>
@@ -453,7 +454,7 @@
 <p>CAS   没有获取到锁的线程是不会阻塞的，要通过控制循环值不断获取</p>
 <p>3个操作数  内存值 V（共享） 旧的预期值E（缓存） 要修改的新值N，仅当E == N时，才会修改  E!=N时，则再次查询主存中的V 使 E == N</p>
 <p>底层：硬件</p>
-<h2 id="AQS-v2">AQS</h2>
+<h2 id="AQS">AQS</h2>
 <h3 id="AbstractQueuedSynchronizer">AbstractQueuedSynchronizer</h3>
 <p>AbstractQueuedSynchronizer抽象类， JUC包下的一个基类。是一个用于构建锁、同步器等线程协作工具类的框架ReentrantLock、ThreadPoolExecutor、Semaphore等。有了 AQS 以后，很多用于线程协作的工具类就都可以很方便的被写出来，有了 AQS 之后，可以让更上层的开发极大的减少工作量，避免重复造轮子，同时也避免了上层因处理不当而导致的线程安全问题，因为 AQS 把这些事情都做好了</p>
 <p><strong>特点</strong></p>
@@ -616,9 +617,9 @@
 <p>CAS操作不能保证if代码块的线程安全，也就是在CAS操作与<em>t.next=node</em>之间可能有其他线程进行操作，进而导致 tail指向prev但prev未指向tail(<em>尽管最后都会顺利连接上</em>)，在这个过程中，如果有线程执行unparkSuccessor且按照从头到尾的顺序去遍历，就无法遍历到所有的节点，但从尾到头遍历是可以保证的，这主要是取决于<em>enq</em>方法中代码编写逻辑来决定的。</p>
 </blockquote>
 <h3 id="ReentrantLock">ReentrantLock</h3>
-<p>基于AQS，JUC编程中可以实现公平锁和非公平锁来对共享资源进行同步，与synchronized一样支持可重入，在调度上更灵活，支持更多功能.同时还可以支持可中断锁机制的实现实现</p>
-<p>实现Lock接口，具有lock tryLock unlock newCondition等方法</p>
-<p>核心类 Sync 派生出公平锁FairSync和非公平锁NonfairSync</p>
+<p><strong>基于AQS</strong>，JUC编程中可以实现公平锁和非公平锁来对共享资源进行同步，与synchronized一样支持可重入，在调度上更灵活，支持更多功能.同时还可以支持可中断锁机制的实现实现</p>
+<p><strong>实现Lock接口</strong>，具有lock tryLock unlock newCondition等方法</p>
+<p>核心类 Sync 派生出公平锁FairSync类与非公平锁NonfairSync类</p>
 <h4 id="Sync">Sync</h4>
 <p>继承自AQS等抽象类，暴露lock方法用于派生类实现</p>
 <h5 id="NonfairSync">NonfairSync</h5>
@@ -760,7 +761,7 @@
             <span class="token function">cancelAcquire</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre></div>
-<h4 id="Condition-v2">Condition</h4>
+<h4 id="Condition">Condition</h4>
 <p>对于synchornized关键字，其内部可以用wait 和 notify进行线程等待或唤醒(wait必须在线程同步的代码块中使用)。但在Lock实现类例如ReentrantLock中，则可以通过Condition的await、signal来进行等待和唤醒</p>
 <p>且ReentrantLock可以唤醒指定条件的线程，而Object的唤醒是随机的</p>
 <h4 id="与Synchronized区别">与Synchronized区别</h4>
@@ -780,23 +781,286 @@
 <li>Lock可以让等待锁的线程响应中断，而sy不鞥，使用sy时等待锁的线程会一直等待而不会响应线程</li>
 <li>通过Lock可以知道线程是否获得了锁，而sy无法的得知</li>
 </ul>
-<h2 id="CAS-v3">CAS</h2>
+<h3 id="Map">Map</h3>
+<p>HashMap存在的线程问题：插入时可能出现环形链表</p>
+<p><strong>使HM的线程安全方式</strong></p>
+<ul>
+<li>Collections.synchronizedMap（）返回一个新的Map：使用synchronized进行互斥。使用代理new了一个新的🥱，直接锁住方法</li>
+<li>ConccurentHashMap：使用新的锁机制，将HM进行拆分。</li>
+</ul>
+<h4 id="Hashtable">Hashtable</h4>
+<p><strong>与HashTable区别</strong></p>
+<ul>
+<li>HT线程同步，HM线程不同步（实质就是每个方法都加了synchronized锁）</li>
+<li>HT不允许有键值有空值</li>
+<li>HM默认数量是16, 2倍增长库容，HT数组默认为11，增长 2x+1</li>
+</ul>
+<p><strong>既不支持Null key也不支持Null value</strong></p>
+<p>这是因为Hashtable使用的是安全失败机制（fail-safe），这种机制会使你此次读到的数据不一定是最新的数据。</p>
+<p>如果你使用null值，就会使得其无法判断对应的key是不存在还是为空，因为你无法再调用一次contain(key）来对key是否存在进行判断，ConcurrentHashMap同理。</p>
+<p><strong>解决问题</strong></p>
+<p>多线程下添加元素的安全性</p>
+<p>何为安全？多线程插入时的线程不安全问题  – 用hashTable可解决</p>
+<p><strong>如何实现</strong></p>
+<p>synchronized 锁方法</p>
+<h4 id="ConcurrentHashMap">ConcurrentHashMap</h4>
+<blockquote>
+<p>注意⚠️: JDK版本 1.7</p>
+</blockquote>
+<p>Hashtable存在的问题：性能差，一把锁锁住了整个资源</p>
+<p>采用策略：<strong>分段锁</strong></p>
+<p><em>ConcurrentHashMap&lt;K, V&gt; extends AbstractMap&lt;K, V&gt; implements ConcurrentMap&lt;K, V&gt;, Serializable</em></p>
+<p>核心内部类： Segment、HashEntry</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230228093431667.png" alt=""></p>
+<p><strong>内部变量</strong></p>
+<ul>
+<li>DEFAULT_CONCURRENCY_LEVEL，CHM的并发程度。默认是 16，也就是说 ConcurrentHashMap 有 16 个 Segments，所以理论上，这个时候，最多可以同时支持 16 个线程并发写，只要它们的操作分别分布在不同的 Segment 上。这个值可以在初始化的时候设置为其他值，但是<strong>一旦初始化以后，它是不可以扩容的</strong>。</li>
+<li>loadFactor：负载因子，给每个Segment内部使用</li>
+</ul>
+<h5 id="HashEntry">HashEntry</h5>
+<p>类似Node的链表节点，但与HM的Entry不同，这里在初始化时还有一段代码</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> nextOffset<span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        UNSAFE <span class="token operator">=</span> <span class="token class-name"><span class="token namespace">sun<span class="token punctuation">.</span>misc<span class="token punctuation">.</span></span>Unsafe</span><span class="token punctuation">.</span><span class="token function">getUnsafe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Class</span> k <span class="token operator">=</span> <span class="token class-name">HashEntry</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">;</span>
+        nextOffset <span class="token operator">=</span> UNSAFE<span class="token punctuation">.</span>objectFieldOffset
+            <span class="token punctuation">(</span>k<span class="token punctuation">.</span><span class="token function">getDeclaredField</span><span class="token punctuation">(</span><span class="token string">"next"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>这里主要是获取next相对于此对象内存地址的偏移量，为了后续能在CAS操作中直接对next进行操作</p>
+<h5 id="Segment">Segment</h5>
+<p><strong>Segment继承自ReentrantLock</strong></p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> MAX_SCAN_RETRIES <span class="token operator">=</span>
+    <span class="token class-name">Runtime</span><span class="token punctuation">.</span><span class="token function">getRuntime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">availableProcessors</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">1</span> <span class="token operator">?</span> <span class="token number">64</span> <span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">transient</span> <span class="token keyword">volatile</span> <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span><span class="token punctuation">[</span><span class="token punctuation">]</span> table<span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * The number of elements. Accessed only either within locks
+ * or among other volatile reads that maintain visibility.
+ */</span>
+<span class="token keyword">transient</span> <span class="token keyword">int</span> count<span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * The total number of mutative operations in this segment.
+ * Even though this may overflows 32 bits, it provides
+ * sufficient accuracy for stability checks in CHM isEmpty()
+ * and size() methods.  Accessed only either within locks or
+ * among other volatile reads that maintain visibility.
+ */</span>
+<span class="token keyword">transient</span> <span class="token keyword">int</span> modCount<span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 下一次需要扩容的阈值
+ * The table is rehashed when its size exceeds this threshold.
+ * (The value of this field is always &lt;tt>(int)(capacity *
+ * loadFactor)&lt;/tt>.)
+ */</span>
+<span class="token keyword">transient</span> <span class="token keyword">int</span> threshold<span class="token punctuation">;</span></code></pre></div>
+<h5 id="操作">操作</h5>
+<h6 id="插入">插入</h6>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// CHM</span>
+<span class="token keyword">public</span> <span class="token class-name">V</span> <span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">K</span> key<span class="token punctuation">,</span> <span class="token class-name">V</span> value<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Segment</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> s<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NullPointerException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> hash <span class="token operator">=</span> <span class="token function">hash</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  	<span class="token comment">// 实际就是取hash的高4位</span>
+    <span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token punctuation">(</span>hash <span class="token operator">>>></span> segmentShift<span class="token punctuation">)</span> <span class="token operator">&amp;</span> segmentMask<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>s <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">Segment</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span><span class="token punctuation">)</span>UNSAFE<span class="token punctuation">.</span><span class="token function">getObject</span><span class="token punctuation">(</span>segments<span class="token punctuation">,</span> <span class="token punctuation">(</span>j <span class="token operator">&lt;&lt;</span> SSHIFT<span class="token punctuation">)</span> <span class="token operator">+</span> SBASE<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> 
+        s <span class="token operator">=</span> <span class="token function">ensureSegment</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> s<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> hash<span class="token punctuation">,</span> value<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>第一层Put： 这里也就是取key hash的高x位 (比如concurrencyLevel为2^n，则就取高n位，这里取决于segment初始设置成多少)作为所在segment的索引，如果所在segment为null，则初始化这个segment。</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token class-name">Segment</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> <span class="token function">ensureSegment</span><span class="token punctuation">(</span><span class="token keyword">int</span> k<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">final</span> <span class="token class-name">Segment</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span><span class="token punctuation">[</span><span class="token punctuation">]</span> ss <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>segments<span class="token punctuation">;</span>
+    <span class="token keyword">long</span> u <span class="token operator">=</span> <span class="token punctuation">(</span>k <span class="token operator">&lt;&lt;</span> SSHIFT<span class="token punctuation">)</span> <span class="token operator">+</span> SBASE<span class="token punctuation">;</span> <span class="token comment">// raw offset</span>
+    <span class="token class-name">Segment</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> seg<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>seg <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">Segment</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span><span class="token punctuation">)</span>UNSAFE<span class="token punctuation">.</span><span class="token function">getObjectVolatile</span><span class="token punctuation">(</span>ss<span class="token punctuation">,</span> u<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Segment</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> proto <span class="token operator">=</span> ss<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// use segment 0 as prototype</span>
+        <span class="token keyword">int</span> cap <span class="token operator">=</span> proto<span class="token punctuation">.</span>table<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+        <span class="token keyword">float</span> lf <span class="token operator">=</span> proto<span class="token punctuation">.</span>loadFactor<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> threshold <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>cap <span class="token operator">*</span> lf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span><span class="token punctuation">[</span><span class="token punctuation">]</span> tab <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token keyword">new</span> <span class="token class-name">HashEntry</span><span class="token punctuation">[</span>cap<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>seg <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">Segment</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span><span class="token punctuation">)</span>UNSAFE<span class="token punctuation">.</span><span class="token function">getObjectVolatile</span><span class="token punctuation">(</span>ss<span class="token punctuation">,</span> u<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// recheck</span>
+            <span class="token class-name">Segment</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Segment</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>lf<span class="token punctuation">,</span> threshold<span class="token punctuation">,</span> tab<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>seg <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">Segment</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span><span class="token punctuation">)</span>UNSAFE<span class="token punctuation">.</span><span class="token function">getObjectVolatile</span><span class="token punctuation">(</span>ss<span class="token punctuation">,</span> u<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                   <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>UNSAFE<span class="token punctuation">.</span><span class="token function">compareAndSwapObject</span><span class="token punctuation">(</span>ss<span class="token punctuation">,</span> u<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> seg <span class="token operator">=</span> s<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> seg<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>初始化的过程中会使用到UNSAFE借助offset去安全地检查值，为什么？因为可能有很多线程在并发地创建同一个segment，因此需要判断。在最终通过CAS操作去完成Segment的创建<br>
+而这里为什么会在CHM初始化时去初始化第一个segment呢？因为在这里接住segment[0]处的数组长度和负载因子来初始化segment[k]了，而为什么使用“当前”的segment[0]呢？因为segment[0]可能已经被扩容过了</p>
+<p>第二层Put：</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// Segment</span>
+<span class="token keyword">final</span> <span class="token class-name">V</span> <span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">K</span> key<span class="token punctuation">,</span> <span class="token keyword">int</span> hash<span class="token punctuation">,</span> <span class="token class-name">V</span> value<span class="token punctuation">,</span> <span class="token keyword">boolean</span> onlyIfAbsent<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> node <span class="token operator">=</span> <span class="token function">tryLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token keyword">null</span> <span class="token operator">:</span>
+        <span class="token function">scanAndLockForPut</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> hash<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">V</span> oldValue<span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span><span class="token punctuation">[</span><span class="token punctuation">]</span> tab <span class="token operator">=</span> table<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> index <span class="token operator">=</span> <span class="token punctuation">(</span>tab<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> hash<span class="token punctuation">;</span>
+        <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> first <span class="token operator">=</span> <span class="token function">entryAt</span><span class="token punctuation">(</span>tab<span class="token punctuation">,</span> index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> e <span class="token operator">=</span> first<span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>e <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token class-name">K</span> k<span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>k <span class="token operator">=</span> e<span class="token punctuation">.</span>key<span class="token punctuation">)</span> <span class="token operator">==</span> key <span class="token operator">||</span>
+                    <span class="token punctuation">(</span>e<span class="token punctuation">.</span>hash <span class="token operator">==</span> hash <span class="token operator">&amp;&amp;</span> key<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    oldValue <span class="token operator">=</span> e<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>onlyIfAbsent<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        e<span class="token punctuation">.</span>value <span class="token operator">=</span> value<span class="token punctuation">;</span>
+                        <span class="token operator">++</span>modCount<span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+                e <span class="token operator">=</span> e<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>node <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+                    node<span class="token punctuation">.</span><span class="token function">setNext</span><span class="token punctuation">(</span>first<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">else</span>
+                    node <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>hash<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">,</span> first<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">int</span> c <span class="token operator">=</span> count <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">></span> threshold <span class="token operator">&amp;&amp;</span> tab<span class="token punctuation">.</span>length <span class="token operator">&lt;</span> MAXIMUM_CAPACITY<span class="token punctuation">)</span>
+                    <span class="token function">rehash</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">else</span>
+                    <span class="token function">setEntryAt</span><span class="token punctuation">(</span>tab<span class="token punctuation">,</span> index<span class="token punctuation">,</span> node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token operator">++</span>modCount<span class="token punctuation">;</span>
+                count <span class="token operator">=</span> c<span class="token punctuation">;</span>
+                oldValue <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> oldValue<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>这里先尝试通过tryLock快速获取该Segment的锁，如果获取到了</p>
+<ul>
+<li>通过key到hash与该segment HashEntry数组长度-1进行与运算得到该元素在该segment下的HashEntry位置</li>
+<li>拿到该HashEntry下的第一个元素（采用UNSAFE 线程安全方式）</li>
+<li>此时就是在HashEntry中，也就是链表结构了。从前往后遍历，如果key值相等 或者hash相等且equals，则改变其值</li>
+<li>如果遍历到最后还是没找到满足条件的node，则采用<strong>头插法</strong>，把node插入到该HashEntry中(判断是否需要对该Segment进行扩容)</li>
+</ul>
+<p><strong>scanAndLockForPut</strong></p>
+<p>如果第二层Put尝试获取锁失败，则会用该方法来获取锁</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// Segment</span>
+<span class="token keyword">private</span> <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> <span class="token function">scanAndLockForPut</span><span class="token punctuation">(</span><span class="token class-name">K</span> key<span class="token punctuation">,</span> <span class="token keyword">int</span> hash<span class="token punctuation">,</span> <span class="token class-name">V</span> value<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> first <span class="token operator">=</span> <span class="token function">entryForHash</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> hash<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> e <span class="token operator">=</span> first<span class="token punctuation">;</span>
+    <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> node <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> retries <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// negative while locating node</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">tryLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> f<span class="token punctuation">;</span> <span class="token comment">// to recheck first below</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>retries <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>e <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>node <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token comment">// speculatively create node</span>
+                    node <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>hash<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                retries <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>key<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                retries <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">else</span>
+                e <span class="token operator">=</span> e<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">++</span>retries <span class="token operator">></span> MAX_SCAN_RETRIES<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>retries <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span>
+                 <span class="token punctuation">(</span>f <span class="token operator">=</span> <span class="token function">entryForHash</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> hash<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> first<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            e <span class="token operator">=</span> first <span class="token operator">=</span> f<span class="token punctuation">;</span> <span class="token comment">// re-traverse if entry changed</span>
+            retries <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> node<span class="token punctuation">;</span></code></pre></div>
+<p>先自己再进行一次tryLock，拿到锁了，直接返回null。如果没拿到锁：</p>
+<ul>
+<li>如果该位置的HashEntry为空，则先创建一个HashEntry</li>
+<li>如果不为空，则尝试去从前往后遍历key值相同的。如果没找到，最终会回到上一步。（可以理解为预先做一些事情，这样在第二层Put中就不用再次初始化node了）。</li>
+<li>如果这时候出现了并发情况，也就是有其他的元素插入到了这个Segment的HashEntry数组的指定位置中，那就需要从该HashEntry的头开始，再去进行遍历</li>
+<li>如果通过循环尝试获取锁次数超过指定值（单核次数为1多核次数为64），则lock阻塞自己，直到获取锁后返回</li>
+</ul>
+<h6 id="查询">查询</h6>
+<p>根据hash和segmentShift、segmentMask等通过 UNSAFE类+offset 找到元素所在的segment，再去找元素所在的HashEntry索引，然后遍历此Entry链表。<br>
+需要注意的是查询操作是没有加锁的</p>
+<h6 id="扩容">扩容</h6>
+<p>当插入节点时，这个Segment中总节点数count大于该Segment可容量节点数目threshold时，将触发扩容操作。</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// Segment</span>
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">rehash</span><span class="token punctuation">(</span><span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> node<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span><span class="token punctuation">[</span><span class="token punctuation">]</span> oldTable <span class="token operator">=</span> table<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> oldCapacity <span class="token operator">=</span> oldTable<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> newCapacity <span class="token operator">=</span> oldCapacity <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    threshold <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>newCapacity <span class="token operator">*</span> loadFactor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span><span class="token punctuation">[</span><span class="token punctuation">]</span> newTable <span class="token operator">=</span>
+        <span class="token punctuation">(</span><span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">new</span> <span class="token class-name">HashEntry</span><span class="token punctuation">[</span>newCapacity<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> sizeMask <span class="token operator">=</span> newCapacity <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> oldCapacity <span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> e <span class="token operator">=</span> oldTable<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>e <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> next <span class="token operator">=</span> e<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            <span class="token keyword">int</span> idx <span class="token operator">=</span> e<span class="token punctuation">.</span>hash <span class="token operator">&amp;</span> sizeMask<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>next <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>   <span class="token comment">//  Single node on list</span>
+                newTable<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">=</span> e<span class="token punctuation">;</span>
+            <span class="token keyword">else</span> <span class="token punctuation">&#123;</span> <span class="token comment">// Reuse consecutive sequence at same slot</span>
+                <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> lastRun <span class="token operator">=</span> e<span class="token punctuation">;</span>
+                <span class="token keyword">int</span> lastIdx <span class="token operator">=</span> idx<span class="token punctuation">;</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> last <span class="token operator">=</span> next<span class="token punctuation">;</span>
+                     last <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+                     last <span class="token operator">=</span> last<span class="token punctuation">.</span>next<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">int</span> k <span class="token operator">=</span> last<span class="token punctuation">.</span>hash <span class="token operator">&amp;</span> sizeMask<span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>k <span class="token operator">!=</span> lastIdx<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        lastIdx <span class="token operator">=</span> k<span class="token punctuation">;</span>
+                        lastRun <span class="token operator">=</span> last<span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span>
+                newTable<span class="token punctuation">[</span>lastIdx<span class="token punctuation">]</span> <span class="token operator">=</span> lastRun<span class="token punctuation">;</span>
+                <span class="token comment">// Clone remaining nodes</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> p <span class="token operator">=</span> e<span class="token punctuation">;</span> p <span class="token operator">!=</span> lastRun<span class="token punctuation">;</span> p <span class="token operator">=</span> p<span class="token punctuation">.</span>next<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token class-name">V</span> v <span class="token operator">=</span> p<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+                    <span class="token keyword">int</span> h <span class="token operator">=</span> p<span class="token punctuation">.</span>hash<span class="token punctuation">;</span>
+                    <span class="token keyword">int</span> k <span class="token operator">=</span> h <span class="token operator">&amp;</span> sizeMask<span class="token punctuation">;</span>
+                    <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span> n <span class="token operator">=</span> newTable<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                    newTable<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashEntry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">K</span><span class="token punctuation">,</span><span class="token class-name">V</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>h<span class="token punctuation">,</span> p<span class="token punctuation">.</span>key<span class="token punctuation">,</span> v<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">int</span> nodeIndex <span class="token operator">=</span> node<span class="token punctuation">.</span>hash <span class="token operator">&amp;</span> sizeMask<span class="token punctuation">;</span> <span class="token comment">// add the new node</span>
+    node<span class="token punctuation">.</span><span class="token function">setNext</span><span class="token punctuation">(</span>newTable<span class="token punctuation">[</span>nodeIndex<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    newTable<span class="token punctuation">[</span>nodeIndex<span class="token punctuation">]</span> <span class="token operator">=</span> node<span class="token punctuation">;</span>
+    table <span class="token operator">=</span> newTable<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>大致思想还是与HM一致，由于Segment是不能扩容的，只能去扩容Segment的HashEntry数组长度(2倍)。然后需要重新去计算Mask并对数组中的元素进行移位：<strong>最高位与1比较判断是否需要进行移位(idx值要么保持不变，要么为idx+oldCapcity)</strong>.对原来HashEntry链表中的元素进行判断。JDK1.7的思想我认为是有一点优化的思想在里面：即从前往后遍历，试图找到一个节点lastRun，该节点到尾节点更新后idx值都是一样的，然后将lastRun直接插入到指定索引的Entry数组中，对于在lastRun之前的节点，那其值可能是idx也可能是idx+oldCapacity，就对每个节点的idx进行单独计算再头插。最终将插入导致rehash的这个新节点再头插入到指定的HashEntry中</p>
+<blockquote>
+<p>⚠️:不同的Segment下的HashEntry数组长度可能是不同的</p>
+</blockquote>
+<h2 id="CAS-v2">CAS</h2>
 <p><strong>原理</strong></p>
 <p>若：内存位置的值 == 预期原值 -&gt; 则赋予新值。通过while循环完成。</p>
 <p>优点：不用进行用户态 内核态的切换</p>
 <p>缺点：自旋时间不确定</p>
 <p>增加版本控制： AtomicStampedReference，不但会判断原值，还会比较版本信息</p>
-<h2 id="线程-v2">线程</h2>
-<h3 id="Callable和Runnable-v2"><strong>Callable和Runnable</strong></h3>
+<h2 id="线程">线程</h2>
+<h3 id="Callable和Runnable"><strong>Callable和Runnable</strong></h3>
 <p>callable可以有h返回子，且可以抛出异常</p>
 <p>Callable.call（） 会调用该线程，阻塞等待结果</p>
-<h3 id="Future-v2"><strong>Future</strong></h3>
+<h3 id="Future"><strong>Future</strong></h3>
 <p>futurei提供了五个方法，用于cancel  isCancel isDone</p>
 <p>get   get(timeout)</p>
 <p><strong>Thread只支持Runnable接口</strong></p>
 <p>通过线程池方式，submit一个callable ，同时线程池也i支持runnable形式，也一个 支持runnbale 的 返回一个future</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210428192019015.png" alt="image-20210428192019015"></p>
-<h3 id="FutureTask-v2">FutureTask</h3>
+<h3 id="FutureTask">FutureTask</h3>
 <p>futureTask实现了runnable和callable接口</p>
 <p>直接调用futuretask的get方法，会一直阻塞  为什么一直a阻塞？</p>
 <p>FutureTask get 中涉及的方法有死循环</p>
@@ -820,10 +1084,10 @@
 <p><strong>interrupt方法</strong></p>
 <p>设置中断标志位，在外部配合isInterrupted()或者interrupted方法进行判断</p>
 <p>两者区别： interrupted会把标志位清空（所以：连续两次调用该方法时第二次返回false）</p>
-<h3 id="ThreadPoolExecutor-v2">ThreadPoolExecutor</h3>
+<h3 id="ThreadPoolExecutor">ThreadPoolExecutor</h3>
 <p><strong>意义</strong></p>
 <p>减少开销，创建和销毁资源存在时间成本，进行一组线程的管理</p>
-<h4 id="自身状态-v2">自身状态</h4>
+<h4 id="自身状态">自身状态</h4>
 <p>高三位表示状态, 低29位表示线程数目</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"> <span class="token comment">// 状态ctl是由Atmoic类管理的</span>
 <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">AtomicInteger</span> ctl <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AtomicInteger</span><span class="token punctuation">(</span><span class="token function">ctlOf</span><span class="token punctuation">(</span>RUNNING<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -991,7 +1255,7 @@
         63&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        255.1k&nbsp 字
+        257.1k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
