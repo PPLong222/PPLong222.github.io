@@ -118,7 +118,7 @@
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210322093200611.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210404170719177.png">
 <meta property="article:published_time" content="2019-12-22T12:05:07.000Z">
-<meta property="article:modified_time" content="2023-02-20T09:25:56.000Z">
+<meta property="article:modified_time" content="2023-03-04T02:09:00.000Z">
 <meta property="article:author" content="PPLong">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Study">
@@ -361,8 +361,8 @@
     
         <span class="post-meta">
   <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
-  <time datetime="2023-02-20 17:25" pubdate>
-    更新: 2023年2月20日下午5点25分
+  <time datetime="2023-03-04 10:09" pubdate>
+    更新: 2023年3月4日上午10点09分
   </time>
 </span>
         
@@ -372,7 +372,7 @@
     
         <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      24k 字
+      29k 字
     </span>
         
 
@@ -381,7 +381,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      76 分钟
+      90 分钟
     </span>
                 
 
@@ -439,8 +439,7 @@
 <h3 id="JRE-和-JDK的关系">JRE 和 JDK的关系</h3>
 <p>JDK：它是Java开发运行环境，在程序员的电脑上当然要安装JDK；<br>
 JRE：Java Runtime Environment它是Java运行环境，如果你不需要开发只需要运行Java程序，那么你可以安装JRE。例如程序员开发出的程序最终卖给了用户，用户不用开发，只需要运行程序，所以用户在电脑上安装JRE即可。<br>
-JDK包含了JRE。<br>
-JRE中包含虚拟机JVM</p>
+JDK包含了JRE，JRE中包含虚拟机JVM</p>
 <h3 id="JVM跨语言的平台">JVM跨语言的平台</h3>
 <p>JVM起始 从<strong>字节码</strong>开始</p>
 <p>字节码文件可以由不同的编程语言提供 在java平台<strong>解释</strong>运行</p>
@@ -483,7 +482,7 @@ JRE中包含虚拟机JVM</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210224095537650.png" srcset="/img/loading.gif" lazyload alt="image-20210224095537650"></p>
 <h3 id="JVM的生命周期">JVM的生命周期</h3>
 <ol>
-<li>启动： bootstapclass loader引导类加载器创建的初始类 initial class 完成的 (加载父类？？)</li>
+<li>启动： bootstrapclass loader引导类加载器创建的初始类 initial class 完成的 (加载父类？？)</li>
 <li>执行：一个虚拟机对应着执行一个Java程序</li>
 <li>退出：异常 、 正常执行完毕、操作系统错误、exit方法</li>
 </ol>
@@ -493,13 +492,13 @@ JRE中包含虚拟机JVM</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210224152835665.png" srcset="/img/loading.gif" lazyload alt="image-20210224152835665"></p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210224153411382.png" srcset="/img/loading.gif" lazyload alt="image-20210224153411382"></p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210224163801377.png" srcset="/img/loading.gif" lazyload alt="image-20210224163801377"></p>
-<h3 id="加载Loading：">加载Loading：</h3>
+<h3 id="加载Loading">加载Loading</h3>
 <ol>
 <li>通过类的全限定名获取定义此类的二进制字节流</li>
 <li>将该字节流代表的静态存储结构转化为方法的运行时数据</li>
 <li>内存中生成一个代表此类的 java.lang.Class对象，作为方法区这个类的各个数据的访问入口</li>
 </ol>
-<h3 id="链接Linking阶段：">链接Linking阶段：</h3>
+<h3 id="链接Linking阶段">链接Linking阶段</h3>
 <h4 id="验证-Verify">验证 Verify</h4>
 <p>确保Class文件的字节流一中包含信息符号当前的虚拟机要求，保证<strong>加载类的正确性</strong>，不危害虚拟机自身安全。</p>
 <p>文件格式验证 元数据验证  字节码验证 符号引用验证</p>
@@ -513,13 +512,32 @@ JRE中包含虚拟机JVM</p>
 <p>执行类构造器方法 clinit  的过程</p>
 <p>javac 编译器自动收集类中的所有<span style='color:red;'>类变量</span>的<strong>赋值动作</strong>和<strong>静态代码块中语句</strong>合并而来</p>
 <p>有静态语句 或者 静态变量 就会有 clinit 方法      不包含主方法</p>
-<p>clinit 方法一定是先执行父类的 clinit 在进行子类的clinit</p>
+<p>clinit 方法一定是先执行父类的 clinit 在进行子类的clinit。</p>
 <p>虚拟机必须保证一个类的clinit 方法在多线程下被同步加锁</p>
-<p>static 代码块 和 static变量的赋值 有顺序的关系，那个在后 那个后执行，但是可以在static语句块中赋值再定义 ------有一个注意点  非法的前向引用（可以赋值但不能调用）</p>
+<p>类的构造器方法为<init>，且可能有多个，static代码块以及静态变量的初始赋值合并在<clinit>中，且只能用有一个。static 代码块 和 static变量的赋值 有顺序的关系，但是可以在static语句块中赋值再定义 ------有一个注意点  非法的前向引用（<strong>可以赋值但不能调用</strong>）</p>
+<p>举个例子：</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">static</span> <span class="token punctuation">&#123;</span>
+    ABC <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> ABC <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token comment">// ABC = 3</span>
+
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> ABC <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token punctuation">&#123;</span>
+    ABC <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">// ABC = 4</span>
+
+<span class="token keyword">static</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>ABC<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> ABC <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token comment">// Error</span>
+</code></pre></div>
 <h5 id="变量初始化过程">变量初始化过程</h5>
 <p>默认初始化–显示初始化- -构造器初始化–对象.属性的初始化</p>
 <h3 id="加载器的分类">加载器的分类</h3>
-<h4 id="BootStapClassLoad">BootStapClassLoad</h4>
+<h4 id="BootStapClassLoader">BootStapClassLoader</h4>
 <ul>
 <li>用c/c++实现 嵌套在JVM内部</li>
 <li>不继承ClassLoader</li>
@@ -543,14 +561,14 @@ JRE中包含虚拟机JVM</p>
 <p>自己创建 的 java.lang.String 和原生的冲突 会先加载原来的</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210224173500988.png" srcset="/img/loading.gif" lazyload alt="image-20210224173500988"></p>
 <ol>
-<li>一个雷加载器收到了类加载请求，他并不会自己先加载，而是把这个请求委托给父类的加载器执行。</li>
+<li>一个类加载器收到了类加载请求，他并不会自己先加载，而是把这个请求委托给父类的加载器执行。</li>
 <li>一次递归请求最终到达顶层的启动类加载器</li>
 <li>如果父类的加载器无法加载（引导类加载器和拓展类加载器只加载指定目录的class），才会委派给子类的加载器加载</li>
 </ol>
 <h3 id="优点">优点</h3>
 <ol>
 <li>保护程序安全，避免核心API被更改</li>
-<li>避免类的重复加载</li>
+<li>避免类的重复加载。当父加载器已经加载过某一个类时，子加载器就不会再重新加载这个类</li>
 </ol>
 <h2 id="沙箱安全机制">沙箱安全机制</h2>
 <p>沙箱安全机制是由基于双亲委派机制上 采取的一种JVM的自我保护机制,假设你要写一个java.lang.String 的类,由于双亲委派机制的原理,此请求会先交给Bootstrap试图进行加载,但是Bootstrap在加载类时首先通过包和类名查找rt.jar中有没有该类,有则优先加载rt.jar包中的类,因此就保证了java的运行机制不会被破坏.</p>
@@ -559,7 +577,7 @@ JRE中包含虚拟机JVM</p>
 <p>JVM中判断两个class对象是否是同一个类存在的两个条件</p>
 <ol>
 <li>类的完整名称必须一致</li>
-<li>加载这个类的加载器必须相同</li>
+<li><strong>加载这个类的加载器必须相同</strong></li>
 </ol>
 <h3 id="类的主动使用和被动使用">类的主动使用和被动使用</h3>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210224184726345.png" srcset="/img/loading.gif" lazyload alt="image-20210224184726345"></p>
@@ -571,7 +589,7 @@ JRE中包含虚拟机JVM</p>
 <p><strong><span style='color:red;'>红色 </span> 一个进程一份</strong></p>
 <p><strong>灰色  一个线程一份</strong></p>
 <p><span style='color:red;'> 一个JVM实例对应一个RunTime实例</span></p>
-<p>HotSpot JVM每个线程对应操作胸膛的本地线程直接映射</p>
+<p>HotSpot JVM每个线程对应操作的本地线程直接映射</p>
 <h3 id="虚拟机栈">虚拟机栈</h3>
 <h4 id="概念-v4">概念</h4>
 <p>内部保存一个个的栈帧，对应着一次次的java方法调用（线程私有）</p>
@@ -586,7 +604,7 @@ JRE中包含虚拟机JVM</p>
 <p>作用：主管java程序的运行，保存方法的局部变量，部分结果，参与方法的调用和返回</p>
 <p>优点： 访问速度快  <strong>不存在垃圾回收问题</strong> <strong>GC</strong>   (只有进栈出栈操作) 但可能存在OOM</p>
 <p>设置栈大小 VMOptions: -Xss256k</p>
-<h4 id="异常">异常</h4>
+<h4 id="异常-v2">异常</h4>
 <ul>
 <li>JVM允许java栈大小是动态或者固定的</li>
 <li>栈溢出异常： 线程的请求分配的栈容量超过JAVA虚拟机允许的最大容量，将抛出Stack Overflow异常</li>
@@ -595,14 +613,14 @@ JRE中包含虚拟机JVM</p>
 <h4 id="栈帧">栈帧</h4>
 <p>栈中的数据都是以栈帧方式存在的，每个方法都对应一个栈帧</p>
 <p>当前栈帧：当前执行方法。</p>
-<p>不同线程的栈帧是不允许相互引用的，不能在一个线程的方法里去调用另一个线程中的方法</p>
+<p><strong>不同线程的栈帧是不允许相互引用的，不能在一个线程的方法里去调用另一个线程中的方法</strong></p>
 <p>包含：</p>
 <h5 id="局部变量表">局部变量表</h5>
 <p>(基本决定栈帧的大小)</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210228084320963.png" srcset="/img/loading.gif" lazyload alt="image-20210228084320963"></p>
 <ul>
 <li>
-<p>数字数组，存储方法参数和定义在方法体内的局部变量。包含基本数据类型，对象引用  （<strong>byte short boolean char 被转换为int</strong>），返回值类型</p>
+<p>数字数组，存储方法参数和定义在方法体内的局部变量。包含基本数据类型，<strong>对象引用</strong>  （<strong>byte short boolean char 被转换为int</strong>），返回值类型</p>
 </li>
 <li>
 <p><span style='color:red;font-size:24px'>垃圾回收的重点内容</span></p>
@@ -623,6 +641,7 @@ JRE中包含虚拟机JVM</p>
 <li>局部变量初始化后再使用时必须赋值，否则编译不通过</li>
 </ul>
 </li>
+<li>slot中先保存this(即该类),然后保存该方法参数，然后再是局部变量</li>
 </ul>
 </li>
 </ul>
@@ -633,8 +652,9 @@ JRE中包含虚拟机JVM</p>
 <li>a + b = c实例</li>
 </ul>
 <h6 id="代码解析">代码解析</h6>
-<p>bipush: 这里的 bi 代表byte 的整型，与代码中定义的int byte类型无关，他只与结果的具体数值有关，转换成最接近的类型]</p>
-<p>istore:将push的byte值转换为java中类型对应的int值</p>
+<p>bipush: 这里的 bi 代表byte 的整型 -128~127 时，与代码中定义的int byte类型无关，他只与结果的具体数值有关，转换成最接近的类型</p>
+<p>sipush:整型 -32768~32767 时</p>
+<p>istore_x: 弹出栈的值并保存到slot索引为x的地方</p>
 <p>注意这里istore_0和istore_1的区别，如果是主方法或者普通方法时，要么保存的是对象的引用this 要么就是args参数在index 为0位置。如果是类的静态方法中时，则就不存在其他的数据，一个数据都保存在index0处</p>
 <p>iconst：当int取值**-1~5<strong>时，JVM采用</strong>iconst**指令将常量压入栈中。</p>
 <div class="code-wrapper"><pre class="language-none"><code class="language-none">0: bipush        10
@@ -670,21 +690,45 @@ JRE中包含虚拟机JVM</p>
 <p>方法的绑定机制：早期绑定和晚期绑定</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210228142033732.png" srcset="/img/loading.gif" lazyload alt="image-20210228142033732"></p>
 <p>晚期绑定：</p>
-<p>多态、继承，无法确定  ----invokeVirtual</p>
-<p>早期绑定：</p>
+<p><strong>多态、继承  无法确定</strong>  ----invokeVirtual</p>
 <p>invokeSpecial</p>
-<p>虚方法：</p>
+<p>虚方法：除非虚方法外的所有方法</p>
 <p>非虚方法：</p>
 <ul>
 <li>
 <p>编译期间确定版本，运行时不可变</p>
 </li>
 <li>
-<p>静态方法、私有方法、final方法、示例构造器、父类方法</p>
+<p>静态方法、<strong>私有方法</strong>、<s>final方法(static修饰的除外)</s>、示例构造器、父类方法</p>
 </li>
 </ul>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210228143133793.png" srcset="/img/loading.gif" lazyload alt="image-20210228143115307"></p>
 <p>在子类中未显示的调用父类方法是虚方法（可能子类进行了重写）</p>
+<blockquote>
+<p><strong>一个问题：为什么调用non-private的final方法是invokevirtual类型的？</strong></p>
+<p>考虑以下一个场景：</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Base</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Base"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Derived</span> <span class="token keyword">extends</span> <span class="token class-name">Base</span> <span class="token punctuation">&#123;</span>
+  <span class="token annotation punctuation">@Override</span>
+  <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Derived"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Derived</span> d <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Derived</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    d<span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token class-name">Base</span> b <span class="token operator">=</span> d<span class="token punctuation">;</span> <span class="token comment">//  Base类型引用指向Derived类型实例</span>
+    b<span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">//  通过invokevirtual调用到final Derived.foo()</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 作者：RednaxelaFX</span>
+<span class="token comment">// 链接：https://www.zhihu.com/question/45131640/answer/98820081</span></code></pre></div>
+<p>也就是子类重写了父类的虚方法并声明为final不希望被自己的子类继承，这个时候则可以通过多态以Base的类型调用到Derived的final方法，所以也是不确定的</p>
+</blockquote>
 <p><span style='font-size:24px;color:orange'>动态类型和静态类型语言的区别</span></p>
 <p>对类型的检查是在编译期间还是在运行期间</p>
 <ul>
@@ -695,10 +739,130 @@ JRE中包含虚拟机JVM</p>
 <p>后者判断变量值的类型信息，变量是没有类型信息的（JavaScript）</p>
 </li>
 </ul>
+<h6 id="方法分派">方法分派</h6>
+<p><strong>静态分派</strong></p>
+<p>首先需要理解，在Java中 Animal animal = new Dog(); 其中Animal表示的是静态类型， 而随后的Dog()则表示实际类型</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DispatchTest</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//方法重载，是一种静态行为，编译期就可以确定</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token class-name">Animal</span> animal<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Animal"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token class-name">Dog</span> dog<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Dog"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token class-name">Cat</span> cat<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Cat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">DispatchTest</span> staticDispatch <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DispatchTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Animal</span> animalDog <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Dog</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//变量声明为Animal，引用指向Dog实例</span>
+        <span class="token class-name">Animal</span> animalCat <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//变量声明为Animal，引用指向Cat实例</span>
+        staticDispatch<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>animalDog<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//调用重载的方法</span>
+        staticDispatch<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>animalCat<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//调用重载的方法</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">class</span> <span class="token class-name">Animal</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token keyword">class</span> <span class="token class-name">Dog</span> <span class="token keyword">extends</span> <span class="token class-name">Animal</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token keyword">class</span> <span class="token class-name">Cat</span> <span class="token keyword">extends</span> <span class="token class-name">Animal</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+<span class="token comment">// result:</span>
+<span class="token comment">// Animal Animal</span></code></pre></div>
+<p>考虑以上情况，结果却不为Dog和Cat，这是因为对方法的重载，方法的参数以<strong>变量的静态类型</strong>为准，而不管引用指向的实际类型。变量的静态类型不会发生变化，而实际类型可能在运行时发生改变。静态分派发生在编译阶段，所以确定静态分派的动作实际上不是由JVM完成的，而应该是Javac编译器</p>
+<p><strong>动态分派</strong></p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DynamicTest</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Fruit</span> apple <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Apple</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//声明为Fruit，引用指向子类</span>
+        <span class="token class-name">Fruit</span> orange <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Orange</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        apple<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        orange<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        apple <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Orange</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//修改引用</span>
+        apple<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">class</span> <span class="token class-name">Fruit</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Fruit"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">class</span> <span class="token class-name">Apple</span> <span class="token keyword">extends</span> <span class="token class-name">Fruit</span><span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@Override</span><span class="token comment">//重写</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Apple"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">class</span> <span class="token class-name">Orange</span> <span class="token keyword">extends</span> <span class="token class-name">Fruit</span><span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@Override</span><span class="token comment">//重写</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Orange"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">// Result:</span>
+<span class="token comment">// Apple Orange Orange</span>
+
+
+<span class="token comment">// 调用的都是Fruit的test方法</span>
+<span class="token comment">// 17: invokevirtual #6                  // Method stream/Fruit.test:()V</span>
+<span class="token comment">// 20: aload_2</span>
+<span class="token comment">// 21: invokevirtual #6                  // Method stream/Fruit.test:()V</span>
+</code></pre></div>
+<p>动态分派和方法的重写有关，涉及到一个概念：方法接受者</p>
+<p>调用invokevirtual字节码指令的多态查找流程：</p>
+<ul>
+<li>在操作数栈顶找到第一个元素所指向的对象的<strong>实际类型C</strong>（这是造成多态查找的根本原因）</li>
+<li>如果在类型C中找到与敞亮中的描述符和简单名称都相符的方法，则进行访问权限校验，如果通过则返回该方法的直接引用。</li>
+<li>否则，按照继承关系从下往上对C的各个父类进行搜索验证</li>
+<li>没有找到合适的方法，抛出AbstractMethodError;</li>
+</ul>
+<p><strong>字段是否有多样性</strong></p>
+<p>参考以下代码, 深刻理解字段不具有多样性</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Father</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> money <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token class-name">Father</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        money <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        <span class="token function">showMeTheMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">showMeTheMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"I am father I got "</span> <span class="token operator">+</span> money <span class="token operator">+</span> <span class="token string">" money"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Son</span> <span class="token keyword">extends</span> <span class="token class-name">Father</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> money <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token class-name">Son</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        money <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+        <span class="token function">showMeTheMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">showMeTheMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"I am son I got "</span> <span class="token operator">+</span> money <span class="token operator">+</span> <span class="token string">" money"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Father</span> son <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Son</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>son<span class="token punctuation">.</span>money<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/** I am son I got 0 money
+ *  I am son I got 4 money
+ *  2
+*/</span></code></pre></div>
+<ul>
+<li>调用new Son()时，肯定先要加载父类，执行父类的init方法，此时父类的money字段为2 ，随后invokevirtual调用虚方法showMeTheMoney()</li>
+<li>但这里是方法的重写，所以有动态分派，实际类型是Son，所以调用Son的showMeTheMoney()</li>
+<li>但这个时候Son对象还没有被初始化啊，所以Son的money字段为0</li>
+<li>然后进行Son对象的初始化，此时money为4且调用son类的showMeTheMoney方法</li>
+<li>最终由于对象的静态类型是Father，所以son.money其实是Father类中的money对象，结果为2</li>
+</ul>
+<p>当子类声明了与父类同名的字段时，虽然在自类的内存中两个字段都会存在，但自类的字段会则遮蔽父类的同名字段，但由于这里通过静态类型访问变量，因此能访问到父类的money变量。</p>
+<blockquote>
+<p><strong>当子类声明了与父类同名的字段时，在自类的内存中两个字段都会存在</strong>。当指定静态类型Father获取时，获取的为属于Father的静态变量，当指定静态类型为Son时获取的是Son的静态变量。已在VisualVM中得到验证</p>
+</blockquote>
+<p><strong>Java是一门静态多分派而动态单分派的语言</strong></p>
+<p>静态分派时考虑静态类型和方法参数等，动态分派只考虑其方法的接收者的实际类型即可。</p>
+<p><strong>JVM如何做到分派呢：建立虚方法表</strong></p>
 <p><span style='font-size:24px;color:orange'>虚方法表</span></p>
 <p>目的： 避免自下而上频繁的使用动态分配</p>
 <p>创建阶段： linking</p>
-<p>每个类中都有一个虚方法表</p>
+<p><strong>每个类中都有一个虚方法表</strong>，虚方法表中存放着每个方法的实际入口地址，如果某个方法在子类中没有被重写，那子类的虚方法表的地址入口和父类相同方法的入口是一样的，如果重写了该方法，则子类虚方法表中的地址会被替换。在父类、子类的虚方法表中都应当有一样的索引序号，当类型变换时，只需要变更查找的虚方法表，就可以找出正确的方法的执行地址</p>
 <h5 id="方法返回地址">方法返回地址</h5>
 <p>方法正常退出的定义（异常退出时由异常表决定）</p>
 <p>存放调用该方法的<strong>pc寄存器</strong>的值 类似ret？？？</p>
@@ -753,7 +917,7 @@ JRE中包含虚拟机JVM</p>
 </ul>
 <h3 id="堆">堆</h3>
 <p>一个JVM只存在一个堆内存      一个进程对应一个堆，JVM启动时 堆被创建  其空间大小就确定了   ，但堆内存的大小是可以调节的</p>
-<p>堆可以处于物理上不连续的空间，但逻辑上他是连续的</p>
+<p>堆可以处于物理上不连续的空间，但逻辑上是连续的</p>
 <p>所有的线程共享JAVA堆，还可以划分线程私有的华冲去   TLAB  THREAD LOCAL ALLOCATION BUFFER</p>
 <p><strong>所有的对象实例及数组都应在运行时分配到堆上</strong></p>
 <ul>
@@ -790,8 +954,7 @@ JRE中包含虚拟机JVM</p>
 <li>Survivor 0 ： from区</li>
 <li>Survivor 1 ：to区</li>
 </ul>
-<p>OldGen</p>
-<p>​    占比2 / 3</p>
+<p>占比2 / 3</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210302163141130.png" srcset="/img/loading.gif" lazyload alt="image-20210302163141130"></p>
 <p>默认比例</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210302163437852.png" srcset="/img/loading.gif" lazyload alt="image-20210302163437852"></p>
@@ -884,7 +1047,7 @@ JRE中包含虚拟机JVM</p>
 <li>多线程分配内存，能避免一系列的非线程安全问题</li>
 <li>提升内存分配的吞吐量（快速分配策略）</li>
 </ul>
-<p>JVM将TLAV作为内存分配的首选</p>
+<p>JVM将TLAB作为内存分配的首选</p>
 <p>TLAB空间小  仅仅占整个Eden的1% ,  也可以设置</p>
 <p>一旦对象在TLAB空间分配内存失败，JVM尝试使用加锁机制确保数据操作的原子性，进而在Eden空间分配内存</p>
 <h4 id="逃逸分析">逃逸分析</h4>
@@ -897,7 +1060,7 @@ JRE中包含虚拟机JVM</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210303161641422.png" srcset="/img/loading.gif" lazyload alt="image-20210303161641422"></p>
 <p>优化  前提 未发生逃逸</p>
 <h5 id="栈上分配">栈上分配</h5>
-<p>原理 ？？</p>
+<p>原理 ：将堆分配转化为栈分配。如果一个对象在子程序中被分配，要使指向该对象的指针永远不会逃逸，对象可能是栈分配的候选，而不是堆分配</p>
 <p>实例n个对象时，开启栈上分配， 速度大幅提高，实例数降低。</p>
 <h5 id="同步省略">同步省略</h5>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210303162647795.png" srcset="/img/loading.gif" lazyload alt="image-20210303162647795"></p>
@@ -905,15 +1068,15 @@ JRE中包含虚拟机JVM</p>
 <h5 id="代码优化">代码优化</h5>
 <p>分离对象或者标量替换   肢解</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210303163208358.png" srcset="/img/loading.gif" lazyload alt="image-20210303163208358"></p>
-<h3 id="元空间">元空间</h3>
-<p>永久代 —&gt;方法区 -----&gt;元空间</p>
+<h3 id="方法区">方法区</h3>
+<p>永久代 -----&gt;元空间(都是对JVM方法区的一种实现策略)</p>
 <p>固定大小或者动态变化   自动收缩   逻辑上连续 物理上不连续</p>
 <p>逻辑上属于堆的一部分</p>
 <p><span style='color:#018531;font-size:30px' >方法区用于存储已被虚拟机加载的类型信息、常量、静态常量、即时编译器（JIT）编译后的代码缓存…</span></p>
 <p><span style='color:orange;font-size:18px' >方法区看做是一块独立于Java堆的内存空间</span></p>
 <p><span style='color:orange;font-size:18px' >方法区的大小决定了系统可以保存多少个类，如果系统定义了太多的类，方法区会溢出 抛出OOM</span></p>
 <p><span style='color:#4169E1;font-size:18px' >元空间和永久代最大的区别</span></p>
-<p>元空间不在虚拟机的内存中，而是在本地内存 ，内部结构也发生改变</p>
+<p>元空间不在虚拟机的内存中，而是在本地内存 ，内部结构也发生改变。JDK1.8 之前是占用 JVM 内存，JDK1.8 之后直接使用物理内存</p>
 <h4 id="方法区-堆-栈的交互关系">方法区 堆  栈的交互关系</h4>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210303164007274.png" srcset="/img/loading.gif" lazyload alt="image-20210303164007274"></p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210303164100411.png" srcset="/img/loading.gif" lazyload alt="image-20210303164100411"></p>
@@ -988,11 +1151,9 @@ JRE中包含虚拟机JVM</p>
 </ol>
 <h3 id="对象创建步骤">对象创建步骤</h3>
 <p>字节码中</p>
-<p>new #x</p>
-<p>分配内存、初始化值</p>
-<p>dup ：Duplicate the top value on the operand stack and push the duplicated value onto the operand stack.  复制操作数堆栈上的顶值，并将复制的值推送到操作数堆栈上。</p>
-<p>invokespecial #a</p>
-<p>调用init构造器</p>
+<p>new #x : 分配内存、初始化值</p>
+<p>dup : Duplicate the top value on the operand stack and push the duplicated value onto the operand stack.  复制操作数堆栈上的顶值，并将复制的值推送到操作数堆栈上。</p>
+<p>invokespecial #a : 调用init构造器</p>
 <p><span style='color: #DAA520;font-size:24px'>流程</span></p>
 <ol>
 <li>判断对象对应的类是否加载、连接、初始化，（是否有符号引用）</li>
@@ -1059,7 +1220,7 @@ JRE中包含虚拟机JVM</p>
 <p>两个String属性的对象</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210405171535161.png" srcset="/img/loading.gif" lazyload alt="image-20210405171535161"></p>
 <p>网上说的  32bit  4 byte</p>
-<p>故  对象头字节固定 为 12 字节</p>
+<p>故  对象头字节固定 为 12 字节(扩充到16字节)</p>
 <p><strong>对象头由什么组成</strong>？</p>
 <ol>
 <li>
@@ -1107,7 +1268,7 @@ JRE中包含虚拟机JVM</p>
 <h2 id="直接内存">直接内存</h2>
 <p>基于元空间</p>
 <p>Java堆外，向系统申请的内存空间</p>
-<p>来源于NIO，世界使用DirectByteBuffer</p>
+<p>来源于NIO，使用DirectByteBuffer</p>
 <p>NIO ：Non-Blocking IO  免去中间商</p>
 <p>访问直接内存的速度，优于Java堆</p>
 <p>缺点：</p>
@@ -1166,6 +1327,7 @@ JRE中包含虚拟机JVM</p>
 <p>阈值 1500 / 10000 次</p>
 <p>-XX: CompileThreshold</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210307220456220.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>对于这张图的理解，我认为是解释方式执行后是不存在Code Cache的，只有JIT编译后才存在缓存。</p>
 <p><span style='color: #DA70D6;font-size:24px'>热度衰减</span></p>
 <p>方法调用计数器统计的部署绝对次数，而是相对的执行效率，超过一定时间线度，如果调用次数仍然不足则会减少一半   ，半衰周期</p>
 <p>-XX: UseCounterDecay  关闭热度衰减</p>
@@ -1233,7 +1395,7 @@ JRE中包含虚拟机JVM</p>
 <li>
 <p>new String(“ab”) 会构建几个对象？</p>
 <p>两个</p>
-<p>一个对象是new关键字在堆控件创建的</p>
+<p>一个对象是new关键字在堆空间中创建的</p>
 <p>一个对象是字符串常量池中的对象，  ldc</p>
 <div class="code-wrapper"><pre class="language-none"><code class="language-none"> 0 new #4 &lt;java&#x2F;lang&#x2F;String&gt;
  3 dup
@@ -1241,12 +1403,15 @@ JRE中包含虚拟机JVM</p>
  6 invokespecial #6 &lt;java&#x2F;lang&#x2F;String.&lt;init&gt;&gt;
  9 astore_1
 10 return</code></pre></div>
+<p>而String a = “ab”;仅仅是在常量池中创建ab并把让那个a指向常量池的ab</p>
 </li>
 <li>
 <p>new Sting(“a”) + new String(“b”)呢？</p>
 <p>new String 创建在堆控件中</p>
 <p>String a = &quot;a&quot;如果已经有a ，则是常量池中的对象</p>
 <p><strong>6个</strong>  注意 + 的拼接操作是Stringbuilder  StringBuilder的toString 会再new 一个String</p>
+<p><strong>注意：new Sting(“a”) + new String(“b”)不会生成在字符串常量中生成“ab”，但会在堆中创建该对象（只有有一个被加因素为变量，则就不会在字符串中生成相加后的结果）</strong></p>
+<p>而String a = “abc” + “123”则会在常量池中生成“abc” “123” “abc123”</p>
 <p><span style='color:orange;font-size:24px'>toString方法在字符串常量池中没有该String！</span>验证后确实没有</p>
 </li>
 <li>
@@ -1275,7 +1440,13 @@ String s2 = “a”;<br>
 String s3 = “bc”;<br>
 String s4 = s2 + s3;<br>
 System.out.println(s1 == s4);<br>
-A：false，因为s2+s3实际上是使用StringBuilder.append来完成，会生成不同的对象。</p>
+A：false，因为s2+s3实际上是使用StringBuilder.append来完成,并且还会调用toString，会生成不同的对象。</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// Create a copy, don't share the array</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>value<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>而这里的new String(char[], int, int)与new String(String)不同，前者不会在常量池中生成对应的字符串。经过测试后发现声明char[]类型字符数组不会在常量池中生成字符串，而前者其实最终是调用了Arrays.copyOfRange方法，将String类的char[]数组value进行改变，只针对char[]，所以不涉及到常量池。这里可专门出一篇文章细细研究</p>
 </blockquote>
 <blockquote>
 <p>Q：下列程序的输出结果：<br>
@@ -1286,7 +1457,7 @@ String s4 = s2 + s3;<br>
 System.out.println(s1 == s4);<br>
 A：true，因为final变量在编译后会直接替换成对应的值，所以实际上等于s4=”a”+”bc”，而这种情况下，编译器会直接合并为s4=”abc”，所以最终s1==s4。</p>
 </blockquote>
-<p>​	<strong>实际操作中 添加多个相同的new String对象， intern成倍的影响速度</strong></p>
+<p><strong>实际操作中 添加多个相同的new String对象， intern成倍的影响速度</strong></p>
 <h2 id="垃圾回收-v2">垃圾回收</h2>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210309154809269.png" srcset="/img/loading.gif" lazyload alt="image-20210309154809269"></p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210309155016450.png" srcset="/img/loading.gif" lazyload alt="image-20210309155016450"></p>
@@ -1359,7 +1530,7 @@ A：true，因为final变量在编译后会直接替换成对应的值，所以�
 <ol>
 <li>没有重写 finalize方法 ----没必要    finalize方法被调用 ----没必要执行</li>
 <li>重写了且未被执行   被插入F-Queue队列中   由优先级较低的Finalizer线程执行</li>
-<li>finalize调用是对象唯一能复活的机会，稍后GC会对F-Queue的对象进行二次标记，如果在finalize中该对象和引用链任何一个对象建立了联系，则第二次标记，该对象会被移除“即将回收”集合， 如果伺候，对象再次出现没有引用存在的情况，这个时候由于一个对象的finalize方法只会执行一次，对象直接变成不可触及状态</li>
+<li>finalize调用是对象唯一能复活的机会，<strong>稍后GC会对F-Queue的对象进行二次标记</strong>，如果在finalize中该对象和引用链任何一个对象建立了联系，则第二次标记，该对象会被移除“即将回收”集合， 如果伺候，对象再次出现没有引用存在的情况，这个时候由于一个对象的finalize方法只会执行一次，对象直接变成不可触及状态</li>
 </ol>
 </li>
 </ol>
@@ -1390,8 +1561,9 @@ A：true，因为final变量在编译后会直接替换成对应的值，所以�
         -----2s
         alive
 	*/</span></code></pre></div>
-<p>​	注意点，这里为什么要休眠2s？</p>
-<p>​	Finalizer是低优先级的线程， 并发时 可能会有耗时 ，直接不休眠的话，会显示为null</p>
+<p>注意点，这里为什么要休眠2s？</p>
+<p>Finalizer是低优先级的线程， 并发时 可能会有耗时 ，直接不休眠的话，会显示为null。</p>
+<p><strong>Finalizer并不一定会保证finalize被完全执行</strong>，如果finalize中有sleep等操作，就不一定能保证语句被执行（因为这时主线程可能已经执行结束）。</p>
 <p>​</p>
 <p>使用mat 和 JVisualVM 查看dump堆</p>
 <p>JProfiler 进行GC溯源</p>
@@ -1592,9 +1764,9 @@ syso s2<span class="token punctuation">.</span>name<span class="token punctuatio
 <p><strong>现在的标准： 在最大吞吐量优先情况下，降低暂停时间</strong></p>
 <h3 id="Serial">Serial</h3>
 <p>串行收集器： 单线程 只使用一个CPU或一条收集线程完成垃圾收集工作  还会触发 STW</p>
-<p>年代久远Client 模式下默认  、 复制算法 、STW、串行回收</p>
+<p>年代久远Client 模式下默认  、 新生代复制算法、老年代标记整理 、STW、串行回收</p>
 <p><strong>Old</strong></p>
-<p>标记-压缩</p>
+<p>标记-整理</p>
 <p>Client模式默认</p>
 <p>Server模式 与新生代ParallelScavenge配合  、 CMS后备垃圾收集方案</p>
 <p>串行收集器采用单线程stop-the-world的方式进行收集。当内存不足时，串行GC设置停顿标识，待所有线程都进入安全点(Safepoint)时，应用线程暂停，串行GC开始工作，采用单线程方式回收空间并整理内存。单线程也意味着复杂度更低、占用内存更少，但同时也意味着不能有效利用多核优势。事实上，串行收集器特别适合堆内存不高、单核甚至双核CPU的场合。</p>
@@ -1633,7 +1805,7 @@ syso s2<span class="token punctuation">.</span>name<span class="token punctuatio
 <p>低延迟，第一次实现了让垃圾收集线程和用户线程同时工作</p>
 <p>尽可能缩短垃圾收集时用户线程的停顿时间</p>
 <p>G1 整体上采用标记-整理算法，局部是通过复制算法，不会产生内存碎片。</p>
-<p>垃圾收集算法采用标记-清除算法</p>
+<p>垃圾收集算法采用<strong>标记-清除算法</strong></p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210324080947878.png" srcset="/img/loading.gif" lazyload alt="image-20210324080947878"></p>
 <ul>
 <li>初始标记 ：STW 标记GC Roots <strong>直接</strong>关联到的对象</li>
@@ -1655,7 +1827,7 @@ syso s2<span class="token punctuation">.</span>name<span class="token punctuatio
 <p>-XX: CMSlinitialtingOccupanyFraction  设置堆内存使用率阈值  默认 92</p>
 <h3 id="G1">G1</h3>
 <p>区域化分代式</p>
-<p>JDK 9 开始采用，面向服务端应用</p>
+<p>JDK 9 开始采用，<strong>面向服务端应用</strong></p>
 <p>适应不断扩大的内存和不断增加的处理器数量  降低暂停时间且兼顾良好的吞吐量</p>
 <p><strong>为什么 叫G1?</strong></p>
 <p>​	并行收集器，划分堆内存  ，使用不同Region表示Eden Survivorws Old Gen等</p>
@@ -1676,7 +1848,7 @@ syso s2<span class="token punctuation">.</span>name<span class="token punctuatio
 </li>
 <li>
 <p>空间整合：</p>
-<p>内存回收以region为基本单位，region之间是复制算法，但整体可以看成是Mark Compact算法（因为分region）。有利于程序长时间运行</p>
+<p>内存回收以region为基本单位，region之间是复制算法，但整体可以看成是标记整理算法（因为分region）。有利于程序长时间运行</p>
 </li>
 <li>
 <p>可预测的停顿时间模型(软实时 Soft Real-Time)</p>
@@ -1721,7 +1893,7 @@ syso s2<span class="token punctuation">.</span>name<span class="token punctuatio
 <h4 id="RemeberedSet-记忆集">RemeberedSet 记忆集</h4>
 <ul>
 <li>一个对象可能被不同区域的对象引用  Old区 引用了 Eden区 。判断对象是否存活，是否要扫喵整个堆？</li>
-<li>回收新生代，不得不扫描老年代 ， 降低Minor GC效率</li>
+<li><strong>回收新生代，不得不扫描老年代 ， 降低Minor GC效率</strong></li>
 </ul>
 <p>解决</p>
 <ul>
@@ -1748,7 +1920,7 @@ syso s2<span class="token punctuation">.</span>name<span class="token punctuatio
 <p>将java源码编译成字节码的前端编译器   IDEA 默认</p>
 <p>类似的  ECJ (Eclipse Compiler for Java) 编译效率高，编译时并非全量编译，只编译为编译部分的源码进行编译</p>
 <p>Eclipse 和 Tomcat默认使用</p>
-<h4 id="-v2"></h4>
+<h4 id="-v3"></h4>
 <p><span style='color:red;font-size:24px'>Integer的自动装箱</span></p>
 <p>内置的IntegerCache</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span> a <span class="token operator">=</span> <span class="token number">127</span><span class="token punctuation">;</span>
@@ -1799,7 +1971,7 @@ syso s2<span class="token punctuation">.</span>name<span class="token punctuatio
 
     <span class="token keyword">private</span> <span class="token class-name">IntegerCache</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre></div>
-<p>涉及到的静态内部类的知识</p>
+<p>涉及到的<strong>静态内部类</strong>的知识</p>
 <p>静态内部类只会在使用到该内部类时才会加载，否则是不会加载的，也就是只有使用到new Integer的valueOf方法时，才会加载该内部类</p>
 <h3 id="概念-v6">概念</h3>
 <p>字节码指令是一个一个字节长度，代表某种特定含义的操作码，以及跟随其后的参数—操作数构成的。</p>
@@ -2165,7 +2337,7 @@ syso s2<span class="token punctuation">.</span>name<span class="token punctuatio
         63&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        262.3k&nbsp 字
+        265k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

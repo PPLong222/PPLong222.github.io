@@ -114,6 +114,7 @@
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220402205928765.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220402205324791.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210405093158517.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230304110445390.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210405094811575.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210405095134634.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210405161553429.png">
@@ -315,7 +316,7 @@
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220306224704953.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210330202907036.png">
 <meta property="article:published_time" content="2019-01-22T12:05:07.000Z">
-<meta property="article:modified_time" content="2022-12-08T12:52:58.000Z">
+<meta property="article:modified_time" content="2023-03-04T13:53:45.000Z">
 <meta property="article:author" content="PPLong">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="算法">
@@ -558,8 +559,8 @@
     
         <span class="post-meta">
   <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
-  <time datetime="2022-12-08 20:52" pubdate>
-    更新: 2022年12月8日晚上8点52分
+  <time datetime="2023-03-04 21:53" pubdate>
+    更新: 2023年3月4日晚上9点53分
   </time>
 </span>
         
@@ -569,7 +570,7 @@
     
         <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      144k 字
+      146k 字
     </span>
         
 
@@ -578,7 +579,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      452 分钟
+      458 分钟
     </span>
                 
 
@@ -2572,8 +2573,10 @@ TAG : Iteration / Recursion / Complement / Bits</p>
 <h3 id="总结-v4">总结</h3>
 <p>一直想做这道题，今天终于还是抽时间写了这道题。这道题踩到坑了，最开始用迭代和递归，都没做出来，要么超时要么StackOF。以为是算法本身的问题，但后来实在没办法，想了想后觉得奇怪。一调试发现一个重要的问题！也是非常基础的问题（只怪自己基础不牢固）</p>
 <p>$$int \ n = Integer.MIN_VALUE  \quad then \quad -n = n$$</p>
-<h2 id="53-最大子序和-⭐">53. 最大子序和 ⭐</h2>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210405093158517.png" srcset="/img/loading.gif" lazyload alt="image-20210405093158517"></p>
+<h2 id="53-最大子序和-⭐⭐">53. 最大子序和 ⭐⭐</h2>
+<div class="code-tag-label code-tag-label-dfs">DFS</div>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210405093158517.png" srcset="/img/loading.gif" lazyload alt="老版"></p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230304110445390.png" srcset="/img/loading.gif" lazyload alt="新版"></p>
 <h3 id="思考-v12">思考</h3>
 <p>O n 的解法</p>
 <p>动态规划？</p>
@@ -2609,9 +2612,73 @@ TAG : Iteration / Recursion / Complement / Bits</p>
 <span class="token punctuation">&#125;</span></code></pre></div>
 <p>空间复杂度变为O 1</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210405095134634.png" srcset="/img/loading.gif" lazyload alt="image-20210405095134634"></p>
-<h3 id="3-分治-线段树">3. 分治  线段树</h3>
+<h3 id="2-分治-线段树">2. 分治  线段树</h3>
 <p>…</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210405161553429.png" srcset="/img/loading.gif" lazyload alt="image-20210405161553429"></p>
+<h3 id="再回首">再回首</h3>
+<div class="code-tag-time">2023/3/4 21:52:00</div>
+<h4 id="1-动态规划-v3">1. 动态规划</h4>
+<p>既然要找出数组最大和的连续子数组，那可以这样想，从1开始，在<strong>整个数组</strong>中找出以第i个数结尾且和最大的子数组。为什么这样？这样就有递推式：</p>
+<ul>
+<li>以当前元素结尾且包含前一个元素</li>
+<li>以当前元素结尾但不包含前一个元素</li>
+</ul>
+<p>则有表达式</p>
+<p>$$maxSubArrSums[i]=\begin{cases}maxSubArrSums[i - 1] + nums[i] \nums[i]\end{cases}$$</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">maxSubArray</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> sumsArr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>nums<span class="token punctuation">.</span>length<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> curMaxSum <span class="token operator">=</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        sumsArr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            sumsArr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>sumsArr<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            curMaxSum <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>sumsArr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> curMaxSum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> curMaxSum<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>最终再将maxSubArrSums优化，转化成一个变量即可</p>
+<h4 id="2-分治-线段树-®">2. 分治(线段树) ®</h4>
+<p>求一个数组的最大连续子序列和，那可以分成左右两部分来看：</p>
+<p>$$整体最大连续子段和=\begin{cases}左部分的最大子段和 \右部分的最大字段和\左部分与右部分交集的子段和\end{cases}$$</p>
+<p>这样就已经解决了两种情况了，只需要解决最后一种左右部分交集的子段和，如何处理？这就引申出来了一个整体的<strong>从左开始</strong>的最大子段和和<strong>从右结束的</strong>最大子段和，这样</p>
+<p>$$左右部分交集的子段和 = 左部分从右结束的最大子段和 + 右部分从左开始的最大子段和$$</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Status</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> lSum<span class="token punctuation">,</span> rSum<span class="token punctuation">,</span> iSum<span class="token punctuation">,</span> mSum <span class="token punctuation">;</span>
+        <span class="token keyword">public</span> <span class="token class-name">Status</span><span class="token punctuation">(</span><span class="token keyword">int</span> lSum<span class="token punctuation">,</span> <span class="token keyword">int</span> rSum<span class="token punctuation">,</span> <span class="token keyword">int</span> iSum<span class="token punctuation">,</span> <span class="token keyword">int</span> mSum<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>lSum <span class="token operator">=</span> lSum<span class="token punctuation">;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>rSum <span class="token operator">=</span> rSum<span class="token punctuation">;</span>
+            <span class="token comment">// 区间和</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>iSum <span class="token operator">=</span> iSum<span class="token punctuation">;</span>
+            <span class="token comment">// 最大子段和</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>mSum <span class="token operator">=</span> mSum<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">maxSubArray</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token function">getStatus</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> <span class="token number">0</span> <span class="token punctuation">,</span> nums<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>mSum<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">Status</span> <span class="token function">getStatus</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> l<span class="token punctuation">,</span> <span class="token keyword">int</span> r<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>l <span class="token operator">==</span> r<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Status</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">,</span>nums<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">int</span> m <span class="token operator">=</span> <span class="token punctuation">(</span>l <span class="token operator">+</span> r<span class="token punctuation">)</span> <span class="token operator">>></span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token class-name">Status</span> left <span class="token operator">=</span> <span class="token function">getStatus</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> l<span class="token punctuation">,</span> m<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Status</span> right <span class="token operator">=</span> <span class="token function">getStatus</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> m <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">sumLeftAndRightSub</span><span class="token punctuation">(</span>left<span class="token punctuation">,</span> right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">Status</span> <span class="token function">sumLeftAndRightSub</span><span class="token punctuation">(</span><span class="token class-name">Status</span> left<span class="token punctuation">,</span> <span class="token class-name">Status</span> right<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> iSum <span class="token operator">=</span> left<span class="token punctuation">.</span>iSum <span class="token operator">+</span> right<span class="token punctuation">.</span>iSum<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> lSum <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>left<span class="token punctuation">.</span>lSum<span class="token punctuation">,</span> left<span class="token punctuation">.</span>iSum <span class="token operator">+</span> right<span class="token punctuation">.</span>lSum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> rSum <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>right<span class="token punctuation">.</span>rSum<span class="token punctuation">,</span> right<span class="token punctuation">.</span>iSum <span class="token operator">+</span> left<span class="token punctuation">.</span>rSum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> mSum <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>left<span class="token punctuation">.</span>mSum<span class="token punctuation">,</span> right<span class="token punctuation">.</span>mSum<span class="token punctuation">)</span><span class="token punctuation">,</span> left<span class="token punctuation">.</span>rSum <span class="token operator">+</span> right<span class="token punctuation">.</span>lSum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Status</span><span class="token punctuation">(</span>lSum<span class="token punctuation">,</span> rSum<span class="token punctuation">,</span> iSum<span class="token punctuation">,</span> mSum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>时间复杂度：O(n)(分治是O(logN), 但是遍历了所有节点) 空间复杂度:(OlogN)</p>
+<p>这种方法还要维护额外的变量，有递归的调用，有什么好处呢？关键是它是一种类似线段树的想法，可以解决任何子区间[l, r]之间问题，在建成树状结构后，只需要O(logN)的时间复杂度就可以求出答案</p>
 <h2 id="55-跳跃游戏-⭐⭐">55. 跳跃游戏 ⭐⭐</h2>
 <div class="code-tag-time">2022/3/20 20:12:00</div>
 <div class="code-tag-label code-tag-label-dfs">DFS</div>
@@ -3957,6 +4024,28 @@ public static int maxProfit_2(int[] prices) &#123;
             second <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>first <span class="token operator">+</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> second<span class="token punctuation">)</span><span class="token punctuation">;</span>
             first <span class="token operator">=</span> temp<span class="token punctuation">;</span>
         <span class="token punctuation">&#125;</span></code></pre></div>
+<p><strong>再回首</strong></p>
+<div class="code-tag-time">2023/3/4 11:00:00</div>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">rob</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span>nums<span class="token punctuation">.</span>length  <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          <span class="token keyword">return</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+      <span class="token comment">// day_x: x-1 days ago</span>
+      <span class="token keyword">int</span> day_3<span class="token punctuation">,</span> day_2<span class="token punctuation">,</span> day_1<span class="token punctuation">;</span>
+      <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+
+      day_3 <span class="token operator">=</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      day_2 <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      day_1 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          day_1 <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>day_3 <span class="token operator">+</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> day_2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          day_3 <span class="token operator">=</span> day_2<span class="token punctuation">;</span>
+          day_2 <span class="token operator">=</span> day_1<span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+      <span class="token keyword">return</span> day_2<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span></code></pre></div>
+<p>思路清晰了很多，先理清偷和不偷今天的盈利，然后考虑DP的数组形式，就能把大致思路想出来，再考虑DP的简化形式</p>
 <h3 id="总结-v5">总结</h3>
 <ul>
 <li>这道题做的很快，因为思路很清楚，为什么思路清楚？因为提到了钱，讨论<strong>钱的最大值</strong>再加上本身<strong>问题有迭代性质因素</strong>，所以想到了贪心和DP</li>
@@ -4483,7 +4572,7 @@ remove保证没有过期元素</p>
 <li>对于单个数的判别方法：DFS.原数减去这个数，剩余的数重复之前的操作，若个数多了，则换成较小的继续</li>
 <li>可能的做法： DFS；树结构？动态规划</li>
 </ul>
-<h3 id="1-动态规划-v3">1. 动态规划</h3>
+<h3 id="1-动态规划-v4">1. 动态规划</h3>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">numSquares</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
        <span class="token keyword">if</span><span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> 
            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
@@ -8860,7 +8949,7 @@ public:
         63&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        262.3k&nbsp 字
+        265k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
