@@ -1178,7 +1178,7 @@ head<span class="token punctuation">.</span>next <span class="token operator">=<
 <p>LeetCode: Boyer-Moore投票算法中，遇到相同的数则将 count 加 1，遇到不同的数则将 count 减 1。根据主要元素的定义，<strong>主要元素的出现次数大于其他元素的出现次数之和</strong>，因此在遍历过程中，主要元素和其他元素两两抵消，最后一定剩下至少一个主要元素，此时candidate 为主要元素，且 count≥1。</p>
 </blockquote>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20221114112209399.png" srcset="/img/loading.gif" lazyload alt="image-20221114112209399"></p>
-<h3 id="总结-v3">总结</h3>
+<h3 id="总结-v4">总结</h3>
 <ul>
 <li><strong>验证也是设计算法时一个重要的环节 ⚠️ ，再次遍历不会影响On的时间复杂度</strong></li>
 </ul>
@@ -2570,7 +2570,7 @@ TAG : Iteration / Recursion / Complement / Bits</p>
 </blockquote>
 <p>这道题我的问题主要在于：signed int (1 &gt;&gt; 31 - 1)等于多少，这里应该从位的角度先去理解，计算-1的补码然后二者相加，因为是补码运算，所以符号位囊括在计算过程中。（而-a = ~a+1，这一点也很重要，简化理解过程），得到二进制存储后，再根据对应的数据类型去转化，这里得到的其实是1&gt;&gt;31，而又是signed int，所以结果又根据原码-&gt;补码的反操作来求补码-&gt;原码，得到原码的值应该是-1&gt;&gt;31。</p>
 <p>总结一下就是：<strong>完全按照计算机的步骤来，不要自己一会补码运算一会原码相加，把自己都搞混了</strong></p>
-<h3 id="总结-v4">总结</h3>
+<h3 id="总结-v5">总结</h3>
 <p>一直想做这道题，今天终于还是抽时间写了这道题。这道题踩到坑了，最开始用迭代和递归，都没做出来，要么超时要么StackOF。以为是算法本身的问题，但后来实在没办法，想了想后觉得奇怪。一调试发现一个重要的问题！也是非常基础的问题（只怪自己基础不牢固）</p>
 <p>$$int \ n = Integer.MIN_VALUE  \quad then \quad -n = n$$</p>
 <h2 id="53-最大子序和-⭐⭐">53. 最大子序和 ⭐⭐</h2>
@@ -4046,7 +4046,7 @@ public static int maxProfit_2(int[] prices) &#123;
       <span class="token keyword">return</span> day_2<span class="token punctuation">;</span>
   <span class="token punctuation">&#125;</span></code></pre></div>
 <p>思路清晰了很多，先理清偷和不偷今天的盈利，然后考虑DP的数组形式，就能把大致思路想出来，再考虑DP的简化形式</p>
-<h3 id="总结-v5">总结</h3>
+<h3 id="总结-v6">总结</h3>
 <ul>
 <li>这道题做的很快，因为思路很清楚，为什么思路清楚？因为提到了钱，讨论<strong>钱的最大值</strong>再加上本身<strong>问题有迭代性质因素</strong>，所以想到了贪心和DP</li>
 <li><strong>然后先想清楚了大致思路才写的代码，把一些坑给避开了，这点很重要</strong></li>
@@ -4419,7 +4419,7 @@ remove保证没有过期元素</p>
    <span class="token punctuation">&#125;</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220119112251084.png" srcset="/img/loading.gif" lazyload alt="image-20220119112251084"></p>
 <p>牛逼…</p>
-<h3 id="总结-v6">总结</h3>
+<h3 id="总结-v7">总结</h3>
 <p>这里最开始做的时候思路大体是对的，要数字决定的索引之间的差值关系，就考虑用桶或者哈希，但自己用了哈希后感觉用桶排序会更快，但后面一直纠结实现桶排序但未考虑最大值而超出了内存限制。感觉自己还是一直纠结把索引保存下来，但其实这里不用保存索引关系，考虑了滑动窗口的问题只需要留一段窗口内的值就行了呀…</p>
 <ul>
 <li>看到值决定的索引间关系问题考虑用哈希</li>
@@ -4663,7 +4663,7 @@ remove保证没有过期元素</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220120120554207.png" srcset="/img/loading.gif" lazyload alt="image-20220120120554207"></p>
 <p>空间复杂度 O1<br>
 时间复杂度 $$O(\sqrt n)$$</p>
-<h3 id="总结-v7">总结</h3>
+<h3 id="总结-v8">总结</h3>
 <p>做这一题的时候思路大概上还是对的，想到了动态规划，之后想到了自定义链表进而想到了DFS，但这道题是BFS解的…</p>
 <ul>
 <li>从树的角度：对多叉树的层数解法考虑BFS</li>
@@ -6002,7 +6002,7 @@ O(amount * coins.length)的时间复杂度</p>
 <span class="token comment">// 作者：cheungq-6</span>
 <span class="token comment">// 链接：https://leetcode-cn.com/problems/coin-change-2/solution/hua-tu-li-jie-cong-chang-gui-er-wei-dpda-4gfy/</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220121121212373.png" srcset="/img/loading.gif" lazyload alt="image-20220121121212373"></p>
-<h3 id="总结-v8">总结</h3>
+<h3 id="总结-v9">总结</h3>
 <p>自己总算是了确了DFS的执念了，之前一想到啥就容易想到DFS，但确实这类题的背包特点太明显了，自己对背包问题还是不熟悉，最开始想的也是从amount  1-n的迭代，但没想清楚如何用规划来迭代的算</p>
 <ul>
 <li>背包问题先从朴素方法解决，然后再优化到一维</li>
@@ -6123,7 +6123,7 @@ O(amount * coins.length)的时间复杂度</p>
 </code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220118182353926.png" srcset="/img/loading.gif" lazyload alt="image-20220118182353926"></p>
 <p>我只能说，精彩…</p>
-<h3 id="总结-v9">总结</h3>
+<h3 id="总结-v10">总结</h3>
 <ol>
 <li>碰到字符串或数字都可排序的情况，先考虑数字排序，因为可能更快</li>
 <li>不要那些不必要的运算，想清楚…</li>
@@ -7503,7 +7503,7 @@ O(n)的空间复杂度</p>
 <span class="token comment">// 作者：LeetCode-Solution</span>
 <span class="token comment">// 链接：https://leetcode-cn.com/problems/array-of-doubled-pairs/solution/er-bei-shu-dui-shu-zu-by-leetcode-soluti-2mqj/</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220402093819482.png" srcset="/img/loading.gif" lazyload alt="image-20220402093819482"></p>
-<h3 id="总结-v10">总结</h3>
+<h3 id="总结-v11">总结</h3>
 <ul>
 <li>🙅 被初始直接算法困扰。虽然做题原则上是从直接到进阶做，但是有时候直接的算法比较冗余，特殊情况较多，如果没写清楚，就容易混乱，导致恶性循环，也没心情想好的思路的。所以以后直接思路的实现比较繁琐时且知道效率不高时，要考虑去思考其他的方法了，不应该把重心放在冗余上。</li>
 <li>⚠️ 排序数组在负数与正数在倍数关系上的相反情况！还有一些特殊情况的查找，以后读题时<strong>对关键条件要先找到特殊情况</strong></li>
@@ -7725,7 +7725,7 @@ O(n)的空间复杂度</p>
        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
    <span class="token punctuation">&#125;</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220821224515819.png" srcset="/img/loading.gif" lazyload alt="image-20220821224515819"></p>
-<h3 id="总结-v11">总结</h3>
+<h3 id="总结-v12">总结</h3>
 <p>状态机的思想：</p>
 <ul>
 <li>能够在简化空间复杂度上有</li>
@@ -8051,7 +8051,7 @@ TAG : Foreach</p>
 <span class="token comment">// 作者：wa-pian-d</span>
 <span class="token comment">// 链接：https://leetcode-cn.com/problems/maximize-the-confusion-of-an-exam/solution/2024-kao-shi-de-zui-da-kun-rao-du-java-b-86wg/</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220330102422950.png" srcset="/img/loading.gif" lazyload alt="image-20220330102422950"></p>
-<h3 id="总结-v12">总结</h3>
+<h3 id="总结-v13">总结</h3>
 <ul>
 <li>
 <p>滑动窗口不熟悉，做的时候没有想到滑动窗口。好久没有做到滑动窗口的题了。滑动窗口题型的特点：<strong>有限定值，计算范围内的值（连续的），最好是在数组中进行的</strong>。巩固一下</p>
@@ -8256,7 +8256,7 @@ TAG : Foreach</p>
 <span class="token punctuation">&#125;</span>
 </code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220124112935563.png" srcset="/img/loading.gif" lazyload alt="image-20220124112935563"></p>
-<h3 id="总结-v13">总结</h3>
+<h3 id="总结-v14">总结</h3>
 <ul>
 <li>TreeMap不熟悉，根本没考虑，有空再了解一下<strong>TreeMap</strong>。HashMap看不上，觉得没有链表快…</li>
 <li>以后还是要多想一下，毕竟链表在插入时还是On的复杂度，但HashMap基本是O1，还是没有想清楚，所以会造成超时的问题。</li>
@@ -8741,7 +8741,7 @@ public:
 &#125;;
 &#x2F;&#x2F; 链接：https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;find-good-days-to-rob-the-bank&#x2F;solution&#x2F;gua-he-da-jie-yin-xing-de-ri-zi-by-leetc-z6r1&#x2F;1418616</code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220306224704953.png" srcset="/img/loading.gif" lazyload alt="image-20220306224704953"></p>
-<h3 id="总结-v14">总结</h3>
+<h3 id="总结-v15">总结</h3>
 <ul>
 <li>Queue还不是很熟悉</li>
 <li>没想到dp…偏偏这次没想到</li>
