@@ -339,7 +339,7 @@
 <blockquote>
 <p>Mybatis中出现了一些与Lambda相关的函数方法，使得在编程时非常的方便，但自己却不知道如何使用基于Java8的语法</p>
 </blockquote>
-<h2 id="概述">概述</h2>
+<h2 id="概述-v2">概述</h2>
 <p><strong>优点</strong></p>
 <ul>
 <li>大数量下处理集合效率高</li>
@@ -418,7 +418,7 @@
 <p>对流中的数据按照制定的计算方式给出一个结果（缩紧操作）。可以直接给出初值也可以不设置初值（不设置时第一个元素为初值）</p>
 <h2 id="Optional">Optional</h2>
 <p>优雅地避免空指针异常，减少非空判断对代码行数。每次通过查询或计算得到结果时，若方法内部没有处理空数据的逻辑，则在外部代码部分就必须判断结果是否为空</p>
-<h3 id="使用">使用</h3>
+<h3 id="使用-v3">使用</h3>
 <p>类似包装类</p>
 <p>将一个对象封装成Optional</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token class-name">Optional</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Person</span><span class="token punctuation">></span></span> person1 <span class="token operator">=</span> <span class="token class-name">Optional</span><span class="token punctuation">.</span><span class="token function">ofNullable</span><span class="token punctuation">(</span>person<span class="token punctuation">)</span><span class="token punctuation">;</span>

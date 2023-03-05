@@ -556,7 +556,7 @@ table <span class="token operator">=</span> newTab<span class="token punctuation
 <p><strong>插入删除原理</strong></p>
 <p><strong>hashmap留的后门</strong></p>
 <p>哪种情况下get也会使得重新排序</p>
-<h3 id="ConcurrentHashMap-v2">ConcurrentHashMap</h3>
+<h3 id="ConcurrentHashMap">ConcurrentHashMap</h3>
 <p><strong>JDK1.8中以CAS与synchronized 锁头节点方式实现线程安全，锁的粒度更细</strong></p>
 <p>优先选择-- 性能效率更高</p>
 <p>能说说什么是快速失败什么是安全失败吗？</p>
@@ -872,7 +872,7 @@ obj<span class="token punctuation">.</span>stu <span class="token operator">=</s
 <span class="token punctuation">&#125;</span></code></pre></div>
 <p>涉及到的静态内部类的知识</p>
 <p>静态内部类只会在使用到该内部类时才会加载，否则是不会加载的，也就是只有使用到new Integer的valueOf方法时，才会加载该内部类</p>
-<h3 id="CAS-v3">CAS</h3>
+<h3 id="CAS-v2">CAS</h3>
 <p><strong>原理</strong></p>
 <p>若：内存位置的值 == 预期原值 -&gt; 则赋予新值。通过while循环完成。</p>
 <p>优点：不用进行用户态 内核态的切换</p>
