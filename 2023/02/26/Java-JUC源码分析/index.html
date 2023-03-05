@@ -29,7 +29,6 @@
 <meta property="og:description" content="Java JUC源码分析 概念 三大特性 原子性 一个或者多个操作在CPU执行的过程中不被中断的特性 可见性 一个线程修改一个变量后，其他线程能够立即得知这个修改 各自的线程有其工作内存，即保存时的副本存储的空间 有序性 代码的执行顺序 编译器 和 处理器执行指令时会进行从排序，改变语序   这里注意什么时候能改什么时候不能改！ Volatile   保证不同线程对变量操作的内存可见性（修改变量直">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233725385.png">
-<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233650045.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233706649.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210303172037854.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210307090828271.png">
@@ -347,7 +346,7 @@
                             
                                     <div class="markdown-body">
                                         <h1>Java JUC源码分析</h1>
-<h2 id="概念-v4">概念</h2>
+<h2 id="概念-v7">概念</h2>
 <h3 id="三大特性">三大特性</h3>
 <h4 id="原子性">原子性</h4>
 <p>一个或者多个操作在CPU执行的过程中不被中断的特性</p>
@@ -367,16 +366,14 @@
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233725385.png" alt="image-20210313233725385"></p>
 </li>
 </ol>
-<h4 id="happens-before-原则">happens - before 原则</h4>
-<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233650045.png" alt="image-20210313233650045"></p>
 <h4 id="为什么不能保证-count-原子性？">为什么不能保证 count++ 原子性？</h4>
 <p>单个变量的读写 具有原子性 i = 100</p>
 <p>但复合操作则不行   i++</p>
 <p>底层机制：内存屏障</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210313233706649.png" alt="image-20210313233706649"></p>
 <p>使用 ： 状态标记、单例模式</p>
-<h2 id="锁-v2">锁</h2>
-<h3 id="锁的分类-v2">锁的分类</h3>
+<h2 id="锁">锁</h2>
+<h3 id="锁的分类">锁的分类</h3>
 <ul>
 <li>可重入、不可重入</li>
 <li>悲观锁、乐观锁</li>
@@ -387,17 +384,17 @@
 <p>将大的方法加入同步锁会影响执行效率</p>
 <p><strong>sleep 抱着锁睡觉</strong></p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210303172037854.png" alt="image-20210303172037854"></p>
-<h3 id="锁到底锁什么-v2">锁到底锁什么</h3>
+<h3 id="锁到底锁什么">锁到底锁什么</h3>
 <p>synchronized 默认锁的是this  方法的调用者</p>
 <p>但是this 中的对象则不能同步 ，要同步哪个对象 就锁哪个</p>
-<h4 id="死锁-v2">死锁</h4>
+<h4 id="死锁">死锁</h4>
 <p><strong>两个或多个线程在等待对方释放资源；某个同步块同时拥有两个以上对象的锁</strong></p>
 <p>产生死锁的条件<br>
 1.互斥条件：一个资源每次只能被一个进程使用。<br>
 2.请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。<br>
 3.不剥夺条件:进程已获得的资源，在末使用完之前，不能强行剥夺。<br>
 4.循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。</p>
-<h4 id="Synchronized和Lock的区别-v2">Synchronized和Lock的区别</h4>
+<h4 id="Synchronized和Lock的区别">Synchronized和Lock的区别</h4>
 <ul>
 <li>Lock可以判断是否获取到了锁</li>
 <li>lock必须要手动释放，如果不释放锁，则出现死锁</li>
@@ -405,7 +402,7 @@
 <li>可重入锁，不可中断，非公平</li>
 <li>Lock适合锁大量的代码</li>
 </ul>
-<h4 id="虚假唤醒-v2">虚假唤醒</h4>
+<h4 id="虚假唤醒">虚假唤醒</h4>
 <h2 id="Synchronized">Synchronized</h2>
 <h3 id="synchronized到底是什么">synchronized到底是什么</h3>
 <p>synchronized是一个<strong>重量级锁</strong>，实现<strong>依赖于JVM 的 monitor 监视器锁</strong>。主要使用monitorenter和monitorexit指令来实现方法同步和代码块同步。<br>
@@ -458,7 +455,7 @@
 <p>CAS   没有获取到锁的线程是不会阻塞的，要通过控制循环值不断获取</p>
 <p>3个操作数  内存值 V（共享） 旧的预期值E（缓存） 要修改的新值N，仅当E == N时，才会修改  E!=N时，则再次查询主存中的V 使 E == N</p>
 <p>底层：硬件</p>
-<h2 id="AQS-v2">AQS</h2>
+<h2 id="AQS">AQS</h2>
 <h3 id="AbstractQueuedSynchronizer">AbstractQueuedSynchronizer</h3>
 <p>AbstractQueuedSynchronizer抽象类， JUC包下的一个基类。是一个用于构建锁、同步器等线程协作工具类的框架ReentrantLock、ThreadPoolExecutor、Semaphore等。有了 AQS 以后，很多用于线程协作的工具类就都可以很方便的被写出来，有了 AQS 之后，可以让更上层的开发极大的减少工作量，避免重复造轮子，同时也避免了上层因处理不当而导致的线程安全问题，因为 AQS 把这些事情都做好了</p>
 <p><strong>特点</strong></p>
@@ -765,7 +762,7 @@
             <span class="token function">cancelAcquire</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre></div>
-<h4 id="Condition-v2">Condition</h4>
+<h4 id="Condition">Condition</h4>
 <p>对于synchornized关键字，其内部可以用wait 和 notify进行线程等待或唤醒(wait必须在线程同步的代码块中使用)。但在Lock实现类例如ReentrantLock中，则可以通过Condition的await、signal来进行等待和唤醒</p>
 <p>且ReentrantLock可以唤醒指定条件的线程，而Object的唤醒是随机的</p>
 <h4 id="与Synchronized区别">与Synchronized区别</h4>
@@ -807,7 +804,7 @@
 <p>何为安全？多线程插入时的线程不安全问题  – 用hashTable可解决</p>
 <p><strong>如何实现</strong></p>
 <p>synchronized 锁方法</p>
-<h4 id="ConcurrentHashMap-v2">ConcurrentHashMap</h4>
+<h4 id="ConcurrentHashMap">ConcurrentHashMap</h4>
 <blockquote>
 <p>注意⚠️: JDK版本 1.7</p>
 </blockquote>
@@ -1049,7 +1046,7 @@
 <blockquote>
 <p>⚠️:不同的Segment下的HashEntry数组长度可能是不同的</p>
 </blockquote>
-<h2 id="CAS-v3">CAS</h2>
+<h2 id="CAS-v2">CAS</h2>
 <p><strong>原理</strong></p>
 <p>若：内存位置的值 == 预期原值 -&gt; 则赋予新值。通过while循环完成。</p>
 <p>优点：不用进行用户态 内核态的切换</p>
@@ -1355,7 +1352,7 @@
 <p><strong>interrupt方法</strong></p>
 <p>设置中断标志位，在外部配合isInterrupted()或者interrupted方法进行判断</p>
 <p>两者区别： interrupted会把标志位清空（所以：连续两次调用该方法时第二次返回false）</p>
-<h2 id="ThreadPoolExecutor-v2">ThreadPoolExecutor</h2>
+<h2 id="ThreadPoolExecutor">ThreadPoolExecutor</h2>
 <p><strong>意义</strong></p>
 <p>减少开销，创建和销毁资源存在时间成本，进行一组线程的管理</p>
 <p><strong>父级结构</strong></p>
@@ -1926,7 +1923,7 @@
         63&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        265k&nbsp 字
+        267.8k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

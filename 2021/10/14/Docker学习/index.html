@@ -767,7 +767,7 @@ evth-pair，就是一堆虚拟设备接口，成对出现，一端接协议，�
 <li>容器能否ping到主机(这里用的内网地址)？能</li>
 <li>容器pin容器能否pin通？</li>
 </ul>
-<h4 id="原理-v2"><strong>原理</strong></h4>
+<h4 id="原理"><strong>原理</strong></h4>
 <ol>
 <li>每启动给一个docker容器，docker就会给容器分配一个ip</li>
 <li>只要安装了docker，就会有一个网卡docker0 — 桥接模式 ----<strong>veth-pair</strong>技术</li>
@@ -895,8 +895,8 @@ docker network create --driver bridge --subnet 192.168.0.0/24 --gateway 192.168.
 192.168.0.4     005986ed8954</code></pre></div>
 <p>这时候，两台容器都可以通过本网段中的ip、名字去互ping，但是<br>
 通过ping外来主机的原网段172.xxx.xx.xx，是ping不到的（可以理解）</p>
-<h2 id="原理-v3">原理</h2>
-<h3 id="概念-v3">概念</h3>
+<h2 id="原理-v2">原理</h2>
+<h3 id="概念">概念</h3>
 <p>虚拟机：模拟系统，在软件层面上通过模拟硬件的输入和输出，让虚拟机的操作系统得以运行在没有物理硬件的环境中，能够模拟硬件的输入输出（比如AS的emulator就是这样）</p>
 <ul>
 <li>一般来说虚拟机会有自己的kernel、自己的硬件，虚拟机开机时需要开机自检、启动kernel、用户进程等，十分慢</li>
@@ -1118,7 +1118,7 @@ CMD [&quot;&#x2F;usr&#x2F;sbin&#x2F;init&quot;]
         63&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        265k&nbsp 字
+        267.8k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

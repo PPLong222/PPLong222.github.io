@@ -21,16 +21,16 @@
   <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
   <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
   <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
-  <meta name="description" content="设计模式 单例模式   DCL class Singleton &amp;#123;     &#x2F;&#x2F;DCL      &#x2F;&#x2F;volatile解决有序性问题     private static volatile Singleton singleton;     &#x2F;&#x2F;私有化构造方法     private Singleton() &amp;#123;&amp;#125;     public static Singleton">
+  <meta name="description" content="设计模式 单例模式   饿汉式 是线程安全的 private static Singleton instance &#x3D; new Singleton(); public static Singleton getInstance() &amp;#123;   return instance; &amp;#125; 静态  一开始便装载   懒汉式 线程不安全，多线程下可能会出现多个实例 private static S">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式">
 <meta property="og:url" content="https://www.pplong.top/2021/01/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="PPLong的博客">
-<meta property="og:description" content="设计模式 单例模式   DCL class Singleton &amp;#123;     &#x2F;&#x2F;DCL      &#x2F;&#x2F;volatile解决有序性问题     private static volatile Singleton singleton;     &#x2F;&#x2F;私有化构造方法     private Singleton() &amp;#123;&amp;#125;     public static Singleton">
+<meta property="og:description" content="设计模式 单例模式   饿汉式 是线程安全的 private static Singleton instance &#x3D; new Singleton(); public static Singleton getInstance() &amp;#123;   return instance; &amp;#125; 静态  一开始便装载   懒汉式 线程不安全，多线程下可能会出现多个实例 private static S">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331230002191.png">
 <meta property="article:published_time" content="2021-01-08T10:05:07.000Z">
-<meta property="article:modified_time" content="2022-04-07T01:45:18.000Z">
+<meta property="article:modified_time" content="2023-03-05T13:38:21.000Z">
 <meta property="article:author" content="PPLong">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
@@ -271,8 +271,8 @@
     
         <span class="post-meta">
   <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
-  <time datetime="2022-04-07 09:45" pubdate>
-    更新: 2022年4月7日上午9点45分
+  <time datetime="2023-03-05 21:38" pubdate>
+    更新: 2023年3月5日晚上9点38分
   </time>
 </span>
         
@@ -282,7 +282,7 @@
     
         <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.7k 字
+      3.8k 字
     </span>
         
 
@@ -291,7 +291,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9 分钟
+      12 分钟
     </span>
                 
 
@@ -341,7 +341,65 @@
 <h2 id="单例模式">单例模式</h2>
 <ol>
 <li>
-<p>DCL</p>
+<p>饿汉式</p>
+<p><strong>是线程安全的</strong></p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>静态  一开始便装载</p>
+</li>
+<li>
+<p>懒汉式</p>
+<p><strong>线程不安全</strong>，多线程下可能会出现多个实例</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> instance <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>instance <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> instance<span class="token punctuation">;</span> 
+<span class="token punctuation">&#125;</span></code></pre></div>
+</li>
+<li>
+<p>懒汉-Synchronized版</p>
+<p>线程安全但效率低下，全部代码被同步</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> instance <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">synchronized</span><span class="token punctuation">(</span><span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+     <span class="token keyword">if</span><span class="token punctuation">(</span>instance <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    		instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  	 <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> instance<span class="token punctuation">;</span> 
+<span class="token punctuation">&#125;</span></code></pre></div>
+</li>
+<li>
+<p>懒汉-Synchronized优化版</p>
+<p>**线程不安全！**一个线程在执行初始化，但另一个线程判断instance为空后就阻塞在等待拿锁了，拿到锁就又初始化了。</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> instance <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+   <span class="token keyword">if</span><span class="token punctuation">(</span>instance <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+     <span class="token keyword">synchronized</span><span class="token punctuation">(</span><span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+   <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> instance<span class="token punctuation">;</span> 
+<span class="token punctuation">&#125;</span></code></pre></div>
+</li>
+<li>
+<p>懒汉-Volatile版</p>
+<p><strong>线程不安全</strong>。无法达成同步(一个线程进入if判断完毕后，另一个线程也进入if判断，还是null)</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">volatile</span> <span class="token class-name">Singleton</span> instance<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>instance <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+</li>
+<li>
+<p>Double-Check Locking(DCL) 双检查锁</p>
+<p>使用volatile: 解决new Singleton时指令重排序问题(分配内存-&gt;初始化-&gt;引用地址赋值给对象)</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">&#123;</span>
     <span class="token comment">//DCL </span>
     <span class="token comment">//volatile解决有序性问题</span>
@@ -349,7 +407,9 @@
     <span class="token comment">//私有化构造方法</span>
     <span class="token keyword">private</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> <span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      	<span class="token comment">// 先判断是否为null再考虑加锁, 提升效率</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span>singleton <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+          	<span class="token comment">// 加锁进行同步,确保只有一个线程进入下面的if判断</span>
             <span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
                 <span class="token comment">//注意这里的双重判断  避免多线程时已经进入第一层</span>
                 <span class="token keyword">if</span><span class="token punctuation">(</span>singleton <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -360,10 +420,6 @@
         <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre></div>
-</li>
-<li>
-<p>最简单</p>
-<p>静态  一开始便装载</p>
 </li>
 <li>
 <p>静态内部类</p>
@@ -394,7 +450,7 @@
 </ol>
 <p>为什么用while 不用 if？</p>
 <p>while 自旋锁，防止虚假唤醒</p>
-<h3 id="虚假唤醒-v3">虚假唤醒</h3>
+<h3 id="虚假唤醒-v2">虚假唤醒</h3>
 <p>虚假唤醒就是一些obj.wait()会在除了obj.notify()和obj.notifyAll()的其他情况被唤醒</p>
 <p>举个例子，我们现在有一个生产者-消费者队列和三个线程。</p>
 <p><strong>1）</strong> 1号线程从队列中获取了一个元素，此时队列变为空。</p>
@@ -608,7 +664,7 @@ ConcreteDecorator：具体的装饰器实现者，负责实现装饰器角色定
         63&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        265k&nbsp 字
+        267.8k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

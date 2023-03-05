@@ -250,10 +250,10 @@
  
 <div style="margin-bottom: 20px;margin-left:10px;margin-right: 10px;">
     <div class="note note-info" style="position: relative;overflow: hidden;">
-      <p class="latest_post" id="latest_post_p" tag-time="1677991392298">最近更新时间:
+      <p class="latest_post" id="latest_post_p" tag-time="1678023501000">最近更新时间:
         &nbsp;&nbsp;&nbsp;&nbsp;
         更新文章: 《 
-        <a href="/2022/03/30/基于WireShark的网络分析/" >基于WireShark的网络分析》</a>
+        <a href="/2021/01/08/设计模式/" >设计模式》</a>
       </p>
     </div>
 </div>
@@ -549,14 +549,18 @@ Android：没有完全继承Linux，比如，其独具特色的通讯方式有Bi
 单例模式
 
 
-DCL
-class Singleton &#123;
-    //DCL 
-    //volatile解决有序性问题
-    private static volatile Singleton singleton;
-    //私有化构造方法
-    private Singleton() &#123;&#125;
-    public static Singleton 
+饿汉式
+是线程安全的
+private static Singleton instance = new Singleton();
+public static Singleton getInstance() &#123;
+  return instance;
+&#125;
+静态  一开始便装载
+
+
+懒汉式
+线程不安全，多线程下可能会出现多个实例
+private static S
         </a>
       </p>
 
@@ -979,7 +983,7 @@ JDBC \ HTML \ MYSQL 间通信
         63&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        265k&nbsp 字
+        267.8k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

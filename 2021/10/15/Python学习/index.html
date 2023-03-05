@@ -925,16 +925,16 @@ raise exception,args,traceback</p>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> arg<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>args <span class="token operator">=</span> arg</code></pre></div>
 <h2 id="进阶-v3">进阶</h2>
-<h3 id="线程-v3">线程</h3>
+<h3 id="线程-v2">线程</h3>
 <p>thread：用于低级模块、底层操作。threading：应用级别开发</p>
 <p>调用方式，新创建类并继承threading.Thread这个类，重写fun方法，通过threadx.start调用，也可以直接在创建时	target=来指定run函数</p>
 <p><strong>join</strong>让当前线程等待调用线程执行完毕后，再执行当前线程的下一段代码</p>
-<h4 id="锁-v3">锁</h4>
+<h4 id="锁-v2">锁</h4>
 <div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">lock <span class="token operator">=</span> threading<span class="token punctuation">.</span>lock<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># 获取锁</span>
 lock<span class="token punctuation">.</span>aquire<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># 线程中获取锁</span>
 lock<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># 线程中释放锁</span>
 <span class="token comment"># 获取重入锁 lock = threading.RLock()</span></code></pre></div>
-<h4 id="Condition-v3">Condition</h4>
+<h4 id="Condition-v2">Condition</h4>
 <h4 id="线程通信-v2">线程通信</h4>
 <h4 id="线程池">线程池</h4>
 <div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> concurrent<span class="token punctuation">.</span>futures <span class="token keyword">import</span> ThreadPoolExecutor
@@ -1160,7 +1160,7 @@ time.sleep --&gt; asynio.sleep --&gt;<strong>await关键词表示 挂起</strong
         63&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        265k&nbsp 字
+        267.8k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
