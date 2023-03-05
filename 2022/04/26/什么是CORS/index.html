@@ -481,7 +481,7 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
 <p>回顾前面的问题，尝试先清空缓存后开启Allow-CORS，然后进行未被允许的CORS请求，发现响应码200并返回正常数据，随后进行抓包发现，只发送了一个GET请求，即浏览器自身直接忽略了预检这一步骤。</p>
 <p>Bilibili CORS Error中，基本上都是js脚本触发的CORS Error，说明可能js脚本中一些xhr类函数的执行没有被Allow-CORS捕获并重新设置，进入到错误js中调试后发现引发了我们都已熟悉了的这个问题</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220426175608360.png" alt="image-20220426175608360"></p>
-<h2 id="总结-v3">总结</h2>
+<h2 id="总结-v15">总结</h2>
 <p>好了，一句话，<s><strong>罪魁祸首：Allow-CORS全锅！</strong></s> 😆</p>
 <p>其实还是一个前后端通信一个比较经典的问题，相信实战的时候肯定还会遇到此类问题，到时候应该还会有新的心得</p>
 
