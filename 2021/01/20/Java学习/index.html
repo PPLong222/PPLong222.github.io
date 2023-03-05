@@ -14,40 +14,44 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="title: Java学习
-date: 2021-1-20 18:05:07
-toc: true
-banner_img: /gallery/covers/cover1.jpg
-index_img: /gallery/thumbnails/javathumb.png
-comment: true
-updated: 2023-03-05 20:15:17
-categories: 学习
-sticky: 9">
+  <meta name="description" content="Java SE
+
+集合
+ArrayList
+
+允许添加多个null值
+
+属性 size 是指 elementData 中实际有多少个元素，而 elementData.length 为集合容量
+DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是否有initialCapacity
+
+第一次添加元素时扩容   默认初始的集合容量 1">
   <meta name="author" content="PPLong">
   <meta name="keywords" content="">
   <!--添加百度站点统计-->
   <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
   <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
   <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
-  <meta name="description" content="title: Java学习 date: 2021-1-20 18:05:07 toc: true banner_img: &#x2F;gallery&#x2F;covers&#x2F;cover1.jpg index_img: &#x2F;gallery&#x2F;thumbnails&#x2F;javathumb.png comment: true updated: 2023-03-05 20:15:17 categories: 学习 sticky: 9">
+  <meta name="description" content="Java SE  集合 ArrayList  允许添加多个null值  属性 size 是指 elementData 中实际有多少个元素，而 elementData.length 为集合容量 DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是否有initialCapacity  第一次添加元素时扩容   默认初始的集合容量 1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PPLong的博客">
-<meta property="og:url" content="https://www.pplong.top/2022/07/21/Java%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:title" content="Java学习">
+<meta property="og:url" content="https://www.pplong.top/2021/01/20/Java%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="PPLong的博客">
-<meta property="og:description" content="title: Java学习 date: 2021-1-20 18:05:07 toc: true banner_img: &#x2F;gallery&#x2F;covers&#x2F;cover1.jpg index_img: &#x2F;gallery&#x2F;thumbnails&#x2F;javathumb.png comment: true updated: 2023-03-05 20:15:17 categories: 学习 sticky: 9">
+<meta property="og:description" content="Java SE  集合 ArrayList  允许添加多个null值  属性 size 是指 elementData 中实际有多少个元素，而 elementData.length 为集合容量 DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是否有initialCapacity  第一次添加元素时扩容   默认初始的集合容量 1">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210228192712917.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230305170110555.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210428185332025.png">
-<meta property="article:published_time" content="2022-07-21T14:45:34.000Z">
-<meta property="article:modified_time" content="2023-03-05T12:15:17.679Z">
+<meta property="article:published_time" content="2021-01-20T10:05:07.000Z">
+<meta property="article:modified_time" content="2023-03-05T12:15:17.000Z">
 <meta property="article:author" content="PPLong">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Study">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210228192712917.png">
   
     <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
   
-  <title>PPLong的博客</title>
+  <title>Java学习 - PPLong的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -253,12 +257,12 @@ sticky: 9">
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/gallery/covers/wallhaven-qde5kr.jpg') no-repeat center center;
+         style="background: url('/gallery/covers/cover1.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="">
+            <span class="h2" id="subtitle" title="Java学习">
               
             </span>
 
@@ -268,8 +272,8 @@ sticky: 9">
             
                 <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-07-21 22:45" pubdate>
-        始于: 2022年7月21日晚上10点45分
+      <time datetime="2021-01-20 18:05" pubdate>
+        始于: 2021年1月20日晚上6点05分
       </time>
     </span>
                 
@@ -291,7 +295,7 @@ sticky: 9">
     
         <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      15k 字
+      14k 字
     </span>
         
 
@@ -342,23 +346,11 @@ sticky: 9">
                         <article class="post-content mx-auto">
                             <!-- SEO header -->
                             <h1 style="display: none">
-                                
+                                Java学习
                             </h1>
                             
                                     <div class="markdown-body">
-                                        <p>title: Java学习<br>
-date: 2021-1-20 18:05:07<br>
-toc: true<br>
-banner_img: /gallery/covers/cover1.jpg<br>
-index_img: /gallery/thumbnails/javathumb.png<br>
-comment: true<br>
-updated: 2023-03-05 20:15:17<br>
-categories: 学习<br>
-sticky: 90<br>
-tags:<br>
-- Java<br>
-- Study</p>
-<h1>Java SE</h1>
+                                        <h1>Java SE</h1>
 <!--toc-->
 <h2 id="集合">集合</h2>
 <h3 id="ArrayList">ArrayList</h3>
@@ -989,7 +981,29 @@ o<span class="token punctuation">[</span><span class="token number">1</span><spa
                                     <div>
                                         <div class="post-metas mb-3">
                                             
+                                                <div class="post-meta mr-3">
+                                                    <i class="iconfont icon-category"></i>
                                                     
+                                                        <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/">
+                                                            学习
+                                                        </a>
+                                                        
+                                                </div>
+                                                
+                                                    
+                                                        <div class="post-meta">
+                                                            <i class="iconfont icon-tags"></i>
+                                                            
+                                                                <a class="hover-with-bg" href="/tags/Java/">
+                                                                    Java
+                                                                </a>
+                                                                
+                                                                <a class="hover-with-bg" href="/tags/Study/">
+                                                                    Study
+                                                                </a>
+                                                                
+                                                        </div>
+                                                        
                                         </div>
                                         
                                             <p class="note note-warning">
@@ -1003,9 +1017,9 @@ o<span class="token punctuation">[</span><span class="token number">1</span><spa
                                                         <article class="post-prev col-6">
                                                             
                                                                 
-                                                                    <a href="/2022/07/30/Java8%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/">
+                                                                    <a href="/2021/01/22/%E8%AE%A1%E7%BD%91/">
                                                                         <i class="iconfont icon-arrowleft"></i>
-                                                                        <span class="hidden-mobile">Java8特性学习</span>
+                                                                        <span class="hidden-mobile">计网</span>
                                                                         <span class="visible-mobile">上一篇</span>
                                                                     </a>
                                                                     
@@ -1013,8 +1027,8 @@ o<span class="token punctuation">[</span><span class="token number">1</span><spa
                                                         <article class="post-next col-6">
                                                             
                                                                 
-                                                                    <a href="/2022/07/08/%E8%BD%AF%E5%B7%A5%E5%AE%9E%E8%AE%AD-%E5%9B%A2%E9%98%9FSSM%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
-                                                                        <span class="hidden-mobile">Echo-软工实训-团队SpringBoot项目总结</span>
+                                                                    <a href="/2021/01/10/Android%E9%9D%A2%E8%AF%95/">
+                                                                        <span class="hidden-mobile">Android知识总结</span>
                                                                         <span class="visible-mobile">下一篇</span>
                                                                         <i class="iconfont icon-arrowright"></i>
                                                                     </a>
