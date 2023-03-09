@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230301093810061.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230301164158265.png">
 <meta property="article:published_time" content="2023-02-26T01:22:52.000Z">
-<meta property="article:modified_time" content="2023-03-05T12:44:51.000Z">
+<meta property="article:modified_time" content="2023-03-08T14:16:54.000Z">
 <meta property="article:author" content="PPLong">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
@@ -279,8 +279,8 @@
     
         <span class="post-meta">
   <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
-  <time datetime="2023-03-05 20:44" pubdate>
-    更新: 2023年3月5日晚上8点44分
+  <time datetime="2023-03-08 22:16" pubdate>
+    更新: 2023年3月8日晚上10点16分
   </time>
 </span>
         
@@ -299,7 +299,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      112 分钟
+      113 分钟
     </span>
                 
 
@@ -1050,10 +1050,19 @@
 </blockquote>
 <h2 id="CAS-v3">CAS</h2>
 <p><strong>原理</strong></p>
+<p>乐观锁：假设程序汇总并发少，让线程不断尝试更新</p>
 <p>若：内存位置的值 == 预期原值 -&gt; 则赋予新值。通过while循环完成。</p>
 <p>优点：不用进行用户态 内核态的切换</p>
-<p>缺点：自旋时间不确定</p>
-<p>增加版本控制： AtomicStampedReference，不但会判断原值，还会比较版本信息</p>
+<p>缺点：自旋时间不确定、开销大、只能保证一个共享变量的原子操作(多个共享变量可进行合并然后使用CAS–AtomicRefernce)</p>
+<p><strong>CAS是如何保证线程安全的？</strong></p>
+<p>如何保证Compare和Swap的原子性：通过UNSAFE类实现，提供硬件级别的原子操作(native方法)</p>
+<p><strong>ABA问题</strong></p>
+<p>CAS在操作时会检查值是否改变，但如果原来值为A，被其他线程通过CAS改成B，然后又被改成A，这个时候去进行CAS，发现值还是A，则不会更新值，但其实值已经发生了改变。如何解决这个问题，就需要使用版本号作为每次更改的依据，相当于(ArrayList中的modCount)。增加版本控制： AtomicStampedReference，不但会判断原值，还会比较版本信息</p>
+<p><strong>两种实现线程安全的方式</strong></p>
+<ul>
+<li>加锁: Synchronized/Lock</li>
+<li>不加锁: CAS Loop &amp; Volatile (轻量)</li>
+</ul>
 <h2 id="FutureTask详解">FutureTask详解</h2>
 <p>FutureTask为Future提供了基础实现，线程安全由CAS保证。常用啦封装Callable和Runnable，作为一个任务提交到线程池中</p>
 <h3 id="Future接口"><strong>Future接口</strong></h3>
@@ -1801,6 +1810,12 @@
                                                         <article class="post-prev col-6">
                                                             
                                                                 
+                                                                    <a href="/2023/03/08/Redis%E6%8C%87%E5%8D%97/">
+                                                                        <i class="iconfont icon-arrowleft"></i>
+                                                                        <span class="hidden-mobile">Redis指南</span>
+                                                                        <span class="visible-mobile">上一篇</span>
+                                                                    </a>
+                                                                    
                                                         </article>
                                                         <article class="post-next col-6">
                                                             
@@ -1918,10 +1933,10 @@
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        60&nbsp 篇文章
+        61&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        267.6k&nbsp 字
+        271.4k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

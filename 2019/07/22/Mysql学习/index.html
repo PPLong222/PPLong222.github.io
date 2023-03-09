@@ -1494,11 +1494,17 @@ alter table xx add index idx_name on (column(xx))</code></pre></div>
 <li>主键自动建立唯一索引</li>
 <li>频繁作为查询条件的字段</li>
 <li>查询中与其他表关联的字段，外键关系</li>
-<li>频繁更新的字段不适合创建索引</li>
-<li>Where条件里用不到的字段不创建索引</li>
 <li>单键/组合索引如何选择(高并发—&gt;组合)</li>
 <li>查询中排序的字段，排序字段通过索引去访问将大幅提高排序速度</li>
 <li>查询中统计或者分组的字段</li>
+</ul>
+<p><strong>哪些条件不需要索引</strong></p>
+<ul>
+<li>where /group by/ order by中永不倒的字段不需要索引</li>
+<li>数据量小的表不需要</li>
+<li>大量重复数据的列上不需要建立索引(索引的价值是快速定位)</li>
+<li>经常更新的表不用创建索引</li>
+<li>无序的值不建议作为索引</li>
 </ul>
 <h3 id="性能分析">性能分析</h3>
 <ol>
@@ -2150,10 +2156,10 @@ show full columns from t22;</code></pre></div>
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        60&nbsp 篇文章
+        61&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        267.6k&nbsp 字
+        271.4k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

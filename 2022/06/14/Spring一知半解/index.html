@@ -292,7 +292,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      56 分钟
+      57 分钟
     </span>
                 
 
@@ -367,12 +367,28 @@
     <span class="token punctuation">&#125;</span></code></pre></div>
 <p>这就让一个本来普通的方法就挤了很多很多的额外附加的内容，增大了不必要的开发量，即便用了代理模式，一样会造成重复的代码和过多的接口</p>
 <p>那不如把安全、日志、事务等这些与实际业务不太相关但有必须的内容抽象成不同的切面(PointCut)，以一种自动化的方式把切面<strong>织入</strong>（Weave）进核心逻辑中。类似invoke，在<code>updateUserMoney</code>方法调用时，先对方法进行<strong>拦截</strong>，在方法前后执行这些不同切面的内容处理，这样便能达到既不破坏原有核心业务方法的内容又能可修改地进行功能增加。</p>
-<p>在Java平台上，对于AOP的织入，有3种方式：</p>
-<ol>
+<p><strong>理解一下AOP中的概念</strong></p>
+<ul>
+<li>Aspect(切面): 类似Java中的类声明，例如用@Aspect定义一个切面</li>
+<li>Join Point(连接点): 在应用执行中能插入切面的一个点(是一个整体的概念，每个应用有多个位置适合织入，都是连接点，但只有我们选择的具体位置是切入点)</li>
+<li>Advice(通知): 在切面中某个连接点采取的动作，有四种不同的通知方式: around/before/after/exception/return</li>
+<li>Pointcut(切入点): 通知所要织入的具体位置</li>
+<li>Introduction(介绍): 为原有的对象增加新的属性和方法</li>
+<li>Target Object(代理对象): 由一个或多个切面代理的对象</li>
+<li>AOP Proxy(AOP代理): AOP框架创建的对象. Spring中主要有两种：<strong>JDK动态代理</strong>和<strong>CGLIB代理</strong></li>
+<li>Weaving(织入): 在Java平台上，对于AOP的织入，有3种方式：
+<ul>
 <li>编译期：<strong>在编译时，由编译器把切面调用编译进字节码</strong>，这种方式需要<strong>定义新的关键字并扩展编译器</strong>，AspectJ就扩展了Java编译器，使用关键字aspect来实现织入；</li>
 <li>类加载器：在目标类被装载到JVM时，通过一个特殊的类加载器，对目标类的字节码重新“增强”；</li>
-<li>运行期：目标对象和切面都是普通Java类，通过<strong>JVM的动态代理功能</strong>或者第三方库实现运行期动态织入。是最简单的方式，Spring的AOP实现就是基于JVM的动态代理</li>
-</ol>
+<li>运行期：目标对象和切面都是普通Java类，通过<strong>JVM的动态代理功能</strong>或者第三方库实现运行期动态织入。是最简单的方式，S<strong>pring的AOP实现就是基于JVM的动态代理</strong></li>
+</ul>
+</li>
+</ul>
+<p>Spring下AOP的执行顺序(有待验证):</p>
+<ul>
+<li>无异常: Surrond前 -&gt; Before -&gt; MethodExecute() -&gt; AfterReturning -&gt; After -&gt; Around后</li>
+<li>异常: Surrond前 -&gt; Before -&gt; MethodExecute() -&gt; AfterThrowing -&gt; After</li>
+</ul>
 <h3 id="IOC">IOC</h3>
 <p><strong>IoC - Inversion of Control - 控制反转</strong></p>
 <p>为什么会有IoC出现？考虑一下场景：</p>
@@ -415,7 +431,7 @@
 <blockquote>
 <p>At the heart are the modules of the core container, including a configuration model and a dependency injection mechanism.</p>
 </blockquote>
-<p><strong>核心容器的模块是核心，包括配置模型和依赖项注入机制</strong>。并且Spring 框架为不同的应用程序体系结构提供了基础支持，包括消息传递，事务性数据和持久性以及 Web。它还包括基于 Servlet 的 Spring MVC Web 框架，以及并行的 Spring WebFlux 反应式 Web 框架。</p>
+<p><strong>核心容器的模块是核心Core，包括配置模型和依赖项注入机制</strong>。并且Spring 框架为不同的应用程序体系结构提供了基础支持，包括消息传递，事务性数据和持久性以及 Web。它还包括基于 Servlet 的 Spring MVC Web 框架，以及并行的 Spring WebFlux 反应式 Web 框架。</p>
 <h2 id="Core-v2">Core</h2>
 <h3 id="IoC">IoC</h3>
 <h4 id="Introduce">Introduce</h4>
@@ -861,7 +877,7 @@
 <p>也可以直接使用<code>  &lt;context:component-scan base-package=&quot;org.example&quot;/&gt;</code></p>
 <p>默认情况下，唯一检测到的候选组件是用<code>@Component</code>，<code>@Repository</code>，<code>@Service</code>，<code>@Controller</code>注解 的类或本身用<code>@Component</code>注解 的定制 注解。可以通过应用自定义过滤器来修改和扩展此行为。将它们添加为<code>@ComponentScan</code>注解的<code>includeFilters</code>或<code>excludeFilters</code>参数(或<code>component-scan</code>元素的<code>include-filter</code>或<code>exclude-filter</code>子元素)。每个过滤器元素都需要<code>type</code>和<code>expression</code>属性</p>
 <h1>使用</h1>
-<h2 id="基础-v4">基础</h2>
+<h2 id="基础-v3">基础</h2>
 <h3 id="配置bean">配置bean</h3>
 <p><a id="demo-application-bean-01"></a></p>
 <p><strong>通过ClassPathXml来定义ApplicationContext进而定义bean的实例</strong></p>
@@ -1064,10 +1080,10 @@
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        60&nbsp 篇文章
+        61&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        267.6k&nbsp 字
+        271.4k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
