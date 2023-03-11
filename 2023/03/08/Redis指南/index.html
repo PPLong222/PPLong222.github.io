@@ -21,12 +21,12 @@
   <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
   <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
   <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
-  <meta name="description" content="参考文章： 🔗: 《Java全栈知识体系》  Redis指南 概念 Redis: 内存告诉缓存数据库，全称为: Remote Dictionary Server(C语言编写), 是一个Key-Value存储系统。可用于缓存，事件发布、订阅、高速队列等场景。基于内存且可持久化。 特点  读写性能优异 数据类型丰富。支持String、List、Set等数据类型的操作 原子性。所有操作都是原子性的">
+  <meta name="description" content="Redis指南 概念 Redis: 内存告诉缓存数据库，全称为: Remote Dictionary Server(C语言编写), 是一个Key-Value存储系统。可用于缓存，事件发布、订阅、高速队列等场景。基于内存且可持久化。 特点  读写性能优异 数据类型丰富。支持String、List、Set等数据类型的操作 原子性。所有操作都是原子性的 持久化。支持RDB、AOF等持久化方式 单线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis指南">
 <meta property="og:url" content="https://www.pplong.top/2023/03/08/Redis%E6%8C%87%E5%8D%97/index.html">
 <meta property="og:site_name" content="PPLong的博客">
-<meta property="og:description" content="参考文章： 🔗: 《Java全栈知识体系》  Redis指南 概念 Redis: 内存告诉缓存数据库，全称为: Remote Dictionary Server(C语言编写), 是一个Key-Value存储系统。可用于缓存，事件发布、订阅、高速队列等场景。基于内存且可持久化。 特点  读写性能优异 数据类型丰富。支持String、List、Set等数据类型的操作 原子性。所有操作都是原子性的">
+<meta property="og:description" content="Redis指南 概念 Redis: 内存告诉缓存数据库，全称为: Remote Dictionary Server(C语言编写), 是一个Key-Value存储系统。可用于缓存，事件发布、订阅、高速队列等场景。基于内存且可持久化。 特点  读写性能优异 数据类型丰富。支持String、List、Set等数据类型的操作 原子性。所有操作都是原子性的 持久化。支持RDB、AOF等持久化方式 单线程">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-08T07:53:16.000Z">
 <meta property="article:modified_time" content="2023-03-08T12:37:50.000Z">
@@ -281,7 +281,7 @@
     
         <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      927 字
+      1.2k 字
     </span>
         
 
@@ -290,7 +290,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3 分钟
+      4 分钟
     </span>
                 
 
@@ -336,11 +336,7 @@
                             </h1>
                             
                                     <div class="markdown-body">
-                                        <blockquote>
-<p>参考文章：</p>
-<p>🔗: <a target="_blank" rel="noopener" href="https://pdai.tech/">《Java全栈知识体系》</a></p>
-</blockquote>
-<h1>Redis指南</h1>
+                                        <h1>Redis指南</h1>
 <h2 id="概念-v9">概念</h2>
 <p>Redis: 内存告诉缓存数据库，全称为: Remote Dictionary Server(C语言编写), 是一个Key-Value存储系统。可用于缓存，事件发布、订阅、高速队列等场景。基于内存且可持久化。</p>
 <h3 id="特点">特点</h3>
@@ -420,6 +416,24 @@
 </ul>
 </li>
 </ul>
+<h2 id="面试-v2">面试</h2>
+<h3 id="基础-v3">基础</h3>
+<h4 id="Redis到底是单线程还是多线程？">Redis到底是单线程还是多线程？</h4>
+<ul>
+<li>Redis6.0版本前的单线程指网络IO喝键值对读写是由一个线程完成的</li>
+<li>Redis6.0后引入多线程是指网络请求采用了多线程，而键值对读写命令仍然是单线程，所以Redis依然是<strong>并发安全</strong>的(其持久化喝集群数据同步等是由额外线程完成的)</li>
+</ul>
+<h4 id="Redis单线程为什么这么快？">Redis单线程为什么这么快？</h4>
+<ol>
+<li>Redis命令执行基于内存操作</li>
+<li>命令执行说单线程操作，没有线程切换开销</li>
+<li>基于多路复用机制提升Redis I/O利用率</li>
+<li>使用高效的数据存储结构：全局Hash表、跳表、压缩列表、链表等</li>
+</ol>
+<blockquote>
+<p>参考文章：</p>
+<p>🔗: <a target="_blank" rel="noopener" href="https://pdai.tech/">《Java全栈知识体系》</a></p>
+</blockquote>
 
                                     </div>
                                     <hr>
@@ -582,7 +596,7 @@
         61&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        271.4k&nbsp 字
+        272.1k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
