@@ -28,12 +28,20 @@
 <meta property="og:site_name" content="PPLong的博客">
 <meta property="og:description" content="Redis指南 概念 Redis: 内存告诉缓存数据库，全称为: Remote Dictionary Server(C语言编写), 是一个Key-Value存储系统。可用于缓存，事件发布、订阅、高速队列等场景。基于内存且可持久化。 特点  读写性能优异 数据类型丰富。支持String、List、Set等数据类型的操作 原子性。所有操作都是原子性的 持久化。支持RDB、AOF等持久化方式 单线程">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pdai.tech/images/db/redis/db-redis-object-2-2.png">
+<meta property="og:image" content="https://pdai.tech/images/db/redis/db-redis-object-2-2.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/4eeef4dd1bedd2ffe0b84d4eaa0dbdea-20230309232249413.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0ODI3Njc0,size_16,color_FFFFFF,t_70-20230309231944807.png">
+<meta property="og:image" content="https://pdai.tech/images/db/redis/db-redis-sub-3.svg">
+<meta property="og:image" content="https://pdai.tech/images/db/redis/db-redis-sub-5.svg">
+<meta property="og:image" content="https://pdai.tech/images/db/redis/db-redis-sub-10.svg">
 <meta property="article:published_time" content="2023-03-08T07:53:16.000Z">
-<meta property="article:modified_time" content="2023-03-08T12:37:50.000Z">
+<meta property="article:modified_time" content="2023-03-12T14:53:22.000Z">
 <meta property="article:author" content="PPLong">
 <meta property="article:tag" content="SQL">
 <meta property="article:tag" content="NoSQL">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pdai.tech/images/db/redis/db-redis-object-2-2.png">
   
     <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
   
@@ -270,8 +278,8 @@
     
         <span class="post-meta">
   <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
-  <time datetime="2023-03-08 20:37" pubdate>
-    更新: 2023年3月8日晚上8点37分
+  <time datetime="2023-03-12 22:53" pubdate>
+    更新: 2023年3月12日晚上10点53分
   </time>
 </span>
         
@@ -281,7 +289,7 @@
     
         <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      6k 字
     </span>
         
 
@@ -290,7 +298,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4 分钟
+      19 分钟
     </span>
                 
 
@@ -415,7 +423,194 @@
 <li>存储：经度+维度</li>
 </ul>
 </li>
+<li>
+<p><strong>Stream消息队列</strong></p>
+<ul>
+<li>相比于基于List类型实现的消息队列，能够自动生成全局唯一消息ID，支持以消费组形式消费数据</li>
 </ul>
+</li>
+</ul>
+<h3 id="Redis对象机制">Redis对象机制</h3>
+<p><img src="https://pdai.tech/images/db/redis/db-redis-object-2-2.png" alt=""></p>
+<p><strong>Redis为什么要设计RedisObject对象</strong></p>
+<p>Redis中一些命令只能用于特定的键，所以需要为不同类型的键设置不同的处理方式，所以Redis必须让每个键都带有类型信息。比如集合类型可以由字典和整数集合两种不同的数据结构实现，但用户执行ZADD时，他不应关系集合使用的是哪种类型。</p>
+<p>Redis构建了自己的类型系统，主要有以下功能:</p>
+<ul>
+<li>构建redisObject对象</li>
+<li>基于redisObject对象的类型检查</li>
+<li>基于redisObject对象的显式多态函数</li>
+<li>对redisObject进行分配、共享和销毁机制</li>
+</ul>
+<p><strong>redisObject组成</strong></p>
+<div class="code-wrapper"><pre class="language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F; type:记录对象保存的值的类型
+#define OBJ_STRING 0 &#x2F;&#x2F; 字符串
+#define OBJ_LIST 1 &#x2F;&#x2F; 列表
+#define OBJ_SET 2 &#x2F;&#x2F; 集合
+#define OBJ_ZSET 3 &#x2F;&#x2F; 有序集
+#define OBJ_HASH 4 &#x2F;&#x2F; 哈希表
+
+&#x2F;&#x2F; encoding:对象所保存的值的编码
+#define OBJ_ENCODING_RAW 0     &#x2F;* Raw representation *&#x2F;
+#define OBJ_ENCODING_INT 1     &#x2F;* Encoded as integer *&#x2F;
+#define OBJ_ENCODING_HT 2      &#x2F;* Encoded as hash table *&#x2F;
+#define OBJ_ENCODING_ZIPMAP 3  &#x2F;* 注意：版本2.6后不再使用. *&#x2F;
+#define OBJ_ENCODING_LINKEDLIST 4 &#x2F;* 注意：不再使用了，旧版本2.x中String的底层之一. *&#x2F;
+#define OBJ_ENCODING_ZIPLIST 5 &#x2F;* Encoded as ziplist *&#x2F;
+#define OBJ_ENCODING_INTSET 6  &#x2F;* Encoded as intset *&#x2F;
+#define OBJ_ENCODING_SKIPLIST 7  &#x2F;* Encoded as skiplist *&#x2F;
+#define OBJ_ENCODING_EMBSTR 8  &#x2F;* Embedded sds string encoding *&#x2F;
+#define OBJ_ENCODING_QUICKLIST 9 &#x2F;* Encoded as linked list of ziplists *&#x2F;
+#define OBJ_ENCODING_STREAM 10 &#x2F;* Encoded as a radix tree of listpacks *&#x2F;
+
+typedef struct redisObject &#123;
+    &#x2F;&#x2F; 对象所保存的值的类型
+    unsigned type:4;
+    &#x2F;&#x2F; 对象所保存的值的编码
+    unsigned encoding:4;
+    &#x2F;&#x2F; LRU - 24位, 记录最末一次访问时间（相对于lru_clock）; 或者 LFU（最少使用的数据：8位频率，16位访问时间）
+    unsigned lru:LRU_BITS; &#x2F;&#x2F; LRU_BITS: 24
+    &#x2F;&#x2F; 引用计数
+    int refcount;
+    &#x2F;&#x2F; 指向底层数据结构实例
+    void *ptr;
+
+&#125; robj;</code></pre></div>
+<p><img src="https://pdai.tech/images/db/redis/db-redis-object-2-2.png" alt="Redis6.0数据、编码类型与底层数据结构的映射关系"></p>
+<p><strong>Redis处理一条命令的过程</strong></p>
+<ol>
+<li>根据给定的key, 在数据库字典中查找和他对应的redisObject，没找到就返回NULL</li>
+<li>检查redisObject的type属性和执行命令所需的类型是否相符(比如说插入的值的类型是字符串)，否则返回错误</li>
+<li>根据redisObject encoding属性指定的编码，选择合适的操作函数来处理底层的数据结构</li>
+<li>返回操作结果值</li>
+</ol>
+<p><strong>对象共享与引用计数</strong></p>
+<p>redis一般把一些常见的值放到一个共享对象中，避免重复分配，但<strong>只能共享字符串对象</strong>。</p>
+<p>每个redisObject都有一个引用计数属性</p>
+<p>新创建一个对象时，refcount为1.对一个对象进行共享时refcount++, 使用完一个对象后refcount–.当refcount==0时，该redisObject将会被销毁</p>
+<h2 id="特点-v2">特点</h2>
+<h3 id="持久化">持久化</h3>
+<blockquote>
+<p>Redis关闭后按理来说数据会丢失，那么Redis如何实现持久化的？</p>
+</blockquote>
+<p><strong>Redis如何实现持久化？</strong></p>
+<p>三种方式: AOF日志、RDB快照、混合持久化方式</p>
+<h4 id="AOF日志">AOF日志</h4>
+<p>Redis执行完一条操作命令后就会降命令追加写入到一个文件中，Redis重启时，会读取该文件记录，逐一执行命令进行数据恢复。</p>
+<p><strong>先执行命令，再把数据写入日志</strong></p>
+<p>这样的方式可能带来以下的影响:</p>
+<ul>
+<li>避免额外开销：如果当前命令有语法错误，那么就无法执行，自然也就不会写入到日志中了。但如果先写入日志再执行，那就需要最后再根据执行情况来判断是否要删除日志中的记录</li>
+<li>数据可能丢失：在操作命令完成但还未开始写入日志时发生宕机，这时候就数据未写入日志中(但数据已经完成更新)，后续重启时无法恢复</li>
+</ul>
+<p><strong>AOF写回过程</strong></p>
+<p><img src="https://cdn.xiaolincoding.com//mysql/other/4eeef4dd1bedd2ffe0b84d4eaa0dbdea-20230309232249413.png" alt=""></p>
+<ol>
+<li>Redis执行完操作后，将命令追加到server.aof_buf缓冲区</li>
+<li>执行write系统调用，将缓冲区数据写入到AOF文件中(此时数据只是到了内核缓冲区，还需要等待内核将数据写入硬盘)</li>
+<li>内核缓冲区掘洞数据何时被写入硬盘</li>
+</ol>
+<p>对于<strong>缓冲区数据写入硬盘的时机</strong>，Redis提供三种策略(与fsync()有关)：</p>
+<ul>
+<li>Always：操作命令执行完后总是将AOF日志数据写回硬盘，性能开销大</li>
+<li>Everysec：每次操作命令执行完后，先将命令写入到AOF文件的内核缓冲区，然后每隔一秒将缓冲区的内容写回到硬盘。宕机时丢失1秒内的数据</li>
+<li>No：Redis不控制缓冲区数据写回到硬盘的时机</li>
+</ul>
+<p><strong>AOF文件过大后该怎么办: AOF重写机制</strong></p>
+<p>随着操作命令越来越多，AOF文件肯定越来越大，重启后则需要花费更多时间来恢复，因此Redis为了避免AOF文件越写越大，提供<strong>AOF重写机制</strong>。当AOF文件大小超过阈值时，就会由后台子进程<code>bgrewriteaof</code>通过AOF重写机制来压缩AOF文件</p>
+<p><strong>具体步骤</strong></p>
+<p>在重写时，读取当前数据库的所有键值对，将每一个键值对用一条命令记录到新的AOF文件中，然后替换旧的AOF文件。(也就是<strong>抹除历史</strong>，不会再保存以前更改的记录，只保存最新值的记录)。例如之前使用<code>set name zyl</code>与<code>set name PPLong</code> ，重写后就只有<code>set name PPLong</code>这一条指令。</p>
+<blockquote>
+<p><strong>为什么AOF重写机制采用子进程进行？不采用线程？</strong></p>
+<ul>
+<li>首先子进程进行AOF重写期间，主进程可以继续处理请求而不会被阻塞</li>
+<li>如果使用线程，多线程间会共享内存，则就存在线程间可见性的问题，修改共享内存数据时需要加锁来保证数据安全，从而会降低效率。由于父子进程是共享内存数据(只读方式)，当父子进程任意一方修改了共享内存，就会发生<code>写时复制——COW</code>, 于是父子进程就有了独立的数据副本，不用来保证数据安全。(这里写时复制COW属于OS的内容，对主进程会造成阻塞，可以先参考这篇文章理解<a target="_blank" rel="noopener" href="https://www.cnblogs.com/jelly12345/p/15223184.html">《Redis写时拷贝（COW）总结》</a>。简单理解为子进程最初与父进程共享页表，只有父亲、子进程要写入时子进程才会复制并开辟另一块内存空间)</li>
+</ul>
+</blockquote>
+<p><strong>AOF引发的数据不一致问题</strong></p>
+<p>如果在重写过程中，主进程修改了已经存在的key-value，此时这个key-value数据在子进程的内存数据就跟在主进程的内存数据不一致了，如何处理？</p>
+<p>为此Redis设置了一个<strong>AOF重写缓冲区</strong>：在重写AOF期间，每当Redis执行完一个写命令后，Redis会将该条命令同时写入到<strong>AOF缓冲区</strong>和<strong>AOF重写缓冲区</strong>。当子进程完成AOF重写后，向主进程发送完成信号，主进程接受到信号后，会将AOF重写缓冲区等待所有内容追加到新的AOF文件中，使得新旧两个AOF文件保存到数据库状态一致，将新的AOF文件覆盖旧的AOF文件。</p>
+<p><img src="https://cdn.xiaolincoding.com//mysql/other/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0ODI3Njc0,size_16,color_FFFFFF,t_70-20230309231944807.png" alt=""></p>
+<h4 id="RDB快照">RDB快照</h4>
+<p>实质：记录某一时刻的内存数据，恢复数据时效率更高，只需要把RDB文件读入内存即可</p>
+<p>生成RDB文件的两种命令：</p>
+<ul>
+<li>bgsave: 创建子进程生成RDB文件
+<ul>
+<li>redis可以通过配置文件自动执行bgsave，默认：</li>
+<li>900 秒之内，对数据库进行了至少 1 次修改；300 秒之内，对数据库进行了至少 10 次修改；60 秒之内，对数据库进行了至少 10000 次修改。</li>
+</ul>
+</li>
+<li>save: 主线程运行，生成RDB文件，会阻塞主线程</li>
+</ul>
+<p>每次保存的快照都是<strong>全量快照</strong>，即把内存中的所有数据都保存到磁盘中，因此保存频率不能太频繁</p>
+<p>bgsave过程中，主线程依然可以处理操作命令，关键还是使用写时复制技术COW。存在的问题式，发生COW后，RDB快照中保存的内容是之前的内存数据。如果系统恰好在RDB快照文件创建完毕后崩溃，则Redis将丢失主线程在快照期间修改的数据。</p>
+<h4 id="AOF-RDB混合持久化">AOF+RDB混合持久化</h4>
+<p>Redis conf下使用<code>aof-use-rdb-preamble yes</code></p>
+<p><strong>AOF日志重写混合持久化过程</strong></p>
+<ul>
+<li>fork出的子进程与主线程共享的<strong>内存数据</strong>以RDB方式写入到AOF文件中</li>
+<li>主线程在此期间处理的操作命令被记录在重写缓冲区中</li>
+<li>重写缓冲区的<strong>增量命令</strong>以AOF方式写入到AOF文件</li>
+</ul>
+<p>也就是前半部分用RDB格式的全量数据，后半部分是AOF格式的增量数据</p>
+<p><strong>优点</strong></p>
+<ul>
+<li>重启Redis时，前半部分(大部分数据)是RDB格式，加载速度快</li>
+<li>后半部分是AOF格式，尽可能减少数据的丢失</li>
+</ul>
+<h3 id="发布-订阅模式">发布/订阅模式</h3>
+<p>一种消息通信模式，两个角色发布者、订阅者</p>
+<p>SUBSCRIBE命令可以让客户端订阅任意数量的频道，每当有新消息发送到被订阅的频道时，信息就会发送给所有订阅该频道的客户端</p>
+<p>客户端执行订阅指令之后，就会进入订阅状态，之后就只能接收 <code>subscribe</code>、<code>psubscribe</code>、<code>unsubscribe</code>、<code>punsubscribe</code> 这四个命令。新订阅的客户端，是<strong>无法收到这个频道之前的消息</strong>，这是因为 Redis 并不会对发布的消息持久化的。</p>
+<p>Redis的两种发布/订阅模式</p>
+<ul>
+<li>基于频道Channel</li>
+<li>基于模式Pattern</li>
+</ul>
+<h4 id="基于频道Channel">基于频道Channel</h4>
+<p>发布者可以向指定的频道Channel发送消息，订阅者可以从订阅的多个Chanel中接收到此消息。发出去的消息不会被持久化</p>
+<div class="code-wrapper"><pre class="language-redis" data-language="redis"><code class="language-redis">&#x2F;&#x2F; 发布
+publish [target_channel] [message]
+&#x2F;&#x2F; 订阅(可一次订阅多个频道)
+subscribe [target_channel_1] [target_channel_2] ...</code></pre></div>
+<p>客户端subscribe，进入订阅状态后客户端可能收到3种类型的回复，回复由三部分组成</p>
+<table>
+<thead>
+<tr>
+<th>消息类型</th>
+<th>第二部分</th>
+<th>第三部分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>subscribe</td>
+<td>订阅成功的频道的名称</td>
+<td>当前客户端订阅的频道数目</td>
+</tr>
+<tr>
+<td>message</td>
+<td>产生消息的频道</td>
+<td>消息的内容</td>
+</tr>
+<tr>
+<td>unsubscribe</td>
+<td>频道名称</td>
+<td>当前客户端订阅的频道数目</td>
+</tr>
+</tbody>
+</table>
+<p><strong>底层: 如何实现</strong></p>
+<p>通过字典实现，key为正在被订阅的频道, value为一个链表，包含所有订阅了这个频道的客户端</p>
+<p>当调用 <code>publish channel message</code> 命令， 程序首先根据 channel 定位到字典的键， 然后将信息发送给字典值链表中的所有客户端。</p>
+<p><img src="https://pdai.tech/images/db/redis/db-redis-sub-3.svg" alt=""></p>
+<h4 id="基于模式Pattern">基于模式Pattern</h4>
+<p><img src="https://pdai.tech/images/db/redis/db-redis-sub-5.svg" alt=""></p>
+<p>当有信息发送到 tweet.shop.kindle 频道时， 信息除了发送给 clientX 和 clientY 之外， 还会发送给订阅 <a target="_blank" rel="noopener" href="http://tweet.shop">tweet.shop</a>.* 模式的 client123 和 client256</p>
+<p>通配符中?表示1个占位符，*表示任意个占位符(包括0)，?*表示1个以上占位符。</p>
+<p><strong>如何实现</strong></p>
+<p>使用链表，链表中的每个节点包含订阅该模式的客户端，pattern表示当前被订阅的模式</p>
+<p><img src="https://pdai.tech/images/db/redis/db-redis-sub-10.svg" alt=""></p>
 <h2 id="面试-v2">面试</h2>
 <h3 id="基础-v3">基础</h3>
 <h4 id="Redis到底是单线程还是多线程？">Redis到底是单线程还是多线程？</h4>
@@ -433,6 +628,8 @@
 <blockquote>
 <p>参考文章：</p>
 <p>🔗: <a target="_blank" rel="noopener" href="https://pdai.tech/">《Java全栈知识体系》</a></p>
+<p>🔗: <a target="_blank" rel="noopener" href="https://xiaolincoding.com/">《小林Coding》</a></p>
+<p>🔗:<a target="_blank" rel="noopener" href="https://www.cnblogs.com/jelly12345/p/15223184.html">《Redis写时拷贝（COW）总结》</a></p>
 </blockquote>
 
                                     </div>
@@ -596,7 +793,7 @@
         61&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        272.1k&nbsp 字
+        275.5k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
