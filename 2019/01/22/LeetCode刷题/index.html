@@ -193,6 +193,7 @@
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210923151745526.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210923152724999.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210923153242918.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230313112945260.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20201008231317959.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20201008231524846.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20201008232649376.png">
@@ -573,7 +574,7 @@
     
         <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      149k 字
+      151k 字
     </span>
         
 
@@ -582,7 +583,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      467 分钟
+      471 分钟
     </span>
                 
 
@@ -4976,6 +4977,67 @@ dp<span class="token punctuation">[</span><span class="token number">0</span><sp
        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
    <span class="token punctuation">&#125;</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210923153242918.png" srcset="/img/loading.gif" lazyload alt="image-20210923153242918"></p>
+<h2 id="337-打家劫舍III⭐⭐">337. 打家劫舍III⭐⭐</h2>
+<div class="code-tag-time">2023/3/13 14:53:00</div>
+<div class="code-tag-label code-tag-label-dp">DP</div>
+<div class="code-tag-label code-tag-label-dfs">DFS</div>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230313112945260.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="思考-v19">思考</h3>
+<ul>
+<li>打劫这一家 或者</li>
+</ul>
+<h3 id="1-DFS-超时">1. DFS(超时)</h3>
+<ul>
+<li>对当前元素，先看其父元素是否被偷窃，如果被偷，说明不能偷这个元素，并且**可以偷也可以不偷(不属于这次管)**该元素的子元素，从偷和不偷子元素的两种方案中原则最大的一种；</li>
+<li>如果父元素没有被偷，则<strong>可以偷这个元素，也可以不偷这个元素</strong></li>
+<li>最终取偷该元素和不偷该元素所带来的最大值</li>
+</ul>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">rob</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token function">robByFlag</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">robByFlag</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">,</span> <span class="token keyword">boolean</span> flag<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token comment">// can rob this house</span>
+        <span class="token keyword">int</span> count_1<span class="token punctuation">,</span> count_2<span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>flag<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            count_1 <span class="token operator">=</span><span class="token function">robByFlag</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">robByFlag</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token operator">+</span> root<span class="token punctuation">.</span>val<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+            count_1 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        
+        count_2 <span class="token operator">=</span> <span class="token function">robByFlag</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">robByFlag</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>count_1<span class="token punctuation">,</span> count_2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<h3 id="2-DP-DFS-转">2. DP+DFS(转)</h3>
+<p>f(o)表示选中当前节点 g(o)表示不选中当前节点</p>
+<ul>
+<li>当父元素o被选中时，o的左右孩子不能被选中，o被选中的情况下以o为根节点的树的最大权值之和为其左孩子的最大权值 + 右孩子的最大权值 $f(o) = g(l) + g® $</li>
+<li>o不被选中时，o的左右孩子能被选中，也可以不被选中，此时$ g(o) = max{f(l), g(l)} + max{f®, g®} $;</li>
+</ul>
+<p>所以可以用哈希表存取每个节点的f值和g值，用DFS遍历得到g和f中每个节点对应的值</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">TreeNode</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">></span></span> f <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">TreeNode</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">TreeNode</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">></span></span> g <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">TreeNode</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">rob</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">dfs</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword">return</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>f<span class="token punctuation">.</span><span class="token function">getOrDefault</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> g<span class="token punctuation">.</span><span class="token function">getOrDefault</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> node<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+         <span class="token keyword">if</span><span class="token punctuation">(</span>node <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+             <span class="token keyword">return</span><span class="token punctuation">;</span>
+         <span class="token punctuation">&#125;</span>
+         <span class="token function">dfs</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token function">dfs</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         f<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>node<span class="token punctuation">,</span> node<span class="token punctuation">.</span>val <span class="token operator">+</span> g<span class="token punctuation">.</span><span class="token function">getOrDefault</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>left<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> g<span class="token punctuation">.</span><span class="token function">getOrDefault</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>right<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         g<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>node<span class="token punctuation">,</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>f<span class="token punctuation">.</span><span class="token function">getOrDefault</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>left<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> g<span class="token punctuation">.</span><span class="token function">getOrDefault</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>left<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>f<span class="token punctuation">.</span><span class="token function">getOrDefault</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>right<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> g<span class="token punctuation">.</span><span class="token function">getOrDefault</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>right<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
 <h2 id="344-反转字符串-⭐">344. 反转字符串 ⭐</h2>
 <div class="code-tag-time">2021/4/6 09:46:00</div>
 <div class="code-tag-label code-tag-label-recursion">Recursion</div>
@@ -6755,7 +6817,7 @@ TAG : DFS \ BFS \ Hash \ InOrder Traversal</p>
 <div class="code-tag-time">2021/4/6 09:46:00</div>
 <div class="code-tag-label code-tag-label-binary">Binary</div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210906184027159.png" srcset="/img/loading.gif" lazyload alt="image-20210906184027159"></p>
-<h3 id="思考-v19">思考</h3>
+<h3 id="思考-v20">思考</h3>
 <p>有序 升序 、返回下标</p>
 <h3 id="1-二分查找">1. 二分查找</h3>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">search</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -6787,7 +6849,7 @@ TAG : DFS \ BFS \ Hash \ InOrder Traversal</p>
 <div class="code-tag-label code-tag-label-presum">Prefix Sum</div>
 <div class="code-tag-label code-tag-label-trietree">Trie Tree</div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220317164310236.png" srcset="/img/loading.gif" lazyload alt="image-20220317164310236"></p>
-<h3 id="思考-v20">思考</h3>
+<h3 id="思考-v21">思考</h3>
 <ol>
 <li>该单词又其他单词逐步添加一个字母组成（不是这样的单词就不是正确答案，可能有其他随意的单词 ），不一定是从一个单词开始添加起（吗？），且可能是乱序。 多个答案则返回<strong>字典序最小</strong>的。</li>
 <li>细节：一个字母后可以跟不同的字母，跟不同字母后最终长度可能变化。</li>
@@ -7058,7 +7120,7 @@ TAG : DFS \ BFS \ Hash \ InOrder Traversal</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331184331762.png" srcset="/img/loading.gif" lazyload alt="image-20220331184331762"></p>
 <h4 id="优化-v7">优化</h4>
 <p>考虑预处理 + 索引，不过意义不是很大感觉</p>
-<h4 id="思考-v21">思考</h4>
+<h4 id="思考-v22">思考</h4>
 <ul>
 <li>先把最简单的做出来再说难的吧</li>
 </ul>
@@ -7104,7 +7166,7 @@ TAG : DFS \ BFS \ Hash \ InOrder Traversal</p>
 <div class="code-tag-label code-tag-label-hash">Hash</div>
 <div class="code-tag-label code-tag-label-math">Math</div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210907152833634.png" srcset="/img/loading.gif" lazyload alt="image-20210907152833634"></p>
-<h3 id="思考-v22">思考</h3>
+<h3 id="思考-v23">思考</h3>
 <p>注意回答是<strong>还有</strong>几只兔子颜色相同，注意相同数字的索引集合数目，是否超过其本身数字，肯定是需要遍历全的，至少On复杂度</p>
 <h3 id="1-哈希表-计数清零">1. 哈希表+计数清零</h3>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">numRabbits</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> answers<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -7644,7 +7706,7 @@ O(n)的空间复杂度</p>
 </ul>
 <h2 id="1221-分割平衡字符串-⭐">1221. 分割平衡字符串 ⭐</h2>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210907150251964.png" srcset="/img/loading.gif" lazyload alt="image-20210907150251964"></p>
-<h3 id="思考-v23">思考</h3>
+<h3 id="思考-v24">思考</h3>
 <p>每个字符串都是平衡字符串，这里父子存在相同关系，想到分治</p>
 <p>列举不可能</p>
 <p>长度为偶数、排除二分法、分支感觉无法完成</p>
@@ -7788,7 +7850,7 @@ O(n)的空间复杂度</p>
 <div class="code-tag-time">2022/8/21 23:48:00</div>
 <div class="code-tag-label code-tag-label-foreach">Foreach</div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220821183032495.png" srcset="/img/loading.gif" lazyload alt="image-20220821183032495"></p>
-<h3 id="思考-v24">思考</h3>
+<h3 id="思考-v25">思考</h3>
 <ul>
 <li>输入是任何单词的前导连续子字符串</li>
 <li>一次遍历</li>
@@ -9079,7 +9141,7 @@ public:
         61&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        275.5k&nbsp 字
+        282.3k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

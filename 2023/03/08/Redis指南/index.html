@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://pdai.tech/images/db/redis/db-redis-sub-5.svg">
 <meta property="og:image" content="https://pdai.tech/images/db/redis/db-redis-sub-10.svg">
 <meta property="article:published_time" content="2023-03-08T07:53:16.000Z">
-<meta property="article:modified_time" content="2023-03-12T14:53:22.000Z">
+<meta property="article:modified_time" content="2023-03-13T01:59:05.000Z">
 <meta property="article:author" content="PPLong">
 <meta property="article:tag" content="SQL">
 <meta property="article:tag" content="NoSQL">
@@ -278,8 +278,8 @@
     
         <span class="post-meta">
   <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
-  <time datetime="2023-03-12 22:53" pubdate>
-    更新: 2023年3月12日晚上10点53分
+  <time datetime="2023-03-13 09:59" pubdate>
+    更新: 2023年3月13日上午9点59分
   </time>
 </span>
         
@@ -289,7 +289,7 @@
     
         <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6k 字
+      8.2k 字
     </span>
         
 
@@ -298,7 +298,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19 分钟
+      26 分钟
     </span>
                 
 
@@ -612,7 +612,7 @@ subscribe [target_channel_1] [target_channel_2] ...</code></pre></div>
 <p>使用链表，链表中的每个节点包含订阅该模式的客户端，pattern表示当前被订阅的模式</p>
 <p><img src="https://pdai.tech/images/db/redis/db-redis-sub-10.svg" alt=""></p>
 <h2 id="面试-v2">面试</h2>
-<h3 id="基础-v3">基础</h3>
+<h3 id="基础-v4">基础</h3>
 <h4 id="Redis到底是单线程还是多线程？">Redis到底是单线程还是多线程？</h4>
 <ul>
 <li>Redis6.0版本前的单线程指网络IO喝键值对读写是由一个线程完成的</li>
@@ -625,6 +625,101 @@ subscribe [target_channel_1] [target_channel_2] ...</code></pre></div>
 <li>基于多路复用机制提升Redis I/O利用率</li>
 <li>使用高效的数据存储结构：全局Hash表、跳表、压缩列表、链表等</li>
 </ol>
+<h3 id="进阶-v5">进阶</h3>
+<h4 id="缓存问题">缓存问题</h4>
+<h5 id="缓存穿透">缓存穿透</h5>
+<p>用户不断请求缓存和数据库中都没有的数据，而按规则如果从存储层查不到数据则不写入缓存，着将导致这个每次进行这个请求都要到数据库去查询，缓存失效(避免无效id查询对数据库的攻击)</p>
+<p>解决方案</p>
+<ul>
+<li>接口层增加校验，用户鉴权校验，查询id参数进行合理性校验</li>
+<li>对于缓存和数据库中都不存在的数据，将键值对记为Key-Null, 并设置缓存有效时间，防止攻击用户反复用一个id进行攻击</li>
+<li>使用<strong>布隆过滤器bloomfilter</strong>，快速判断某个元素是否存在于集合中</li>
+</ul>
+<h5 id="缓存击穿">缓存击穿</h5>
+<p>缓存中没有但数据库中有的数据(一般是缓存的数据缓存时间到期被删除), 这时如果并发用户特别多，同时缓存中没读到数据，就只能去数据库中读取，造成数据库压力过大。例如秒杀活动数据在缓存中失效，到点秒杀时，就会出现问题(属于缓存雪崩的子集)</p>
+<p>解决方案</p>
+<ul>
+<li>设置热点数据永不过期或延长过期时间</li>
+<li>重要的接口做好限流策略，防止用户恶意请求。进行降级准备，接口中某些服务不可用时，进行<strong>熔断</strong>，失败快速返回机制。</li>
+<li>加互斥锁</li>
+</ul>
+<h5 id="缓存雪崩">缓存雪崩</h5>
+<p>缓存中的数据大批量到达过期时间或Redis服务宕机，而此时查询数据量大，引起数据库压力过大。缓存击穿指并发查同一条数据，而雪崩是指很多数据都过期了</p>
+<p>解决方案</p>
+<ul>
+<li>缓存数据的过期时间随机设置，防止大批数据同时过期</li>
+<li>将热点数据均匀分布在不同的缓存数据库中</li>
+<li>延长过期时间</li>
+<li>互斥锁： 如果访问的的数据不在 Redis中，就加锁，保证同一时间只有一个请求构建缓存</li>
+</ul>
+<p>如果是Redis故障宕机而引发雪崩，可以用以下几种方案解决：</p>
+<ul>
+<li>服务熔断，暂停对应用业务对缓存服务的访问，直接返回错误</li>
+<li>请求限流，只允许少部分请求发送到数据库进行请求</li>
+<li>构建Redis集群</li>
+</ul>
+<h5 id="缓存污染">缓存污染</h5>
+<p>缓存中一些只会被访问一次或几次的数据，之后便不会被再次访问，但其仍然留在缓存中消耗空间，时间一长后，缓存被占满了，就需要额外的开销(也就是使用Redis淘汰判断策略淘汰数据)</p>
+<p><strong>缓存淘汰策略</strong></p>
+<ul>
+<li>不淘汰: noeviction。直接返回错误</li>
+<li>对设置了过期时间的数据进行淘汰
+<ul>
+<li>volatile-random</li>
+<li>volatile-ttl，越早过期的数据优先被选择</li>
+<li>Volatile-lru，最近最少使用的原则(时间)。</li>
+<li>Redis会记录每个数据的最近一次被访问的时间戳。在Redis在决定淘汰的数据时，第一次会随机选出 N 个数据，把它们作为一个候选集合。接下来，Redis 会比较这 N 个数据的 lru 字段，把 lru 字段值最小的数据从缓存中淘汰出去</li>
+<li>volatile-lfu，最近不经常使用(频数)。Redis 会在候选集合中，根据数据 lru 字段的后 8bit 选择访问次数最少的数据进行淘汰。当访问次数相同时，再根据 lru 字段的前 16bit 值大小，选择访问时间最久远的数据进行淘汰。</li>
+</ul>
+</li>
+<li>全部数据进行淘汰
+<ul>
+<li>allkeys-random</li>
+<li>allkeys-lru</li>
+<li>allkeys=lfu</li>
+</ul>
+</li>
+</ul>
+<h4 id="数据库和缓存一致性">数据库和缓存一致性</h4>
+<p>使用场景： Redis作为缓冲，Mysql等作为数据库</p>
+<p>不管先写Mysql再更新缓存还是先更新缓存再更写Mysql都容易出现数据不一致的情况。例如：</p>
+<ol>
+<li>先删除缓存，正准备写数据库时，另一个线程来读取，发现缓存为空再读取数据库，此时就读到脏数据</li>
+<li>先写库，正准备更新缓存，此时线程宕机了，没有删除掉缓存，也会出现不一致的情况</li>
+</ol>
+<p><strong>更新缓存的四种设计模式：</strong></p>
+<ul>
+<li>Cache aside</li>
+<li>Read through</li>
+<li>Write through</li>
+<li>Write back</li>
+</ul>
+<h5 id="Cache-Aside-旁路策略">Cache Aside-旁路策略</h5>
+<p>读之前先读缓存，缓存没有则读取数据库，取出数据后放入缓存中，同时返回响应；写时先更新数据库，再<strong>删除缓存(让缓存失效)</strong></p>
+<p><strong>不管是先删除缓存再更新数据库还是先更新数据库再删除缓存都会造成混存和数据库数据不一致的问题！</strong></p>
+<p>但是如果是先更新数据库再更新缓存，考虑以下情况:</p>
+<ol>
+<li>请求A要求查询数据库一个字段值(缓存中不存在)</li>
+<li>查到数据但未写入缓存时，B请求更新该数据，使其自增，更新数据库的值，并清空缓存值</li>
+<li>请求A将读到的旧值写入缓存中</li>
+</ol>
+<p>此时仍然造成了数据库与缓存不一致的问题，但是这种概率是非常小的。因为缓存的写入远快于数据库的写入，实际中很难出现请求B更新了数据库并且删除了缓存，请求A才更新完缓存的情况。可以姑且理解为执行完数据库操作后只要极少的时间就执行完缓存更新了。</p>
+<p>Cache Aside适合读多写少的场景，不适合写多的场景，因为写入比较频繁时，缓存的数据将会被频繁地清理</p>
+<blockquote>
+<p><strong>考虑这样一个问题：如果更新数据库操作成功，但删除缓存操作失败，那此时缓存中还是旧数据，该怎么办？</strong></p>
+<p>兜底策略： 设置缓存数据过期时间,但这样在数据未过期的一段时间内，数据都是脏的</p>
+</blockquote>
+<p><strong>如何保证写数据库和删除Redis缓存都成功？</strong></p>
+<ul>
+<li>重试机制(异步)</li>
+<li>订阅Mysql binlog(异步)</li>
+</ul>
+<h5 id="重试机制">重试机制</h5>
+<p>使用消息队列，将删除缓存的操作加入到消息队列，由消费者来操作数据。</p>
+<p>如果应用删除缓存失败，就从消息队列中重新读取数据，然后再次删除，反复重试。成功则从消息队列中移除</p>
+<p><strong>订阅Mysql binlog，再删除缓存</strong></p>
+<p>由于Mysql操作一条命令成功后会产生一条日志，记录在binlog中，所以可以通过订阅这个日志文件，拿到要操作的数据，再执行缓存删除，比如阿里巴巴开源中间件Canal</p>
+<p>Canal 模拟 MySQL 主从复制的交互协议，把自己伪装成一个 MySQL 的从节点，向 MySQL 主节点发送 dump 请求，MySQL 收到请求后，就会开始推送 Binlog 给 Canal，Canal 解析 Binlog 字节流之后，转换为便于读取的结构化数据，供下游程序订阅使用。</p>
 <blockquote>
 <p>参考文章：</p>
 <p>🔗: <a target="_blank" rel="noopener" href="https://pdai.tech/">《Java全栈知识体系》</a></p>
@@ -793,7 +888,7 @@ subscribe [target_channel_1] [target_channel_2] ...</code></pre></div>
         61&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        275.5k&nbsp 字
+        282.3k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
