@@ -72,6 +72,7 @@
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210402092118490.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210310221622240.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210310221742708.png">
+<meta property="og:image" content="https://camo.githubusercontent.com/66ea435b7b3d6426bb30bec91500f4519664fd70386e4dad88f2083f75345e04/68747470733a2f2f63646e2e7869616f6c696e636f64696e672e636f6d2f67682f7869616f6c696e636f6465722f496d616765486f737434406d61696e2f2545372542442539312545372542422539432f68747470322f2545352542382541372545362541302542432545352542432538462e706e67">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210310224715407.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331203958930.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210331211800303.png">
@@ -339,7 +340,7 @@
     
         <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      9.3k 字
+      11k 字
     </span>
         
 
@@ -348,7 +349,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      29 分钟
+      36 分钟
     </span>
                 
 
@@ -649,41 +650,65 @@
 <li>目前一般使用HTTP1.1</li>
 <li>解决对同一域名请求次数过多(浏览器会限制一段时间内对同一域名到请求数)：
 <ul>
-<li>管线技术: 一个连接可以一次发多个请求但响应必须要按顺序接收 (不太常用)</li>
+<li>管线技术: 一个连接可以一次发多个请求<strong>但响应必须要按顺序接收</strong> (不太常用)</li>
 <li>精灵图：多个元素小图整合到一张大图发给客户端然后再裁剪</li>
 <li>Data URL: 经过Base64编码以字符串方式表示</li>
 <li>域名分片: 同时请求多个域名</li>
 </ul>
 </li>
 </ul>
-<h3 id="Http2-0-与-Http-1-x的区别">Http2.0 与 Http 1.x的区别</h3>
+<h3 id="Http2-0">Http2.0</h3>
 <h4 id="多路复用">多路复用</h4>
 <p>​	多路复用技术：<strong>解决HTTP1.1队头阻塞的问题</strong> 单连接多资源的方式，减少服务端的链接压力,内存占用更少,连接吞吐量更大；由于减少TCP 慢启动时间，提高传输的速度. 允许单一HTTP 2 连接同时发起多重的请求 - 响应消息</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210310221742708.png" srcset="/img/loading.gif" lazyload alt="image-20210310221742708"></p>
-<p><strong>二进制分帧</strong></p>
-<p>在二进制分帧层中， HTTP/2 会将所有传输的信息分割为帧（frame）,并对它们采用二进制格式的编码 ，其中 首部信息会被封装到 HEADER frame，而相应的 Request Body 则封装到 DATA frame 里面。这也就类似TCP数据包的结构了，每个HTTP2包具有标识该流的ID，所以即使请求是不按序的，也可以根据流的ID来进行顺序组合</p>
+<p><strong>多个Stream复用一条TCP连接达到并发效果</strong></p>
+<ul>
+<li>一个TCP连接包含多个Stream，Stream中包含多个Message,</li>
+<li>Message对应HTTP1.x的一个请求或响应。Message包含多个Frame</li>
+<li>Frame是HTTP2的最小单位，以二进制压缩格式放在HTTP1.x的内容， 一条HTTP消息可由多个Frame组成(合称为一条Message)。<strong>一条Frame可以由多个TCP报文组成</strong></li>
+</ul>
+<p>在 HTTP/2 连接上，<strong>不同 Stream 的帧是可以乱序发送的（因此可以并发不同的 Stream ）</strong>，因为每个帧的头部会携带 Stream ID 信息，所以接收端可以通过 Stream ID 有序组装成 HTTP 消息，而<strong>同一 Stream 内部的帧必须是严格有序的</strong>。</p>
+<h4 id="二进制分帧"><strong>二进制分帧</strong></h4>
+<p><img src="https://camo.githubusercontent.com/66ea435b7b3d6426bb30bec91500f4519664fd70386e4dad88f2083f75345e04/68747470733a2f2f63646e2e7869616f6c696e636f64696e672e636f6d2f67682f7869616f6c696e636f6465722f496d616765486f737434406d61696e2f2545372542442539312545372542422539432f68747470322f2545352542382541372545362541302542432545352542432538462e706e67" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>在二进制分帧层中， HTTP/2 会将所有传输的信息分割为帧（frame）,并对它们采用二进制格式的编码 ，其中 首部信息会被封装到 HEADER frame，而相应的 Request Body 则封装到 DATA frame 里面。这也就类似TCP数据包的结构了，每个HTTP2包具有标识该Stream的ID，标识该 Frame 属于哪个 Stream.所以即使请求是不按序的，也可以根据相同ID的流来进行顺序组合</p>
 <p>HTTP 性能优化的<strong>关键并不在于高带宽，而是低延迟</strong>。TCP 连接会随着时间进行自我「调谐」，起初会限制连接的最大速度，如果数据成功传输，会随着时间的推移提高传输的速度。这种调谐则被称为 TCP 慢启动。由于这种原因，让原本就具有突发性和短时性的 HTTP 连接变的十分低效。</p>
 <h4 id="首部压缩">首部压缩</h4>
 <p>​	 HTTP/1 中，HTTP 请求和响应都是由「<strong>状态行</strong>、<strong>请求 / 响应头部</strong>、<strong>消息主体</strong>」三部分组成。一般而言，消息主体都会经过 gzip 压缩，或者本身传输的就是压缩过后的<strong>二进制</strong>文件（例如图片、音频），但状态行和头部却没有经过任何压缩，直接以纯文本传输。</p>
 <p>随着 Web 功能越来越复杂，每个页面产生的请求数也越来越多，导致消耗在头部的流量越来越多，尤其是每次都要传输 UserAgent、Cookie 这类不会频繁变动的内容，完全是一种浪费。</p>
 <p>我们再用通俗的语言解释下，压缩的原理。头部压缩需要在支持 HTTP/2 的浏览器和服务端之间：</p>
 <ul>
-<li>维护一份相同的静态字典（Static Table），包含常见的头部名称，以及特别常见的头部名称与值的组合；</li>
-<li>维护一份相同的动态字典（Dynamic Table），可以动态的添加内容；</li>
-<li>支持基于静态哈夫曼码表的哈夫曼编码（Huffman Coding）；</li>
+<li>维护一份相同的静态字典（Static Table），包含常见的头部名称，以及特别常见的头部名称与值的组合(61种)；</li>
+<li>维护一份相同的动态字典（Dynamic Table），可以动态的添加内容。使得动态表生效有一个前提：<strong>必须同一个连接上，重复传输完全相同的 HTTP 头部</strong></li>
+<li>支持基于静态哈夫曼码表的<strong>哈夫曼编码</strong>（Huffman Coding） (包含ASCII码表)；</li>
 </ul>
 <p>静态字典的作用有两个：</p>
 <p>1）对于完全匹配的头部键值对，例如 “:method :GET”，可以直接使用一个字符表示；</p>
 <p>2）对于头部名称可以匹配的键值对，例如 “cookie :xxxxxxx”，可以将名称使用一个字符表示。</p>
-<p>HTTP/2 中的静态字典如下（以下只截取了部分，完整表格在这里）：</p>
+<p>HTTP/2 中的静态字典如下（以下只截取了部分）：</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210310224715407.png" srcset="/img/loading.gif" lazyload alt="image-20210310224715407"></p>
 <p>浏览器和服务端都可以向动态字典中添加键值对，之后这个键值对就可以使用一个字符表示了。需要注意的是，动态字典上下文有关，需要为每个 HTTP/2 连接维护不同的字典。在传输过程中使用，使用字符代替键值对大大减少传输的数据量。</p>
 <h4 id="服务器推送"><strong>服务器推送</strong></h4>
 <p>服务端推送是一种在客户端请求之前发送数据的机制。当代网页使用了许多资源:HTML、样式表、脚本、图片等等。在HTTP/1.x中这些资源每一个都必须明确地请求。这可能是一个很慢的过程。浏览器从获取HTML开始，然后在它解析和评估页面的时候，增量地获取更多的资源。因为服务器必须等待浏览器做每一个请求，网络经常是空闲的和未充分使用的。</p>
 <p>为了改善延迟，HTTP/2引入了server push，它允许服务端推送资源给浏览器，在浏览器明确地请求之前。<strong>一个服务器经常知道一个页面需要很多附加资源，在它响应浏览器第一个请求的时候，可以开始推送这些资源</strong>。这允许服务端去完全充分地利用一个可能空闲的网络，改善页面加载时间。</p>
+<p><strong>需要注意的是，这和WebSocket的全双工协议是不同的，HTTP2的推送还属于是被动推送(资源文件)。</strong></p>
 <h3 id="HTTP3-0">HTTP3.0</h3>
-<p>HTTP2还是存在队头阻塞(在TCP层面，数据包丢失会重传)，所以要<strong>摆脱传统TCP</strong></p>
-<p><strong>将TCP和TLS握手过程整合</strong>。<strong>在UDP基础</strong>上建立了新的传输层协议 <strong>QUIC</strong>，数据帧移动到QUIC里，在传输层就有了数据帧。QUIC帧-&gt;QUIC数据包，又会加上Connection ID区分连接</p>
+<h4 id="基于TCP而存在的问题">基于TCP而存在的问题</h4>
+<blockquote>
+<p><strong>HTTP2还是存在队头阻塞(在TCP层面，数据包丢失会重传)</strong></p>
+<p>因为HTTP/2仍然基于TCP传输数据，TCP层必须保证收到的字节数据是完整且连续的，当前一个包数据没有到达后或丢包后，后续的包数据智能放在内核缓冲区中，该TCP连接中的所有请求都会被阻塞。只有等到该包数据到达时，HTTP/2应用层才能从内核中拿到数据。例如Stream 2 有个TCP包丢失，那么Stream 3 Stream 4都会被阻塞，所以要<strong>摆脱传统TCP</strong></p>
+</blockquote>
+<p>并且TLS和TCP握手时存在3个RTT，且由于TCP拥塞控制的慢启动过程，刚开始的TCP连接很慢。</p>
+<p>并且当网络场景切换时，例如WiFi变成4G或重新更换WiFi节点，都会引发TLS与TCP重新连接。所以</p>
+<p><strong>将TCP和TLS握手过程整合</strong>。<strong>在UDP基础</strong>上建立了新的<strong>应用层协议</strong> <strong>QUIC</strong>，数据帧移动到QUIC里，在传输层就有了数据帧。QUIC帧-&gt;QUIC数据包，又会加上Connection</p>
+<p>ID区分连接</p>
+<h4 id="无队头阻塞">无队头阻塞</h4>
+<p>UDP不会保证数据包可靠性，由QUIC协议保证数据包可靠性，每个QUIC数据包都有唯一序号表示，如果流的一个数据包丢失了，即使该流的其他数据包到达，也无法被HTTP3读取，直到QUIC重传丢失的报文。而不会影响其他流。(分Stream ID以及Unique ID)</p>
+<h4 id="更快连接">更快连接</h4>
+<p><strong>合并TLS</strong></p>
+<p>基于HTTP的TCP和TLS是分层的，一个是内核实现的传输层，一个是OpenSSL实现的表示层，所以要分批。</p>
+<p>而HTP3在传输数据前需要QUIC协议握手来确认连接ID(UDP没有握手环节), 整个过程只需要1RTT。这是因为QUIC内部包含TLS，会在自己的帧内携带TLS的记录(并且使用TLS1.3)，因此1个RTT可同时完成建立连接和密钥连接</p>
+<p><strong>连接迁移</strong></p>
+<p>并且HTTP3没有基于TCP四元组来确定连接的，而是使用连接ID来标记两个通信端点，所以网络变化后，只要保持上下文信息(TLS密钥、连接ID)，就可以复用原连接。</p>
 <h2 id="Https">Https</h2>
 <p>两大法宝</p>
 <p>SSL  Secure Sockets Layer 安全套接层 使用公匙加密  SSL证书</p>
@@ -763,16 +788,43 @@
 <p>接收方收到0窗口通知时，开启计时器，超时则发送零窗口的探测报文(携带1字节数据)，如果对方发来的报文创口也是零，则重置计时器继续等待，如果不是零则打破僵局</p>
 <p><strong>既然服务器的窗口为0，那为什么还能接受发送方发来的探测报文段？</strong></p>
 <p>规定接受 0窗口探测报文段、确认报文段、携带紧急数据的报文段</p>
-<p><strong>三次握手</strong></p>
-<p><strong>四次挥手</strong></p>
-<p><strong>为什么一定要三握四挥？</strong></p>
+<h3 id="三次握手-v2"><strong>三次握手</strong></h3>
+<p><strong>为什么不用两次握手</strong></p>
+<ul>
+<li>避免历史连接，防止旧的连接初始化了连接而造成混乱(Seq Num混乱) (<strong>最主要原因</strong>)</li>
+<li>同步双方初始化序列号，确保可靠传输</li>
+<li>避免资源浪费。客户端没有收到ACK报文，会重新发送SYN，服务端每收到一个SYN就会主动建立一个连接。</li>
+</ul>
+<p><strong>如果第三次握手发来的ACK包丢失掉，会出现什么</strong></p>
+<p>此后服务端仍然处于SYN-RCVD状态等待接受该ACK包，客户端却开始发送数据了。服务端能正常接受吗？两种方案</p>
+<ol>
+<li>多数情况，客户端进入ESTABLISHED状态会立即发送数据，发送第一个数据包时会携带ACK确认序号，服务端在收到这个数据包时，通过包内的ACK确认号正常进入ESTABLISHED状态</li>
+<li>如果客户端暂时不发数据，则服务端超时后发送SYN-ACK重传报文</li>
+</ol>
+<h4 id="四次挥手-v2"><strong>四次挥手</strong></h4>
+<p><strong>为什么一定要四次挥？</strong></p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331202037703.png" srcset="/img/loading.gif" lazyload alt="image-20220331202037703"></p>
-<p>四次挥手，是因为</p>
+<ul>
+<li>关闭连接时，客户端发送ACK-FIN表示我不再发送了，但你还可以继续发完</li>
+<li>服务端说我收到了，等我把我发的发完我也不会继续等你了</li>
+<li>服务端继续发送要发的数据，发完后服务端给客户端发送ACK-FIN表示我把我想发的也发完了</li>
+<li>客户端收到该FIN，给服务端说OK，那我们就关闭连接吧</li>
+<li>客户端等待2MSL</li>
+</ul>
 <p>为什么这里Server的FIN 和 ACK分两次发送呢？因为我们可以得知Client要关闭时，再发送最后一点数据给Client</p>
-<p>为什么要有最后一次的挥手，如果没有这次挥手，则服务端给客户端发送的FIN报文就不一定能接收到，客户端就认为服务端可能还会有数据要发。</p>
+<p>第二次挥手包丢失，重传的是FIN报文还是ACK报文？ 客户端重发FIN，因为<strong>ACK报文是不会被重传的</strong></p>
+<p>为什么要有最后一次的挥手？ 如果没有这次挥手，则服务端给客户端发送的FIN报文就不一定能接收到，<strong>客户端就认为服务端可能还会有数据要发从而保持连接</strong>。</p>
 <p><strong>为什么会有2MSL？他有什么作用</strong></p>
-<p>第一，为了保证A发送的最后一个ACK报文能够到达B。这个ACK报文段有可能丢失，因而使处在LAST-ACK状态的B收不到对已发送的FIN+ACK报文段的确认。B会超时重传这个FIN+ACK报文段，而A就能在2MSL时间内收到这个重传的FIN+ACK报文段。如果A在TIME-WAIT状态不等待一段时间，而是在发送完ACK报文段后就立即释放连接，就无法收到B重传的FIN+ACK报文段，因而也不会再发送一次确认报文段。这样，B就无法按照正常的步骤进入CLOSED状态。<br>
-第二，A在发送完ACK报文段后，再经过2MSL时间，就可以使本连接持续的时间所产生的所有报文段都从网络中消失。这样就可以使下一个新的连接中不会出现这种旧的连接请求的报文段</p>
+<ol>
+<li>保证双方正常关闭连接</li>
+<li>防止历史连接延迟的包被新连接所接受</li>
+</ol>
+<p>MSL： Maximum Segment Lifetime 最大报文生存时间，任何报文在网络上存在的最长时间</p>
+<ul>
+<li>如果客户端不等待，第四次挥手后直接关闭自己连接，此时对服务端而言，如果客户端发来的ACK包丢失，则它不知道客户端是否正常收到第三次挥手时服务端发来的FIN-ACK包，所以就不确定客户端是否已经关闭。</li>
+<li>如果客户端等待2MSL，(服务端在发送第三次挥手时也会开启计时)，如果第四次挥手ACK丢失后，服务端没接收到，会认为客户端没有接收到自己发来的FIN-ACK报文，则会重传FIN-ACK报文，客户端收到该报文后则会重置2MSL计时器，并发送第四次挥手的ACK报文。如果发送完该报文后且2MSL后客户端没接收到服务端重发的FIN-ACK报文，说明服务端已经接收到最后一次ACK包，客户端知晓服务端已经关闭，所以此时客户端可以关闭</li>
+<li>另外也能避免第二次挥手后服务端继续发来的数据延迟到达而造成数据混乱情况(如果客户端不等待2MSL，直接断开连接，则如果断开连接后又与相同服务端建立连接，在发新数据的时候，上一次旧连接中第二次挥手后服务端发的数据包延迟到达，且序号刚好符合窗口要求，这时候则会被客户端直接接受，而不会被丢弃，从而造成混乱)</li>
+</ul>
 <h2 id="UDP">UDP</h2>
 <p>User Datagram Protocol</p>
 <p>无连接，可随时发送数据、网络开销小 速度快 、支持一对一 一对多(广播、多播(指定)) 多对一、报文直接打包、首部开销小 8 字节</p>
@@ -879,6 +931,13 @@
 <ul>
 <li></li>
 </ul>
+<h3 id="UDP、TCP、端口号">UDP、TCP、端口号</h3>
+<p><strong>TCP、UDP可以同时绑定相同端口吗</strong></p>
+<p>能，主机收到数据包后会拆解IP报头获得协议，如果是TCP则交给绑定该TCP端口的应用程序处理 UDP交给绑定了UDP该端口的应用程序处理</p>
+<p><strong>多个TCP进程能绑定同一个端口吗</strong></p>
+<p>不能。TCP 服务进程需要绑定一个 IP 地址和一个端口，然后就监听在这个地址和端口上，等待客户端连接的到来(所以要主机上的IP地址和端口有一个不相同才能绑定)</p>
+<p><strong>客户端同一个端口能连接不同服务器的TCP服务吗</strong></p>
+<p>能。在客户端执行 connect 函数的时候，只要客户端连接的服务器不是同一个，内核允许端口重复使用。</p>
 <blockquote>
 <p>参考文章：</p>
 <p>🔗 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1KY411x7Jp/">HTTPS是什么？加密原理和证书。SSL/TLS握手过程</a></p>
@@ -1047,7 +1106,7 @@
         61&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        284k&nbsp 字
+        289.9k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

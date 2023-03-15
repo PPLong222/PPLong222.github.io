@@ -43,10 +43,14 @@ show databases、  create database  xxx  、show create  database xxx(查询名�
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211005161627866.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211006164521956.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211006165928954.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/mysql/sql%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/mysql%E6%9F%A5%E8%AF%A2%E6%B5%81%E7%A8%8B.png">
 <meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4@main/mysql/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/ReadView.drawio.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211009204408842.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230313190227731.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230313191226596.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4@main/mysql/innodb/bufferpool%E5%86%85%E5%AE%B9.drawio.png?image_process=watermark,text_5YWs5LyX5Y-377ya5bCP5p6XY29kaW5n,type_ZnpsdHpoaw,x_10,y_10,g_se,size_20,color_0000CD,t_70,fill_0">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/mysql/how_update/innodb_flush_log_at_trx_commit.drawio.png?image_process=watermark,text_5YWs5LyX5Y-377ya5bCP5p6XY29kaW5n,type_ZnpsdHpoaw,x_10,y_10,g_se,size_20,color_0000CD,t_70,fill_0">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/mysql/how_update/binlogcache.drawio.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211010220425178.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211020103933579.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211020105635279.png">
@@ -60,7 +64,7 @@ show databases、  create database  xxx  、show create  database xxx(查询名�
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211023211744223.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211023211734818.png">
 <meta property="article:published_time" content="2019-07-22T12:05:07.000Z">
-<meta property="article:modified_time" content="2023-03-14T03:42:30.000Z">
+<meta property="article:modified_time" content="2023-03-14T11:21:27.000Z">
 <meta property="article:author" content="PPLong">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Study">
@@ -303,8 +307,8 @@ show databases、  create database  xxx  、show create  database xxx(查询名�
     
         <span class="post-meta">
   <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
-  <time datetime="2023-03-14 11:42" pubdate>
-    更新: 2023年3月14日中午11点42分
+  <time datetime="2023-03-14 19:21" pubdate>
+    更新: 2023年3月14日晚上7点21分
   </time>
 </span>
         
@@ -314,7 +318,7 @@ show databases、  create database  xxx  、show create  database xxx(查询名�
     
         <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      33k 字
+      42k 字
     </span>
         
 
@@ -323,7 +327,7 @@ show databases、  create database  xxx  、show create  database xxx(查询名�
       <i class="iconfont icon-clock-fill"></i>
       
       
-      105 分钟
+      130 分钟
     </span>
                 
 
@@ -984,6 +988,58 @@ select id,name from Dep where id &lt; 10 union select levelDes,id from level whe
 
 </code></pre></div>
 <h2 id="基础进阶">基础进阶</h2>
+<h3 id="MySQL执行流程">MySQL执行流程</h3>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/mysql/sql%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/mysql%E6%9F%A5%E8%AF%A2%E6%B5%81%E7%A8%8B.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>主要分为两层: Server层和存储引擎层</p>
+<ul>
+<li>Server层: 建立连接、分析、执行SQL</li>
+<li>存储引擎层: 数据的存储和提取，有InnoDB、MyISAM等存储引擎。不同的存储引擎共用一个Server层</li>
+</ul>
+<h4 id="连接器">连接器</h4>
+<p>提供MySQL连接服务，MySQL连接基于TCP进行传输。连接后，后续该用户在此连接的任何操作，都会<strong>基于连接开始时读到的权限</strong>进行权限逻辑的判断</p>
+<p>查看当前连接数 show processlist;Command为Sleep表示当前是一个空闲连接</p>
+<div class="code-wrapper"><pre class="language-none"><code class="language-none">mysql&gt; show processlist;
++-------+-----------------+----------------------+---------+---------+---------+------------------------+------------------+
+| Id    | User            | Host                 | db      | Command | Time    | State                  | Info             |
++-------+-----------------+----------------------+---------+---------+---------+------------------------+------------------+
+|     5 | event_scheduler | localhost            | NULL    | Daemon  | 5956243 | Waiting on empty queue | NULL             |
+| 10257 | root            | 115.156.141.98:56720 | study   | Query   |       0 | init                   | show processlist |
+| 10262 | root            | 114.115.150.92:37304 | pp_live | Sleep   |    1521 |                        | NULL             |
+| 10263 | root            | 114.115.150.92:37308 | pp_live | Sleep   |    1465 |                        | NULL             |
+| 10264 | root            | 114.115.150.92:37320 | pp_live | Sleep   |    1240 |                        | NULL             |
+| 10265 | root            | 114.115.150.92:37324 | pp_live | Sleep   |    1192 |                        | NULL             |</code></pre></div>
+<p>空闲连接默认最大等待时间时8h，超过后会被断开。也可以手动断开连接: <code>kill connection +id</code></p>
+<p>MySQL连接也是与HTTP相似，有长连接和短连接之分，一般使用长连接(多次SQL执行返回只用一次TCP连接), 但使用长连接可能造成占用内存过多</p>
+<h4 id="缓存查询">缓存查询</h4>
+<p>连接完成后就可以发送SQL语句，此时解析SQL语句的第一个字段</p>
+<ul>
+<li>如果是select，代表是查询语句，则MySQL会先去查询缓存Query Cache中查找缓存数据，看之前是否执行过该查询命令，以key value形式保存在内存中，key为SQL查询语句，value为SQL语句查询结果。但是这个缓存命中率很低，因为<strong>只要表中有更新，那么这个表的查询缓存就会被清空</strong>(MySQL8.0已经删除掉查询缓存)</li>
+</ul>
+<h4 id="解析SQL">解析SQL</h4>
+<p><strong>词法分析</strong></p>
+<p>根据输入的SQL命令，提取出SQL关键字，构建SQL语法树</p>
+<p><strong>语法分析</strong></p>
+<p>根据词法分析的结果，语法解析器根据语法规则判断这个SQL语句是否满足MySQL语法</p>
+<h4 id="执行SQL">执行SQL</h4>
+<ul>
+<li>prepare预处理</li>
+<li>optimize优化</li>
+<li>execute执行</li>
+</ul>
+<p><strong>预处理</strong></p>
+<ul>
+<li>检查SQL查询语句中的表或字段是否存在</li>
+<li>扩展select * 中的*符号为表中的所有列</li>
+</ul>
+<p><strong>优化</strong></p>
+<p>是否使用索引查询，用哪个索引查询</p>
+<p><strong>执行</strong></p>
+<p>三种方式</p>
+<ul>
+<li>主键索引查询</li>
+<li>全表扫描</li>
+<li>索引下推：对联合索引的查询避免了回表操作</li>
+</ul>
 <h3 id="InnoDB的MVCC实现机制">InnoDB的MVCC实现机制</h3>
 <p>目的：为了提高数据库并发性能，用更好的方式去处理读-写冲突，做到即使有读写冲突时，也能做到不加锁，非阻塞并发读</p>
 <p>MVCC：Multi-Version Concurrency Control，多版本并发控制。实现对数据的并发访问</p>
@@ -1453,6 +1509,159 @@ insert into t1 values(27, name, age); # 6</code></pre></div>
 </ul>
 <h4 id="Insert加隐式锁">Insert加隐式锁</h4>
 <p>Insert 语句在<strong>正常执行</strong>时是不会生成锁结构的，它是靠聚簇索引记录自带的 trx_id 隐藏列来作为<strong>隐式锁</strong>来保护记录的</p>
+<h3 id="日志">日志</h3>
+<h4 id="Buffer-Pool">Buffer Pool</h4>
+<p>更新一条记录时，先从磁盘读取该记录，然后在内存中修改改记录，那么是直接写回到磁盘还是先保存到缓存中比较好？显然是后者</p>
+<ul>
+<li>读取数据，如果数据在BufferPool中，则直接读取BP的数据</li>
+<li>修改数据时，数据在BP中，直接修改BP数据所在的页，然后将其页设置为脏页(该页的内存数据和磁盘上的数据已经不一致)，后台线程选择合适的时机将脏页写入磁盘</li>
+</ul>
+<p>由于InnoDB把存储的数据划分为若干页 ，以页为磁盘和内存交互的基本单位，默认大小为16KB</p>
+<p>在MySQL启动时，InnoDB会为BP申请一片连续的内存空间，然后按照16KB划分许多个页</p>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4@main/mysql/innodb/bufferpool%E5%86%85%E5%AE%B9.drawio.png?image_process=watermark,text_5YWs5LyX5Y-377ya5bCP5p6XY29kaW5n,type_ZnpsdHpoaw,x_10,y_10,g_se,size_20,color_0000CD,t_70,fill_0" srcset="/img/loading.gif" lazyload alt=""></p>
+<h4 id="undo-log">undo log</h4>
+<p>用于撤销回退的日志，每当InnoDB对一套记录进行操作时，只要把回顾时所需要的信息记录到undo log里即可</p>
+<blockquote>
+<p><strong>undo log 是如何刷盘（持久化到磁盘）的？</strong></p>
+<p>undo log 和数据页的刷盘策略是一样的，都需要通过 redo log 保证持久化。</p>
+<p>buffer pool 中有 undo 页，对 undo 页的修改也都会记录到 redo log。redo log 会每秒刷盘，提交事务时也会刷盘，数据页和 undo 页都是靠这个机制保证持久化的。</p>
+</blockquote>
+<h4 id="redo-log">redo log</h4>
+<p>BP是基于内存的，如果断电重启，那没有及时写入磁盘的脏页数据就无法被恢复。为了防止这个问题，每次更新数据时，InnoDB先更新内存，标记BP的页为脏页，然后将本次对改页的修改以redo log的形式记录下来。后续在适当时，后台线程将内存脏页写回磁盘，这就是**WAL(Write-Ahead Logging)**技术(MySQL写操作并不是立即写到磁盘上，先写日志，然后在合适的时间上再写到磁盘上)</p>
+<p>需要注意的是，redo log是物理日志，记录对X表第几个数据页的特定个偏移量做了特定更新，而不是像undo log一样更逻辑化地记录。执行语句时，就会产生这样的物理日志，而当<strong>事务提交时，只要将redo log持久化到磁盘即可</strong>，而不需要等到将缓存再BP到脏页数据持久化到磁盘。</p>
+<blockquote>
+<p>理解undo log与redo log区别</p>
+<ul>
+<li>undo log记录的是操作数据之前的情况</li>
+<li>redo log记录的是操作数据之后的情况(物理上)</li>
+</ul>
+</blockquote>
+<p><strong>顺序写和随机写</strong></p>
+<p>写redo log到磁盘中用追加操作的方式，磁盘操作顺序是顺序写；写入具体数据时要先找到写入位置才能写入磁盘，磁盘操作是随机写。而<strong>磁盘的顺序写速度快于随机写</strong>，所以redo log写入磁盘开销更小。<strong>WAL技术就让MySQL的写操作从磁盘的随机写转化到顺序写</strong></p>
+<p><strong>redo log的优点</strong></p>
+<ol>
+<li>实现事务的持久性，让MySQL有crash-safe能力</li>
+<li>将写操作从随机写变成了顺序写，提升MySQL写入磁盘的性能</li>
+</ol>
+<p>当然redolog也不是直接写入磁盘的，有自己的缓存，redo log buffer，redo log会先写到buffer中然后再持久化到磁盘。所以，断电问题有转移到了<strong>redo log buffer什么时候刷</strong>盘这一问题来：</p>
+<ul>
+<li>MysQL正常关闭时</li>
+<li>redo log buffer中记录的写入量大于buffer内存空间的一半</li>
+<li>InnoDB后台线程每隔1s将redo log buffer持久化</li>
+<li>每次事务提交时都将缓存在redo log buffer的redo log持久化到磁盘(可选)</li>
+</ul>
+<p>三种策略 主要根据<code>innodb_flush_log_at_trx_commit</code>参数：</p>
+<ul>
+<li>0: 每次事务提交时，redo log留在buffer中，不主动触发刷盘</li>
+<li>1(Default): 每次事务提交，缓存在buffer的redo log立即刷到磁盘</li>
+<li>2: 每次事务提交，将缓存在redo log buffer的redo log 写到redo log文件，不是磁盘，而是OS到缓存页 Page Cache。这样就算Mysql挂了，OS不挂，最终还是会被写入到磁盘的</li>
+</ul>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/mysql/how_update/innodb_flush_log_at_trx_commit.drawio.png?image_process=watermark,text_5YWs5LyX5Y-377ya5bCP5p6XY29kaW5n,type_ZnpsdHpoaw,x_10,y_10,g_se,size_20,color_0000CD,t_70,fill_0" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><strong>redo log 文件写满了怎么办</strong></p>
+<p>简言之：有两个文件，循环写。先写一个文件，写满后再另一个文件写，期间查看是否被刷盘，如果刷盘则覆盖写，如果没有被刷盘且写满了，就会被阻塞</p>
+<h4 id="binlog">binlog</h4>
+<p>redo log和undo log都是InnoDB生成的，而binlog是MySQL完成更新操作后在Server层生成的</p>
+<p>binlog记录了所有数据库表结构变更和表数据修改的日志，<strong>不会记录查询类的操作</strong></p>
+<blockquote>
+<p><strong>为什么有了binlog还要有redo log？</strong></p>
+<p>这个问题跟 MySQL 的时间线有关系。最开始 MySQL 里并没有 InnoDB 引擎，MySQL 自带的引擎是 MyISAM，但是 MyISAM 没有 crash-safe 的能力，binlog 日志只能用于归档。</p>
+<p>而 InnoDB 是另一个公司以插件形式引入 MySQL 的，既然只依靠 binlog 是没有 crash-safe 能力的，所以 InnoDB 使用 redo log 来实现 crash-safe 能力。</p>
+</blockquote>
+<p><strong>redo log和binlog区别</strong></p>
+<ul>
+<li>适用对象不同: 一个基于InnoDB 一个基于MySQL Server层</li>
+<li>文件格式不同：
+<ul>
+<li>binlog有三种文件格式:
+<ul>
+<li>STATEMENT 默认: 每一条修改数据的SQL都会记录到binlog中，但STATEMENT中有例如now()等的动态函数，会在主从复制过程中造成结果不一致问题</li>
+<li>ROW：记录行数据最终被修改成什么了，每行数据的变化结果都会被记录，可能造成binlog文件过大</li>
+<li>MIXED：两者混合</li>
+</ul>
+</li>
+<li>redolog：物理日志</li>
+</ul>
+</li>
+<li>写入方式不同：
+<ul>
+<li>binlog：追加写，写满一个文件，创建新文件继续写，不会覆盖以爱你的日志，保存的是全量日志</li>
+<li>redo log：循环写，日志空间大小固定，全部写满就从头开始</li>
+</ul>
+</li>
+<li>用途不同：
+<ul>
+<li>binlog：备份恢复、主从复制</li>
+<li>redo log：掉电恢复</li>
+</ul>
+</li>
+</ul>
+<p><strong>binlog 刷盘时机</strong></p>
+<p>执行事务时，先把日志写到binlog cache，事务提交时，再把cache写到binlog文件中</p>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/mysql/how_update/binlogcache.drawio.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>MySQL提供一个 sync_binlog 参数来控制数据库的 binlog 刷到磁盘上的频率：</p>
+<ul>
+<li>sync_binlog = 0 的时候，表示每次提交事务都只 write，不 fsync，后续交由操作系统决定何时将数据持久化到磁盘；</li>
+<li>sync_binlog = 1 的时候，表示每次提交事务都会 write，然后马上执行 fsync；</li>
+<li>sync_binlog =N(N&gt;1) 的时候，表示每次提交事务都 write，但累积 N 个事务后才 fsync。</li>
+</ul>
+<p>注意，与redo log稍有不同的是，binlog都是先从buffer写入到OS Page Cache</p>
+<blockquote>
+<p>以下引用🔗 <a target="_blank" rel="noopener" href="https://xiaolincoding.com/mysql/log/how_update.html#binlog-%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E5%88%B7%E7%9B%98">小林Coding-binlog什么时候刷盘</a>的内容</p>
+</blockquote>
+<p>具体更新一条记录 <code>UPDATE t_user SET name = 'xiaolin' WHERE id = 1;</code> 的流程如下:</p>
+<ol>
+<li>执行器负责具体执行，会调用存储引擎的接口，通过主键索引树搜索获取 id = 1 这一行记录：
+<ul>
+<li>如果 id=1 这一行所在的数据页本来就在 buffer pool 中，就直接返回给执行器更新；</li>
+<li>如果记录不在 buffer pool，将数据页从磁盘读入到 buffer pool，返回记录给执行器。</li>
+</ul>
+</li>
+<li>执行器得到聚簇索引记录后，会看一下更新前的记录和更新后的记录是否一样：
+<ul>
+<li>如果一样的话就不进行后续更新流程；</li>
+<li>如果不一样的话就把更新前的记录和更新后的记录都当作参数传给 InnoDB 层，让 InnoDB 真正的执行更新记录的操作；</li>
+</ul>
+</li>
+<li>开启事务， InnoDB 层更新记录前，首先要记录相应的 undo log，因为这是更新操作，需要把被更新的列的旧值记下来，也就是要生成一条 undo log，undo log 会写入 Buffer Pool 中的 Undo 页面，不过在内存修改该 Undo 页面后，需要记录对应的 redo log。</li>
+<li>InnoDB 层开始更新记录，会先更新内存（同时标记为脏页），然后将记录写到 redo log 里面，这个时候更新就算完成了。为了减少磁盘I/O，不会立即将脏页写入磁盘，后续由后台线程选择一个合适的时机将脏页写入到磁盘。这就是 <strong>WAL 技术</strong>，MySQL 的写操作并不是立刻写到磁盘上，而是先写 redo 日志，然后在合适的时间再将修改的行数据写到磁盘上。</li>
+<li>至此，一条记录更新完了。</li>
+<li>在一条更新语句执行完成后，然后开始记录该语句对应的 binlog，此时记录的 binlog 会被保存到 binlog cache，并没有刷新到硬盘上的 binlog 文件，在事务提交时才会统一将该事务运行过程中的所有 binlog 刷新到硬盘。</li>
+<li>事务提交，剩下的就是 <strong>两阶段提交</strong> 的事情了</li>
+</ol>
+<p>需要注意这里的顺序: undo -&gt; redo -&gt; binlog</p>
+<h4 id="两阶段提交-2PC">两阶段提交 2PC</h4>
+<p>理解为什么会有两阶段提交：当事务提交后，此时redo log 和bin log cache中的内容都没有 持久化到磁盘，并且两个都是异步的过程，如果此时:</p>
+<ul>
+<li>redo log刷到磁盘后，MySQL宕机，binlog还没来得及写入，主从复制就会出问题</li>
+<li>binlog刷到磁盘后，redo log还没来得及写入，则崩溃后数据就会丢失</li>
+</ul>
+<p>所以两阶段提交是分布式事务一致性的协议，保证多个逻辑操作要么全部成功要么全部事务，这又有点事务的感觉了。</p>
+<p>两阶段提交将单个事务的提交拆分成2个阶段: 准备Prepare阶段和提交Commit阶段。每阶段都由协调者Coordinator和参与者Participant共同完成。</p>
+<p><strong>两阶段提交过程</strong></p>
+<p>为了保证redo log和binlog日志的一致性，MySQL使用内部XA事务，由binlog作为协调者，存储引擎作为参与者</p>
+<p>不要把提交（Commit）阶段和 commit 语句混淆了，commit 语句执行的时候，会包含提交（Commit）阶段。</p>
+<p>当客户端执行commit语句后(或隐式执行), MySQL内部开启一个XA事务，分两阶段完成XA事务的提交：</p>
+<ul>
+<li>Prepare：将XID(内部XA事务ID)写入到redo log，同时将redo log对应到事务状态设置为prepare，然后将redo log持久化到磁盘。</li>
+<li>Commit：将XID写入到binlog，然后将binlog持久化到磁盘，将redo log状态设置为commit。此时该状态并不需要持久化到磁盘，只需要 write 到文件系统的 page cache 中就够了，因为只要 binlog 写磁盘成功，就算 redo log 的状态还是 prepare 也没有关系，一样会被认为事务已经执行成功；</li>
+</ul>
+<p>这时再看之前存在的问题：</p>
+<ul>
+<li>如果binlog中没有当前内部事务XID，说明redo log完成刷盘，但binlog没有刷盘，所以回滚事务。</li>
+<li>如果binlog有当前内部事务XID，说明redo log和binlog都已经完成了刷盘，则提交事务。</li>
+</ul>
+<blockquote>
+<p>事务没提交的时候，redo log会持久到磁盘吗？</p>
+<p>会的，因为前面有说过，后台线程可能会1s把redo log buffer的数据持久化到磁盘，如果这个时候有个事务没提交，但buffer数据已经被持久化到磁盘了，如果发生断电，这时候再恢复是否会出现数据不一致问题？</p>
+<p>不会，因为此时binlog还没有写入，redo log和binlog 存在数据不一致问题，mysql重启后会进行回滚操作。<br>
+redo log 在进行数据重做时，只有读到了 commit 标识，才会认为这条 redo log 日志是完整的，才会进行数据重做(有特例，例如binlog已经写入)，否则会认为这个 redo log 日志不完整，不会进行数据重做</p>
+</blockquote>
+<p><strong>存在的问题</strong></p>
+<ol>
+<li>磁盘IO次数高</li>
+<li>锁竞争激烈</li>
+</ol>
+<p><strong>优化：组提交</strong></p>
 <h3 id="视图">视图</h3>
 <p>一种虚拟表，5.1版本后的新特性，通过表动态生成的数据（类似临时拼凑的表，可重复利用）</p>
 <p>只保存sql逻辑，不保存查询结果</p>
@@ -1629,7 +1838,7 @@ select @selfStr;</code></pre></div>
 drop procedure xxx
 # 查看存储过程
 show create procedure xxx;</code></pre></div>
-<h4 id="函数-v2">函数</h4>
+<h4 id="函数-v3">函数</h4>
 <div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 创建
 create function xxx(params...) returns returntype
 begin
@@ -1742,7 +1951,7 @@ begin
         end while xx;
 end $;</code></pre></div>
 <p>iterator  : 类似java中的continue;</p>
-<h2 id="进阶-v2">进阶</h2>
+<h2 id="进阶-v3">进阶</h2>
 <h3 id="自启动服务">自启动服务</h3>
 <p>早就想设置了，赣！</p>
 <p>/usr/lib/systemd/system下新建xx.service文件</p>
@@ -1992,7 +2201,7 @@ alter table xx add index idx_name on (column(xx))</code></pre></div>
 <ul>
 <li>using filesort：说明mysql对数据使用外部的索引排序，而不是按照表内的索引进行读取。无法通过索引完成的排序称作“文件排序” ---- 不太好的情况</li>
 <li>using temporary：使用了临时表保存中间结果（对查询结果进行排序时）  — 非常不好的情况</li>
-<li>using index：相应的 select操作使用了覆盖索引，避免了表的数据行，效率高。
+<li>using index：相应的 select 操作使用了覆盖索引，避免了表的数据行，效率高。
 <ul>
 <li>同时出现using where，表明索引被用来执行索引键值的查找</li>
 <li>没有同时出现using  where，表明索引用来读取数据而并非执行查找动作</li>
@@ -2256,8 +2465,8 @@ select * from t1 order by col1 asc,col2 desc; # col1-col2 is co-index  --- index
 <p>表定义文件</p>
 <h5 id="ibd">ibd</h5>
 <p>索引和数据文件</p>
-<h2 id="一些问题-v3">一些问题</h2>
-<p><strong>Mysql和Mariadb的区别</strong></p>
+<h2 id="一些问题-v4">一些问题</h2>
+<h3 id="Mysql和Mariadb的区别">Mysql和Mariadb的区别</h3>
 <ul>
 <li>MyISam：
 <ul>
@@ -2291,7 +2500,7 @@ select * from t1 order by col1 asc,col2 desc; # col1-col2 is co-index  --- index
 </ul>
 </li>
 </ul>
-<p><strong>解释一下什么是聚簇索引和非聚簇索引</strong></p>
+<h3 id="什么是聚簇索引和非聚簇索引">什么是聚簇索引和非聚簇索引</h3>
 <ul>
 <li>
 <p>聚簇索引：数据存储和索引放在一个文件，索引结构的叶子节点保存了行数据（索引！项的顺序和表中记录的物理顺序一致）</p>
@@ -2303,7 +2512,7 @@ select * from t1 order by col1 asc,col2 desc; # col1-col2 is co-index  --- index
 <p>如果么有定义主键，InnoDB会选择一个唯一的非空索引代替</p>
 </li>
 <li>
-<p>如果没哟这样的索引，将会在内部生成一个名为GEN_CLUST_INDEX的隐式聚簇索引</p>
+<p>如果没有这样的索引，将会在内部生成一个名为GEN_CLUST_INDEX的隐式聚簇索引</p>
 </li>
 <li>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211023211744223.png" srcset="/img/loading.gif" lazyload alt="image-20211023211744223"></p>
@@ -2339,7 +2548,7 @@ select * from t1 order by col1 asc,col2 desc; # col1-col2 is co-index  --- index
 <li>AVL：树的高度 — 读取磁盘次数增加，可能有回表的现象（查找范围区间）</li>
 <li>B和B+树前面有说：主要还是降低了树的高度</li>
 </ul>
-<p><strong>Mysq索引为啥会失效</strong></p>
+<h3 id="Mysq索引为啥会失效">Mysq索引为啥会失效</h3>
 <p>主要是联合索引</p>
 <p>注意联合索引中的值<strong>顺序存储</strong>的方式 ----- &gt; 联合索引如何排序？</p>
 <ul>
@@ -2353,6 +2562,53 @@ select * from t1 order by col1 asc,col2 desc; # col1-col2 is co-index  --- index
 <li>对符合条件的情况，叶子节点和非叶子节点可能是无序的 — &gt; 不能通过二分查找去找之后索引的数据（不懂就画图）</li>
 </ul>
 </li>
+</ul>
+<h3 id="count-与count-1-区别">count(*)与count(1)区别</h3>
+<p>结论: count(*) = count(1) &gt; count(primary key) &gt; count(field)</p>
+<p>首先理解count的作用: 统计符合查询条件的记录中，参数<strong>不为NULL</strong>的记录的个数</p>
+<p>当count(primary key)时：</p>
+<ul>
+<li>如果表中索引只有主键：InnoDB循环遍历聚簇索引，如果id值不为null(也不可能为null)，就将count变量+1；</li>
+<li>如果表中还有二级索引，则InnoDB循环遍历的对象就不是聚簇索引，而是二级索引(<strong>因为相同数量的二级索引记录闭聚簇索引记录占用更少的存储空间，遍历的IO成本比聚簇索引更小</strong>)</li>
+</ul>
+<div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell">mysql&gt; explain select count(id) from t1;
++----+-------------+-------+------------+-------+---------------+---------+---------+------+------+----------+-------------+
+| id | select_type | table | partitions | type  | possible_keys | key     | key_len | ref  | rows | filtered | Extra       |
++----+-------------+-------+------------+-------+---------------+---------+---------+------+------+----------+-------------+
+|  1 | SIMPLE      | t1    | NULL       | index | NULL          | idx_age | 5       | NULL |    7 |   100.00 | Using index |
++----+-------------+-------+------------+-------+---------------+---------+---------+------+------+----------+-------------+
+# age为二级索引</code></pre></div>
+<p>当count(1)时同理，但count(1)比count(primary key)少一个步骤，不需要读取记录中的字段值，所以<strong>count(1)执行效率比count(primary key)更高</strong></p>
+<p>count(*) == count(0) 在性能方面等于 count(1)</p>
+<p>count(field) 效率是最差的，因为其会采用全表扫描的方式来计数</p>
+<p><strong>InnoDB与MyISAM count的区别</strong></p>
+<p>没有任何查询条件下的count(*) MyISAM查询速度快于InnoDB</p>
+<p>这是因为MyISAM数据表中都有一个meta信息row_count维护表中所有记录数，并由表锁保证一致性，执行count(*)只需要O(1)的复杂度即可</p>
+<p>而InnoDB支持事务的，由于同一时刻的多个事务查询，基于MVCC的原因，所以InnoDB不可能维护多个row_count来返回不同的行数，所以<strong>InnoDB会在执行count函数时进行遍历</strong></p>
+<h3 id="使用like-“-x”一定造成索引失效吗">使用like “%x”一定造成索引失效吗</h3>
+<p>考虑以下场景，一张表，只有主键id和索引name，此时执行命令 select * from t2 where name like “xxx%”，是否是全表扫描?</p>
+<div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell">mysql&gt; explain select * from t2 where name like &quot;xxx%&quot;;
++----+-------------+-------+------------+-------+---------------+----------+---------+------+------+----------+--------------------------+
+| id | select_type | table | partitions | type  | possible_keys | key      | key_len | ref  | rows | filtered | Extra                    |
++----+-------------+-------+------------+-------+---------------+----------+---------+------+------+----------+--------------------------+
+|  1 | SIMPLE      | t2    | NULL       | index | idx_name      | idx_name | 43      | NULL |    1 |   100.00 | Using where; Using index |
++----+-------------+-------+------------+-------+---------------+----------+---------+------+------+----------+--------------------------+</code></pre></div>
+<p>可以看到几个特点：</p>
+<ul>
+<li>type不是all而是index，表明读的是整个索引树</li>
+<li>possible_keys为二级索引name，而不是主键id。</li>
+<li>有using index 表明该select语句使用到覆盖索引，即select的数据列<strong>只用从索引中就能够取得，不必读取数据行</strong>。</li>
+</ul>
+<blockquote>
+<p>所以为什么这里全扫描二级索引树而不扫描主键所在的聚簇索引树呢？</p>
+<p>因为二级索引树的记录很少，只有索引值 + 主键值，而聚簇索引记录东西多，比如事务id、MVCC回滚指针等，遍历聚簇索引树IO花销大</p>
+</blockquote>
+<h3 id="MySQL-ACID如何保证的">MySQL ACID如何保证的</h3>
+<ul>
+<li>原子性：undo log</li>
+<li>隔离性：MVCC</li>
+<li>持久性：缓冲cache+redo log</li>
+<li>一致性：前三者</li>
 </ul>
 <h2 id="一些链接">一些链接</h2>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ThinkWon/article/details/104778621?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163470018116780264064360%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163470018116780264064360&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-104778621.pc_search_ecpm_flag&amp;utm_term=Mysql%E7%B4%A2%E5%BC%95&amp;spm=1018.2226.3001.4187">Mysql面试题</a></p>
@@ -2544,7 +2800,7 @@ show full columns from t22;</code></pre></div>
         61&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        284k&nbsp 字
+        289.9k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
