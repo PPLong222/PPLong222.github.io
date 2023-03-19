@@ -60,6 +60,7 @@
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210403095612566.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210316215457375.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210316225500458.png">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230319183359718.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210428183546466.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210428183707107.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20221114110525822.png">
@@ -320,7 +321,7 @@
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220306224704953.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210330202907036.png">
 <meta property="article:published_time" content="2019-01-22T12:05:07.000Z">
-<meta property="article:modified_time" content="2023-03-15T01:57:22.000Z">
+<meta property="article:modified_time" content="2023-03-19T11:32:33.000Z">
 <meta property="article:author" content="PPLong">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="算法">
@@ -563,8 +564,8 @@
     
         <span class="post-meta">
   <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
-  <time datetime="2023-03-15 09:57" pubdate>
-    更新: 2023年3月15日上午9点57分
+  <time datetime="2023-03-19 19:32" pubdate>
+    更新: 2023年3月19日晚上7点32分
   </time>
 </span>
         
@@ -574,7 +575,7 @@
     
         <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      151k 字
+      153k 字
     </span>
         
 
@@ -583,7 +584,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      473 分钟
+      477 分钟
     </span>
                 
 
@@ -1173,6 +1174,75 @@ head<span class="token punctuation">.</span>next <span class="token operator">=<
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210316225500458.png" srcset="/img/loading.gif" lazyload alt="image-20210316225500458"></p>
 <p>时间复杂度On 空间复杂度O1</p>
 <p>还是，多去找通项公式，不一定是符号表达的，能用语言刻画的一样可以</p>
+<h2 id="JZ-II-16-不含重复字符的最长子字符串⭐⭐">JZ-II-16. 不含重复字符的最长子字符串⭐⭐</h2>
+<div class="code-tag-time">2021/4/6 09:46:00</div>
+<div class="code-tag-label code-tag-label-foreach">Foreach</div>
+<div class="code-tag-label code-tag-label-hash">Hash</div>
+<div class="code-tag-label code-tag-label-queue">Queue</div>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230319183359718.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="1-暴力">1. 暴力</h3>
+<p>统计从索引为i处开始且符合条件的子串的最大长度，空间复杂度O(n^2)</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">lengthOfLongestSubstring</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> max <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Character</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">></span></span> map<span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> temp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> i<span class="token punctuation">;</span> j <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    temp<span class="token operator">++</span><span class="token punctuation">;</span>
+                    map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+            max <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>temp<span class="token punctuation">,</span> max<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> max<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<h3 id="2-队列-哈希">2. 队列+哈希</h3>
+<p>还不错，能把这个想出来。</p>
+<p>思路就是维通过先进先出<strong>维护一个队列、当前队列对应的哈希表、队列中队头元素的索引</strong>，<strong>队列中时刻维护着当前遍历长度下符合条件的最长子串</strong>，通过一次遍历就能解决问题。时间复杂度比解法1更好一点</p>
+<ul>
+<li>当前元素不在哈希表中(说明队列中肯定也没有), 则该元素入队并添加到哈希表中，Value为索引</li>
+<li>当前元素在哈希表中(说明队列中肯定有该元素), 则<strong>将队头到与当前字符重复的那个字符所在的队列区间清空</strong>(同时清空哈希表), 再将当前元素添加到队列与哈希表中。</li>
+</ul>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">lengthOfLongestSubstring</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Queue</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Character</span><span class="token punctuation">></span></span> queue <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Character</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">></span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> max <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> curIndex <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">char</span> c <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            queue<span class="token punctuation">.</span><span class="token function">offer</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+            max <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>queue<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> max<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> num <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">while</span><span class="token punctuation">(</span>curIndex <span class="token operator">&lt;=</span> num<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                map<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>queue<span class="token punctuation">.</span><span class="token function">poll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                curIndex<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            i<span class="token operator">--</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>queue<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> max<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<h3 id="问题-v2">问题</h3>
+<p>这里自己犯了一个很经典的问题，在写代码时，while判断时，为了代码简洁，使用了第一种写法，但最终却一直报超时。</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// Solution 1</span>
+<span class="token keyword">while</span><span class="token punctuation">(</span>curIndex <span class="token operator">&lt;=</span> num<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    map<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>queue<span class="token punctuation">.</span><span class="token function">poll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    curIndex<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">// Solution 2</span>
+<span class="token keyword">while</span><span class="token punctuation">(</span>curIndex<span class="token operator">++</span> <span class="token operator">&lt;=</span> num<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    map<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>queue<span class="token punctuation">.</span><span class="token function">poll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>这其实就是在while循环中使用 自增/减符号不当可能引发的错误❎。例如当curIndex = 1， num = 3时，使用第一种方式最终curIndex结果为 4， 而第二种结果方式为5.原因很简单，因为在第一种方式里，判断时只要条件不满足就会退出循环，而第二种方式里，<strong>条件不满足会退出循环并且还会对curIndex自增</strong>，所以这就造成了curIndex比预期值多了1.</p>
 <h2 id="JD-17-09-第K个数-⭐⭐">JD-17.09. 第K个数 ⭐⭐</h2>
 <div class="code-tag-time">2021/4/6 09:46:00</div>
 <div class="code-tag-label code-tag-label-dp">DP</div>
@@ -1356,7 +1426,7 @@ head<span class="token punctuation">.</span>next <span class="token operator">=<
 </ul>
 </li>
 </ul>
-<h3 id="1-暴力">1. 暴力</h3>
+<h3 id="1-暴力-v2">1. 暴力</h3>
 <p>先划分好二维字符矩阵，然后再按照Z字形排序依次填入矩阵中，最后从矩阵中依照行列顺序读就行了。</p>
 <p>缺点：耗费O(numRow * actCol)的空间复杂度</p>
 <h3 id="2-数学公式">2. 数学公式</h3>
@@ -2026,7 +2096,7 @@ TAG : KMP、迭代</p>
 <li>可以为负数</li>
 <li>排除递归、dp…</li>
 </ul>
-<h3 id="1-暴力-v2">1. 暴力</h3>
+<h3 id="1-暴力-v3">1. 暴力</h3>
 <h3 id="-v7"></h3>
 <h3 id="2-二分查找-转">2. 二分查找(转)</h3>
 <ol>
@@ -2634,7 +2704,7 @@ TAG : Iteration / Recursion / Complement / Bits</p>
         <span class="token keyword">return</span> res<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220402205324791.png" srcset="/img/loading.gif" lazyload alt="image-20220402205324791"></p>
-<h3 id="问题-v2">问题</h3>
+<h3 id="问题-v3">问题</h3>
 <p>这里还涉及到了自己的一个学习漏洞，对补码的理解和计算机位表示的混乱理解：</p>
 <blockquote>
 <p>具体解析参见文章《计算机组成原理》 [补码的加减法]章节</p>
@@ -9153,7 +9223,7 @@ public:
         61&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        289.9k&nbsp 字
+        290.5k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

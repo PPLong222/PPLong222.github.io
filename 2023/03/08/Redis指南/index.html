@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://pdai.tech/images/db/redis/db-redis-sub-5.svg">
 <meta property="og:image" content="https://pdai.tech/images/db/redis/db-redis-sub-10.svg">
 <meta property="article:published_time" content="2023-03-08T07:53:16.000Z">
-<meta property="article:modified_time" content="2023-03-13T01:59:05.000Z">
+<meta property="article:modified_time" content="2023-03-16T10:52:20.000Z">
 <meta property="article:author" content="PPLong">
 <meta property="article:tag" content="SQL">
 <meta property="article:tag" content="NoSQL">
@@ -278,8 +278,8 @@
     
         <span class="post-meta">
   <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
-  <time datetime="2023-03-13 09:59" pubdate>
-    更新: 2023年3月13日上午9点59分
+  <time datetime="2023-03-16 18:52" pubdate>
+    更新: 2023年3月16日晚上6点52分
   </time>
 </span>
         
@@ -612,10 +612,10 @@ subscribe [target_channel_1] [target_channel_2] ...</code></pre></div>
 <p>使用链表，链表中的每个节点包含订阅该模式的客户端，pattern表示当前被订阅的模式</p>
 <p><img src="https://pdai.tech/images/db/redis/db-redis-sub-10.svg" alt=""></p>
 <h2 id="面试-v2">面试</h2>
-<h3 id="基础-v4">基础</h3>
+<h3 id="基础-v3">基础</h3>
 <h4 id="Redis到底是单线程还是多线程？">Redis到底是单线程还是多线程？</h4>
 <ul>
-<li>Redis6.0版本前的单线程指网络IO喝键值对读写是由一个线程完成的</li>
+<li>Redis6.0版本前的单线程指网络IO和读写是由一个线程完成的</li>
 <li>Redis6.0后引入多线程是指网络请求采用了多线程，而键值对读写命令仍然是单线程，所以Redis依然是<strong>并发安全</strong>的(其持久化喝集群数据同步等是由额外线程完成的)</li>
 </ul>
 <h4 id="Redis单线程为什么这么快？">Redis单线程为什么这么快？</h4>
@@ -888,7 +888,7 @@ subscribe [target_channel_1] [target_channel_2] ...</code></pre></div>
         61&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        289.9k&nbsp 字
+        290.5k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
