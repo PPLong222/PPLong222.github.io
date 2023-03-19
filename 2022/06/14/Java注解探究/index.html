@@ -596,7 +596,7 @@ RuntimeVisibleAnnotations:
         <span class="token keyword">return</span> result<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span></code></pre></div>
 <p>即代理类在调用方法时对自定义的方法，会通过Map memberValues去取之前存有的注解中的值。而注解中设置的值<strong>并不直接在生成的$Proxy类中</strong>，而是通过构造该类时传入的AnnotationInvocationHandler中的Map&lt;String, Object&gt; memberValues来管理，在每次invoke时去get对应的值</p>
-<h2 id="总结-v2">总结</h2>
+<h2 id="总结">总结</h2>
 <p>注解是一种帮助快速开发的手段，通过主要Java反射来检测和执行，依赖JDK动态代理的机制。</p>
 <div class="note note-info">
             <p>参考文章： 📖  <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/60966151">知乎-注解(上)</a>     📖 <a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/java-annotation.html">Java注解（Annotation） </a> 📖 <a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/java-annotation.html">RUNOOB-Java 注解</a></p>
@@ -765,7 +765,7 @@ RuntimeVisibleAnnotations:
         61&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        290.5k&nbsp 字
+        290.8k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

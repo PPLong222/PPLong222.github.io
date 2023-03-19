@@ -584,7 +584,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      477 分钟
+      478 分钟
     </span>
                 
 
@@ -1202,13 +1202,19 @@ head<span class="token punctuation">.</span>next <span class="token operator">=<
         <span class="token keyword">return</span> max<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre></div>
-<h3 id="2-队列-哈希">2. 队列+哈希</h3>
+<h3 id="2-滑动窗口-队列-哈希">2. 滑动窗口-队列+哈希</h3>
 <p>还不错，能把这个想出来。</p>
 <p>思路就是维通过先进先出<strong>维护一个队列、当前队列对应的哈希表、队列中队头元素的索引</strong>，<strong>队列中时刻维护着当前遍历长度下符合条件的最长子串</strong>，通过一次遍历就能解决问题。时间复杂度比解法1更好一点</p>
 <ul>
 <li>当前元素不在哈希表中(说明队列中肯定也没有), 则该元素入队并添加到哈希表中，Value为索引</li>
 <li>当前元素在哈希表中(说明队列中肯定有该元素), 则<strong>将队头到与当前字符重复的那个字符所在的队列区间清空</strong>(同时清空哈希表), 再将当前元素添加到队列与哈希表中。</li>
 </ul>
+<blockquote>
+<p><strong>为什么这里可以使用滑动窗口的思路?</strong></p>
+<p><strong>递增性⤴️</strong></p>
+<p><strong>如果我们依次递增地枚举子串的起始位置，那么子串的结束位置也是递增的</strong>！这里的原因在于，假设我们选择字符串中的第 kkk 个字符作为起始位置，并且得到了不包含重复字符的最长子串的结束位置为 rk。那么当我们选择第 k+1个字符作为起始位置时，首先<strong>从 k+1到 rk 的字符显然是不重复的，并且由于少了原本的第 k 个字符，我们可以尝试继续增大 rk</strong> ，直到右侧出现了重复字符为止。这样一来，我们就可以使用「滑动窗口」来解决这个问题了：</p>
+<p>摘自<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/wtcaE1/solutions/1398911/bu-han-zhong-fu-zi-fu-de-zui-chang-zi-zi-4g7m/">力扣官方题解</a></p>
+</blockquote>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">lengthOfLongestSubstring</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token class-name">Queue</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Character</span><span class="token punctuation">></span></span> queue <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Character</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">></span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1231,6 +1237,8 @@ head<span class="token punctuation">.</span>next <span class="token operator">=<
     <span class="token punctuation">&#125;</span>
     <span class="token keyword">return</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>queue<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> max<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre></div>
+<h4 id="优化">优化</h4>
+<p>尝试考虑不使用Queue而使用左右指针维护，Map改为HashSet</p>
 <h3 id="问题-v2">问题</h3>
 <p>这里自己犯了一个很经典的问题，在写代码时，while判断时，为了代码简洁，使用了第一种写法，但最终却一直报超时。</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// Solution 1</span>
@@ -2003,7 +2011,7 @@ TAG : KMP、迭代</p>
         <span class="token keyword">return</span> next<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220326100442552.png" srcset="/img/loading.gif" lazyload alt="image-20220326100442552"></p>
-<h4 id="优化">优化</h4>
+<h4 id="优化-v2">优化</h4>
 <p>针对next数组优化，因为如果father_str[i] != son_str[j] 且 son_str[j] == son_str[next[j]]时，就会出现不必要的重复判断，因为之前判断两者不相等，而转化j后再去判断，（但son_str[j] == son_str[next[j]]）所以两者肯定还是不相等，就优化了next数组</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">kmp_gen_next_modified</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> next <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -3995,7 +4003,7 @@ public static int maxProfit_2(int[] prices) &#123;
             temp <span class="token operator">=</span> origin<span class="token operator">++</span><span class="token punctuation">;</span>
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span></code></pre></div>
-<h4 id="优化-v2">优化</h4>
+<h4 id="优化-v3">优化</h4>
 <p>其实2的个数是远大于5的个数的，所以只用统计5的个数即可</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">trailingZeroes</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
        <span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
@@ -4032,7 +4040,7 @@ public static int maxProfit_2(int[] prices) &#123;
 <span class="token punctuation">&#125;</span></code></pre></div>
 <p>O(log_5{N})的时间复杂度</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220328210847131.png" srcset="/img/loading.gif" lazyload alt="image-20220328210847131"></p>
-<h4 id="优化-v3">优化</h4>
+<h4 id="优化-v4">优化</h4>
 <p>LeetCode题解，思路相同，但代码简洁许多</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">trailingZeroes</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
@@ -4202,7 +4210,7 @@ public static int maxProfit_2(int[] prices) &#123;
      <span class="token keyword">return</span> curMax<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <p>O(N)的时间复杂度  O(N)的空间复杂度</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220414202724884.png" srcset="/img/loading.gif" lazyload alt="image-20220414202724884"></p>
-<h4 id="优化-v4">优化</h4>
+<h4 id="优化-v5">优化</h4>
 <p><strong>DP从数组到常量个变量的经典优化</strong>：因为实际计算值只与curMax[i-1]、curMax[i-2]和isGo[i-1]有关，因此均可优化为常量级别的数组，以此降低空间复杂度到O© 。</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">rob</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span>nums<span class="token punctuation">.</span>length <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -6580,7 +6588,7 @@ O(amount * coins.length)的时间复杂度</p>
 <p>时间复杂度低 O(m + n)<br>
 空间复杂度高 O(m + n)，且大量字符串占据</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220314213243724.png" srcset="/img/loading.gif" lazyload alt="image-20220314213243724"></p>
-<h4 id="优化-v5">优化</h4>
+<h4 id="优化-v6">优化</h4>
 <p>简单的一句 足矣…（在第二个集合判断之前插入判断，避免了之后的无用元素判断）</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// ...   </span>
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> list2<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -7016,7 +7024,7 @@ TAG : DFS \ BFS \ Hash \ InOrder Traversal</p>
 <p>时间复杂度：O(a) * O(m)比之前稍微好一点<br>
 空间复杂度：O(n)</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220318101119632.png" srcset="/img/loading.gif" lazyload alt="image-20220318101119632"></p>
-<h4 id="优化-v6">优化</h4>
+<h4 id="优化-v7">优化</h4>
 <p><strong>按字符串长度迭代</strong></p>
 <p>一次遍历的思路：关键在于解决之前对每个元素前n-1个前缀都重复判断的冗余操作</p>
 <p>核心思路：以数组元素的length为标杆，Set只存当前前length前缀都存在的字符串，按length遍历时，只用判断第length - 1个前缀（substring(0,length-1)）的那个字符串是否存在就行，感觉有一点dp的思路吗？</p>
@@ -7200,7 +7208,7 @@ TAG : DFS \ BFS \ Hash \ InOrder Traversal</p>
     <span class="token punctuation">&#125;</span></code></pre></div>
 <p>是真没想到最直接的方法居然接近最快…时间复杂度<em>O</em>(n* log_10{right})</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220331184331762.png" srcset="/img/loading.gif" lazyload alt="image-20220331184331762"></p>
-<h4 id="优化-v7">优化</h4>
+<h4 id="优化-v8">优化</h4>
 <p>考虑预处理 + 索引，不过意义不是很大感觉</p>
 <h4 id="思考-v22">思考</h4>
 <ul>
@@ -7690,7 +7698,7 @@ O(n)的空间复杂度</p>
   <span class="token punctuation">&#125;</span></code></pre></div>
 <p>时间复杂度一下就快了很多了，因为消除了内层的循环，时间复杂度仅取决于Arrays.sort的排序复杂度</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220401215607935.png" srcset="/img/loading.gif" lazyload alt="image-20220401215607935"></p>
-<h4 id="优化-v8">优化</h4>
+<h4 id="优化-v9">优化</h4>
 <p>特殊数：零，如果零的个数是奇数，则可以直接判false，并且也消除了之前对0的特殊判断</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">canReorderDoubled</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
       <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -8625,7 +8633,7 @@ TAG：DFS、Bit</p>
 <p>时间复杂度：O(1 &lt;&lt; nums.length)<br>
 空间复杂度：O(nums.length) （调用栈占用空间）</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220315195438852.png" srcset="/img/loading.gif" lazyload alt="image-20220315195438852"></p>
-<h4 id="优化-v9">优化</h4>
+<h4 id="优化-v10">优化</h4>
 <p>因为是顺序搜索的，或的结果是依次增大，所以先遍历一次求出max，如果在的dfs时其值等于max，则可以直接计算出结果</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">if</span> <span class="token punctuation">(</span>or <span class="token operator">==</span> max<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
             ans <span class="token operator">+=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>nums<span class="token punctuation">.</span>length <span class="token operator">-</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -9223,7 +9231,7 @@ public:
         61&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        290.5k&nbsp 字
+        290.8k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
