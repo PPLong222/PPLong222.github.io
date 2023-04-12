@@ -14,17 +14,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="Java SE
-
-集合
-ArrayList
-
-允许添加多个null值
-
-属性 size 是指 elementData 中实际有多少个元素，而 elementData.length 为集合容量
-DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是否有initialCapacity
-
-第一次添加元素时扩容   默认初始的集合容量 1">
+  <meta name="description" content="">
   <meta name="author" content="PPLong">
   <meta name="keywords" content="">
   <!--添加百度站点统计-->
@@ -295,7 +285,7 @@ DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是�
     
         <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      14k 字
+      15k 字
     </span>
         
 
@@ -304,7 +294,7 @@ DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是�
       <i class="iconfont icon-clock-fill"></i>
       
       
-      46 分钟
+      47 分钟
     </span>
                 
 
@@ -365,11 +355,9 @@ DEFAULTCAPACITY_EMPTY_ELEMENTDATA和EMPTY_ELEMENTDATA区别： 构造函数 是�
 </li>
 </ul>
 </li>
-<li>grow()： 数组扩容策略，1.5倍且与最小容量进行比较</li>
+<li>grow()： 数组扩容策略，<strong>1.5倍</strong>且与最小容量进行比较</li>
 <li>每次增删都使modCount增加 ，并且增删会进行modCount的检查，例如在迭代时进行增删操作时 会报错，Itr中的expectedModCount与modCount不一致！因此ArrayList是不支持多线程的</li>
 </ul>
-<p><span style='color:red;font-size:20px;'>面试：优化数组 </span></p>
-<span id="more"></span>
 <p>标记-清除法</p>
 <h3 id="HashMap">HashMap</h3>
 <p>内部hash函数</p>
@@ -538,7 +526,7 @@ table <span class="token operator">=</span> newTab<span class="token punctuation
 <p>发生hash碰撞时 当前的元素生成新的节点保存在链表的尾部</p>
 <h4 id="HM的线程安全方式">HM的线程安全方式</h4>
 <ul>
-<li>Collections.synchronizedMap（）返回一个新的Map：使用synchronized进行互斥。使用代理new了一个新的🥱，直接锁住方法</li>
+<li>Collections.synchronizedMap（）返回一个新的Map：使用synchronized进行互斥。使用<strong>代理模式</strong>new了一个新的🥱，直接锁住方法</li>
 <li>ConccurentHashMap：使用新的锁机制，将HM进行拆分。</li>
 </ul>
 <h4 id="HM-JDK1-8后扩容上的优化">HM JDK1.8后扩容上的优化</h4>
@@ -551,18 +539,17 @@ table <span class="token operator">=</span> newTab<span class="token punctuation
 <h3 id="LinkedHashMap">LinkedHashMap</h3>
 <p><strong>结构</strong></p>
 <p>accessOrder有什么用？</p>
-<p>transient关键字不可见 ？</p>
+<p>transient关键字不可见 ？字段的生命周期仅存于调用者的内存中而不会写到磁盘里持久化。</p>
 <p><strong>实现LRU</strong></p>
 <p><strong>插入删除原理</strong></p>
 <p><strong>hashmap留的后门</strong></p>
 <p>哪种情况下get也会使得重新排序</p>
-<h3 id="ConcurrentHashMap">ConcurrentHashMap</h3>
+<h3 id="ConcurrentHashMap-v2">ConcurrentHashMap</h3>
 <p><strong>JDK1.8中以CAS与synchronized 锁头节点方式实现线程安全，锁的粒度更细</strong></p>
 <p>优先选择-- 性能效率更高</p>
-<p>能说说什么是快速失败什么是安全失败吗？</p>
+<p><strong>能说说什么是快速失败什么是安全失败吗？</strong></p>
 <p>快速失败  modCount 不能在多线程下并发修改</p>
 <p>安全失败  concurrent包下的容器都是</p>
-<h4 id="1-7版本">1.7版本</h4>
 <h3 id="SynchronizedMap">SynchronizedMap</h3>
 <p>排斥所 Object mutex</p>
 <p>就是加锁</p>
@@ -607,6 +594,12 @@ obj<span class="token punctuation">.</span>stu <span class="token operator">=</s
 <p>如果在不同包下 新建一个类 继承他， 创建这个类的对象，不能调用 clone方法，但是可以在这个类中重写protected的方法，这样就能够调用。</p>
 <p><span style='color:#3CB371;font-size:24px'>这就是protected的 派生类对同包可见，不同包不可见的原理</span></p>
 <p>protected受访问保护规则是很微妙的。虽然protected域对所有子类都可见。但是有一点很重要，子类只能在自己的作用范围内访问自己继承的那个父类protected域，而无法到访问别的子类（同父类的亲兄弟）所继承的protected域和父类对象的protected域</p>
+<ul>
+<li>public：表明该成员变量或者方法对所有类的对象都是可见的，所有类的对象都可以直接访问</li>
+<li>private：表明该成员变量或者方法是私有的，只有当前类对其具有访问权限，除此之外的其他类或者对象都没有访问权限。</li>
+<li>protected：表明该成员变量或者方法对该类自身，与它在同一个包中的其他类，在其他包中的子类都可见。</li>
+<li>default：表明该成员变量或者方法只有自己和与其位于同一包内的类可见。若父类和子类位于同一个包内，则<strong>子类对父类的default成员变量或者方法都有访问权限；若父类和子类不在同一个包内，则没有访问权限。</strong></li>
+</ul>
 <h2 id="关键字Final">关键字Final</h2>
 <blockquote>
 <p>关于final的问题，推荐阅读《Java并发编程的艺术》☕</p>
@@ -706,7 +699,7 @@ obj<span class="token punctuation">.</span>stu <span class="token operator">=</s
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
 <span class="token comment">// 原文链接：https://pdai.tech/md/java/thread/java-thread-x-key-final.html</span></code></pre></div>
-<p>此时如果线程A开始执行writer方法然后执行构造函数, 由于构造方法中不存在数据一致性，所以1操作可能在2操作之后，那在2操作执行完毕且1操作还未执行的时候 ，这时候线程B执行reader方法(此时this引用溢出，对象还未构造完全后就未其他线程可见)，检测referenceDemo对象不为空，然后访问其final成员，结果却为0，这就出现了问题。在构造函数返回前，被构造对象的引用不能被其他线程看见，因为此时的final域可能还没有被初始化。</p>
+<p>此时如果线程A开始执行writer方法然后执行构造函数, 由于构造方法中不存在数据一致性，所以1操作可能在2操作之后，那在2操作执行完毕且1操作还未执行的时候 ，这时候线程B执行reader方法(此时this引用溢出，对象还未构造完全后就未其他线程可见)，检测referenceDemo对象不为空，然后访问其final成员，结果却为0，这就出现了问题。<strong>在构造函数返回前，被构造对象的引用不能被其他线程看见，因为此时的final域可能还没有被初始化</strong>。</p>
 <h2 id="实现Serlizable接口的类中UID是啥？">实现Serlizable接口的类中UID是啥？</h2>
 <p>java序列化机制。简单来说，JAVA序列化的机制是通过 判断类的serialVersionUID来验证的版本一致的。在进行反序列化时，JVM会把传来的字节流中的serialVersionUID于本地相应实体类的serialVersionUID进行比较。如果相同说明是一致的，可以进行反序列化，否则会出现反序列化版本一致的异常，即是InvalidCastException</p>
 <p>显示声明serialVersionUID可以避免对象不一致，</p>
@@ -872,7 +865,7 @@ obj<span class="token punctuation">.</span>stu <span class="token operator">=</s
 <span class="token punctuation">&#125;</span></code></pre></div>
 <p>涉及到的静态内部类的知识</p>
 <p>静态内部类只会在使用到该内部类时才会加载，否则是不会加载的，也就是只有使用到new Integer的valueOf方法时，才会加载该内部类</p>
-<h3 id="CAS-v2">CAS</h3>
+<h3 id="CAS-v3">CAS</h3>
 <p><strong>原理</strong></p>
 <p>若：内存位置的值 == 预期原值 -&gt; 则赋予新值。通过while循环完成。</p>
 <p>优点：不用进行用户态 内核态的切换</p>
@@ -1140,10 +1133,10 @@ o<span class="token punctuation">[</span><span class="token number">1</span><spa
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        61&nbsp 篇文章
+        62&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        290.8k&nbsp 字
+        295.3k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

@@ -459,7 +459,7 @@ JDK包含了JRE，JRE中包含虚拟机JVM</p>
 <p>JDK 1.5 —&gt; Java SE 5.0</p>
 <h3 id="虚拟机">虚拟机</h3>
 <p>软件：执行一系列虚拟计算机指令</p>
-<p>分类  ：</p>
+<p>分类</p>
 <ul>
 <li>系统虚拟机: 提供可运行完整操作系统的软件平台，是对物理计算机的仿真</li>
 <li>程序虚拟机:专门为<strong>执行单个计算机程序</strong>设计的   Java虚拟机中执行的指令 — 字节码指令</li>
@@ -506,7 +506,7 @@ JDK包含了JRE，JRE中包含虚拟机JVM</p>
 <p>确保Class文件的字节流一中包含信息符号当前的虚拟机要求，保证<strong>加载类的正确性</strong>，不危害虚拟机自身安全。</p>
 <p>文件格式验证 元数据验证  字节码验证 符号引用验证</p>
 <h4 id="准备-Prepare">准备 Prepare</h4>
-<p>为类变量分配内存并且设置该内变量的默认初始值，哪怕是a = 1 最开始也是  a=0</p>
+<p>为类变量分配内存并且设置该内变量的默认初始值，哪怕是a = 1 最开始也是  a = 0</p>
 <p>不包含用final修饰的static  final在编译阶段就会分配了</p>
 <h4 id="解析-Resolve">解析 Resolve</h4>
 <p>将常量池内的符号引用转换为直接引用的过程</p>
@@ -540,7 +540,7 @@ JDK包含了JRE，JRE中包含虚拟机JVM</p>
 <h5 id="变量初始化过程">变量初始化过程</h5>
 <p>默认初始化–显示初始化- -构造器初始化–对象.属性的初始化</p>
 <h3 id="加载器的分类">加载器的分类</h3>
-<h4 id="BootStapClassLoader">BootStapClassLoader</h4>
+<h4 id="BootStrapClassLoader">BootStrapClassLoader</h4>
 <ul>
 <li>用c/c++实现 嵌套在JVM内部</li>
 <li>不继承ClassLoader</li>
@@ -594,7 +594,7 @@ JDK包含了JRE，JRE中包含虚拟机JVM</p>
 <p><span style='color:red;'> 一个JVM实例对应一个RunTime实例</span></p>
 <p>HotSpot JVM每个线程对应操作的本地线程直接映射</p>
 <h3 id="虚拟机栈">虚拟机栈</h3>
-<h4 id="概念-v4">概念</h4>
+<h4 id="概念-v5">概念</h4>
 <p>内部保存一个个的栈帧，对应着一次次的java方法调用（线程私有）</p>
 <ul>
 <li>
@@ -1222,10 +1222,9 @@ son<span class="token punctuation">.</span><span class="token function">sayOfSon
 <h4 id="实例数据">实例数据</h4>
 <h4 id="Instance-Data">Instance Data</h4>
 <p>对象真正存储的有效信息，包括程序代码定义的各种类型的字段</p>
-<p>规则： 入少年宫图</p>
 <h4 id="对齐填充">对齐填充</h4>
 <p>占位符作用</p>
-<p>64位 JVM   实际对象必须是8的整数位   只有1byte属性也要给你整到 16 bytes</p>
+<p>64位 JVM   实际对象必须是8的整数位   只有1byte属性也要给你整到 8 bytes</p>
 <p>一个空的对象</p>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210405171441583.png" srcset="/img/loading.gif" lazyload alt="image-20210405171441583"></p>
 <p>两个String属性的对象</p>
@@ -1663,7 +1662,7 @@ A：true，因为final变量在编译后会直接替换成对应的值，所以�
 <h4 id="分区算法">分区算法</h4>
 <p>堆空间越大 GC时间越长</p>
 <p>分割内存区域为多个小块 region ，减少目标停顿时间，每次合理地回收若干个小空间 而不是整个堆空间</p>
-<h3 id="概念-v5">概念</h3>
+<h3 id="概念-v6">概念</h3>
 <h4 id="System-gy">System,gy()</h4>
 <p>Runtijme.getRunTime().gc() 显示触发 Full GC</p>
 <p>但是附带<strong>免责声明</strong>，无法保证对垃圾收集器的调用</p>
@@ -1733,7 +1732,7 @@ s1 <span class="token operator">=</span> <span class="token keyword">null</span>
 syso s2<span class="token punctuation">.</span>name<span class="token punctuation">;</span></code></pre></div>
 <p>上述结果能输出s2的名字，因为由于是强引用，s1虽然没有引用了，但s2仍然持有堆空间中对象的引用，所以full gc时没有被清理</p>
 <h4 id="软引用Soft">软引用Soft</h4>
-<p>OOM前 或者 内存<strong>快要满了</strong>，将会把这些对象放入回收范围中进行二次回收，如果回收内存不够，才会报OOM</p>
+<p>常规gc时不会被回收，只有OOM前或者内存<strong>快要满了</strong>，将会把这些对象放入回收范围中进行二次回收，如果回收内存不够，才会报OOM</p>
 <p>注意软引用的使用方式  –  使用后要把强引用给置空，使得强引用无效</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java">   <span class="token class-name">Teacher1</span> teacher <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Teacher1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
    <span class="token class-name">SoftReference</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Teacher1</span><span class="token punctuation">></span></span> softReference <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SoftReference</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Teacher1</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>teacher<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1984,7 +1983,7 @@ syso s2<span class="token punctuation">.</span>name<span class="token punctuatio
 <span class="token punctuation">&#125;</span></code></pre></div>
 <p>涉及到的<strong>静态内部类</strong>的知识</p>
 <p>静态内部类只会在使用到该内部类时才会加载，否则是不会加载的，也就是只有使用到new Integer的valueOf方法时，才会加载该内部类</p>
-<h3 id="概念-v6">概念</h3>
+<h3 id="概念-v7">概念</h3>
 <p>字节码指令是一个一个字节长度，代表某种特定含义的操作码，以及跟随其后的参数—操作数构成的。</p>
 <h4 id="Class文件">Class文件</h4>
 <p>不一定以磁盘文件形式存在，是一组以8字节为基础单位的二进制流</p>
@@ -2492,10 +2491,10 @@ y <span class="token operator">=</span> a<span class="token punctuation">;</span
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        61&nbsp 篇文章
+        62&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        290.8k&nbsp 字
+        295.3k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

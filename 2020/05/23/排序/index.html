@@ -498,7 +498,7 @@
 <p>先决定中间正确索引pivot，再对两边进行排序。决定pivot时默认最左边为pivot选定的数，temp先保存，右边哨兵先动，&lt; temp时替换左边，然后左边相反。最后l == r时，将temp归位到正确pivot索引上</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">quickSort</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">,</span><span class="token keyword">int</span> l <span class="token punctuation">,</span><span class="token keyword">int</span> r<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span>l <span class="token operator">&lt;</span> r<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">int</span> index <span class="token operator">=</span> <span class="token function">getIndex</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> index <span class="token operator">=</span> <span class="token function">getIndex</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token operator">=</span>
         <span class="token function">quickSort</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span>l<span class="token punctuation">,</span>index<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">quickSort</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span>index<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">&#125;</span>
@@ -716,10 +716,10 @@
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        61&nbsp 篇文章
+        62&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        290.8k&nbsp 字
+        295.3k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

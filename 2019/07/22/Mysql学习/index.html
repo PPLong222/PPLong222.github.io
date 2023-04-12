@@ -64,7 +64,7 @@ show databases、  create database  xxx  、show create  database xxx(查询名�
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211023211744223.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20211023211734818.png">
 <meta property="article:published_time" content="2019-07-22T12:05:07.000Z">
-<meta property="article:modified_time" content="2023-03-14T11:21:27.000Z">
+<meta property="article:modified_time" content="2023-04-10T07:35:10.000Z">
 <meta property="article:author" content="PPLong">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Study">
@@ -307,8 +307,8 @@ show databases、  create database  xxx  、show create  database xxx(查询名�
     
         <span class="post-meta">
   <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
-  <time datetime="2023-03-14 19:21" pubdate>
-    更新: 2023年3月14日晚上7点21分
+  <time datetime="2023-04-10 15:35" pubdate>
+    更新: 2023年4月10日下午3点35分
   </time>
 </span>
         
@@ -327,7 +327,7 @@ show databases、  create database  xxx  、show create  database xxx(查询名�
       <i class="iconfont icon-clock-fill"></i>
       
       
-      130 分钟
+      131 分钟
     </span>
                 
 
@@ -616,13 +616,11 @@ alter table xxx drop foreign key key_name;
 <p>​    2.删除 ： Alter  table xxx drop foreign key 外键名;</p>
 <p>​    3.添加：  Alter  table xxx add costraint 外键名 foreign key 外键列名称 references 主表名称(主表列名称)（一般是主键）;</p>
 <ol start="4">
-<li>
-<p><em><strong>级联</strong></em>  （外键可以为NULL ）</p>
+<li><em><strong>级联</strong></em>  （外键可以为NULL ）</li>
+</ol>
 <ul>
 <li>创建表后级联更新：Alter table （foreign table） ADD CONSTRAINT … 		ON UPDATE  CASCADE;  (ON DELELTE CASCADE)</li>
 </ul>
-</li>
-</ol>
 <h2 id="标识列">标识列</h2>
 <p>auto_increment   自增长列，系统自动提供值,标识列必须是一个key，且只能有一个标识列</p>
 <p>设置起始值和步长</p>
@@ -787,7 +785,7 @@ revoke xxx on xxxdatabase.xxtable to  ‘xxxUser’@‘host’;</p>
 <p>目的：（避免使用后就开除的现象） 节约用户时间，重复使用连接对象。</p>
 </li>
 <li>
-<p>概念： 容器。存放数据库连接，系统初始后容器被创建，容器中申请一些连接对象，用		   户访问数据库时，从容器中获取连接对象，访问后将归还这些连接对象</p>
+<p>概念： 容器。存放数据库连接，系统初始后容器被创建，容器中申请一些连接对象，用户访问数据库时，从容器中获取连接对象，访问后将归还这些连接对象</p>
 </li>
 <li>
 <p>有点： 节约资源， 用户访问高效</p>
@@ -997,7 +995,7 @@ select id,name from Dep where id &lt; 10 union select levelDes,id from level whe
 </ul>
 <h4 id="连接器">连接器</h4>
 <p>提供MySQL连接服务，MySQL连接基于TCP进行传输。连接后，后续该用户在此连接的任何操作，都会<strong>基于连接开始时读到的权限</strong>进行权限逻辑的判断</p>
-<p>查看当前连接数 show processlist;Command为Sleep表示当前是一个空闲连接</p>
+<p>查看当前连接数 show processlist;      Command为Sleep表示当前是一个空闲连接</p>
 <div class="code-wrapper"><pre class="language-none"><code class="language-none">mysql&gt; show processlist;
 +-------+-----------------+----------------------+---------+---------+---------+------------------------+------------------+
 | Id    | User            | Host                 | db      | Command | Time    | State                  | Info             |
@@ -1094,7 +1092,7 @@ select id,name from Dep where id &lt; 10 union select levelDes,id from level whe
 <li>如果DB_TRX_ID在[min_trx_id,max_trx_id)之间，则要判断DB_TRX_ID是否在m_ids列表中
 <ul>
 <li>如果DB_TRX_ID在列表中，表明生成该版本记录的活跃事务依然活跃，所以该版本的记录对当前事务不可见。(<strong>特例：对本事务可见！</strong>)</li>
-<li>如果DB_TRX_ID在列表中，表明生成该版本记录的活跃事务已经被提交，所以该版本的记录对当前事务可见</li>
+<li>如果DB_TRX_ID不在列表中，表明生成该版本记录的活跃事务已经被提交，所以该版本的记录对当前事务可见</li>
 </ul>
 </li>
 </ul>
@@ -1193,8 +1191,8 @@ select @@tx_isolation
 set (global 代表设置全局的)session transaction isolation level xxxx;
 # 实验前提：两个会话都需要都开启一个事务 set autocommit &#x3D; 0;</code></pre></div>
 <ul>
-<li>read- uncommitted 读未提交：一个事务没提交时，做的变更就能被其他事务看到</li>
-<li>read committed 读已提交：一个事务提交后，做的变更才能被其他事务看到。<strong>通过ReadiView实现</strong>
+<li>read-uncommitted 读未提交：一个事务没提交时，做的变更就能被其他事务看到</li>
+<li>read-committed 读已提交：一个事务提交后，做的变更才能被其他事务看到。<strong>通过ReadiView实现</strong>
 <ul>
 <li>避免脏读，但不可重复读、幻读不能避免</li>
 </ul>
@@ -1205,7 +1203,7 @@ set (global 代表设置全局的)session transaction isolation level xxxx;
 <li>InnoDB默认隔离级别</li>
 </ul>
 </li>
-<li>serializable 串行化：<strong>对记录加上读写锁</strong>，在多个事务对该记录进行读写操作时，如果发生饿了读写冲突，则后访问的事务必须等待前一个事务执行完成
+<li>serializable 串行化：<strong>对记录加上读写锁</strong>，在多个事务对该记录进行读写操作时，如果发生了读写冲突，则后访问的事务必须等待前一个事务执行完成
 <ul>
 <li>都可避免</li>
 <li>会阻塞住,性能十分低下</li>
@@ -1236,7 +1234,7 @@ unlock tables</code></pre></div>
 <li>表锁 <code>lock tables t_student read/write</code></li>
 <li>元数据锁MDL. 对数据库表进行操作时自动加上了MDL，只有在事务提交后才会被释放
 <ul>
-<li>对一张表进行CRUD时加点是MDL读锁，当一个线程执行select语句中，如果有其他线程向更改该表的结构，则会被阻塞</li>
+<li>对一张表进行CRUD时加的是MDL读锁，当一个线程执行select语句中，如果有其他线程向更改该表的结构，则会被阻塞</li>
 <li>对一张表做结构变更时加的是MDL写锁，当一个线程对表结构进行改变时，如果有其他线程执行CRUD操作，则会被阻塞</li>
 </ul>
 </li>
@@ -1545,7 +1543,7 @@ insert into t1 values(27, name, age); # 6</code></pre></div>
 </ol>
 <p>当然redolog也不是直接写入磁盘的，有自己的缓存，redo log buffer，redo log会先写到buffer中然后再持久化到磁盘。所以，断电问题有转移到了<strong>redo log buffer什么时候刷</strong>盘这一问题来：</p>
 <ul>
-<li>MysQL正常关闭时</li>
+<li>MySQL正常关闭时</li>
 <li>redo log buffer中记录的写入量大于buffer内存空间的一半</li>
 <li>InnoDB后台线程每隔1s将redo log buffer持久化</li>
 <li>每次事务提交时都将缓存在redo log buffer的redo log持久化到磁盘(可选)</li>
@@ -1554,7 +1552,7 @@ insert into t1 values(27, name, age); # 6</code></pre></div>
 <ul>
 <li>0: 每次事务提交时，redo log留在buffer中，不主动触发刷盘</li>
 <li>1(Default): 每次事务提交，缓存在buffer的redo log立即刷到磁盘</li>
-<li>2: 每次事务提交，将缓存在redo log buffer的redo log 写到redo log文件，不是磁盘，而是OS到缓存页 Page Cache。这样就算Mysql挂了，OS不挂，最终还是会被写入到磁盘的</li>
+<li>2: 每次事务提交，将缓存在redo log buffer的redo log 写到redo log文件，不是磁盘，而是OS的缓存页 Page Cache。这样就算Mysql挂了，OS不挂，最终还是会被写入到磁盘的</li>
 </ul>
 <p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/mysql/how_update/innodb_flush_log_at_trx_commit.drawio.png?image_process=watermark,text_5YWs5LyX5Y-377ya5bCP5p6XY29kaW5n,type_ZnpsdHpoaw,x_10,y_10,g_se,size_20,color_0000CD,t_70,fill_0" srcset="/img/loading.gif" lazyload alt=""></p>
 <p><strong>redo log 文件写满了怎么办</strong></p>
@@ -1584,7 +1582,7 @@ insert into t1 values(27, name, age); # 6</code></pre></div>
 </li>
 <li>写入方式不同：
 <ul>
-<li>binlog：追加写，写满一个文件，创建新文件继续写，不会覆盖以爱你的日志，保存的是全量日志</li>
+<li>binlog：追加写，写满一个文件，创建新文件继续写，不会覆盖以前的日志，保存的是全量日志</li>
 <li>redo log：循环写，日志空间大小固定，全部写满就从头开始</li>
 </ul>
 </li>
@@ -1838,7 +1836,7 @@ select @selfStr;</code></pre></div>
 drop procedure xxx
 # 查看存储过程
 show create procedure xxx;</code></pre></div>
-<h4 id="函数-v3">函数</h4>
+<h4 id="函数-v2">函数</h4>
 <div class="code-wrapper"><pre class="language-mysql" data-language="mysql"><code class="language-mysql"># 创建
 create function xxx(params...) returns returntype
 begin
@@ -1951,7 +1949,7 @@ begin
         end while xx;
 end $;</code></pre></div>
 <p>iterator  : 类似java中的continue;</p>
-<h2 id="进阶-v4">进阶</h2>
+<h2 id="进阶-v2">进阶</h2>
 <h3 id="自启动服务">自启动服务</h3>
 <p>早就想设置了，赣！</p>
 <p>/usr/lib/systemd/system下新建xx.service文件</p>
@@ -2465,10 +2463,10 @@ select * from t1 order by col1 asc,col2 desc; # col1-col2 is co-index  --- index
 <p>表定义文件</p>
 <h5 id="ibd">ibd</h5>
 <p>索引和数据文件</p>
-<h2 id="一些问题-v4">一些问题</h2>
-<h3 id="Mysql和Mariadb的区别">Mysql和Mariadb的区别</h3>
+<h2 id="一些问题-v3">一些问题</h2>
+<h3 id="InnoDB和MyISAM的区别">InnoDB和MyISAM的区别</h3>
 <ul>
-<li>MyISam：
+<li>MyISAM：
 <ul>
 <li><strong>不支持外键</strong></li>
 <li><strong>不支持事务</strong></li>
@@ -2484,7 +2482,7 @@ select * from t1 order by col1 asc,col2 desc; # col1-col2 is co-index  --- index
 </li>
 </ul>
 </li>
-<li>Innodb：
+<li>InnoDB：
 <ul>
 <li><strong>支持外键</strong></li>
 <li><strong>支持事务</strong>（Mysql默认引擎为InnoDB的重要原因）</li>
@@ -2509,7 +2507,7 @@ select * from t1 order by col1 asc,col2 desc; # col1-col2 is co-index  --- index
 <p>默认是主键</p>
 </li>
 <li>
-<p>如果么有定义主键，InnoDB会选择一个唯一的非空索引代替</p>
+<p>如果没有定义主键，InnoDB会选择一个唯一的非空索引代替</p>
 </li>
 <li>
 <p>如果没有这样的索引，将会在内部生成一个名为GEN_CLUST_INDEX的隐式聚簇索引</p>
@@ -2603,6 +2601,8 @@ select * from t1 order by col1 asc,col2 desc; # col1-col2 is co-index  --- index
 <p>所以为什么这里全扫描二级索引树而不扫描主键所在的聚簇索引树呢？</p>
 <p>因为二级索引树的记录很少，只有索引值 + 主键值，而聚簇索引记录东西多，比如事务id、MVCC回滚指针等，遍历聚簇索引树IO花销大</p>
 </blockquote>
+<p>即使用左模糊匹配（like “%xx”）并不一定会走全表扫描，关键还是看数据表中的字段。</p>
+<p>如果数据库表中的字段只有主键+二级索引，那么即使使用了左模糊匹配，也不会走全表扫描（type=all），而是走全扫描二级索引树(type=index)。</p>
 <h3 id="MySQL-ACID如何保证的">MySQL ACID如何保证的</h3>
 <ul>
 <li>原子性：undo log</li>
@@ -2797,10 +2797,10 @@ show full columns from t22;</code></pre></div>
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        61&nbsp 篇文章
+        62&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        290.8k&nbsp 字
+        295.3k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
