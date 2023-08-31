@@ -345,7 +345,7 @@
                             
                                     <div class="markdown-body">
                                         <h1>Redis指南</h1>
-<h2 id="概念-v8">概念</h2>
+<h2 id="概念-v9">概念</h2>
 <p>Redis: 内存告诉缓存数据库，全称为: Remote Dictionary Server(C语言编写), 是一个Key-Value存储系统。可用于缓存，事件发布、订阅、高速队列等场景。基于内存且可持久化。</p>
 <h3 id="特点">特点</h3>
 <ul>
@@ -364,7 +364,7 @@
 <li>排行榜(SortedSet)</li>
 <li>好友等相互关系的存储</li>
 </ul>
-<h2 id="基本-v2">基本</h2>
+<h2 id="基本-v3">基本</h2>
 <h3 id="基本数据类型">基本数据类型</h3>
 <table>
 <thead>
@@ -625,7 +625,7 @@ subscribe [target_channel_1] [target_channel_2] ...</code></pre></div>
 <li>基于多路复用机制提升Redis I/O利用率</li>
 <li>使用高效的数据存储结构：全局Hash表、跳表、压缩列表、链表等</li>
 </ol>
-<h3 id="进阶-v4">进阶</h3>
+<h3 id="进阶-v5">进阶</h3>
 <h4 id="缓存问题">缓存问题</h4>
 <h5 id="缓存穿透">缓存穿透</h5>
 <p>用户不断请求缓存和数据库中都没有的数据，而按规则如果从存储层查不到数据则不写入缓存，着将导致这个每次进行这个请求都要到数据库去查询，缓存失效(避免无效id查询对数据库的攻击)</p>
@@ -894,10 +894,10 @@ subscribe [target_channel_1] [target_channel_2] ...</code></pre></div>
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        71&nbsp 篇文章
+        72&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        262.5k&nbsp 字
+        319.3k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
