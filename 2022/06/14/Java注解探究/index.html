@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220616105156419.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220616111005419.png">
 <meta property="article:published_time" content="2022-06-14T06:34:56.000Z">
-<meta property="article:modified_time" content="2022-06-16T09:25:34.000Z">
+<meta property="article:modified_time" content="2023-08-27T09:19:47.000Z">
 <meta property="article:author" content="PPLong">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
@@ -272,8 +272,8 @@
     
         <span class="post-meta">
   <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
-  <time datetime="2022-06-16 17:25" pubdate>
-    更新: 2022年6月16日下午5点25分
+  <time datetime="2023-08-27 17:19" pubdate>
+    更新: 2023年8月27日下午5点19分
   </time>
 </span>
         
@@ -382,7 +382,7 @@
 <p>如果使用其他类型的对象，则会报错<br>
 <img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220616105156419.png" alt="image-20220616105156419"></p>
 <p>若注解中只有<strong>一个</strong>方法<strong>value()</strong>，则注解时可以直接不加方法名称说明，@Hello(“myname”)即可</p>
-<h3 id="结构-v2">结构</h3>
+<h3 id="结构">结构</h3>
 <p><strong>注解的本质是一个继承了Annotation接口的接口</strong></p>
 <div class="note note-primary">
             <p>基础回顾： Interface中的方法默认都是public abstract的，且属性默认是static的</p>
@@ -481,7 +481,7 @@
 </code></pre></div>
 <p>一个Annotation与一个RetentionPolicy关联，并且与1-n个ElementType关联；ElementType来指定Annotation的类型，指明Annotation的用途；RetentionPolicy指定Annotation的作用域，三种作用域的作用在上述注解中均已说明。</p>
 <h2 id="实验-v2">实验</h2>
-<h3 id="使用-v3">使用</h3>
+<h3 id="使用-v5">使用</h3>
 <p>getAnnotation指定的注解来获取指定的注解类型，可直接调用该<strong>注解对象</strong>下的方法，进而获取其中的数据</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token class-name">ElementType</span><span class="token punctuation">.</span>FIELD<span class="token punctuation">,</span> <span class="token class-name">ElementType</span><span class="token punctuation">.</span>METHOD<span class="token punctuation">,</span> <span class="token class-name">ElementType</span><span class="token punctuation">.</span>TYPE<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token class-name">RetentionPolicy</span><span class="token punctuation">.</span>RUNTIME<span class="token punctuation">)</span>
@@ -507,7 +507,7 @@
 <div class="code-wrapper"><pre class="language-shell" data-language="shell"><code class="language-shell">Classfile &#x2F;opt&#x2F;JavaProjects&#x2F;AnnotationStudy&#x2F;target&#x2F;classes&#x2F;Hello.class
   Last modified 2022-6-14; size 442 bytes
   MD5 checksum 4db04dd07931cec8b63bb2890dd0ad0d
-  Compiled from &quot;Hello.java&quot;
+  Compiled from &quot;Hello.java
 public interface Hello extends java.lang.annotation.Annotation
   minor version: 0
   major version: 52
@@ -596,7 +596,7 @@ RuntimeVisibleAnnotations:
         <span class="token keyword">return</span> result<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span></code></pre></div>
 <p>即代理类在调用方法时对自定义的方法，会通过Map memberValues去取之前存有的注解中的值。而注解中设置的值<strong>并不直接在生成的$Proxy类中</strong>，而是通过构造该类时传入的AnnotationInvocationHandler中的Map&lt;String, Object&gt; memberValues来管理，在每次invoke时去get对应的值</p>
-<h2 id="总结-v2">总结</h2>
+<h2 id="总结-v3">总结</h2>
 <p>注解是一种帮助快速开发的手段，通过主要Java反射来检测和执行，依赖JDK动态代理的机制。</p>
 <div class="note note-info">
             <p>参考文章： 📖  <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/60966151">知乎-注解(上)</a>     📖 <a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/java-annotation.html">Java注解（Annotation） </a> 📖 <a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/java-annotation.html">RUNOOB-Java 注解</a></p>
@@ -762,10 +762,10 @@ RuntimeVisibleAnnotations:
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        62&nbsp 篇文章
+        71&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        296.2k&nbsp 字
+        262.5k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

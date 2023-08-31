@@ -345,7 +345,7 @@
                             
                                     <div class="markdown-body">
                                         <h1>Redis指南</h1>
-<h2 id="概念-v9">概念</h2>
+<h2 id="概念-v8">概念</h2>
 <p>Redis: 内存告诉缓存数据库，全称为: Remote Dictionary Server(C语言编写), 是一个Key-Value存储系统。可用于缓存，事件发布、订阅、高速队列等场景。基于内存且可持久化。</p>
 <h3 id="特点">特点</h3>
 <ul>
@@ -612,7 +612,7 @@ subscribe [target_channel_1] [target_channel_2] ...</code></pre></div>
 <p>使用链表，链表中的每个节点包含订阅该模式的客户端，pattern表示当前被订阅的模式</p>
 <p><img src="https://pdai.tech/images/db/redis/db-redis-sub-10.svg" alt=""></p>
 <h2 id="面试-v2">面试</h2>
-<h3 id="基础-v3">基础</h3>
+<h3 id="基础-v6">基础</h3>
 <h4 id="Redis到底是单线程还是多线程？">Redis到底是单线程还是多线程？</h4>
 <ul>
 <li>Redis6.0版本前的单线程指网络IO和读写是由一个线程完成的</li>
@@ -625,7 +625,7 @@ subscribe [target_channel_1] [target_channel_2] ...</code></pre></div>
 <li>基于多路复用机制提升Redis I/O利用率</li>
 <li>使用高效的数据存储结构：全局Hash表、跳表、压缩列表、链表等</li>
 </ol>
-<h3 id="进阶-v5">进阶</h3>
+<h3 id="进阶-v4">进阶</h3>
 <h4 id="缓存问题">缓存问题</h4>
 <h5 id="缓存穿透">缓存穿透</h5>
 <p>用户不断请求缓存和数据库中都没有的数据，而按规则如果从存储层查不到数据则不写入缓存，着将导致这个每次进行这个请求都要到数据库去查询，缓存失效(避免无效id查询对数据库的攻击)</p>
@@ -894,10 +894,10 @@ subscribe [target_channel_1] [target_channel_2] ...</code></pre></div>
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        62&nbsp 篇文章
+        71&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        296.2k&nbsp 字
+        262.5k&nbsp 字
     </div>
 </div>
         <div class="footer-content">

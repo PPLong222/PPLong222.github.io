@@ -250,10 +250,10 @@
  
 <div style="margin-bottom: 20px;margin-left:10px;margin-right: 10px;">
     <div class="note note-info" style="position: relative;overflow: hidden;">
-      <p class="latest_post" id="latest_post_p" tag-time="1681379425000">最近更新时间:
+      <p class="latest_post" id="latest_post_p" tag-time="1693481048000">最近更新时间:
         &nbsp;&nbsp;&nbsp;&nbsp;
         更新文章: 《 
-        <a href="/2019/01/22/LeetCode刷题/" >LeetCode题库》</a>
+        <a href="/2023/08/31/Android-LayoutInflater探究/" >Android LayoutInflater探究》</a>
       </p>
     </div>
 </div>
@@ -263,30 +263,32 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2022/04/26/%E4%BB%80%E4%B9%88%E6%98%AFCORS/" target="_self">
-          <img src="/gallery/covers/wallhaven-x8gejl.jpg" srcset="/img/loading.gif" lazyload alt="什么是CORS">
+        <a href="/2023/08/31/Android%20RecyclerView%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          <img src="/gallery/covers/wallhaven-lm5w9r.jpg" srcset="/img/loading.gif" lazyload alt="Android RecyclerView源码解析">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/04/26/%E4%BB%80%E4%B9%88%E6%98%AFCORS/" target="_self">
-          什么是CORS
+        <a href="/2023/08/31/Android%20RecyclerView%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          Android RecyclerView源码解析
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/04/26/%E4%BB%80%E4%B9%88%E6%98%AFCORS/" target="_self">
+        <a href="/2023/08/31/Android%20RecyclerView%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
           
           
             
           
-          SOP与CORS
-问题溯源
-为什么我会遇到这个问题呢？如果你也有类似的经历，那么接下来的内容就或许能够帮助你解决问题
-1. 通过服务器网页上的js脚本想在线获取leetcode的数据
-通过网页上的js脚本给leetcode发送请求，这个bug发现花了很长时间，因为在自己的Chrome上以前也发生过类似的CORS请求失败问题，当时没有深究，查了下 下载了Allow CORS这个插件，立马解决了问题。
+          RecyclerView
+简介
+首先了解RecyclerView的关键参数
+public class RecyclerView extends ViewGroup implements ScrollingView,
+NestedScrollingChild2, NestedScrollingChild3 &#123;
+    // 回收机制核心
+    final Recycler mRecycl
         </a>
       </p>
 
@@ -294,8 +296,520 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-04-26 15:10" pubdate>
-              2022-04-26
+            <time datetime="2023-08-31 19:11" pubdate>
+              2023-08-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/03/20/Java-I-O%E8%AF%A6%E8%A7%A3/" target="_self">
+          <img src="/gallery/covers/wallhaven-lm5w9r.jpg" srcset="/img/loading.gif" lazyload alt="Java I/O详解">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/03/20/Java-I-O%E8%AF%A6%E8%A7%A3/" target="_self">
+          Java I/O详解
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/03/20/Java-I-O%E8%AF%A6%E8%A7%A3/" target="_self">
+          
+          
+            
+          
+          JAVA I/O详解
+
+IO这块一直是自己所忽略的部分，抽时间好好系统性地学习一下
+建议回顾这篇文章之前，先回顾Unicode\UTF-8\ASCII等不同的编码方式
+
+
+概述
+编码
+字符和字节到底怎么区分的呢
+字节，基本的数据量单位，一字节 = 8 位
+字符是计算机中使用的字母、数字、字和符号
+
+ASCII 码中，一个英文字母（不分大小写）为一个字节，一个中文汉字为两个字节。
+Unicode 编
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-03-20 20:44" pubdate>
+              2023-03-20
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/03/08/Redis%E6%8C%87%E5%8D%97/" target="_self">
+          <img src="/gallery/covers/wallhaven-lm5w9r.jpg" srcset="/img/loading.gif" lazyload alt="Redis指南">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/03/08/Redis%E6%8C%87%E5%8D%97/" target="_self">
+          Redis指南
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/03/08/Redis%E6%8C%87%E5%8D%97/" target="_self">
+          
+          
+            
+          
+          Redis指南
+概念
+Redis: 内存告诉缓存数据库，全称为: Remote Dictionary Server(C语言编写), 是一个Key-Value存储系统。可用于缓存，事件发布、订阅、高速队列等场景。基于内存且可持久化。
+特点
+
+读写性能优异
+数据类型丰富。支持String、List、Set等数据类型的操作
+原子性。所有操作都是原子性的
+持久化。支持RDB、AOF等持久化方式
+单线程
+
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-03-08 15:53" pubdate>
+              2023-03-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Study/">Study</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/SQL/">SQL</a>
+            
+              <a href="/tags/NoSQL/">NoSQL</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/07/30/Java8%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/" target="_self">
+          <img src="/gallery/covers/wallhaven-lm5w9r.jpg" srcset="/img/loading.gif" lazyload alt="Java8特性学习">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/30/Java8%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/" target="_self">
+          Java8特性学习
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/07/30/Java8%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/" target="_self">
+          
+          
+            
+          
+          Java8特性学习
+
+Mybatis中出现了一些与Lambda相关的函数方法，使得在编程时非常的方便，但自己却不知道如何使用基于Java8的语法
+
+概述
+优点
+
+大数量下处理集合效率高
+代码可读性高，代码简洁，开发快速
+易于并发编程
+减少嵌套
+
+函数式编程思想
+面向对象的思想关注的说用什么对象完成什么事情，而函数式编程关注是对数据进行了什么操作
+Lambda表达式
+本质是JDK8 的语法糖，能对某
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-30 14:51" pubdate>
+              2022-07-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/07/08/%E8%BD%AF%E5%B7%A5%E5%AE%9E%E8%AE%AD-%E5%9B%A2%E9%98%9FSSM%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" target="_self">
+          <img src="/gallery/covers/wallhaven-3zp6o9.jpg" srcset="/img/loading.gif" lazyload alt="Echo-软工实训-团队SpringBoot项目总结">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/08/%E8%BD%AF%E5%B7%A5%E5%AE%9E%E8%AE%AD-%E5%9B%A2%E9%98%9FSSM%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" target="_self">
+          Echo-软工实训-团队SpringBoot项目总结
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/07/08/%E8%BD%AF%E5%B7%A5%E5%AE%9E%E8%AE%AD-%E5%9B%A2%E9%98%9FSSM%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" target="_self">
+          
+          
+            
+          
+          Echo-软工实训-团队SpringBoot项目总结
+
+忙碌了4周，终于结束了学院的实训课程，也是大学以来最后一个由团队协作完成的实训项目，也算是自己比较用心与团队成员一起完成的项目了。虽然最终效果还不是很好，但自己还是花了许多时间与精力，第一次比较正规的组织开发，在此进行一下复盘，总结一下组织开发时自己一些疏忽之处与项目开发时所遇到的问题。也算是自己后端实际开发所码的第一块砖了
+
+介绍
+所选定的
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-08 09:25" pubdate>
+              2022-07-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Spring-Boot/">Spring Boot</a>
+            
+              <a href="/tags/SSM/">SSM</a>
+            
+              <a href="/tags/Team-Work/">Team Work</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/06/15/%E7%BC%96%E8%AF%91JDK%E6%BA%90%E7%A0%81%E5%B9%B6%E8%B0%83%E8%AF%95Native%E6%96%B9%E6%B3%95/" target="_self">
+          <img src="/gallery/covers/wallhaven-e766xw.jpg" srcset="/img/loading.gif" lazyload alt="编译JDK源码并调试Native方法">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/06/15/%E7%BC%96%E8%AF%91JDK%E6%BA%90%E7%A0%81%E5%B9%B6%E8%B0%83%E8%AF%95Native%E6%96%B9%E6%B3%95/" target="_self">
+          编译JDK源码并调试Native方法
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/06/15/%E7%BC%96%E8%AF%91JDK%E6%BA%90%E7%A0%81%E5%B9%B6%E8%B0%83%E8%AF%95Native%E6%96%B9%E6%B3%95/" target="_self">
+          
+          
+            
+          
+          编译JDK源码并调试Native方法
+
+在学习反射的过程中核心方法Native反射的invoke0方法是Native的，还想多研究一下C层的代码，于是开始捣鼓如何调试JDK源码中Native方法。
+概要：编译自己的JDK源码、通过Clion与IDEA调试Native方法
+
+编译JDK源码
+
+            个人环境Linux: 5.10.121-1-MANJAROgcc/g++: 12.1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-15 10:59" pubdate>
+              2022-06-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/06/14/Java%E5%8F%8D%E5%B0%84%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/" target="_self">
+          <img src="/gallery/covers/wallhaven-lm5w9r.jpg" srcset="/img/loading.gif" lazyload alt="Java反射原理探究">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/06/14/Java%E5%8F%8D%E5%B0%84%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/" target="_self">
+          Java反射原理探究
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/06/14/Java%E5%8F%8D%E5%B0%84%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/" target="_self">
+          
+          
+            
+          
+          Java反射原理探究
+
+为什么要写这篇文章？基于Spring的学习我需要对Java的反射和注解机制有一个全面的认知，并且注解中有许多关系也牵扯到反射的原理，所以先学好反射才能学习注解等内容
+
+Reflection is a feature in the Java programming language. It allows an executing Java program to examine
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-14 16:20" pubdate>
+              2022-06-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/06/14/Java%E6%B3%A8%E8%A7%A3%E6%8E%A2%E7%A9%B6/" target="_self">
+          <img src="/gallery/covers/wallhaven-y898vk.jpg" srcset="/img/loading.gif" lazyload alt="Java注解探究">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/06/14/Java%E6%B3%A8%E8%A7%A3%E6%8E%A2%E7%A9%B6/" target="_self">
+          Java注解探究
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/06/14/Java%E6%B3%A8%E8%A7%A3%E6%8E%A2%E7%A9%B6/" target="_self">
+          
+          
+            
+          
+          Java注解探究
+
+            为什么学习？以前只是初步了解注解的概念，但实际应用场景寥寥无几。因为最近才开始深入的学习Spring，希望从底层弄懂其原理，当然作为Spring一定会用到的关键的注解，例如@Autowired之类的，要弄清其原理则肯定首先要弄懂Java的注解机制，因此才有了本文关于本文你可能需要提前了解：📖 Java的反射、📖 JDK动态代理机制关于本文包含的内容：
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-14 14:34" pubdate>
+              2022-06-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/05/04/CSRF%E4%BB%8B%E7%BB%8D/" target="_self">
+          <img src="/gallery/covers/wallhaven-1ke9xg.jpg" srcset="/img/loading.gif" lazyload alt="CSRF介绍">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/04/CSRF%E4%BB%8B%E7%BB%8D/" target="_self">
+          CSRF介绍
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/04/CSRF%E4%BB%8B%E7%BB%8D/" target="_self">
+          
+          
+            
+          
+          CSRF介绍
+
+看了CORS和SOP后还想继续了解一下Web安全的一些攻防，怕以后搭建后端的时候可能会有坑，这里先入个门
+
+介绍
+Cross-Site Request Forgery 跨站请求伪造，也可称为“One  Click Attack” 或者 “Session Riding”。通过伪装网站受信任的用户发送的请求来破坏数据
+引入
+为什么会发生CSRF攻击？ ——浏览器的隐式认证
+一般网站不会
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-04 09:39" pubdate>
+              2022-05-04
             </time>
           </div>
         
@@ -313,7 +827,7 @@
             
               <a href="/tags/Web/">Web</a>
             
-              <a href="/tags/HTTP/">HTTP</a>
+              <a href="/tags/Web-Security/">Web Security</a>
             
           </div>
         
@@ -325,42 +839,38 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2022/04/25/%E4%B8%BA%E4%BD%A0%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0LeetCode%E6%97%A5%E5%8E%86/" target="_self">
-          <img src="/gallery/covers/wallhaven-8om5xy.jpg" srcset="/img/loading.gif" lazyload alt="为你的Hexo博客添加LeetCode日历">
+        <a href="/2022/04/30/Python%E7%88%AC%E8%99%AB%E6%A1%88%E4%BE%8B%E6%95%B4%E5%90%88/" target="_self">
+          <img src="/gallery/covers/wallhaven-dpy6gg.jpg" srcset="/img/loading.gif" lazyload alt="Python爬虫案例整合">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/04/25/%E4%B8%BA%E4%BD%A0%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0LeetCode%E6%97%A5%E5%8E%86/" target="_self">
-          为你的Hexo博客添加LeetCode日历
+        <a href="/2022/04/30/Python%E7%88%AC%E8%99%AB%E6%A1%88%E4%BE%8B%E6%95%B4%E5%90%88/" target="_self">
+          Python爬虫案例整合
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/04/25/%E4%B8%BA%E4%BD%A0%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0LeetCode%E6%97%A5%E5%8E%86/" target="_self">
+        <a href="/2022/04/30/Python%E7%88%AC%E8%99%AB%E6%A1%88%E4%BE%8B%E6%95%B4%E5%90%88/" target="_self">
           
           
             
           
-          为你的Hexo博客添加LeetCode日历
+          Python爬虫案例整合
 
-    
-	
-	
-    
+整合一下自己写的一些爬虫案例，涉及一些常见的反爬机制和思路梳理
 
+Github仓库地址：PythonSpiderCases
+樱花动漫网站视频爬取
+(樱花动漫)[http://dmh8.com]
 
-介绍
-hexo-leetcode-calendar可以让你在以hexo为驱动的博客页面展示leetcode用户的提交记录，包括近一年的提交记录，以及每一天对应的天数（动态显示），并能分题型难易程度显示已解决的问题数。（灵感源自hexo-githubcalendar）
+一直想做一个自动更新追番的题型，以及做一个简易的搜索爬取。
 
+Version 1：
 
-
-
-安装
-快速上手
-定位到hexo主目录下，并打开
+支持在本地输入名称查询，获取对应的名称列表，选择序号，并获取对应的URL，获取该番剧的集数
         </a>
       </p>
 
@@ -368,8 +878,8 @@ hexo-leetcode-calendar可以让你在以hexo为驱动的博客页面展示leetco
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-04-25 20:14" pubdate>
-              2022-04-25
+            <time datetime="2022-04-30 22:59" pubdate>
+              2022-04-30
             </time>
           </div>
         
@@ -381,519 +891,6 @@ hexo-leetcode-calendar可以让你在以hexo为驱动的博客页面展示leetco
             
           </div>
         
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Hexo/">Hexo</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2022/04/21/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%95%B4%E5%90%88/" target="_self">
-          <img src="/gallery/covers/wallhaven-e766xw.jpg" srcset="/img/loading.gif" lazyload alt="正则表达式整合">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/04/21/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%95%B4%E5%90%88/" target="_self">
-          正则表达式整合
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/04/21/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%95%B4%E5%90%88/" target="_self">
-          
-          
-            
-          
-          正则表达式
-
-正则表达式很强大，但一直不是很清楚具体语法，每次遇到想匹配的字符串都是在网上抄，终于有时间好好整合一下，做一个总的整理，并且将后续项目中可能用到的匹配式也收录进来。
-
-语法
-位置
-
-
-^ : 匹配输入字符串开始的位置
-
-[1]+以一个或多个数字开头
-
-
-
-$ : 匹配输入字符串的结束位置
-
-abc$表示以abc结尾
-
-
-
-\b: 匹配单词边界（字与空格的位置）
-
-\b的位置非常重要，
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-04-21 22:15" pubdate>
-              2022-04-21
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/RE/">RE</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2022/04/21/Python%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8/" target="_self">
-          <img src="/gallery/covers/wallhaven-kww6e6.jpg" srcset="/img/loading.gif" lazyload alt="Python爬虫入门">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/04/21/Python%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8/" target="_self">
-          Python爬虫入门
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/04/21/Python%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8/" target="_self">
-          
-          
-            
-          
-          Python爬虫入门
-
-初衷：希望能从Leetcode上爬取个人登录一年的每天提交次数的json，通过mouse in触发js事件的然后绘制的HTML块，希望学习完后能够做到，也能轻松爬取豆瓣等资源
-这篇文章涉及到的知识：
-
-Python Lib: Scrapy Re BeautifulSoup Selenium XPath
-Web: Request Response Cookie Session
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-04-21 12:01" pubdate>
-              2022-04-21
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Python/">Python</a>
-            
-              <a href="/tags/Web-Spider/">Web Spider</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2022/04/04/%E6%B5%85%E5%85%A5Git-Hooks/" target="_self">
-          <img src="/gallery/covers/wallhaven-z83o6y.jpg" srcset="/img/loading.gif" lazyload alt="初识Git Hooks">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/04/04/%E6%B5%85%E5%85%A5Git-Hooks/" target="_self">
-          初识Git Hooks
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/04/04/%E6%B5%85%E5%85%A5Git-Hooks/" target="_self">
-          
-          
-            
-          
-          初识Git Hooks
-
-最近因为想充利用服务器的即时服务功能，希望把Hexo上的文档直接转化成PDF格式，不用电脑上操作，直接手机上通过FTP获取即可。所以本篇涉及到一些Linux简单脚本、pandoc命令和hexo操作、git知识
-
-背景
-希望能够通过钩子和Git仓库将我的Hexo博客的md文档同步到Server的仓库中，因为hexo部署的文件项目是public的html网页而非pdf，所以当
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-04-04 21:35" pubdate>
-              2022-04-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">Linux</a>
-            
-              <a href="/tags/Git/">Git</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2022/03/30/%E5%9F%BA%E4%BA%8EWireShark%E7%9A%84%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90/" target="_self">
-          <img src="/gallery/covers/wallhaven-z8p9rj.jpg" srcset="/img/loading.gif" lazyload alt="基于WireShark的网络分析">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/03/30/%E5%9F%BA%E4%BA%8EWireShark%E7%9A%84%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90/" target="_self">
-          基于WireShark的网络分析
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/03/30/%E5%9F%BA%E4%BA%8EWireShark%E7%9A%84%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90/" target="_self">
-          
-          
-            
-          
-          基于WireShark的网络分析
-
-一直对网络抓包这块很感兴趣，并且WireShark也一直吃灰，借这个机会通过WireShark分析一下传输层和网络层（TCP、IP）具体到数据包的封装细节和具体的工作细节
-
-介绍
-WireShark
-前称Ethereal，是一个网络封包分析软件，截取网络封装包，尽可能详细地显示网络封包信息 	开源开源开源！
-网络分析
-三次握手
-主要看传输层的分析
-Hello
-报
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-30 22:27" pubdate>
-              2022-03-30
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Network/">Network</a>
-            
-              <a href="/tags/WireShark/">WireShark</a>
-            
-              <a href="/tags/TCP-IP/">TCP/IP</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2022/02/16/MATLAB%E5%85%A5%E9%97%A8/" target="_self">
-          <img src="/gallery/covers/wallhaven-wqwgp6.jpg" srcset="/img/loading.gif" lazyload alt="MATLAB入门">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/02/16/MATLAB%E5%85%A5%E9%97%A8/" target="_self">
-          MATLAB入门
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/02/16/MATLAB%E5%85%A5%E9%97%A8/" target="_self">
-          
-          
-            
-          
-          MATLAB入门
-基本常识
-MATLAB默认数据类型是double
-Inf：无限大 eps：2.2204e-016无限小
-不加“；”，则会打印出该等式的结果值
-Matlab索引从 1 开始
-Calling Priority
-
-%% ：区分一个section
-一行打不完 用… 可以在第二行继续写
-数组
-条件表达式
-注意都要有end结尾
-
-if elseif else
-switch case  oth
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-02-16 09:08" pubdate>
-              2022-02-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/MATLAB/">MATLAB</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2022/02/15/unzip%E4%B8%8Eark%E8%A7%A3%E5%8E%8B%E7%9A%84%E4%B8%8D%E5%90%8C/" target="_self">
-          <img src="/gallery/covers/wallhaven-j3dl2p.jpg" srcset="/img/loading.gif" lazyload alt="unzip与ark解压踩坑">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/02/15/unzip%E4%B8%8Eark%E8%A7%A3%E5%8E%8B%E7%9A%84%E4%B8%8D%E5%90%8C/" target="_self">
-          unzip与ark解压踩坑
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/02/15/unzip%E4%B8%8Eark%E8%A7%A3%E5%8E%8B%E7%9A%84%E4%B8%8D%E5%90%8C/" target="_self">
-          
-          
-            
-          
-          unzip与ark解压踩坑
-
-最近安装Linux版本的MATLAB时，对zip压缩包直接采用的是Manjaro内置的解压方式Ark，但解压后出现问题，提示file too short ,一些so文件的名称出现问题，经过查证后，是ln -s 软链接出现问题【软链接相关解释在《Linux文件系统理解》文章中，可回顾一下】。以为是官方下载包不适配自己内核的问题，但自己ln 修复也不行，后通过AUR中查找
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-02-15 15:58" pubdate>
-              2022-02-15
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2022/01/21/%E8%BF%81%E7%A7%BBHexo/" target="_self">
-          <img src="/gallery/covers/wallhaven-k7jqem.png" srcset="/img/loading.gif" lazyload alt="将Hexo从Github Pages迁移到服务器">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/01/21/%E8%BF%81%E7%A7%BBHexo/" target="_self">
-          将Hexo从Github Pages迁移到服务器
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/01/21/%E8%BF%81%E7%A7%BBHexo/" target="_self">
-          
-          
-            
-          
-          将Hexo从Github Pages迁移到服务器
-
-            服务器一直空着，之前Hexo博客又搭在Github上有时候从手机上访问图片加载很慢。一直想着迁移到云服务器上，奈何拖延症晚期，昨天终于是弄好了，不过还是踩了个终极沙币坑
-          
-步骤
-服务器方面
-
-
-按照必要的git和nginx
-
-
-建立hexo 部署后的public文件夹的实际保存地址 (/home/www
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-21 16:52" pubdate>
-              2022-01-21
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Hexo/">Hexo</a>
-            
-              <a href="/tags/ErrorResolve/">ErrorResolve</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2022/01/04/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%80%BB%E7%BB%93/" target="_self">
-          <img src="/gallery/covers/wallhaven-x8dpml.png" srcset="/img/loading.gif" lazyload alt="数据库系统概总结">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/01/04/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%80%BB%E7%BB%93/" target="_self">
-          数据库系统概总结
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/01/04/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%80%BB%E7%BB%93/" target="_self">
-          
-          
-            
-          
-          数据库系统概总结
-绪论
-数据库技术的四个基本概念： 数据、数据库、数据库管理系统和数据库系统
-数据(data)：数据库中存储的基本对象。定义：描述事务的符号记录，可以是数字也可以是文字、图形、图像…都可以经过数字化存储后存入计算机。
-数据库(DataBase)：长期存储在计算机内、有组织的、可共享的大量数据的集合。数据库中的数据按照一定的数据模型组织、描述和存储，具有较小的冗余度、较高的数据独立性
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-04 14:44" pubdate>
-              2022-01-04
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
-            
-          </div>
         
       </div>
     </article>
@@ -903,7 +900,7 @@ switch case  oth
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#board">8</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
@@ -963,10 +960,10 @@ switch case  oth
 <!-- 自定义显示文章总页数和字数的模块 -->
 <div class="bottom-post-statistic">
     <div class="bottom-post-count">
-        62&nbsp 篇文章
+        71&nbsp 篇文章
     </div>
     <div class="bottom-post-word">
-        296.2k&nbsp 字
+        262.5k&nbsp 字
     </div>
 </div>
         <div class="footer-content">
