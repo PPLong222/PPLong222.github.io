@@ -481,7 +481,7 @@
 </code></pre></div>
 <p>一个Annotation与一个RetentionPolicy关联，并且与1-n个ElementType关联；ElementType来指定Annotation的类型，指明Annotation的用途；RetentionPolicy指定Annotation的作用域，三种作用域的作用在上述注解中均已说明。</p>
 <h2 id="实验-v2">实验</h2>
-<h3 id="使用-v5">使用</h3>
+<h3 id="使用-v4">使用</h3>
 <p>getAnnotation指定的注解来获取指定的注解类型，可直接调用该<strong>注解对象</strong>下的方法，进而获取其中的数据</p>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token class-name">ElementType</span><span class="token punctuation">.</span>FIELD<span class="token punctuation">,</span> <span class="token class-name">ElementType</span><span class="token punctuation">.</span>METHOD<span class="token punctuation">,</span> <span class="token class-name">ElementType</span><span class="token punctuation">.</span>TYPE<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token class-name">RetentionPolicy</span><span class="token punctuation">.</span>RUNTIME<span class="token punctuation">)</span>

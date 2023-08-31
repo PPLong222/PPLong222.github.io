@@ -324,7 +324,7 @@
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220306224704953.png">
 <meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210330202907036.png">
 <meta property="article:published_time" content="2019-01-22T12:05:07.000Z">
-<meta property="article:modified_time" content="2023-04-30T12:57:09.000Z">
+<meta property="article:modified_time" content="2023-08-31T11:28:12.000Z">
 <meta property="article:author" content="PPLong">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="算法">
@@ -567,8 +567,8 @@
     
         <span class="post-meta">
   <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
-  <time datetime="2023-04-30 20:57" pubdate>
-    更新: 2023年4月30日晚上8点57分
+  <time datetime="2023-08-31 19:28" pubdate>
+    更新: 2023年8月31日晚上7点28分
   </time>
 </span>
         
@@ -1496,7 +1496,7 @@ head<span class="token punctuation">.</span>next <span class="token operator">=<
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210307223505616.png" srcset="/img/loading.gif" lazyload alt="image-20210307223505616"></p>
 <p>先审题， 两个整数，返回数组下标，给出的数组不是排序的，返回的数组是排序的？</p>
 <p>回过头才发现忽略的因素：  数组是否有相同元素？</p>
-<h3 id="思路">思路</h3>
+<h3 id="思路-v2">思路</h3>
 <ol>
 <li>二分？</li>
 <li>排序后找？</li>
@@ -1539,7 +1539,7 @@ head<span class="token punctuation">.</span>next <span class="token operator">=<
 <div class="code-tag-time">2022/11/8 21:12:00</div>
 <div class="code-tag-label code-tag-label-foreach">Foreach</div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20221108211139910.png" srcset="/img/loading.gif" lazyload alt="image-20221108211139910"></p>
-<h3 id="思路-v2">思路</h3>
+<h3 id="思路-v3">思路</h3>
 <ul>
 <li>暴力解法：将两个数组合二为一然后直接取中位数即可，时间、空间复杂度O(m + n)</li>
 <li>基于数组是正序的来思考</li>
@@ -1759,7 +1759,7 @@ TAG : Overflow / Decimal</p>
        <span class="token keyword">return</span> rev<span class="token punctuation">;</span>
    <span class="token punctuation">&#125;</span></code></pre></div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20220406093819912.png" srcset="/img/loading.gif" lazyload alt="image-20220406093819912"></p>
-<h4 id="注意点">注意点</h4>
+<h4 id="注意点-v2">注意点</h4>
 <p>题解的方法跟我方法差距这么大主要是有一个原因：</p>
 <ul>
 <li>
@@ -2330,7 +2330,7 @@ TAG : KMP、迭代</p>
 <li>排除递归、dp…</li>
 </ul>
 <h3 id="1-暴力-v3">1. 暴力</h3>
-<h3 id="-v6"></h3>
+<h3 id="-v7"></h3>
 <h3 id="2-二分查找-转">2. 二分查找(转)</h3>
 <ol>
 <li>先把特殊情况罗列</li>
@@ -3477,7 +3477,7 @@ right<span class="token operator">=</span> <span class="token number">1</span><s
 <div class="code-tag-label code-tag-label-stack">Stack</div>
 <div class="code-tag-label code-tag-label-hash">Hash</div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210409123330409.png" srcset="/img/loading.gif" lazyload alt="image-20210409123330409"></p>
-<h3 id="思路-v3">思路</h3>
+<h3 id="思路-v4">思路</h3>
 <p>递归  node.left = …</p>
 <h3 id="1-My-递归">1. My 递归</h3>
 <div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">TreeNode</span> <span class="token function">buildTree</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> preorder<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> inorder<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -3570,7 +3570,7 @@ right<span class="token operator">=</span> <span class="token number">1</span><s
 <div class="code-tag-time">2023/3/12 18:12:00</div>
 <div class="code-tag-label code-tag-label-dfs">DFS</div>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230312170531781.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h3 id="思路-v4">思路</h3>
+<h3 id="思路-v5">思路</h3>
 <ul>
 <li>输出所有可能的路径；根节点到叶子结点；注意: 不是找到一条合适的路径就可以返回了，这里<strong>必须要遍历完所有的路径</strong>。</li>
 <li>直接：遍历所有从根节点到叶子结点的可能，成功则将其加入到List中</li>
@@ -9253,11 +9253,11 @@ public:
 <li>没想到dp…偏偏这次没想到</li>
 <li>其他还好，除了没想到好方法 还彳亍</li>
 </ul>
-<h2 id="-v7">------------------------------------------</h2>
+<h2 id="-v8">------------------------------------------</h2>
 <h2 id="LRU实现">LRU实现</h2>
 <h2 id="阿里2020-栈求表达式">阿里2020. 栈求表达式</h2>
 <p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20210330202907036.png" srcset="/img/loading.gif" lazyload alt="image-20210330202907036"></p>
-<h3 id="-v8"></h3>
+<h3 id="-v9"></h3>
 <h2 id="计算整数n的平方根-精度为0-00001">计算整数n的平方根  精度为0.00001</h2>
 <h3 id="牛顿迭代法">牛顿迭代法</h3>
 <p>牛顿迭代法不安全</p>
