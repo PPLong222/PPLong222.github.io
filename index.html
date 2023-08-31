@@ -250,10 +250,10 @@
  
 <div style="margin-bottom: 20px;margin-left:10px;margin-right: 10px;">
     <div class="note note-info" style="position: relative;overflow: hidden;">
-      <p class="latest_post" id="latest_post_p" tag-time="1693482114000">最近更新时间:
+      <p class="latest_post" id="latest_post_p" tag-time="1693494778000">最近更新时间:
         &nbsp;&nbsp;&nbsp;&nbsp;
         更新文章: 《 
-        <a href="/2023/08/31/Android-LayoutInflater探究/" >Android LayoutInflater探究》</a>
+        <a href="/2022/07/10/Android-View绘制机制/" >Android View绘制机制》</a>
       </p>
     </div>
 </div>
@@ -305,9 +305,9 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Life/">Life</a>
-            
               <a href="/tags/Thought/">Thought</a>
+            
+              <a href="/tags/Life/">Life</a>
             
           </div>
         
@@ -647,31 +647,56 @@ show databases、  create database  xxx  、show create  database xxx(查询名�
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/08/31/Android-LayoutInflater%E6%8E%A2%E7%A9%B6/" target="_self">
-          <img src="/gallery/covers/wallhaven-3z86od.png" srcset="/img/loading.gif" lazyload alt="Android LayoutInflater探究">
+        <a href="/2023/05/02/Android-RxJava%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" target="_self">
+          <img src="/gallery/covers/wallhaven-283q5m.png" srcset="/img/loading.gif" lazyload alt="Android RxJava源码学习">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/08/31/Android-LayoutInflater%E6%8E%A2%E7%A9%B6/" target="_self">
-          Android LayoutInflater探究
+        <a href="/2023/05/02/Android-RxJava%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" target="_self">
+          Android RxJava源码学习
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2023/08/31/Android-LayoutInflater%E6%8E%A2%E7%A9%B6/" target="_self">
+        <a href="/2023/05/02/Android-RxJava%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" target="_self">
           
           
             
           
-          LayoutInflater.inflate
+          RxJava
+基础
+特点：基于事件流的链式调用，实现异步操作，逻辑简洁实用简单。
+原理：基于一种扩展的观察者模式
 
-项目中经常使用到LayoutInflater.inflate去加载Layout为View，那么三个参数到底有何意义，今天来仔细看一下.
 
-public View inflate(@LayoutRes int resource, @Nullable ViewGroup root, boolean attachToRoot)
-方法的含义肯定是明确的，即把
+
+角色
+作用
+
+
+
+
+Observable(被观察者)
+产生事件
+
+
+Observer(观察者)
+接收事件，给出响应
+
+
+Subscribe(订阅)
+连接被观察者与观察者
+
+
+Event(事件)
+被观察者&amp;观察者 沟通的载体
+
+
+
+被观察者 通过 订阅 按顺序发送 事件 给
         </a>
       </p>
 
@@ -679,8 +704,8 @@ public View inflate(@LayoutRes int resource, @Nullable ViewGroup root, boolean a
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-31 19:24" pubdate>
-              2023-08-31
+            <time datetime="2023-05-02 19:13" pubdate>
+              2023-05-02
             </time>
           </div>
         
@@ -701,7 +726,128 @@ public View inflate(@LayoutRes int resource, @Nullable ViewGroup root, boolean a
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/08/31/Android-Activity-Fragment%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%8E%A2%E7%A9%B6/" target="_self">
+        <a href="/2023/04/28/Android-Lifecycle%E6%9C%BA%E5%88%B6%E6%8E%A2%E7%A9%B6/" target="_self">
+          <img src="/gallery/covers/wallhaven-kww6e6.jpg" srcset="/img/loading.gif" lazyload alt="Android Lifecycle机制探究">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/04/28/Android-Lifecycle%E6%9C%BA%E5%88%B6%E6%8E%A2%E7%A9%B6/" target="_self">
+          Android Lifecycle机制探究
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/04/28/Android-Lifecycle%E6%9C%BA%E5%88%B6%E6%8E%A2%E7%A9%B6/" target="_self">
+          
+          
+            
+          
+          Android Lifecycle机制探究
+Lifecyle
+LifecycleObserver
+
+引入：在控制Activity生命周期时，常常会在onStop或者onResume中写很多开关控制语句，防止内存泄漏等，不好维护；同时onStart有耗时任务，则onStop结束后而耗时任务还没完成，导致内存泄漏
+
+目的：用于构建生命周期感知型组件的类和接口
+特点：采用观察者模式
+核心组件
+
+Life
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-28 19:12" pubdate>
+              2023-04-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/04/25/Android-OkHttp%E6%BA%90%E7%A0%81%E6%A2%B3%E7%90%86/" target="_self">
+          <img src="/gallery/covers/wallhaven-2828w6.jpg" srcset="/img/loading.gif" lazyload alt="Android OkHttp源码梳理">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/04/25/Android-OkHttp%E6%BA%90%E7%A0%81%E6%A2%B3%E7%90%86/" target="_self">
+          Android OkHttp源码梳理
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/04/25/Android-OkHttp%E6%BA%90%E7%A0%81%E6%A2%B3%E7%90%86/" target="_self">
+          
+          
+            
+          
+          OkHttp学习
+基础
+Android主流网络请求框架，且是Retrofit框架的基础
+特性
+
+使用连接池减少请求延时
+使用GZIP压缩减少响应数据大小
+缓存响应内容，避免完全重复的请求
+支持HTTP2，对一台机器的所有请求共享同一个socket
+
+特点 责任链模式
+基本使用
+val okHttpClient = OkHttpClient()
+val request = Request.Build
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-25 19:13" pubdate>
+              2023-04-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/04/10/Android-Activity-Fragment%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%8E%A2%E7%A9%B6/" target="_self">
           <img src="/gallery/covers/wallhaven-6o7g9x.jpg" srcset="/img/loading.gif" lazyload alt="Android Activity&amp;Fragment生命周期探究">
         </a>
       </div>
@@ -709,13 +855,13 @@ public View inflate(@LayoutRes int resource, @Nullable ViewGroup root, boolean a
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/08/31/Android-Activity-Fragment%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%8E%A2%E7%A9%B6/" target="_self">
+        <a href="/2023/04/10/Android-Activity-Fragment%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%8E%A2%E7%A9%B6/" target="_self">
           Android Activity&amp;Fragment生命周期探究
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2023/08/31/Android-Activity-Fragment%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%8E%A2%E7%A9%B6/" target="_self">
+        <a href="/2023/04/10/Android-Activity-Fragment%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%8E%A2%E7%A9%B6/" target="_self">
           
           
             
@@ -736,121 +882,8 @@ onResume
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-31 19:22" pubdate>
-              2023-08-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/08/31/Android-Handler%E6%9C%BA%E5%88%B6%E8%A7%A3%E6%9E%90/" target="_self">
-          <img src="/gallery/covers/wallhaven-6or7gx.jpg" srcset="/img/loading.gif" lazyload alt="Android Handler机制解析">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/31/Android-Handler%E6%9C%BA%E5%88%B6%E8%A7%A3%E6%9E%90/" target="_self">
-          Android Handler机制解析
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/08/31/Android-Handler%E6%9C%BA%E5%88%B6%E8%A7%A3%E6%9E%90/" target="_self">
-          
-          
-            
-          
-          Handler
-简介
-定义：Android独有的一套消息传递机制
-作用：在多线程场景中将工作线程要更新的UI操作信息传递到UI主线程中进行更新，避免线程操作不安全问题
-核心角色：
-
-源码梳理
-Message
-public final class Message implements Parcelable &#123;
-    // Message类型
-    public int what;
-  
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-31 19:18" pubdate>
-              2023-08-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/08/31/Android-ViewModel%E6%BA%90%E7%A0%81%E6%A2%B3%E7%90%86/" target="_self">
-          <img src="/gallery/covers/wallhaven-6ow9xw.jpg" srcset="/img/loading.gif" lazyload alt="Android ViewModel源码梳理">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/31/Android-ViewModel%E6%BA%90%E7%A0%81%E6%A2%B3%E7%90%86/" target="_self">
-          Android ViewModel源码梳理
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/08/31/Android-ViewModel%E6%BA%90%E7%A0%81%E6%A2%B3%E7%90%86/" target="_self">
-          
-          
-            
-          
-          Android MVVM
-ViewModel
-ViewModel的不同之处：生命周期维持在Activity创建到销毁
-如何创建
-在Activity中我们经常使用ViewModelProvier(this)[MViewModel::class.java]获取唯一的ViewModel实例，ViewModel是通过ViewModelProvider进行创建的，那么就从ViewModelProvider的
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-31 19:14" pubdate>
-              2023-08-31
+            <time datetime="2023-04-10 19:22" pubdate>
+              2023-04-10
             </time>
           </div>
         

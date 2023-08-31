@@ -1,0 +1,1253 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/gallery/paw_img.jpg">
+  <link rel="icon" href="/gallery/paw_img.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PPLong">
+  <meta name="keywords" content="">
+  <!--添加百度站点统计-->
+  <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
+  <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
+  <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
+  <meta name="description" content="RxJava 基础 特点：基于事件流的链式调用，实现异步操作，逻辑简洁实用简单。 原理：基于一种扩展的观察者模式    角色 作用     Observable(被观察者) 产生事件   Observer(观察者) 接收事件，给出响应   Subscribe(订阅) 连接被观察者与观察者   Event(事件) 被观察者&amp;观察者 沟通的载体    被观察者 通过 订阅 按顺序发送 事件 给">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android RxJava源码学习">
+<meta property="og:url" content="https://www.pplong.top/2023/05/02/Android-RxJava%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="PPLong的博客">
+<meta property="og:description" content="RxJava 基础 特点：基于事件流的链式调用，实现异步操作，逻辑简洁实用简单。 原理：基于一种扩展的观察者模式    角色 作用     Observable(被观察者) 产生事件   Observer(观察者) 接收事件，给出响应   Subscribe(订阅) 连接被观察者与观察者   Event(事件) 被观察者&amp;观察者 沟通的载体    被观察者 通过 订阅 按顺序发送 事件 给">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230827193531680.png">
+<meta property="article:published_time" content="2023-05-02T11:13:28.000Z">
+<meta property="article:modified_time" content="2023-05-02T11:39:34.000Z">
+<meta property="article:author" content="PPLong">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230827193531680.png">
+  
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
+  
+  <title>Android RxJava源码学习 - PPLong的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/indexing-hover.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.pplong.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 90vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PPLong的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友達
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-link-fill"></i>
+                娱乐
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/movie/">
+                    <i class="iconfont icon-movie"></i>
+                    第二人生
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/shuoshuo/">
+                    <i class="iconfont icon-comment"></i>
+                    唠唠
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/develop/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    尝鲜
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/gallery/covers/wallhaven-283q5m.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Android RxJava源码学习">
+              
+            </span>
+
+            
+              <div class="mt-3">
+    
+            
+                <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-05-02 19:13" pubdate>
+        始于: 2023年5月2日晚上7点13分
+      </time>
+    </span>
+                
+</div>
+
+<!-- 自定义的更新时间 -->
+<div class="mt-1">
+    
+        <span class="post-meta">
+  <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
+  <time datetime="2023-05-02 19:39" pubdate>
+    更新: 2023年5月2日晚上7点39分
+  </time>
+</span>
+        
+</div>
+
+<div class="mt-1">
+    
+        <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      15k 字
+    </span>
+        
+
+            
+                <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      47 分钟
+    </span>
+                
+
+                    
+                        
+                            
+                                <!-- LeanCloud 统计文章PV -->
+                                <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span>
+                                 次
+                                    </span>
+                                    
+                                                
+</div>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+    <div class="container-fluid nopadding-x">
+        <div class="row nomargin-x">
+            <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-x-md">
+                <div class="container nopadding-x-md" id="board-ctn">
+                    <div class="py-5" id="board">
+                        <article class="post-content mx-auto">
+                            <!-- SEO header -->
+                            <h1 style="display: none">
+                                Android RxJava源码学习
+                            </h1>
+                            
+                                    <div class="markdown-body">
+                                        <h1>RxJava</h1>
+<h2 id="基础-v2">基础</h2>
+<p>特点：基于事件流的链式调用，实现异步操作，逻辑简洁实用简单。</p>
+<p>原理：基于一种扩展的观察者模式</p>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Observable(被观察者)</td>
+<td>产生事件</td>
+</tr>
+<tr>
+<td>Observer(观察者)</td>
+<td>接收事件，给出响应</td>
+</tr>
+<tr>
+<td>Subscribe(订阅)</td>
+<td>连接被观察者与观察者</td>
+</tr>
+<tr>
+<td>Event(事件)</td>
+<td>被观察者&amp;观察者 沟通的载体</td>
+</tr>
+</tbody>
+</table>
+<p>被观察者 通过 <strong>订阅</strong> 按顺序发送 事件 给 观察者，观察者 按顺序接收事件并做出响应</p>
+<blockquote>
+<p>举个例子</p>
+<p>餐馆中客户点菜，则客户作为被观察者来产生事件，厨房作为观察者接收具体事件并对事件进行处理，菜肴为具体事件，服务员作为subscribe连接食客与厨房。</p>
+</blockquote>
+<h3 id="简单使用-v2">简单使用</h3>
+<ol>
+<li>创建被观察者，被观察者生产指定事件</li>
+</ol>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> observable <span class="token operator">=</span> Observable<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">object</span><span class="token operator">:</span> ObservableOnSubscribe<span class="token operator">&lt;</span>Int<span class="token operator">></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">subscribe</span><span class="token punctuation">(</span>emitter<span class="token operator">:</span> ObservableEmitter<span class="token operator">&lt;</span>Int<span class="token operator">></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        emitter<span class="token punctuation">.</span><span class="token function">onNext</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+        emitter<span class="token punctuation">.</span><span class="token function">onNext</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+        emitter<span class="token punctuation">.</span><span class="token function">onComplete</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token comment">// 自动创建</span>
+<span class="token keyword">val</span> observableX <span class="token operator">=</span> Observable<span class="token punctuation">.</span><span class="token function">just</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"1"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"2"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"3"</span></span><span class="token punctuation">)</span>
+<span class="token comment">// 通过数组创建</span>
+<span class="token keyword">val</span> array <span class="token operator">=</span> <span class="token function">intArrayOf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token keyword">val</span> fromArray <span class="token operator">=</span> Observable<span class="token punctuation">.</span><span class="token function">fromArray</span><span class="token punctuation">(</span>array<span class="token punctuation">)</span></code></pre></div>
+<ol start="2">
+<li>创建观察者并定义响应事件行为</li>
+</ol>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token comment">// 实现Observer接口</span>
+<span class="token keyword">val</span> observer <span class="token operator">=</span> <span class="token keyword">object</span><span class="token operator">:</span> Observer<span class="token operator">&lt;</span>Int<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onSubscribe</span><span class="token punctuation">(</span>d<span class="token operator">:</span> Disposable<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onError</span><span class="token punctuation">(</span>e<span class="token operator">:</span> Throwable<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onComplete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onNext</span><span class="token punctuation">(</span>t<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">// 采用Subscriber抽象类</span>
+<span class="token keyword">val</span> observer <span class="token operator">=</span> <span class="token keyword">object</span><span class="token operator">:</span> Subscriber<span class="token operator">&lt;</span>Int<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onSubscribe</span><span class="token punctuation">(</span>d<span class="token operator">:</span> Disposable<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onError</span><span class="token punctuation">(</span>e<span class="token operator">:</span> Throwable<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onComplete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onNext</span><span class="token punctuation">(</span>t<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>使用Subscriber抽象类与Observer接口的区别</p>
+<ul>
+<li>在RxJava subscribe过程中Observer总是会被转化为Subscriber</li>
+<li>Subscriber对Observer接口进行了扩展，新增额外两个方法
+<ul>
+<li>onStart：还未响应事件前调用，做一些初始化工作</li>
+<li>unsubscribe：取消订阅</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>通过订阅连接被观察者和观察者</li>
+</ol>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token comment">// 注意这里主语是被观察者，subscribe可以理解为被观察</span>
+observable<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>observer<span class="token punctuation">)</span></code></pre></div>
+<p><strong>基于事件流优雅实现订阅流程</strong></p>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> observable <span class="token operator">=</span> Observable<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">object</span><span class="token operator">:</span> ObservableOnSubscribe<span class="token operator">&lt;</span>Int<span class="token operator">></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">subscribe</span><span class="token punctuation">(</span>emitter<span class="token operator">:</span> ObservableEmitter<span class="token operator">&lt;</span>Int<span class="token operator">></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        emitter<span class="token punctuation">.</span><span class="token function">onNext</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+        emitter<span class="token punctuation">.</span><span class="token function">onNext</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+        emitter<span class="token punctuation">.</span><span class="token function">onComplete</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token keyword">object</span> <span class="token operator">:</span> Observer<span class="token operator">&lt;</span>Int<span class="token operator">></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onSubscribe</span><span class="token punctuation">(</span>d<span class="token operator">:</span> Disposable<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onError</span><span class="token punctuation">(</span>e<span class="token operator">:</span> Throwable<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onComplete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onNext</span><span class="token punctuation">(</span>t<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div>
+<p>在onSubscribe中可采用Disposable的dispose方法，切断观察者与被观察者的连接，但此时被观察者还是可以继续发送事件</p>
+<h2 id="原理-v2">原理</h2>
+<h3 id="create">create</h3>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token operator">&lt;</span><span class="token annotation punctuation">@NonNull</span> <span class="token class-name">T</span><span class="token operator">></span> <span class="token class-name">Observable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">create</span><span class="token punctuation">(</span><span class="token annotation punctuation">@NonNull</span> <span class="token class-name">ObservableOnSubscribe</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> source<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span>source<span class="token punctuation">,</span> <span class="token string">"source is null"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token class-name">RxJavaPlugins</span><span class="token punctuation">.</span><span class="token function">onAssembly</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ObservableCreate</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">ObservableCreate</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token keyword">extends</span> <span class="token class-name">Observable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">final</span> <span class="token class-name">ObservableOnSubscribe</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> source<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">ObservableCreate</span><span class="token punctuation">(</span><span class="token class-name">ObservableOnSubscribe</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> source<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>source <span class="token operator">=</span> source<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 一般返回source，即ObservableCreate</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token operator">&lt;</span><span class="token annotation punctuation">@NonNull</span> <span class="token class-name">T</span><span class="token operator">></span> <span class="token annotation punctuation">@NonNull</span> <span class="token class-name">Observable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">onAssembly</span><span class="token punctuation">(</span><span class="token annotation punctuation">@NonNull</span> <span class="token class-name">Observable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> source<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Function</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> <span class="token class-name">Observable</span><span class="token punctuation">,</span> <span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">Observable</span><span class="token punctuation">></span></span> f <span class="token operator">=</span> onObservableAssembly<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> f <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">?</span> <span class="token punctuation">(</span><span class="token class-name">Observable</span><span class="token punctuation">)</span><span class="token function">apply</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> source<span class="token punctuation">)</span> <span class="token operator">:</span> source<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>即最终创建的是<strong>ObservableCreate</strong>对象，继承于抽象类Observable</p>
+<h3 id="subscribe">subscribe</h3>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token annotation punctuation">@NonNull</span> <span class="token class-name">Observer</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> <span class="token class-name">T</span><span class="token punctuation">></span></span> observer<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span>observer<span class="token punctuation">,</span> <span class="token string">"observer is null"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        observer <span class="token operator">=</span> <span class="token class-name">RxJavaPlugins</span><span class="token punctuation">.</span><span class="token function">onSubscribe</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> observer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      	<span class="token comment">// 核心方法</span>
+        <span class="token function">subscribeActual</span><span class="token punctuation">(</span>observer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NullPointerException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// NOPMD</span>
+        <span class="token keyword">throw</span> e<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Throwable</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">RxJavaPlugins</span><span class="token punctuation">.</span><span class="token function">onError</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// RxJavaPlugins</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token operator">&lt;</span><span class="token annotation punctuation">@NonNull</span> <span class="token class-name">T</span><span class="token operator">></span> <span class="token class-name">Observer</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> <span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">onSubscribe</span><span class="token punctuation">(</span><span class="token annotation punctuation">@NonNull</span> <span class="token class-name">Observable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> source<span class="token punctuation">,</span> <span class="token annotation punctuation">@NonNull</span> <span class="token class-name">Observer</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> <span class="token class-name">T</span><span class="token punctuation">></span></span> observer<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 一般为null</span>
+    <span class="token class-name">BiFunction</span><span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> <span class="token class-name">Observable</span><span class="token punctuation">,</span> <span class="token annotation punctuation">@NonNull</span> <span class="token operator">?</span> <span class="token keyword">super</span> <span class="token class-name">Observer</span><span class="token punctuation">,</span> <span class="token annotation punctuation">@NonNull</span> <span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">Observer</span><span class="token operator">></span> f <span class="token operator">=</span> onObservableSubscribe<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>f <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token function">apply</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> source<span class="token punctuation">,</span> observer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> observer<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// ObservaleCreate</span>
+<span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">subscribeActual</span><span class="token punctuation">(</span><span class="token class-name">Observer</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> <span class="token class-name">T</span><span class="token punctuation">></span></span> observer<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">CreateEmitter</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> parent <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CreateEmitter</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>observer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  	<span class="token comment">// 调用Observer中的onSubscrible方法，与下面subscribe方法区分开来</span>
+    observer<span class="token punctuation">.</span><span class="token function">onSubscribe</span><span class="token punctuation">(</span>parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+      	<span class="token comment">// 调用自定义的ObservableOnSubscribe的subscribe方法</span>
+      	<span class="token comment">// 随后开始执行自定义的方法，包括emitter.onNext</span>
+        source<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Throwable</span> ex<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Exceptions</span><span class="token punctuation">.</span><span class="token function">throwIfFatal</span><span class="token punctuation">(</span>ex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        parent<span class="token punctuation">.</span><span class="token function">onError</span><span class="token punctuation">(</span>ex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>接下来流程就交给了ObservableEmitter来进行传递</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// ObservaleCreate.CreateEmitter</span>
+
+<span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">CreateEmitter</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token keyword">extends</span> <span class="token class-name">AtomicReference</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Disposable</span><span class="token punctuation">></span></span> <span class="token keyword">implements</span> <span class="token class-name">ObservableEmitter</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span><span class="token punctuation">,</span> <span class="token class-name">Disposable</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">final</span> <span class="token class-name">Observer</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> <span class="token class-name">T</span><span class="token punctuation">></span></span> observer<span class="token punctuation">;</span>
+
+    <span class="token class-name">CreateEmitter</span><span class="token punctuation">(</span><span class="token class-name">Observer</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> <span class="token class-name">T</span><span class="token punctuation">></span></span> observer<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>observer <span class="token operator">=</span> observer<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onNext</span><span class="token punctuation">(</span><span class="token class-name">T</span> t<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>t <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+   	  		<span class="token function">onError</span><span class="token punctuation">(</span><span class="token class-name">ExceptionHelper</span><span class="token punctuation">.</span><span class="token function">createNullPointerException</span><span class="token punctuation">(</span><span class="token string">"onNext called with a null value."</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+      	<span class="token comment">// 进行校验</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isDisposed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          	<span class="token comment">// 调用绑定的observer的onNext方法</span>
+            observer<span class="token punctuation">.</span><span class="token function">onNext</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>可以看到，onNext</p>
+<h3 id="dispose">dispose</h3>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// ObservaleCreate.CreateEmitter</span>
+<span class="token comment">// CreateEmitter extends AtomicReference&lt;Disposable> implements ObservableEmitter&lt;T>, Disposable</span>
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">DisposableHelper</span><span class="token punctuation">.</span><span class="token function">dispose</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// DisposableHelper</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">boolean</span> <span class="token function">dispose</span><span class="token punctuation">(</span><span class="token class-name">AtomicReference</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Disposable</span><span class="token punctuation">></span></span> field<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Disposable</span> current <span class="token operator">=</span> field<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  	<span class="token comment">// DISPOSED 是实现Disposed接口的常量的实例</span>
+    <span class="token class-name">Disposable</span> d <span class="token operator">=</span> DISPOSED<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>current <span class="token operator">!=</span> d<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      	<span class="token comment">// 通过Atomic类 CAS操作进行, 可能是避免多线程下错误情况</span>
+        current <span class="token operator">=</span> field<span class="token punctuation">.</span><span class="token function">getAndSet</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>current <span class="token operator">!=</span> d<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>current <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+              	<span class="token comment">// CAS失败，则循环进行，直到正确为止</span>
+                current<span class="token punctuation">.</span><span class="token function">dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<h3 id="总结">总结</h3>
+<p>RxJava中设计模式采用了装饰者设计模式，例如CreateEmitter包装了自定义Observer接口实现类。缺点：整个调用栈变得很长</p>
+<h2 id="线程切换">线程切换</h2>
+<p><strong>核心：</strong> 装饰者模式下的逐层封装与拆包调用，依赖于内部Scheduler线程池进行线程调度</p>
+<h3 id="使用-v2">使用</h3>
+<p>Android中对RxJava一般的需求场景是 在子线程中实现耗时操作，然后回到主线程实现UI操作，即：</p>
+<ul>
+<li>被观察者在子线程中产生事件，例如进行网络请求获取数据</li>
+<li>观察者在主线程接收并响应事件，例如基于获取得到的数据进行UI更新</li>
+</ul>
+<p><strong>RxJava如何实现线程切换？</strong></p>
+<p>采用RxJava内置的线程调度器Scheduler，通过subscribeOn 与 observeOn 方法实现</p>
+<ul>
+<li>subscribeOn 指定被观察者发送事件的线程</li>
+<li>observeOn 指定观察者接收响应事件的线程</li>
+</ul>
+<p>RxJava中内置的用于调度的线程类型，并使用线程池维护，因此线程调度效率高</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th style="text-align:center">含义</th>
+<th style="text-align:right">应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Schedulers.immediate()</td>
+<td style="text-align:center">当前线程 = 不指定线程</td>
+<td style="text-align:right">默认</td>
+</tr>
+<tr>
+<td>AndroidSchedulers.mainThread()</td>
+<td style="text-align:center">Android主线程</td>
+<td style="text-align:right">操作UI</td>
+</tr>
+<tr>
+<td>Schedulers.newThread()</td>
+<td style="text-align:center">常规新线程</td>
+<td style="text-align:right">耗时等操作</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="http://Schedulers.io">Schedulers.io</a>()</td>
+<td style="text-align:center">io操作线程</td>
+<td style="text-align:right">网络请求、读写文件等io密集型操作</td>
+</tr>
+<tr>
+<td>Schedulers.computation()</td>
+<td style="text-align:center">CPU计算操作线程</td>
+<td style="text-align:right">大量计算操作</td>
+</tr>
+</tbody>
+</table>
+<p>需要注意的是subScribeOn只能执行一次，其后赋值无效。</p>
+<p>而observeOn可以赋值多次，每次指定Scheduler即代表此后与Observer相关的代码均从指定的Scheduler处执行</p>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> observer <span class="token operator">=</span> Observable<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>ObservableOnSubscribe<span class="token operator">&lt;</span>Int<span class="token operator">></span> <span class="token punctuation">&#123;</span>
+    		<span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"observable subscribe"</span></span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"current Thread: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        it<span class="token punctuation">.</span><span class="token function">onNext</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+        it<span class="token punctuation">.</span><span class="token function">onComplete</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribeOn</span><span class="token punctuation">(</span>Schedulers<span class="token punctuation">.</span><span class="token function">io</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">observeOn</span><span class="token punctuation">(</span>Schedulers<span class="token punctuation">.</span><span class="token function">newThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">doOnNext</span> <span class="token punctuation">&#123;</span>
+    		<span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"doOnNext"</span></span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"current Thread: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token punctuation">.</span><span class="token function">observeOn</span><span class="token punctuation">(</span>Schedulers<span class="token punctuation">.</span><span class="token function">newThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">doOnComplete</span> <span class="token punctuation">&#123;</span>
+    		<span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"doOnComplete"</span></span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"current Thread: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token punctuation">.</span><span class="token function">observeOn</span><span class="token punctuation">(</span>Schedulers<span class="token punctuation">.</span><span class="token function">newThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">subscribe</span> <span class="token punctuation">(</span><span class="token keyword">object</span> <span class="token operator">:</span> Observer<span class="token operator">&lt;</span>Int<span class="token operator">></span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onSubscribe</span><span class="token punctuation">(</span>p0<span class="token operator">:</span> Disposable<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"onSubscribe"</span></span><span class="token punctuation">)</span>
+                <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"current Thread: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onError</span><span class="token punctuation">(</span>p0<span class="token operator">:</span> Throwable<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onComplete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"onComplete"</span></span><span class="token punctuation">)</span>
+                <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"current Thread: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onNext</span><span class="token punctuation">(</span>p0<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"onNext"</span></span><span class="token punctuation">)</span>
+                <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"current Thread: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">)</span></code></pre></div>
+<p>输出</p>
+<div class="code-wrapper"><pre class="language-text" data-language="text"><code class="language-text">onSubscribe
+current Thread: main
+observable subscribe
+current Thread: RxCachedThreadScheduler-1
+doOnNext
+current Thread: RxNewThreadScheduler-1
+doOnComplete
+current Thread: RxNewThreadScheduler-2
+onNext
+current Thread: RxNewThreadScheduler-3
+onComplete
+current Thread: RxNewThreadScheduler-3</code></pre></div>
+<h3 id="subscribeOn">subscribeOn</h3>
+<blockquote>
+<p>接下来源码分析可能会很绕，自己都花了一天的时间才勉强看懂大致流程，此处不了解可以先不管，后续会有流程图总结。</p>
+<p>同时，阅读该部分源码一定要<strong>梳理清楚每个Observer或Observable中的source、observer参数</strong></p>
+</blockquote>
+<blockquote>
+<p>假设方法中只有subscribeOn，没有observerOn</p>
+</blockquote>
+<p>调用subscribeOn时通过装饰模式，将scheduler与当前Observable包装为一个ObservableSubscribeOn<strong>并返回</strong>，返回是很重要的。<strong>因为此后的操作特性是基于ObservableSubscribeOn上的了</strong></p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// Observable</span>
+<span class="token annotation punctuation">@SchedulerSupport</span><span class="token punctuation">(</span><span class="token class-name">SchedulerSupport</span><span class="token punctuation">.</span>CUSTOM<span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token class-name">Observable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">subscribeOn</span><span class="token punctuation">(</span><span class="token class-name">Scheduler</span> scheduler<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">ObjectHelper</span><span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span>scheduler<span class="token punctuation">,</span> <span class="token string">"scheduler is null"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 装饰者模式构造ObservableSubscribeOn对象</span>
+    <span class="token keyword">return</span> <span class="token class-name">RxJavaPlugins</span><span class="token punctuation">.</span><span class="token function">onAssembly</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ObservableSubscribeOn</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> scheduler<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">public</span> <span class="token class-name">ObservableSubscribeOn</span><span class="token punctuation">(</span><span class="token class-name">ObservableSource</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> source<span class="token punctuation">,</span> <span class="token class-name">Scheduler</span> scheduler<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>scheduler <span class="token operator">=</span> scheduler<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// ObservableSubscribeOn</span>
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">subscribeActual</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token class-name">Observer</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> <span class="token class-name">T</span><span class="token punctuation">></span></span> observer<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 构建SubscribeOnObserver</span>
+    <span class="token keyword">final</span> <span class="token class-name">SubscribeOnObserver</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> parent <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SubscribeOnObserver</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>observer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">// observer调用自定义的onSubscribe方法，此时还是在当前线程中，并不是指定线程中</span>
+    observer<span class="token punctuation">.</span><span class="token function">onSubscribe</span><span class="token punctuation">(</span>parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+    parent<span class="token punctuation">.</span><span class="token function">setDisposable</span><span class="token punctuation">(</span>scheduler<span class="token punctuation">.</span><span class="token function">scheduleDirect</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">SubscribeTask</span><span class="token punctuation">(</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">SubscribeTask</span> <span class="token keyword">implements</span> <span class="token class-name">Runnable</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">SubscribeOnObserver</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> parent<span class="token punctuation">;</span>
+
+    <span class="token class-name">SubscribeTask</span><span class="token punctuation">(</span><span class="token class-name">SubscribeOnObserver</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> parent<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>parent <span class="token operator">=</span> parent<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        source<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token annotation punctuation">@NonNull</span>
+<span class="token keyword">public</span> <span class="token class-name">Disposable</span> <span class="token function">scheduleDirect</span><span class="token punctuation">(</span><span class="token annotation punctuation">@NonNull</span> <span class="token class-name">Runnable</span> run<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token function">scheduleDirect</span><span class="token punctuation">(</span>run<span class="token punctuation">,</span> <span class="token number">0L</span><span class="token punctuation">,</span> <span class="token class-name">TimeUnit</span><span class="token punctuation">.</span>NANOSECONDS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Scheduler</span>
+<span class="token annotation punctuation">@NonNull</span>
+<span class="token keyword">public</span> <span class="token class-name">Disposable</span> <span class="token function">scheduleDirect</span><span class="token punctuation">(</span><span class="token annotation punctuation">@NonNull</span> <span class="token class-name">Runnable</span> run<span class="token punctuation">,</span> <span class="token keyword">long</span> delay<span class="token punctuation">,</span> <span class="token annotation punctuation">@NonNull</span> <span class="token class-name">TimeUnit</span> unit<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 根据之前指定的scheduler的不同类来创建Worker</span>
+    <span class="token keyword">final</span> <span class="token class-name">Worker</span> w <span class="token operator">=</span> <span class="token function">createWorker</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">// 获取到Runnable</span>
+    <span class="token keyword">final</span> <span class="token class-name">Runnable</span> decoratedRun <span class="token operator">=</span> <span class="token class-name">RxJavaPlugins</span><span class="token punctuation">.</span><span class="token function">onSchedule</span><span class="token punctuation">(</span>run<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">// 将Runnable和Wroker封装为DisposeTask</span>
+    <span class="token class-name">DisposeTask</span> task <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DisposeTask</span><span class="token punctuation">(</span>decoratedRun<span class="token punctuation">,</span> w<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">// Worker在指定delay后执行这个disposeTask</span>
+    w<span class="token punctuation">.</span><span class="token function">schedule</span><span class="token punctuation">(</span>task<span class="token punctuation">,</span> delay<span class="token punctuation">,</span> unit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> task<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// IoScheduler(其他Scheduler也可以)</span>
+<span class="token keyword">public</span> <span class="token class-name">Worker</span> <span class="token function">createWorker</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">EventLoopWorker</span><span class="token punctuation">(</span>pool<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// IoScheduler.EventLoopWorker</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">EventLoopWorker</span> <span class="token keyword">extends</span> <span class="token class-name">Scheduler<span class="token punctuation">.</span>Worker</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 实质包含set集合</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">CompositeDisposable</span> tasks<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">CachedWorkerPool</span> pool<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">ThreadWorker</span> threadWorker<span class="token punctuation">;</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">Disposable</span> <span class="token function">schedule</span><span class="token punctuation">(</span><span class="token annotation punctuation">@NonNull</span> <span class="token class-name">Runnable</span> action<span class="token punctuation">,</span> <span class="token keyword">long</span> delayTime<span class="token punctuation">,</span> <span class="token annotation punctuation">@NonNull</span> <span class="token class-name">TimeUnit</span> unit<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 如果task已经取消与observer的绑定关系了</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>tasks<span class="token punctuation">.</span><span class="token function">isDisposed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token class-name">EmptyDisposable</span><span class="token punctuation">.</span>INSTANCE<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> threadWorker<span class="token punctuation">.</span><span class="token function">scheduleActual</span><span class="token punctuation">(</span>action<span class="token punctuation">,</span> delayTime<span class="token punctuation">,</span> unit<span class="token punctuation">,</span> tasks<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+
+<span class="token comment">// ThreadWorker(此处为NewThreadWorker)</span>
+<span class="token annotation punctuation">@NonNull</span>
+<span class="token keyword">public</span> <span class="token class-name">ScheduledRunnable</span> <span class="token function">scheduleActual</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token class-name">Runnable</span> run<span class="token punctuation">,</span> <span class="token keyword">long</span> delayTime<span class="token punctuation">,</span> <span class="token annotation punctuation">@NonNull</span> <span class="token class-name">TimeUnit</span> unit<span class="token punctuation">,</span> <span class="token annotation punctuation">@Nullable</span> <span class="token class-name">DisposableContainer</span> parent<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 获取按规则包装后的Runnbale</span>
+    <span class="token class-name">Runnable</span> decoratedRun <span class="token operator">=</span> <span class="token class-name">RxJavaPlugins</span><span class="token punctuation">.</span><span class="token function">onSchedule</span><span class="token punctuation">(</span>run<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 将runnable打包</span>
+    <span class="token class-name">ScheduledRunnable</span> sr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ScheduledRunnable</span><span class="token punctuation">(</span>decoratedRun<span class="token punctuation">,</span> parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>parent <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// CompositeDisposable.add</span>
+        <span class="token comment">// 通过Synchronized尝试将该Disposable加入到自身的set中</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>parent<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>sr<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> sr<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token class-name">Future</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span> f<span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 看是否是立刻执行还是等一会再执行</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>delayTime <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 通过ScheduledExecutorService执行，这里应该是自定义的线程池</span>
+            f <span class="token operator">=</span> executor<span class="token punctuation">.</span><span class="token function">submit</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">Callable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Object</span><span class="token punctuation">></span></span><span class="token punctuation">)</span>sr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            f <span class="token operator">=</span> executor<span class="token punctuation">.</span><span class="token function">schedule</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">Callable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Object</span><span class="token punctuation">></span></span><span class="token punctuation">)</span>sr<span class="token punctuation">,</span> delayTime<span class="token punctuation">,</span> unit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        sr<span class="token punctuation">.</span><span class="token function">setFuture</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">RejectedExecutionException</span> ex<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>parent <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            parent<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>sr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token class-name">RxJavaPlugins</span><span class="token punctuation">.</span><span class="token function">onError</span><span class="token punctuation">(</span>ex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> sr<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">CompositeDisposable</span> <span class="token keyword">implements</span> <span class="token class-name">Disposable</span><span class="token punctuation">,</span> <span class="token class-name">DisposableContainer</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">OpenHashSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Disposable</span><span class="token punctuation">></span></span> resources<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>到此，梳理一下通过subscribeOn后(也即通过ObservableSubscribeOn)调用subscribe方法的流程</p>
+<ul>
+<li>调用Observable的subscribe，调用具体实现子类，即<strong>ObservableSubscribeOn</strong>的subscribeActual方法</li>
+<li>subscribeActual：
+<ul>
+<li>包装Observer为SubscribeOnObserver</li>
+<li>调用observer的onSubscribe方法</li>
+<li>包装SubscribeOnObserver为SubscribeTask(实现Runnable接口)</li>
+<li>让subscribeOn指定的Scheduler通过scheduleDirect执行包装</li>
+</ul>
+</li>
+<li>scheduleDirect：
+<ul>
+<li>创建基于不同Scheduler的Worker，实质是基于内部CachedWorkerPool创建继承于Worker的EventLoopWorker</li>
+<li>基于Worker与Runnable封装成DisposeTask便于返回Disposable对象</li>
+<li>worker通过schedule准备加入该task</li>
+</ul>
+</li>
+<li>schedule：Worker内部的threadWorker执行scheduleActual</li>
+<li>scheduleActual：
+<ul>
+<li>包装Runnable</li>
+<li>通过线程池submit或者schedule当前Runnable</li>
+</ul>
+</li>
+<li>最终返回为一个Disposable</li>
+</ul>
+<h3 id="observeOn">observeOn</h3>
+<blockquote>
+<p>假设这里既有subscribeOn又有observerOn，且subscribeOn先于observeOn</p>
+</blockquote>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// Observable</span>
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token class-name">Observable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">observeOn</span><span class="token punctuation">(</span><span class="token class-name">Scheduler</span> scheduler<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token function">observeOn</span><span class="token punctuation">(</span>scheduler<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token function">bufferSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token class-name">Observable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">observeOn</span><span class="token punctuation">(</span><span class="token class-name">Scheduler</span> scheduler<span class="token punctuation">,</span> <span class="token keyword">boolean</span> delayError<span class="token punctuation">,</span> <span class="token keyword">int</span> bufferSize<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">ObjectHelper</span><span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span>scheduler<span class="token punctuation">,</span> <span class="token string">"scheduler is null"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">ObjectHelper</span><span class="token punctuation">.</span><span class="token function">verifyPositive</span><span class="token punctuation">(</span>bufferSize<span class="token punctuation">,</span> <span class="token string">"bufferSize"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 包装为ObservableObserveOn对象</span>
+    <span class="token comment">// 仔细品味这里的this</span>
+    <span class="token keyword">return</span> <span class="token class-name">RxJavaPlugins</span><span class="token punctuation">.</span><span class="token function">onAssembly</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ObservableObserveOn</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> scheduler<span class="token punctuation">,</span> delayError<span class="token punctuation">,</span> bufferSize<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">public</span> <span class="token class-name">ObservableObserveOn</span><span class="token punctuation">(</span><span class="token class-name">ObservableSource</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> source<span class="token punctuation">,</span> <span class="token class-name">Scheduler</span> scheduler<span class="token punctuation">,</span> <span class="token keyword">boolean</span> delayError<span class="token punctuation">,</span> <span class="token keyword">int</span> bufferSize<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// protected final ObservableSource&lt;T> source;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>source <span class="token operator">=</span> source<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>scheduler <span class="token operator">=</span> scheduler<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>delayError <span class="token operator">=</span> delayError<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>bufferSize <span class="token operator">=</span> bufferSize<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">subscribeActual</span><span class="token punctuation">(</span><span class="token class-name">Observer</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> <span class="token class-name">T</span><span class="token punctuation">></span></span> observer<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>scheduler <span class="token keyword">instanceof</span> <span class="token class-name">TrampolineScheduler</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        source<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>observer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Scheduler<span class="token punctuation">.</span>Worker</span> w <span class="token operator">=</span> scheduler<span class="token punctuation">.</span><span class="token function">createWorker</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        source<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ObserveOnObserver</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>observer<span class="token punctuation">,</span> w<span class="token punctuation">,</span> delayError<span class="token punctuation">,</span> bufferSize<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>到这里后，请问subscribeActual中source对象是什么？通过前面的this关键字，即可知，此时this对象就是调用observerOn方法前的那个基于Observable的对象，在此处就是 ObservableSubscribeOn，并最终调用subscribe，也就回到了我们之前所梳理的subscribeOn中的流程</p>
+<p>不同之处是在于，此时调用subscribe方法时，对自定义Observer进行了包装，构成ObserveOnObserver，但之前是直接传递了一个自定义的Observer的。此时还为ObserveOnObserver指定了worker，为observeOn中指定的worker。所以再次进入到Observable的subscribe方法，并进入<strong>ObserveOnObserver的subscribeActual方法</strong></p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">subscribeActual</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token class-name">Observer</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> <span class="token class-name">T</span><span class="token punctuation">></span></span> observer<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">final</span> <span class="token class-name">SubscribeOnObserver</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> parent <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SubscribeOnObserver</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>observer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    observer<span class="token punctuation">.</span><span class="token function">onSubscribe</span><span class="token punctuation">(</span>parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    parent<span class="token punctuation">.</span><span class="token function">setDisposable</span><span class="token punctuation">(</span>scheduler<span class="token punctuation">.</span><span class="token function">scheduleDirect</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">SubscribeTask</span><span class="token punctuation">(</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>此后与之前Subscribe步骤中无太大差别</p>
+<p>那么observer的线程切换一定是发生在自定义ObservableOnSubscribe实现类subscribe方法中，通过onNext或onComplete</p>
+<div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">// ObservableCreate.CreateEmitter</span>
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onNext</span><span class="token punctuation">(</span><span class="token class-name">T</span> t<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>t <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">onError</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">NullPointerException</span><span class="token punctuation">(</span><span class="token string">"onNext called with null. Null values are generally not allowed in 2.x operators and sources."</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isDisposed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        observer<span class="token punctuation">.</span><span class="token function">onNext</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// ObservableSubscribeOn.SubscribeOnObserver</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onNext</span><span class="token punctuation">(</span><span class="token class-name">T</span> t<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    downstream<span class="token punctuation">.</span><span class="token function">onNext</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// ObservableSubscribeOn</span>
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onNext</span><span class="token punctuation">(</span><span class="token class-name">T</span> t<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>done<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>sourceMode <span class="token operator">!=</span> <span class="token class-name">QueueDisposable</span><span class="token punctuation">.</span>ASYNC<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 将结果入队</span>
+        queue<span class="token punctuation">.</span><span class="token function">offer</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+
+<span class="token keyword">void</span> <span class="token function">schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">getAndIncrement</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 执行具体SchedulerWorker的schedule方法</span>
+        worker<span class="token punctuation">.</span><span class="token function">schedule</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<h3 id="流程总结">流程总结</h3>
+<p>先关注这里的包装顺序关系：</p>
+<ol>
+<li><strong>包装自定义Observable</strong>(即ObservableOnSubscribe)：</li>
+</ol>
+<ul>
+<li>自定义的ObservableOnSubscribe通过Observable.create被包装为ObservableCreate</li>
+<li>通过subscribeOn，被包装为ObservableSubscribeOn</li>
+<li>通过observeOn，被包装为ObservableObserveOn</li>
+</ul>
+<ol start="2">
+<li>调用subscribe方法，根据具体包装类的subscribeActual方法实现不同，<strong>包装自定义Observer</strong>：</li>
+</ol>
+<ul>
+<li>通过ObservableObserveOn.subscribeActual，自定义<strong>observer</strong>被包装为<strong>ObserveOnObserver</strong>，并调用其source的subscribe方法，传递该对象</li>
+<li>调用ObservableSubscribeOn.subscribeActual，将ObserveOnObserver包装为<strong>SubscribeOnObserver</strong>，并最终包装为<strong>SubscribeTask</strong>(Runnable)传递给scheduler
+<ul>
+<li>SubscribeTask 为SubscribeOnObserver的内部类，run方法为source.subscribe(parent); source为SubscribeOnObserver的实际承载类，parent为封装的SubscribeOnObserver</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>任务交给SubscribeOn所在线程池进行执行，该执行时：</li>
+</ol>
+<ul>
+<li>取出SubscribeTask，执行run方法，调用source.subscribe(parent); 此时source为ObservableSubscribeOn的实际承载类，即ObservableCreate，parent为包装的<strong>SubscribeOnObserver</strong></li>
+<li>调用ObservableCreate的subscribeActual方法，创建CreateEmitter为parent，设置CreateEmitter的observer为parent。并调用source.subscribe(parent); source为自定义的ObservableOnSubscribe完成了回调过程</li>
+</ul>
+<ol start="4">
+<li>进行onNext回调时：</li>
+</ol>
+<ul>
+<li>调用CreateEmitter.onNext方法，会调用到observer.onNext(t); observer为之前传递的<strong>SubscribeOnObserver</strong></li>
+<li>调用SubscribeOnObserver.onNext方法，其实是调用了downstream.onNext(t);(downstream即为source ObserveOnObserver)</li>
+<li>调用ObserveOnObserver.onNext: 将onNext数据添加到队列中，并调用schedule方法准备执行任务。最终是进入到对应Scheduler的executor安排执行</li>
+</ul>
+<p>用一张流程图总结一下全流程（注意理解其中包装关系）</p>
+<p><img src="https://s401177923-1302493622.cos.ap-nanjing.myqcloud.com/mdImages/image-20230827193531680.png" alt="RxJava线程切换流程图"></p>
+<p><strong>如何快速理解？</strong></p>
+<p>其实核心思想还是<strong>装饰者模式贯穿始终</strong>，查看流程图能比较直观的了解到其实还是顺序装包与逆序拆包的操作</p>
+<ul>
+<li>Observable装包：对Observable进行subscribeOn、observerOn操作：实质是对Observable进行封装，每调用一个函数就多包一层</li>
+<li>Observer装包：observable包装完后执行subscribe方法，接下来就是对observer包装，之前observable包装成什么样子，那就从外到里让每层observable根据自己需要又对observer进行包装，最终包装成一个可执行的Runnable，并提交给线程池</li>
+<li>启动Subscribe Runnable：做重写<strong>ObservableOnSubscribe</strong>中的subscribe的事，并通过next等操作准备通知observer。对包装的observer逐层拆包，执行每一层的onNext，最终又启动一个Runnable，在另一个线程中执行自定义Observer的方法</li>
+<li>启动Observer Runnable：在指定线程中运行自定义Observer的方法</li>
+</ul>
+
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="post-metas mb-3">
+                                            
+                                                <div class="post-meta mr-3">
+                                                    <i class="iconfont icon-category"></i>
+                                                    
+                                                        <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/">
+                                                            学习
+                                                        </a>
+                                                        
+                                                </div>
+                                                
+                                                    
+                                        </div>
+                                        
+                                            <p class="note note-warning">
+                                                
+                                                            本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                                                                
+                                            </p>
+                                            
+                                                
+                                                    <div class="post-prevnext">
+                                                        <article class="post-prev col-6">
+                                                            
+                                                                
+                                                        </article>
+                                                        <article class="post-next col-6">
+                                                            
+                                                                
+                                                                    <a href="/2023/04/28/Android-Lifecycle%E6%9C%BA%E5%88%B6%E6%8E%A2%E7%A9%B6/">
+                                                                        <span class="hidden-mobile">Android Lifecycle机制探究</span>
+                                                                        <span class="visible-mobile">下一篇</span>
+                                                                        <i class="iconfont icon-arrowright"></i>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                    </div>
+                                                    
+                                    </div>
+
+                                    
+                                        <!-- Comments -->
+                                        <article class="comments" id="comments">
+                                            
+                                                        
+                                                            
+                                                                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'PPLong222/commit-utterances');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+                                        </article>
+                                        
+                        </article>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+                    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+                </div>
+                
+        </div>
+    </div>
+
+    <!-- Custom -->
+    
+    <!--添加我自己的设置页面-->
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+    <!--加入自定义格式的-->
+    <!--自定义的git徽标样式-->
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue">
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a">
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080">
+<br>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAdCAYAAAC9pNwMAAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDIgNzkuMTYwOTI0LCAyMDE3LzA3LzEzLTAxOjA2OjM5ICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+nhxg7wAACNlJREFUSInF1mmMVeUdx/Hv2e+5+519mJWBYQZkGxZZxLKJqBXGoLS1iXWrmihotFXaJiTWWlsbl6q1aetWd5u0VkKjNG4YEJSlOCibDLMwM8x679z9nnPP1jcVJUxf+7z6J8+LT37/Z4VvaQhfFS8+sBXbctCDGrVTKlBUH4mxAbI9Hfj0IJLsp6paJ5/tmn20N/D0wKDRMq9F/c3M2U1/V0vDfWMFh+tv/Ig1zYPMabDImPJ52OaXO87W580KggCiiOsJOJ6I3wcNFaaeNKxrt72f2fLGu4FpJ/sDQABRzD22fH7/Yze069vGc6mrDLNIJCDik10sxz2by3VdPM87xzkP9jwPTZFRVI1YUJKH+oy7n3tbvv/P2wW/UQxRWe6w4ZJRptYLHDoCuz8v5cP92XbI762O+h6UVWHnUFbPpU0fEb2A60mMJ7MUi9b/b7UgKhiZMaIxm8YLplLMDPz8hl/EH+rs8TNlUpFf32uyZJGLPDwCiTGUyTWodTN49eUCdz2YwXb9NNcObp1X98WDoufynzMVCEKGn27ayPTWBi5ad8P5iQUkJEnFLjqM9Z+hrVX0vfDe6K2dPRWsW2bwyp9EUifSJB84gdxrkR0eRgv1o/3I4fbbprJ6scqamzVO9pffec1S5ZWY2Nfz5qEy/FqOC2Y3s3j53HMSi18VRjFPwSwg+1RfVbl115vvJrsfej7UGIsYPPGgQ7JXoO+Xx5B3dHEomyJ9x1qiQozkr95h5937aFnVyouPlgJK+Ss7Fxz64OTSxSX+LHYxT2IsRW5kbGI4oHcR0jqoqTjV9se3I7/f8rS/ClS23GxSXhph6L5d9Akm7qqZhHWBQGUJ+CWGFzcg7e7m6D3/ZuW1Ea5YKdA3EojuONi813TqNi+YPYOKUhXDtCeGL26/hakLLiEcdsaHRkRAoLRc4fJrmhnekyF0apgZowWSwwkaa+rw3f8WA1GZZsPP5JEChX8dhZTN6iU6kAcs5s+dHd183SJ0VVKL57pfw6YdRQw23aeWTns47DPTALWlRTR7kMLew6hGgYqUhWXYFFUdPZ6lUBahLA8hVcOftckfi7No7VRAAQqsX1dybfvG1qwriM9mM5mJ4e4jO5Cc01dPqixbr8tWGBQUL4vjGigEEShi+xUmZ2RiR/sJ1pbS8NkgZrKAGw0TsgQsQyFaF/nfYTGprAlMFysbA1pI3mhkR6snhGsaymYGvPyFEb9IdbUE2AzFFTwpRqCtBY0wmdER+hZW4j63gcJj38V+/ErSUZXsYBfjIZHIRW0c2Z8BskCAqN+CbBJBFnyyKjR+Ez57nBxLqpfMUeSISElMBFz6x2Q6OxzWrYjyxWVzEewioU3LCS5vQY6nMUrLwNaxXvoQ59IloFSx54PPAZtQLExVZZDxsVE8J4dn6v4JYatgbSjk0owPw7RGH2ADMo88Z7L20ip8f7gC7fAo0q4+0rt7kEQDvaghVZbiPHUHcyeXcfLjT3jmpR7AYsnSScya3UR8bARVMck7Y/cB75/X6rDf3Fg2dw2jKZm5dXGm1LuAzO5DCo9v6aT0ibco5kzOvLOP+NGTFJtDpPYeZKijk/Rn3QxsfZV7txwhX7ABiZUXBsGvIvguQApNQQva9RMmTvZ2dpVUls+tX/UD7GN/Y8Ws05w6rQF+9vyzg1vZjbvMRJhXiRSU8DpTFFe0QE8S6SfPkOkZoktrB2oAhZWrwljxOPmchiSMYOWNoxNuruFU5vWeXdsojiUon345113dBBQBmTYlTimgdB8nfPo4WjaNFgN9OMEkJ02dnadVt5ki54Esqy+bzKJltVhSPbI3iN2zCyMTeXNCuG7Omm2Zok7PR2+R7jvD8ouruHhmCrB5jVZeYxLdrTP4sr4Vtd9g4MA4qc4c+6cu5NPamfw4P59t2WrA4YdXKkASf7SFivo6PDdEPmf1fRM++zp1bH/0r4I1dD1ODtOWaW4IsvPjL7nqXhloQiSPwjjgMYkMASyGEBkjhISCQwkwzve/18AbT+pk8pVY4UacQi9y+gyZ0eRAw4qHa89LXEx1LXMSPfhDJYRb59BtlLKg2WPT2l6qYl1svtGkrLYckyA1S+t5+2ATm37WCui0LSynsckDNH5zTxAchbQtkx08hDHYiW6NgC0enHBzEZ102UDH8QORdEckjEzZrNWkRydzyx17uGnDXqbUnGZ6dRPjSY91q2TqwjFuvTxLo5Zn5Qo/pumRSFcTLQtybEhGE0fQrDhhJ0VvH2lTnnHPhGtsmWan469apERjI2MH3qN7+7MEfH6ql29CbV7PvsMG32k6yU2XDhEKyZw66eJaRdrXR7CzCcqUNC3zwgymPJRCH4KRRLINimpL14A5Y4GDeOqbsPRVcfuN7Xj44pav/hFfrNT2kr2rsqf2Ibp5pEA14ZIImUyW3t5REkkTXRGQ/DGGhtLginhqCWknQDE5hKf5UFSF9Lj020Q2ul5V1AR2hr+8vuP8Vlc2zMPRxoSjnx7XBC14sDoydahSGq7KdO/HFyrBchxCVfX4fDKp4T7SCQejYODZLrYgIqgKFsNIgQqEYob8mW6yiUyb7Z64LVK/+B85xznnJ3AWzqTzuIX46mr5wLs+UUTyIriBCjRNxguHMJIFDLEEvXEOVRWnSJ0+jCd4CJoGjoedM1CLcXQziW3nMV2TSMBeOx7vWZvPt1r+cMPzE8KunaUkFn0vNrvtqXj34c1W6gzxlEQ6naIoBahtnkMwoFMwIVzSRNguMt53Aj2s4nkSlgPoGqLkICsRNF0gl8rYWuP8+11/w/OOJDEhHPKLCIpOXmi+M9AgP+maiesLifF2T1Rn5ZNj5Lo/Qc/GcPMmhdoqlEgIGzCK4PiCmJKK68p4KfF3qYGuF0qCRUkJTzleUbvQyWRTuE5xYthxQbBs7EISAbkzUFG3VfXXbK2YFi3X/eryfKKnqVBItNjJxDzH8erddC4SqWwcN5WyTtlyO1RP/Lh3eHD76MB40swmiDVJyDLYRhpc5+ub6tse/wWKbvSQEAw1awAAAABJRU5ErkJggg==&style=flat&color=d2c68b">
+
+<!-- 自定义显示文章总页数和字数的模块 -->
+<div class="bottom-post-statistic">
+    <div class="bottom-post-count">
+        72&nbsp 篇文章
+    </div>
+    <div class="bottom-post-word">
+        319.3k&nbsp 字
+    </div>
+</div>
+        <div class="footer-content">
+             <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+        </div>
+
+        
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+            
+
+                
+</footer>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/reset_code_lang.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+  <!-- 暂时先不引入该功能 -->
+  <!-- 引入JQuery -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> -->
+  <!-- 引入自定义的页面访问和ip统计脚本 -->
+  <!-- <script src="/js/send_req_info.js"></script> --> -->
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?PPLong222";
+            var git_color =['#ebedf0', '#bef5cb', '#bef5cb', '#a9f5b4', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620'];
+            var git_user ="PPLong222";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div id="github-calendar" style="width:100%;height:auto;padding:10px;margin-bottom:20px"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;margin-top:100px;;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/about/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:200px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>#github_container > .position-relative > .border{border:0!important}#github-calendar{position: relative;margin-top: -2rem;background-color: var(--board-bg-color);transition: background-color 0.2s ease-in-out;border-radius: 0.5rem;z-index: 3;-webkit-box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);}</style><!-- hexo injector body_end end --></body>
+</html>

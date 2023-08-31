@@ -250,10 +250,10 @@
  
 <div style="margin-bottom: 20px;margin-left:10px;margin-right: 10px;">
     <div class="note note-info" style="position: relative;overflow: hidden;">
-      <p class="latest_post" id="latest_post_p" tag-time="1693482114000">最近更新时间:
+      <p class="latest_post" id="latest_post_p" tag-time="1693494778000">最近更新时间:
         &nbsp;&nbsp;&nbsp;&nbsp;
         更新文章: 《 
-        <a href="/2023/08/31/Android-LayoutInflater探究/" >Android LayoutInflater探究》</a>
+        <a href="/2022/07/10/Android-View绘制机制/" >Android View绘制机制》</a>
       </p>
     </div>
 </div>
@@ -263,41 +263,37 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2022/07/30/Java8%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/" target="_self">
-          <img src="/gallery/covers/wallhaven-lm5w9r.jpg" srcset="/img/loading.gif" lazyload alt="Java8特性学习">
+        <a href="/2022/07/10/Android-View%E7%BB%98%E5%88%B6%E6%9C%BA%E5%88%B6/" target="_self">
+          <img src="/gallery/covers/wallhaven-e7g7zk.jpg" srcset="/img/loading.gif" lazyload alt="Android View绘制机制">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/07/30/Java8%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/" target="_self">
-          Java8特性学习
+        <a href="/2022/07/10/Android-View%E7%BB%98%E5%88%B6%E6%9C%BA%E5%88%B6/" target="_self">
+          Android View绘制机制
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/07/30/Java8%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/" target="_self">
+        <a href="/2022/07/10/Android-View%E7%BB%98%E5%88%B6%E6%9C%BA%E5%88%B6/" target="_self">
           
           
             
           
-          Java8特性学习
+          Android View绘制机制
+View绘制
+基本
+ViewRoot
+DecorView
+顶层ViewGroup，FrameLayout子类
 
-Mybatis中出现了一些与Lambda相关的函数方法，使得在编程时非常的方便，但自己却不知道如何使用基于Java8的语法
+注意这里是View的三步骤不是连续执行的，而是基于每一步骤大过程分开执行的，先总体执行measure再layout再draw
 
-概述
-优点
-
-大数量下处理集合效率高
-代码可读性高，代码简洁，开发快速
-易于并发编程
-减少嵌套
-
-函数式编程思想
-面向对象的思想关注的说用什么对象完成什么事情，而函数式编程关注是对数据进行了什么操作
-Lambda表达式
-本质是JDK8 的语法糖，能对某
+​
+MeasureSpec
+决定View的测量过程，测量过程中，系统将LayoutParam所加的约束转换为MeasureSp
         </a>
       </p>
 
@@ -305,8 +301,8 @@ Lambda表达式
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-07-30 14:51" pubdate>
-              2022-07-30
+            <time datetime="2022-07-10 19:12" pubdate>
+              2022-07-10
             </time>
           </div>
         
@@ -318,13 +314,6 @@ Lambda表达式
             
           </div>
         
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Java/">Java</a>
-            
-          </div>
         
       </div>
     </article>

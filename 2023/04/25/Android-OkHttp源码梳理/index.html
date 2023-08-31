@@ -1,0 +1,1611 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="baidu-site-verification" content="code-O81KxcQEvT" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/gallery/paw_img.jpg">
+  <link rel="icon" href="/gallery/paw_img.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PPLong">
+  <meta name="keywords" content="">
+  <!--添加百度站点统计-->
+  <meta name="baidu-site-verification" content="code-O8Xoj3awJS" />
+  <!-- 谷歌网址前缀站点统计 http://www.pplong.top -->
+  <meta name="google-site-verification" content="Mp6W6JCXOdt66_GIaboJrilKmC9VI0DOWE4W2d1PMRQ" />
+  <meta name="description" content="OkHttp学习 基础 Android主流网络请求框架，且是Retrofit框架的基础 特性  使用连接池减少请求延时 使用GZIP压缩减少响应数据大小 缓存响应内容，避免完全重复的请求 支持HTTP2，对一台机器的所有请求共享同一个socket  特点 责任链模式 基本使用 val okHttpClient &#x3D; OkHttpClient() val request &#x3D; Request.Build">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android OkHttp源码梳理">
+<meta property="og:url" content="https://www.pplong.top/2023/04/25/Android-OkHttp%E6%BA%90%E7%A0%81%E6%A2%B3%E7%90%86/index.html">
+<meta property="og:site_name" content="PPLong的博客">
+<meta property="og:description" content="OkHttp学习 基础 Android主流网络请求框架，且是Retrofit框架的基础 特性  使用连接池减少请求延时 使用GZIP压缩减少响应数据大小 缓存响应内容，避免完全重复的请求 支持HTTP2，对一台机器的所有请求共享同一个socket  特点 责任链模式 基本使用 val okHttpClient &#x3D; OkHttpClient() val request &#x3D; Request.Build">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.pplong.top/Users/pplong/Library/Application%20Support/typora-user-images/image-20230824234553755.png">
+<meta property="article:published_time" content="2023-04-25T11:13:46.000Z">
+<meta property="article:modified_time" content="2023-04-25T11:33:38.000Z">
+<meta property="article:author" content="PPLong">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.pplong.top/Users/pplong/Library/Application%20Support/typora-user-images/image-20230824234553755.png">
+  
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script> <script>LA.init({id: "Jf1FrphVHSZkysQl",ck: "Jf1FrphVHSZkysQl"})</script>
+  
+  <title>Android OkHttp源码梳理 - PPLong的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" />
+      
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/indexing-hover.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_3317616_gaxkom6hjqm.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.pplong.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"9MuBWVsFJbGBbwW0dLf4PCir-MdYXbMMI","app_key":"ufhGMao9OY41YN3la9fN7NI0","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 90vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PPLong的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友達
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-link-fill"></i>
+                娱乐
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/movie/">
+                    <i class="iconfont icon-movie"></i>
+                    第二人生
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/shuoshuo/">
+                    <i class="iconfont icon-comment"></i>
+                    唠唠
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/develop/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    尝鲜
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/gallery/covers/wallhaven-2828w6.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Android OkHttp源码梳理">
+              
+            </span>
+
+            
+              <div class="mt-3">
+    
+            
+                <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-04-25 19:13" pubdate>
+        始于: 2023年4月25日晚上7点13分
+      </time>
+    </span>
+                
+</div>
+
+<!-- 自定义的更新时间 -->
+<div class="mt-1">
+    
+        <span class="post-meta">
+  <i class="iconfont icon-clipcheck" aria-hidden="true"></i>
+  <time datetime="2023-04-25 19:33" pubdate>
+    更新: 2023年4月25日晚上7点33分
+  </time>
+</span>
+        
+</div>
+
+<div class="mt-1">
+    
+        <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      24k 字
+    </span>
+        
+
+            
+                <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      77 分钟
+    </span>
+                
+
+                    
+                        
+                            
+                                <!-- LeanCloud 统计文章PV -->
+                                <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span>
+                                 次
+                                    </span>
+                                    
+                                                
+</div>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+    <div class="container-fluid nopadding-x">
+        <div class="row nomargin-x">
+            <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-lg-8 nopadding-x-md">
+                <div class="container nopadding-x-md" id="board-ctn">
+                    <div class="py-5" id="board">
+                        <article class="post-content mx-auto">
+                            <!-- SEO header -->
+                            <h1 style="display: none">
+                                Android OkHttp源码梳理
+                            </h1>
+                            
+                                    <div class="markdown-body">
+                                        <h1>OkHttp学习</h1>
+<h2 id="基础-v3">基础</h2>
+<p>Android主流网络请求框架，且是Retrofit框架的基础</p>
+<p><strong>特性</strong></p>
+<ul>
+<li>使用连接池减少请求延时</li>
+<li>使用GZIP压缩减少响应数据大小</li>
+<li>缓存响应内容，避免完全重复的请求</li>
+<li>支持HTTP2，对一台机器的所有请求共享同一个socket</li>
+</ul>
+<p><strong>特点</strong> 责任链模式</p>
+<h3 id="基本使用">基本使用</h3>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> okHttpClient <span class="token operator">=</span> <span class="token function">OkHttpClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">val</span> request <span class="token operator">=</span> Request<span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"https://www.baidu.com"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">val</span> newCall <span class="token operator">=</span> okHttpClient<span class="token punctuation">.</span><span class="token function">newCall</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span>
+
+<span class="token comment">// 同步方式</span>
+<span class="token comment">// 注意：Android中不能在主线程中进行网络请求，否则会报错</span>
+Thread <span class="token punctuation">&#123;</span>
+    <span class="token keyword">val</span> execute <span class="token operator">=</span> newCall<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    Log<span class="token punctuation">.</span><span class="token function">i</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"TAG"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"okHttp: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">execute<span class="token punctuation">.</span>body<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 异步方式</span>
+newCall<span class="token punctuation">.</span><span class="token function">enqueue</span><span class="token punctuation">(</span><span class="token keyword">object</span> <span class="token operator">:</span> Callback <span class="token punctuation">&#123;</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onFailure</span><span class="token punctuation">(</span>call<span class="token operator">:</span> Call<span class="token punctuation">,</span> e<span class="token operator">:</span> IOException<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onResponse</span><span class="token punctuation">(</span>call<span class="token operator">:</span> Call<span class="token punctuation">,</span> response<span class="token operator">:</span> Response<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div>
+<h2 id="源码梳理-v2">源码梳理</h2>
+<blockquote>
+<p>阅读OkHttp源码，一定首先带着有建造者模式以及责任链模式的理念去阅读。同时OkHttp4是基于Kotlin编写的，因此还需要掌握一些Kotlin基本语法</p>
+</blockquote>
+<h3 id="初始化">初始化</h3>
+<h4 id="OkHttpClient创建">OkHttpClient创建</h4>
+<p><strong>默认创建</strong></p>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">open</span> <span class="token keyword">class</span> OkHttpClient <span class="token keyword">internal</span> <span class="token keyword">constructor</span><span class="token punctuation">(</span>
+builder<span class="token operator">:</span> Builder<span class="token punctuation">)</span> <span class="token operator">:</span> Cloneable<span class="token punctuation">,</span> Call<span class="token punctuation">.</span>Factory<span class="token punctuation">,</span> WebSocket<span class="token punctuation">.</span><span class="token function">Factory</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">(</span><span class="token function">Builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  
+  <span class="token keyword">init</span><span class="token punctuation">&#123;</span>
+    <span class="token comment">// 通过builder中的属性做一些基本设置</span>
+  <span class="token punctuation">&#125;</span>
+  
+  <span class="token comment">// Builder中包含一些基本的配置项</span>
+  <span class="token keyword">class</span> Builder <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  	<span class="token keyword">internal</span> <span class="token keyword">var</span> dispatcher<span class="token operator">:</span> Dispatcher <span class="token operator">=</span> <span class="token function">Dispatcher</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">internal</span> <span class="token keyword">var</span> connectionPool<span class="token operator">:</span> ConnectionPool <span class="token operator">=</span> <span class="token function">ConnectionPool</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">internal</span> <span class="token keyword">val</span> interceptors<span class="token operator">:</span> MutableList<span class="token operator">&lt;</span>Interceptor<span class="token operator">></span> <span class="token operator">=</span> <span class="token function">mutableListOf</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">internal</span> <span class="token keyword">val</span> networkInterceptors<span class="token operator">:</span> MutableList<span class="token operator">&lt;</span>Interceptor<span class="token operator">></span> <span class="token operator">=</span> <span class="token function">mutableListOf</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">internal</span> <span class="token keyword">var</span> cache<span class="token operator">:</span> Cache<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token keyword">internal</span> <span class="token keyword">var</span> dns<span class="token operator">:</span> Dns <span class="token operator">=</span> Dns<span class="token punctuation">.</span>SYSTEM
+    <span class="token keyword">internal</span> <span class="token keyword">var</span> proxy<span class="token operator">:</span> Proxy<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token keyword">internal</span> <span class="token keyword">var</span> protocols<span class="token operator">:</span> List<span class="token operator">&lt;</span>Protocol<span class="token operator">></span> <span class="token operator">=</span> DEFAULT_PROTOCOLS
+    <span class="token keyword">internal</span> <span class="token keyword">var</span> callTimeout <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">internal</span> <span class="token keyword">var</span> connectTimeout <span class="token operator">=</span> <span class="token number">10_000</span>
+    <span class="token keyword">internal</span> <span class="token keyword">var</span> readTimeout <span class="token operator">=</span> <span class="token number">10_000</span>
+    <span class="token keyword">internal</span> <span class="token keyword">var</span> writeTimeout <span class="token operator">=</span> <span class="token number">10_000</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<blockquote>
+<p><strong>查漏补缺</strong>——internal关键字</p>
+<p>限制Module间的方法调用，internal修饰的字段或方法只能在该Module内访问，而不能跨module访问，应该是保护API安全性之类的。</p>
+</blockquote>
+<p><strong>通过OkHttpClient.Builder实例创建</strong></p>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token comment">// 例子</span>
+<span class="token keyword">val</span> okHttpClient <span class="token operator">=</span> OkHttpClient<span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">callTimeout</span><span class="token punctuation">(</span>Duration<span class="token punctuation">.</span>ZERO<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">addInterceptor</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> 
+    <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// OkHttpClient.Builder</span>
+<span class="token keyword">fun</span> <span class="token function">callTimeout</span><span class="token punctuation">(</span>duration<span class="token operator">:</span> Duration<span class="token punctuation">)</span> <span class="token operator">=</span> apply <span class="token punctuation">&#123;</span>
+  <span class="token function">callTimeout</span><span class="token punctuation">(</span>duration<span class="token punctuation">.</span><span class="token function">toMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> MILLISECONDS<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">fun</span> <span class="token function">connectTimeout</span><span class="token punctuation">(</span>timeout<span class="token operator">:</span> Long<span class="token punctuation">,</span> unit<span class="token operator">:</span> TimeUnit<span class="token punctuation">)</span> <span class="token operator">=</span> apply <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 配置Builder内置属性并</span>
+  connectTimeout <span class="token operator">=</span> <span class="token function">checkDuration</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"timeout"</span></span><span class="token punctuation">,</span> timeout<span class="token punctuation">,</span> unit<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 通过配置好的Builder实例构造OkHttpClient对象</span>
+<span class="token keyword">fun</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> OkHttpClient <span class="token operator">=</span> <span class="token function">OkHttpClient</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span></code></pre></div>
+<blockquote>
+<p>Kotlin语法糖——apply</p>
+<p>apply: 不仅it指代当前实例，同时还默认返回处理后的实例对象，因此用apply更加简洁，不用再手写return</p>
+</blockquote>
+<p>每一次调用时都会返回一个Builder对象以供下次继续配置</p>
+<blockquote>
+<p>简单回顾一下<strong>建造者模式</strong></p>
+<p>意图：将一个复杂的构建与其表示相分离，想解决一个复杂系统的创建过程</p>
+<p>使用场景：当一个类的构造函数参数个数超过4个，且有一些是可选参数时</p>
+<p>解决什么问题：构造函数参数过多不方便；同过set进行注入又可能造成顺序问题</p>
+</blockquote>
+<h3 id="构建请求">构建请求</h3>
+<h4 id="构建Request">构建Request</h4>
+<p>构建请求时也是使用到建造者模式</p>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">class</span> Request <span class="token keyword">internal</span> <span class="token keyword">constructor</span><span class="token punctuation">(</span>
+    <span class="token comment">// 基本属性</span>
+    <span class="token annotation builtin">@get:JvmName</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"url"</span></span><span class="token punctuation">)</span> <span class="token keyword">val</span> url<span class="token operator">:</span> HttpUrl<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@get:JvmName</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"method"</span></span><span class="token punctuation">)</span> <span class="token keyword">val</span> method<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@get:JvmName</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"headers"</span></span><span class="token punctuation">)</span> <span class="token keyword">val</span> headers<span class="token operator">:</span> Headers<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@get:JvmName</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"body"</span></span><span class="token punctuation">)</span> <span class="token keyword">val</span> body<span class="token operator">:</span> RequestBody<span class="token operator">?</span><span class="token punctuation">,</span>
+    <span class="token keyword">internal</span> <span class="token keyword">val</span> tags<span class="token operator">:</span> Map<span class="token operator">&lt;</span>Class<span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">,</span> Any<span class="token operator">></span>
+<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">val</span> isHttps<span class="token operator">:</span> Boolean 
+    <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> url<span class="token punctuation">.</span>isHttps
+
+    <span class="token keyword">open</span> <span class="token keyword">class</span> Builder <span class="token punctuation">&#123;</span>
+        <span class="token keyword">internal</span> <span class="token keyword">var</span> url<span class="token operator">:</span> HttpUrl<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
+        <span class="token keyword">internal</span> <span class="token keyword">var</span> method<span class="token operator">:</span> String
+        <span class="token keyword">internal</span> <span class="token keyword">var</span> headers<span class="token operator">:</span> Headers<span class="token punctuation">.</span>Builder
+        <span class="token keyword">internal</span> <span class="token keyword">var</span> body<span class="token operator">:</span> RequestBody<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
+        <span class="token comment">// 默认采用GET方法并初始哈headers</span>
+        <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>method <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"GET"</span></span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>headers <span class="token operator">=</span> Headers<span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">open</span> <span class="token keyword">fun</span> <span class="token function">url</span><span class="token punctuation">(</span>url<span class="token operator">:</span> HttpUrl<span class="token punctuation">)</span><span class="token operator">:</span> Builder <span class="token operator">=</span> apply <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>url <span class="token operator">=</span> url
+        <span class="token punctuation">&#125;</span>
+		
+        <span class="token comment">// 根据Builder返回Request</span>
+        <span class="token keyword">open</span> <span class="token keyword">fun</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Request <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token function">Request</span><span class="token punctuation">(</span>
+                <span class="token function">checkNotNull</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token string-literal singleline"><span class="token string">"url == null"</span></span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+                method<span class="token punctuation">,</span>
+                headers<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                body<span class="token punctuation">,</span>
+                tags<span class="token punctuation">.</span><span class="token function">toImmutableMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>可以看到此处Request的构建方式与之前OkHttpClient构建方式大致相同，都是通过Builder构造</p>
+<h4 id="构建RealCall">构建RealCall</h4>
+<p>通过OkHttpClient根据Request创建实际请求类RealCall，Request相当于只是一个纲要单，给出我想做什么。RealCall相当于是具体的执行计划，给出我该怎么做</p>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> newCall <span class="token operator">=</span> okHttpClient<span class="token punctuation">.</span><span class="token function">newCall</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span>
+
+<span class="token comment">// OkHttpClient.kt</span>
+<span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">newCall</span><span class="token punctuation">(</span>request<span class="token operator">:</span> Request<span class="token punctuation">)</span><span class="token operator">:</span> Call <span class="token operator">=</span> <span class="token function">RealCall</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> request<span class="token punctuation">,</span> forWebSocket <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+
+<span class="token comment">// RealCall.kt</span>
+<span class="token keyword">class</span> <span class="token function">RealCall</span><span class="token punctuation">(</span>
+    <span class="token keyword">val</span> client<span class="token operator">:</span> OkHttpClient<span class="token punctuation">,</span>
+    <span class="token keyword">val</span> originalRequest<span class="token operator">:</span> Request<span class="token punctuation">,</span>
+    <span class="token keyword">val</span> forWebSocket<span class="token operator">:</span> Boolean
+<span class="token punctuation">)</span> <span class="token operator">:</span> Call <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 连接池，与client绑定</span>
+    <span class="token keyword">private</span> <span class="token keyword">val</span> connectionPool<span class="token operator">:</span> RealConnectionPool <span class="token operator">=</span> client<span class="token punctuation">.</span>connectionPool<span class="token punctuation">.</span>delegate
+    <span class="token comment">// 事件监听器</span>
+    <span class="token keyword">internal</span> <span class="token keyword">val</span> eventListener<span class="token operator">:</span> EventListener <span class="token operator">=</span> client<span class="token punctuation">.</span>eventListenerFactory<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+    <span class="token comment">// timeout监听</span>
+    <span class="token keyword">private</span> <span class="token keyword">val</span> timeout <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token operator">:</span> <span class="token function">AsyncTimeout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">timedOut</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">timeout</span><span class="token punctuation">(</span>client<span class="token punctuation">.</span>callTimeoutMillis<span class="token punctuation">.</span><span class="token function">toLong</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> MILLISECONDS<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">// 执行状态</span>
+    <span class="token keyword">private</span> <span class="token keyword">val</span> executed <span class="token operator">=</span> <span class="token function">AtomicBoolean</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> connection<span class="token operator">:</span> RealConnection<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token keyword">private</span> <span class="token keyword">set</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Call是基本的请求接口，实现了请求要具有的基本方法</span>
+<span class="token keyword">interface</span> Call <span class="token operator">:</span> Cloneable <span class="token punctuation">&#123;</span>
+    <span class="token keyword">fun</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Request
+    <span class="token keyword">fun</span> <span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Response
+    <span class="token keyword">fun</span> <span class="token function">enqueue</span><span class="token punctuation">(</span>responseCallback<span class="token operator">:</span> Callback<span class="token punctuation">)</span>
+    <span class="token keyword">fun</span> <span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">fun</span> <span class="token function">isExecuted</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Boolean
+    <span class="token keyword">fun</span> <span class="token function">isCanceled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Boolean
+    <span class="token comment">// ...</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<h3 id="执行">执行</h3>
+<h4 id="同步execute">同步execute</h4>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token comment">// 	RealCall</span>
+<span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Response <span class="token punctuation">&#123;</span>
+    <span class="token comment">// CAS检查call是否已经被执行</span>
+    <span class="token function">check</span><span class="token punctuation">(</span>executed<span class="token punctuation">.</span><span class="token function">compareAndSet</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token string-literal singleline"><span class="token string">"Already Executed"</span></span> <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 开启timeout超时监听</span>
+    timeout<span class="token punctuation">.</span><span class="token function">enter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">callStart</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 向client的dispatch提出执行申请</span>
+        client<span class="token punctuation">.</span>dispatcher<span class="token punctuation">.</span><span class="token function">executed</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+        <span class="token comment">// 核心方法，侧面接入interceptorchain获取最终response</span>
+        <span class="token keyword">return</span> <span class="token function">getResponseWithInterceptorChain</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 向client的dispatch提出结束申请</span>
+        client<span class="token punctuation">.</span>dispatcher<span class="token punctuation">.</span><span class="token function">finished</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Dispatcher(具体的线程调度器,类似于RxJava中的Scheduler)</span>
+<span class="token keyword">class</span> Dispatcher <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 默认最大请求数64</span>
+    <span class="token annotation builtin">@get:Synchronized</span> <span class="token keyword">var</span> maxRequests <span class="token operator">=</span> <span class="token number">64</span>
+    <span class="token comment">// 默认每个主机允许发送的最大请求数5</span>
+    <span class="token annotation builtin">@get:Synchronized</span> <span class="token keyword">var</span> maxRequestsPerHost <span class="token operator">=</span> <span class="token number">5</span>
+    <span class="token annotation builtin">@set:Synchronized</span>
+    <span class="token annotation builtin">@get:Synchronized</span>
+    <span class="token keyword">var</span> idleCallback<span class="token operator">:</span> Runnable<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">var</span> executorServiceOrNull<span class="token operator">:</span> ExecutorService<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token comment">// 最终返回的还是 executorServiceOrNull</span>
+    <span class="token annotation builtin">@get:Synchronized</span>
+    <span class="token annotation builtin">@get:JvmName</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"executorService"</span></span><span class="token punctuation">)</span> <span class="token keyword">val</span> executorService<span class="token operator">:</span> ExecutorService
+        <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>executorServiceOrNull <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            executorServiceOrNull <span class="token operator">=</span> <span class="token function">ThreadPoolExecutor</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> Int<span class="token punctuation">.</span>MAX_VALUE<span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">,</span> TimeUnit<span class="token punctuation">.</span>SECONDS<span class="token punctuation">,</span>
+                <span class="token function">SynchronousQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">threadFactory</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">okHttpName</span></span><span class="token string"> Dispatcher"</span></span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token punctuation">&#125;</span>
+          <span class="token keyword">return</span> executorServiceOrNull<span class="token operator">!!</span>
+        <span class="token punctuation">&#125;</span>
+
+
+    <span class="token keyword">private</span> <span class="token keyword">val</span> readyAsyncCalls <span class="token operator">=</span> ArrayDeque<span class="token operator">&lt;</span>AsyncCall<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token keyword">val</span> runningAsyncCalls <span class="token operator">=</span> ArrayDeque<span class="token operator">&lt;</span>AsyncCall<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token keyword">val</span> runningSyncCalls <span class="token operator">=</span> ArrayDeque<span class="token operator">&lt;</span>RealCall<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token annotation builtin">@Synchronized</span> <span class="token keyword">internal</span> <span class="token keyword">fun</span> <span class="token function">executed</span><span class="token punctuation">(</span>call<span class="token operator">:</span> RealCall<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 向同步Running双端队列中加入该Call</span>
+        runningSyncCalls<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>call<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// ReaCall</span>
+<span class="token annotation builtin">@Throws</span><span class="token punctuation">(</span>IOException<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+<span class="token keyword">internal</span> <span class="token keyword">fun</span> <span class="token function">getResponseWithInterceptorChain</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Response <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 构建interceptor链，后续会介绍该部分</span>
+    <span class="token keyword">val</span> interceptors <span class="token operator">=</span> mutableListOf<span class="token operator">&lt;</span>Interceptor<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    interceptors <span class="token operator">+=</span> client<span class="token punctuation">.</span>interceptors
+    interceptors <span class="token operator">+=</span> <span class="token function">RetryAndFollowUpInterceptor</span><span class="token punctuation">(</span>client<span class="token punctuation">)</span>
+    interceptors <span class="token operator">+=</span> <span class="token function">BridgeInterceptor</span><span class="token punctuation">(</span>client<span class="token punctuation">.</span>cookieJar<span class="token punctuation">)</span>
+    interceptors <span class="token operator">+=</span> <span class="token function">CacheInterceptor</span><span class="token punctuation">(</span>client<span class="token punctuation">.</span>cache<span class="token punctuation">)</span>
+    interceptors <span class="token operator">+=</span> ConnectInterceptor
+    <span class="token comment">// 不是WebSocket时特殊处理</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>forWebSocket<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        interceptors <span class="token operator">+=</span> client<span class="token punctuation">.</span>networkInterceptors
+    <span class="token punctuation">&#125;</span>
+    interceptors <span class="token operator">+=</span> <span class="token function">CallServerInterceptor</span><span class="token punctuation">(</span>forWebSocket<span class="token punctuation">)</span>
+	
+    <span class="token comment">// 通过之前的interceptor构建第一个InterceptorChain</span>
+    <span class="token keyword">val</span> chain <span class="token operator">=</span> <span class="token function">RealInterceptorChain</span><span class="token punctuation">(</span>
+        call <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">,</span>
+        interceptors <span class="token operator">=</span> interceptors<span class="token punctuation">,</span>
+        index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>
+        exchange <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+        request <span class="token operator">=</span> originalRequest<span class="token punctuation">,</span>
+        connectTimeoutMillis <span class="token operator">=</span> client<span class="token punctuation">.</span>connectTimeoutMillis<span class="token punctuation">,</span>
+        readTimeoutMillis <span class="token operator">=</span> client<span class="token punctuation">.</span>readTimeoutMillis<span class="token punctuation">,</span>
+        writeTimeoutMillis <span class="token operator">=</span> client<span class="token punctuation">.</span>writeTimeoutMillis
+    <span class="token punctuation">)</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 核心方法</span>
+        <span class="token keyword">val</span> response <span class="token operator">=</span> chain<span class="token punctuation">.</span><span class="token function">proceed</span><span class="token punctuation">(</span>originalRequest<span class="token punctuation">)</span>
+        <span class="token comment">// Call是否被取消</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isCanceled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            response<span class="token punctuation">.</span><span class="token function">closeQuietly</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">throw</span> <span class="token function">IOException</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Canceled"</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> response
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> IOException<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        calledNoMoreExchanges <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token keyword">throw</span> <span class="token function">noMoreExchanges</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token keyword">as</span> Throwable
+    <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>calledNoMoreExchanges<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">noMoreExchanges</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>好，看到如上位置，流程逐渐清晰，通过call.execute将该call添加到dispatcher的待执行队列中，然后开始通过责任链模式去获取最终执行结果，那么重点就是OkHttp如何通过责任链模式获取到Response呢？</p>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token comment">// RealInterceptorChain</span>
+<span class="token keyword">class</span> <span class="token function">RealInterceptorChain</span><span class="token punctuation">(</span>
+    <span class="token keyword">internal</span> <span class="token keyword">val</span> call<span class="token operator">:</span> RealCall<span class="token punctuation">,</span>
+    <span class="token comment">// 重要，所有的interceptor</span>
+    <span class="token keyword">private</span> <span class="token keyword">val</span> interceptors<span class="token operator">:</span> List<span class="token operator">&lt;</span>Interceptor<span class="token operator">></span><span class="token punctuation">,</span>
+    <span class="token comment">// 当前应该执行的interceptor</span>
+    <span class="token keyword">private</span> <span class="token keyword">val</span> index<span class="token operator">:</span> Int<span class="token punctuation">,</span>
+    <span class="token keyword">internal</span> <span class="token keyword">val</span> exchange<span class="token operator">:</span> Exchange<span class="token operator">?</span><span class="token punctuation">,</span>
+    <span class="token keyword">internal</span> <span class="token keyword">val</span> request<span class="token operator">:</span> Request<span class="token punctuation">,</span>
+    <span class="token keyword">internal</span> <span class="token keyword">val</span> connectTimeoutMillis<span class="token operator">:</span> Int<span class="token punctuation">,</span>
+    <span class="token keyword">internal</span> <span class="token keyword">val</span> readTimeoutMillis<span class="token operator">:</span> Int<span class="token punctuation">,</span>
+    <span class="token keyword">internal</span> <span class="token keyword">val</span> writeTimeoutMillis<span class="token operator">:</span> Int
+<span class="token punctuation">)</span> <span class="token operator">:</span> Interceptor<span class="token punctuation">.</span><span class="token function">Chain</span> <span class="token punctuation">&#123;</span>
+    <span class="token annotation builtin">@Throws</span><span class="token punctuation">(</span>IOException<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">proceed</span><span class="token punctuation">(</span>request<span class="token operator">:</span> Request<span class="token punctuation">)</span><span class="token operator">:</span> Response <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 检查index是否正确</span>
+        <span class="token function">check</span><span class="token punctuation">(</span>index <span class="token operator">&lt;</span> interceptors<span class="token punctuation">.</span>size<span class="token punctuation">)</span>
+
+        calls<span class="token operator">++</span>
+		
+        <span class="token comment">// 不太理解exchange的作用，后续介绍到</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>exchange <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">check</span><span class="token punctuation">(</span>exchange<span class="token punctuation">.</span>finder<span class="token punctuation">.</span><span class="token function">sameHostAndPort</span><span class="token punctuation">(</span>request<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token string-literal singleline"><span class="token string">"network interceptor </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">interceptors<span class="token punctuation">[</span>index <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span></span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> must retain the same host and port"</span></span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token function">check</span><span class="token punctuation">(</span>calls <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token string-literal singleline"><span class="token string">"network interceptor </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">interceptors<span class="token punctuation">[</span>index <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span></span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> must call proceed() exactly once"</span></span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// copy构建下一个待处理的chain (index+1: 交给下一个interceptor)</span>
+        <span class="token keyword">val</span> next <span class="token operator">=</span> <span class="token function">copy</span><span class="token punctuation">(</span>index <span class="token operator">=</span> index <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> request <span class="token operator">=</span> request<span class="token punctuation">)</span>
+        <span class="token comment">// 获取当前的拦截器</span>
+        <span class="token keyword">val</span> interceptor <span class="token operator">=</span> interceptors<span class="token punctuation">[</span>index<span class="token punctuation">]</span>
+
+        <span class="token comment">// 当前interceptor处理下一个</span>
+        <span class="token keyword">val</span> response <span class="token operator">=</span> interceptor<span class="token punctuation">.</span><span class="token function">intercept</span><span class="token punctuation">(</span>next<span class="token punctuation">)</span> <span class="token operator">?:</span> <span class="token keyword">throw</span> <span class="token function">NullPointerException</span><span class="token punctuation">(</span>
+            <span class="token string-literal singleline"><span class="token string">"interceptor </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">interceptor</span></span><span class="token string"> returned null"</span></span><span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>exchange <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">check</span><span class="token punctuation">(</span>index <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">>=</span> interceptors<span class="token punctuation">.</span>size <span class="token operator">||</span> next<span class="token punctuation">.</span>calls <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token string-literal singleline"><span class="token string">"network interceptor </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">interceptor</span></span><span class="token string"> must call proceed() exactly once"</span></span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token function">check</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>body <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token string-literal singleline"><span class="token string">"interceptor </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">interceptor</span></span><span class="token string"> returned a response with no body"</span></span> <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">return</span> response
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<h4 id="异步enqueue">异步enqueue</h4>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token comment">// RealCall</span>
+<span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">enqueue</span><span class="token punctuation">(</span>responseCallback<span class="token operator">:</span> Callback<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 检查call的当前状态</span>
+    <span class="token function">check</span><span class="token punctuation">(</span>executed<span class="token punctuation">.</span><span class="token function">compareAndSet</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token string-literal singleline"><span class="token string">"Already Executed"</span></span> <span class="token punctuation">&#125;</span>
+
+    <span class="token function">callStart</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">// 包装Call为AsyncCall并入队</span>
+    client<span class="token punctuation">.</span>dispatcher<span class="token punctuation">.</span><span class="token function">enqueue</span><span class="token punctuation">(</span><span class="token function">AsyncCall</span><span class="token punctuation">(</span>responseCallback<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Dispatcher</span>
+<span class="token keyword">internal</span> <span class="token keyword">fun</span> <span class="token function">enqueue</span><span class="token punctuation">(</span>call<span class="token operator">:</span> AsyncCall<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">synchronized</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 添加当前call到异步任务等待线程池中</span>
+        readyAsyncCalls<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>call<span class="token punctuation">)</span>
+		<span class="token comment">// 暂时不研究</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>call<span class="token punctuation">.</span>call<span class="token punctuation">.</span>forWebSocket<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">val</span> existingCall <span class="token operator">=</span> <span class="token function">findExistingCallWithHost</span><span class="token punctuation">(</span>call<span class="token punctuation">.</span>host<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>existingCall <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> call<span class="token punctuation">.</span><span class="token function">reuseCallsPerHostFrom</span><span class="token punctuation">(</span>existingCall<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">promoteAndExecute</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">private</span> <span class="token keyword">fun</span> <span class="token function">promoteAndExecute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Boolean <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">assertThreadDoesntHoldLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">val</span> executableCalls <span class="token operator">=</span> mutableListOf<span class="token operator">&lt;</span>AsyncCall<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">val</span> isRunning<span class="token operator">:</span> Boolean
+    <span class="token comment">// 加锁</span>
+    <span class="token function">synchronized</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">val</span> i <span class="token operator">=</span> readyAsyncCalls<span class="token punctuation">.</span><span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>i<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">val</span> asyncCall <span class="token operator">=</span> i<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+			
+            <span class="token comment">// 若正在执行异步任务数量超过规定最大数量，则不继续处理</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>runningAsyncCalls<span class="token punctuation">.</span>size <span class="token operator">>=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>maxRequests<span class="token punctuation">)</span> <span class="token keyword">break</span> <span class="token comment">// Max capacity.</span>
+            <span class="token comment">// 若当前Call对应主机发送的请求大于最大规定数，则不继续处理</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>asyncCall<span class="token punctuation">.</span>callsPerHost<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>maxRequestsPerHost<span class="token punctuation">)</span> <span class="token keyword">continue</span> <span class="token comment">// Host max capacity.</span>
+
+            i<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            asyncCall<span class="token punctuation">.</span>callsPerHost<span class="token punctuation">.</span><span class="token function">incrementAndGet</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// AtomicInteger</span>
+            <span class="token comment">// 将call加入到执行的call集合中</span>
+            executableCalls<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>asyncCall<span class="token punctuation">)</span>
+            runningAsyncCalls<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>asyncCall<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+        isRunning <span class="token operator">=</span> <span class="token function">runningCallsCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span>
+    <span class="token punctuation">&#125;</span>
+	
+    <span class="token comment">// 对每一个可执行的call通过executorService进行异步执行</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token keyword">in</span> <span class="token number">0</span> until executableCalls<span class="token punctuation">.</span>size<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">val</span> asyncCall <span class="token operator">=</span> executableCalls<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+        asyncCall<span class="token punctuation">.</span><span class="token function">executeOn</span><span class="token punctuation">(</span>executorService<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> isRunning
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// RealCall</span>
+<span class="token keyword">fun</span> <span class="token function">executeOn</span><span class="token punctuation">(</span>executorService<span class="token operator">:</span> ExecutorService<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    client<span class="token punctuation">.</span>dispatcher<span class="token punctuation">.</span><span class="token function">assertThreadDoesntHoldLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> success <span class="token operator">=</span> <span class="token boolean">false</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        executorService<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+        success <span class="token operator">=</span> <span class="token boolean">true</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> RejectedExecutionException<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">val</span> ioException <span class="token operator">=</span> <span class="token function">InterruptedIOException</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"executor rejected"</span></span><span class="token punctuation">)</span>
+        ioException<span class="token punctuation">.</span><span class="token function">initCause</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span>
+        <span class="token function">noMoreExchanges</span><span class="token punctuation">(</span>ioException<span class="token punctuation">)</span>
+        responseCallback<span class="token punctuation">.</span><span class="token function">onFailure</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token label symbol">@RealCall</span><span class="token punctuation">,</span> ioException<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>success<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            client<span class="token punctuation">.</span>dispatcher<span class="token punctuation">.</span><span class="token function">finished</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token comment">// This call is no longer running!</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>那么这里的executorService到底是如何配置的，在前面OkHttpClient默认Build配置中，在get executorService时，会默认初始化executorServiceOrNull</p>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token annotation builtin">@get:Synchronized</span>
+<span class="token annotation builtin">@get:JvmName</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"executorService"</span></span><span class="token punctuation">)</span> <span class="token keyword">val</span> executorService<span class="token operator">:</span> ExecutorService
+	<span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>executorServiceOrNull <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            executorServiceOrNull <span class="token operator">=</span> <span class="token function">ThreadPoolExecutor</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> Int<span class="token punctuation">.</span>MAX_VALUE<span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">,</span> TimeUnit<span class="token punctuation">.</span>SECONDS<span class="token punctuation">,</span>
+                                                       <span class="token function">SynchronousQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">threadFactory</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">okHttpName</span></span><span class="token string"> Dispatcher"</span></span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> executorServiceOrNull<span class="token operator">!!</span>
+	<span class="token punctuation">&#125;</span></code></pre></div>
+<p>可以看到这里使用的是SynchronousQueue作为阻塞队列，有关线程池的知识，在Java JUC中已经学习到，如果忘了可以回顾一下再来看这段内容。</p>
+<blockquote>
+<p>SynchronousQueue(同步队列) 不存储元素，只有当前元素出了队下一个元素才能进来。 此处使用同步队列是为了<strong>保证网络请求任务尽可能的地做，能做就做</strong>，多开线程也没有影响，只要不超过最大限制。也符合此时网络请求的场景(但此处虽然最大线程数是Int.MAX_VALUE，但其实还是在Dispatcher中做了具体限制(64) )</p>
+</blockquote>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token comment">// AsyncCall</span>
+<span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">threadName</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"OkHttp </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression"><span class="token function">redactedUrl</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">var</span> signalledCallback <span class="token operator">=</span> <span class="token boolean">false</span>
+        <span class="token comment">// 启动超时监听</span>
+        timeout<span class="token punctuation">.</span><span class="token function">enter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 还是之前的责任链调用方式，只是此时位于新的线程中</span>
+            <span class="token keyword">val</span> response <span class="token operator">=</span> <span class="token function">getResponseWithInterceptorChain</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            signalledCallback <span class="token operator">=</span> <span class="token boolean">true</span>
+            <span class="token comment">// 如果成功响应，不抛异常，则调用onResponse回调</span>
+            responseCallback<span class="token punctuation">.</span><span class="token function">onResponse</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token label symbol">@RealCall</span><span class="token punctuation">,</span> response<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> IOException<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 抛异常，调用onFailure方法</span>
+            responseCallback<span class="token punctuation">.</span><span class="token function">onFailure</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token label symbol">@RealCall</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>t<span class="token operator">:</span> Throwable<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            responseCallback<span class="token punctuation">.</span><span class="token function">onFailure</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token label symbol">@RealCall</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+            <span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">throw</span> t
+        <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+            client<span class="token punctuation">.</span>dispatcher<span class="token punctuation">.</span><span class="token function">finished</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<h3 id="其他-v2">其他</h3>
+<h4 id="陌生类介绍">陌生类介绍</h4>
+<p><strong>Exchange</strong></p>
+<p>传递单个HTTP Request与Reponse响应对，在ExchangeCodec基础上添加事件分发管理，Exchange负责将请求发出去并读取的具体响应，具体使用的又是ExchangeCodec，Exchange相当于管理工人的老板</p>
+<p><strong>ExchangeFinder</strong></p>
+<p>尝试为一个Exchange找到一个可用的Connection</p>
+<p><strong>ExchangeCodec</strong></p>
+<p>编码HTTP Request并解码HTTP Response，相当于是工人</p>
+<p><strong>ConnectionPool</strong></p>
+<p>RealConnectionPool的代理类，负责维护所有的HTTP Connection，RealConnectionPool内通过ConcurrentLinkedQueue维护所持有的RealConnection</p>
+<h4 id="齐全的监听机制">齐全的监听机制</h4>
+<p>在OkHttp进行责任链机制的调用过程中，有非常完整的监听，对每一次关键操作的执行都要开始和结束的监听回调，但这也带来了一个问题，每次进行传递调用时都需要将该EventListener作为参数进行传递。</p>
+<h3 id="责任链机制">责任链机制</h3>
+<p>回到RealInterceptorChain的chain方法中，具体品味一下责任链机制</p>
+<p>可以看到这里大概有这几个责任链。首先交给RealInterceptorChain开启调用，RealInterceptorChain按顺序执行Inteceptor，每个Interceptor执行完毕后，再次调用chain.proceed，以回到RealInterceptorChain以便进入到下层的interceptor调用，底层Interceptor调用完后再逆序执行余下操作，这就构成了责任链的结构，也就是注意两个核心方法</p>
+<ul>
+<li>interceptor.intercept(chain):Response</li>
+<li>chain.proceed(chain):Response</li>
+</ul>
+<pre><code class="mermaid"><span class="token keyword">graph</span> LR
+A<span class="token text string">[client.interceptors]</span><span class="token arrow operator">--></span>B<span class="token text string">[RetryAndFollowUpInterceptor]</span>
+B<span class="token text string">[RetryAndFollowUpInterceptor]</span> <span class="token arrow operator">--></span> C<span class="token text string">[BridgeInterceptor]</span>
+C<span class="token text string">[BridgeInterceptor]</span> <span class="token arrow operator">--></span> D<span class="token text string">[CacheInterceptor]</span>
+D<span class="token text string">[CacheInterceptor]</span> <span class="token arrow operator">--></span> E<span class="token text string">[ConnectInterceptor]</span>
+E<span class="token text string">[ConnectInterceptor]</span> <span class="token arrow operator">--></span> F<span class="token text string">[client.networkInterceptors]</span>
+F<span class="token text string">[client.networkInterceptors]</span> <span class="token arrow operator">--></span> G<span class="token text string">[CallServerInterceptor]</span></code></pre>
+<p>先列出RealInterceptorChain的proceed代码，后续会介绍</p>
+<h4 id="RetryAndFolowUpInterceptor">RetryAndFolowUpInterceptor</h4>
+<p>重试重定向拦截器：负责在请求失败的时候重试以及重定向的自动后续请求</p>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token comment">// RetryAndFollowUpInterceptor</span>
+<span class="token annotation builtin">@Throws</span><span class="token punctuation">(</span>IOException<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+<span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">intercept</span><span class="token punctuation">(</span>chain<span class="token operator">:</span> Interceptor<span class="token punctuation">.</span>Chain<span class="token punctuation">)</span><span class="token operator">:</span> Response <span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        call<span class="token punctuation">.</span><span class="token function">enterNetworkInterceptorExchange</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> newExchangeFinder<span class="token punctuation">)</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 将请求发送给下一个拦截器</span>
+        response <span class="token operator">=</span> realChain<span class="token punctuation">.</span><span class="token function">proceed</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span><span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> RouteException<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// RealCall</span>
+<span class="token comment">// 尝试创建一个exchangeFinder</span>
+<span class="token keyword">fun</span> <span class="token function">enterNetworkInterceptorExchange</span><span class="token punctuation">(</span>request<span class="token operator">:</span> Request<span class="token punctuation">,</span> newExchangeFinder<span class="token operator">:</span> Boolean<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">check</span><span class="token punctuation">(</span>interceptorScopedExchange <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+
+    <span class="token function">synchronized</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">check</span><span class="token punctuation">(</span><span class="token operator">!</span>responseBodyOpen<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token string-literal singleline"><span class="token string">"cannot make a new request because the previous response is still open: "</span></span> <span class="token operator">+</span>
+            <span class="token string-literal singleline"><span class="token string">"please call response.close()"</span></span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token function">check</span><span class="token punctuation">(</span><span class="token operator">!</span>requestBodyOpen<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>newExchangeFinder<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>exchangeFinder <span class="token operator">=</span> <span class="token function">ExchangeFinder</span><span class="token punctuation">(</span>
+            connectionPool<span class="token punctuation">,</span>
+            <span class="token function">createAddress</span><span class="token punctuation">(</span>request<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token keyword">this</span><span class="token punctuation">,</span>
+            eventListener
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<h4 id="BridgeInterceptor"><strong>BridgeInterceptor</strong></h4>
+<p>桥接拦截器：用户与网络之间的桥梁，我们发出的请求将会经过它的处理才能发送给服务器，可以根据<code>Request</code>信息构建<code>Header</code>以及设置响应信息，例如<code>Content-Length</code>的计算和添加、<code>gzip</code>的⽀持<code>（Accept-Encoding: gzip）</code>、 <code>gzip</code>压缩数据的解包。</p>
+<ul>
+<li>先：主要是对Request Header中ContentLength、ContentType、Host、Connection、User-Agent、Cookies等做一些基本配置</li>
+<li>后：可能会进行gzip压缩数据</li>
+</ul>
+<h4 id="CacheInterceptor"><strong>CacheInterceptor</strong></h4>
+<p>缓存拦截器：根据请求的信息和缓存响应信息来判断是否存在缓存可以使用</p>
+<ul>
+<li>先：尝试通过请求来创建缓存策略，根据缓存策略查找缓存结果。并根据配置判断是否要直接返回缓存</li>
+<li>后：如果返回为304且有该响应的缓存，则可以复用部分缓存，并更新缓存</li>
+</ul>
+<h4 id="ConnectInterceptor"><strong>ConnectInterceptor</strong></h4>
+<p>连接拦截器：负责和服务器建立连接，即<strong>打开服务器与主机的Socket连接</strong>（TLS验证、证书验证），非常关键的过程都在这里进行处理，包括ExchangeFinder、Exchange与ExchangeCodec在这里进行初始化，同时连接池复用过程也在此处得以体现</p>
+<ul>
+<li>前：寻找可用Connection(包含复用过程)并创建Exchange</li>
+</ul>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">object</span> ConnectInterceptor <span class="token operator">:</span> Interceptor <span class="token punctuation">&#123;</span>
+    <span class="token annotation builtin">@Throws</span><span class="token punctuation">(</span>IOException<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">intercept</span><span class="token punctuation">(</span>chain<span class="token operator">:</span> Interceptor<span class="token punctuation">.</span>Chain<span class="token punctuation">)</span><span class="token operator">:</span> Response <span class="token punctuation">&#123;</span>
+        <span class="token keyword">val</span> realChain <span class="token operator">=</span> chain <span class="token keyword">as</span> RealInterceptorChain
+        <span class="token keyword">val</span> exchange <span class="token operator">=</span> realChain<span class="token punctuation">.</span>call<span class="token punctuation">.</span><span class="token function">initExchange</span><span class="token punctuation">(</span>chain<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> connectedChain <span class="token operator">=</span> realChain<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>exchange <span class="token operator">=</span> exchange<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> connectedChain<span class="token punctuation">.</span><span class="token function">proceed</span><span class="token punctuation">(</span>realChain<span class="token punctuation">.</span>request<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// RealInterceptorChain</span>
+<span class="token comment">// 通过之前创建的ExchangeFinder尝试找到一个可用的Connection</span>
+<span class="token keyword">internal</span> <span class="token keyword">fun</span> <span class="token function">initExchange</span><span class="token punctuation">(</span>chain<span class="token operator">:</span> RealInterceptorChain<span class="token punctuation">)</span><span class="token operator">:</span> Exchange <span class="token punctuation">&#123;</span>
+    <span class="token function">synchronized</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">check</span><span class="token punctuation">(</span>expectMoreExchanges<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token string-literal singleline"><span class="token string">"released"</span></span> <span class="token punctuation">&#125;</span>
+        <span class="token function">check</span><span class="token punctuation">(</span><span class="token operator">!</span>responseBodyOpen<span class="token punctuation">)</span>
+        <span class="token function">check</span><span class="token punctuation">(</span><span class="token operator">!</span>requestBodyOpen<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">val</span> exchangeFinder <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>exchangeFinder<span class="token operator">!!</span>
+    <span class="token comment">// 尝试通过echangeFinder找到一个有可用Connection的Codec</span>
+    <span class="token keyword">val</span> codec <span class="token operator">=</span> exchangeFinder<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>client<span class="token punctuation">,</span> chain<span class="token punctuation">)</span>
+    <span class="token comment">// 基于ExchangeFinder与ExchangeCodec创建Exchange</span>
+    <span class="token keyword">val</span> result <span class="token operator">=</span> <span class="token function">Exchange</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> eventListener<span class="token punctuation">,</span> exchangeFinder<span class="token punctuation">,</span> codec<span class="token punctuation">)</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>interceptorScopedExchange <span class="token operator">=</span> result
+    <span class="token keyword">this</span><span class="token punctuation">.</span>exchange <span class="token operator">=</span> result
+    <span class="token function">synchronized</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>requestBodyOpen <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>responseBodyOpen <span class="token operator">=</span> <span class="token boolean">true</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>canceled<span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token function">IOException</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Canceled"</span></span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> result
+<span class="token punctuation">&#125;</span>
+<span class="token comment">// ExchangeFinder</span>
+<span class="token keyword">fun</span> <span class="token function">find</span><span class="token punctuation">(</span>
+    client<span class="token operator">:</span> OkHttpClient<span class="token punctuation">,</span>
+    chain<span class="token operator">:</span> RealInterceptorChain
+<span class="token punctuation">)</span><span class="token operator">:</span> ExchangeCodec <span class="token punctuation">&#123;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 尝试从ConnectionPool中获取到可用的Connection</span>
+        <span class="token keyword">val</span> resultConnection <span class="token operator">=</span> <span class="token function">findHealthyConnection</span><span class="token punctuation">(</span>
+            connectTimeout <span class="token operator">=</span> chain<span class="token punctuation">.</span>connectTimeoutMillis<span class="token punctuation">,</span>
+            readTimeout <span class="token operator">=</span> chain<span class="token punctuation">.</span>readTimeoutMillis<span class="token punctuation">,</span>
+            writeTimeout <span class="token operator">=</span> chain<span class="token punctuation">.</span>writeTimeoutMillis<span class="token punctuation">,</span>
+            pingIntervalMillis <span class="token operator">=</span> client<span class="token punctuation">.</span>pingIntervalMillis<span class="token punctuation">,</span>
+            connectionRetryEnabled <span class="token operator">=</span> client<span class="token punctuation">.</span>retryOnConnectionFailure<span class="token punctuation">,</span>
+            doExtensiveHealthChecks <span class="token operator">=</span> chain<span class="token punctuation">.</span>request<span class="token punctuation">.</span>method <span class="token operator">!=</span> <span class="token string-literal singleline"><span class="token string">"GET"</span></span>
+        <span class="token punctuation">)</span>
+        <span class="token comment">// 创建一个基于该chain且可编码的HTTP Connection</span>
+        <span class="token keyword">return</span> resultConnection<span class="token punctuation">.</span><span class="token function">newCodec</span><span class="token punctuation">(</span>client<span class="token punctuation">,</span> chain<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> RouteException<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">trackFailure</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>lastConnectException<span class="token punctuation">)</span>
+        <span class="token keyword">throw</span> e
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> IOException<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">trackFailure</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span>
+        <span class="token keyword">throw</span> <span class="token function">RouteException</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<h4 id="CallServerInterceptor">CallServerInterceptor</h4>
+<blockquote>
+<p>阅读这部分源码时，卡了一会，因为一直以为OkHttp底层还是通过HttpConnection发送的，因此一直没有找到具体逻辑，最后才注意到原来OkHttp是<strong>基于Socket连接的</strong></p>
+</blockquote>
+<p>服务请求拦截器：<strong>向服务器发起真正的网络请求</strong>，然后接收到服务器返回响应。这是整个拦截器链中的最后一个拦截器，在这个拦截器中不会再有<code>proceed</code>方法调用下一个拦截器，而是会<strong>把拿到的响应处理之后返回给上一层的拦截器</strong></p>
+<blockquote>
+<p>通过Socket进行网络请求的 步骤</p>
+<ol>
+<li>建立服务器与主机间的Socket连接</li>
+<li>主机向服务器发送具体请求，例如 “GET /user/login HTTP/1.1”</li>
+</ol>
+</blockquote>
+<p>而在上一步<strong>CacheInterceptor</strong>中，已经打开了Socket连接，此处只需要通过打开的Socket连接向服务端发送请求即可,此处对请求的处理采用了StringBuffer类似的结构。并根据Socket中Buffer的响应数据，填充实际的Response</p>
+<p>此后不会再chain.proceed，因为也没有可以proceed的interceptor了，此时直接返回得到的Response，并逆序递交给之前的interceptor</p>
+<h3 id="连接池复用">连接池复用</h3>
+<p>连接池复用是OkHttp中的一大优势，让OkHttp快于其他一般的网络请求框架。在此之前回顾一下HTTP复用相关内容</p>
+<blockquote>
+<p><strong>HTTP长连接</strong></p>
+<p>HTTP1.1之前，HTTP连接都是短连接，即发送一个Request经过TCP连接后，且得到响应后连接就会断开。但在许多环境下，往往请求都发送到相同的几个HOST中，如果每次HTTP请求都要进行TCP三挥四握，则<strong>浪费内存与时间</strong>。</p>
+<p>同时，短连接还可能造成<strong>短时的端口阻塞问题</strong>，因为服务器在四次挥手后还要等待2MSL(4分钟)，此时端口还是处于被占用状态，因此若大量短连接HTTP请求同时请求一台主机，此时很容易造成端口被占满的情况</p>
+<p>因此HTTP1.1便推出了HTTP长连接，用请求头Connection: keep-alive表示(默认启动)。即服务器收到长连接的Request在发送完响应后不会关闭该TCP连接，等待一定时间后才会关闭，即节省了重复HTTP请求的TCP三次握手流程以及相关资源创建时间。</p>
+</blockquote>
+<h4 id="清理">清理</h4>
+<h5 id="如何启动清理线程">如何启动清理线程</h5>
+<p>核心： OkHttp采用异步线程进行清理</p>
+<p>TaskRunner是如何创建的？</p>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">class</span> ConnectionPool <span class="token keyword">internal</span> <span class="token keyword">constructor</span><span class="token punctuation">(</span>
+  <span class="token keyword">internal</span> <span class="token keyword">val</span> delegate<span class="token operator">:</span> RealConnectionPool
+<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span>
+    maxIdleConnections<span class="token operator">:</span> Int<span class="token punctuation">,</span>
+    keepAliveDuration<span class="token operator">:</span> Long<span class="token punctuation">,</span>
+    timeUnit<span class="token operator">:</span> TimeUnit
+  <span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">(</span><span class="token function">RealConnectionPool</span><span class="token punctuation">(</span>
+      taskRunner <span class="token operator">=</span> TaskRunner<span class="token punctuation">.</span>INSTANCE<span class="token punctuation">,</span>
+      maxIdleConnections <span class="token operator">=</span> maxIdleConnections<span class="token punctuation">,</span>
+      keepAliveDuration <span class="token operator">=</span> keepAliveDuration<span class="token punctuation">,</span>
+      timeUnit <span class="token operator">=</span> timeUnit
+  <span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">// TaskRunner</span>
+<span class="token comment">// Backend其实包含一个ThreadPoolExecutor</span>
+<span class="token keyword">val</span> INSTANCE <span class="token operator">=</span> <span class="token function">TaskRunner</span><span class="token punctuation">(</span><span class="token function">RealBackend</span><span class="token punctuation">(</span><span class="token function">threadFactory</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">okHttpName</span></span><span class="token string"> TaskRunner"</span></span><span class="token punctuation">,</span> daemon <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">class</span> <span class="token function">RealBackend</span><span class="token punctuation">(</span>threadFactory<span class="token operator">:</span> ThreadFactory<span class="token punctuation">)</span> <span class="token operator">:</span> Backend <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">val</span> executor <span class="token operator">=</span> <span class="token function">ThreadPoolExecutor</span><span class="token punctuation">(</span>
+        <span class="token number">0</span><span class="token punctuation">,</span> <span class="token comment">// corePoolSize.</span>
+        Int<span class="token punctuation">.</span>MAX_VALUE<span class="token punctuation">,</span> <span class="token comment">// maximumPoolSize.</span>
+        <span class="token number">60L</span><span class="token punctuation">,</span> TimeUnit<span class="token punctuation">.</span>SECONDS<span class="token punctuation">,</span> <span class="token comment">// keepAliveTime.</span>
+        <span class="token function">SynchronousQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        threadFactory
+    <span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token function">RealConnectionPool</span><span class="token punctuation">(</span>
+  taskRunner<span class="token operator">:</span> TaskRunner<span class="token punctuation">,</span>
+  <span class="token comment">/** The maximum number of idle connections for each address. */</span>
+  <span class="token keyword">private</span> <span class="token keyword">val</span> maxIdleConnections<span class="token operator">:</span> Int<span class="token punctuation">,</span>
+  keepAliveDuration<span class="token operator">:</span> Long<span class="token punctuation">,</span>
+  timeUnit<span class="token operator">:</span> TimeUnit
+<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  
+  <span class="token keyword">private</span> <span class="token keyword">val</span> keepAliveDurationNs<span class="token operator">:</span> Long <span class="token operator">=</span> timeUnit<span class="token punctuation">.</span><span class="token function">toNanos</span><span class="token punctuation">(</span>keepAliveDuration<span class="token punctuation">)</span>
+  <span class="token keyword">private</span> <span class="token keyword">val</span> cleanupQueue<span class="token operator">:</span> TaskQueue <span class="token operator">=</span> taskRunner<span class="token punctuation">.</span><span class="token function">newQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">private</span> <span class="token keyword">val</span> cleanupTask <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token operator">:</span> <span class="token function">Task</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">okHttpName</span></span><span class="token string"> ConnectionPool"</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">runOnce</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">cleanup</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span><span class="token function">nanoTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// TaskQueue</span>
+<span class="token keyword">class</span> TaskQueue <span class="token keyword">internal</span> <span class="token keyword">constructor</span><span class="token punctuation">(</span>
+  <span class="token keyword">internal</span> <span class="token keyword">val</span> taskRunner<span class="token operator">:</span> TaskRunner<span class="token punctuation">,</span>
+  <span class="token keyword">internal</span> <span class="token keyword">val</span> name<span class="token operator">:</span> String
+<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">val</span> scheduledTasks<span class="token operator">:</span> List<span class="token operator">&lt;</span>Task<span class="token operator">></span>
+    <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">synchronized</span><span class="token punctuation">(</span>taskRunner<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> futureTasks<span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+  <span class="token keyword">internal</span> <span class="token keyword">val</span> futureTasks <span class="token operator">=</span> mutableListOf<span class="token operator">&lt;</span>Task<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>该异步线程在两处进行调用</p>
+<ul>
+<li>Put方法：每次Put Connection到ConnectionPool中</li>
+<li>connectionBecameIdle：当有Connection变为空闲状态时</li>
+</ul>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token comment">// RealThreadPool</span>
+<span class="token keyword">fun</span> <span class="token function">put</span><span class="token punctuation">(</span>connection<span class="token operator">:</span> RealConnection<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  connection<span class="token punctuation">.</span><span class="token function">assertThreadHoldsLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  connections<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>connection<span class="token punctuation">)</span>
+  cleanupQueue<span class="token punctuation">.</span><span class="token function">schedule</span><span class="token punctuation">(</span>cleanupTask<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">fun</span> <span class="token function">connectionBecameIdle</span><span class="token punctuation">(</span>connection<span class="token operator">:</span> RealConnection<span class="token punctuation">)</span><span class="token operator">:</span> Boolean <span class="token punctuation">&#123;</span>
+  connection<span class="token punctuation">.</span><span class="token function">assertThreadHoldsLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">return</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>connection<span class="token punctuation">.</span>noNewExchanges <span class="token operator">||</span> maxIdleConnections <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    connection<span class="token punctuation">.</span>noNewExchanges <span class="token operator">=</span> <span class="token boolean">true</span>
+    connections<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>connection<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>connections<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> cleanupQueue<span class="token punctuation">.</span><span class="token function">cancelAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token boolean">true</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    cleanupQueue<span class="token punctuation">.</span><span class="token function">schedule</span><span class="token punctuation">(</span>cleanupTask<span class="token punctuation">)</span>
+    <span class="token boolean">false</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>来看一下taskQueue.schedule方法是如何将这个固定的cleanupTask放入Thread并执行的</p>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token comment">// TaskQueue</span>
+<span class="token keyword">fun</span> <span class="token function">schedule</span><span class="token punctuation">(</span>task<span class="token operator">:</span> Task<span class="token punctuation">,</span> delayNanos<span class="token operator">:</span> Long <span class="token operator">=</span> <span class="token number">0L</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 对当前清理的task上锁</span>
+  <span class="token function">synchronized</span><span class="token punctuation">(</span>taskRunner<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 当前taskQueue关闭后，做一些判断</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>shutdown<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>task<span class="token punctuation">.</span>cancelable<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">taskLog</span><span class="token punctuation">(</span>task<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token string-literal singleline"><span class="token string">"schedule canceled (queue is shutdown)"</span></span> <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span>
+      <span class="token punctuation">&#125;</span>
+      <span class="token function">taskLog</span><span class="token punctuation">(</span>task<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token string-literal singleline"><span class="token string">"schedule failed (queue is shutdown)"</span></span> <span class="token punctuation">&#125;</span>
+      <span class="token keyword">throw</span> <span class="token function">RejectedExecutionException</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+		
+    <span class="token comment">// 如果当前线程已经是未来待执行Queue futureTask中的第一个</span>
+    <span class="token comment">// 否则就将其按执行时间插入到queue中</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">scheduleAndDecide</span><span class="token punctuation">(</span>task<span class="token punctuation">,</span> delayNanos<span class="token punctuation">,</span> recurrence <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 则尝试安排该Task立即执行</span>
+      taskRunner<span class="token punctuation">.</span><span class="token function">kickCoordinator</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 判断何时执行</span>
+<span class="token keyword">internal</span> <span class="token keyword">fun</span> <span class="token function">scheduleAndDecide</span><span class="token punctuation">(</span>task<span class="token operator">:</span> Task<span class="token punctuation">,</span> delayNanos<span class="token operator">:</span> Long<span class="token punctuation">,</span> recurrence<span class="token operator">:</span> Boolean<span class="token punctuation">)</span><span class="token operator">:</span> Boolean <span class="token punctuation">&#123;</span>
+    task<span class="token punctuation">.</span><span class="token function">initQueue</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">val</span> now <span class="token operator">=</span> taskRunner<span class="token punctuation">.</span>backend<span class="token punctuation">.</span><span class="token function">nanoTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">val</span> executeNanoTime <span class="token operator">=</span> now <span class="token operator">+</span> delayNanos
+
+    <span class="token comment">// 如果这个清理任务已经被安排要以后运行了</span>
+    <span class="token keyword">val</span> existingIndex <span class="token operator">=</span> futureTasks<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>task<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>existingIndex <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>task<span class="token punctuation">.</span>nextExecuteNanoTime <span class="token operator">&lt;=</span> executeNanoTime<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">taskLog</span><span class="token punctuation">(</span>task<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token string-literal singleline"><span class="token string">"already scheduled"</span></span> <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span>
+      <span class="token punctuation">&#125;</span>
+      futureTasks<span class="token punctuation">.</span><span class="token function">removeAt</span><span class="token punctuation">(</span>existingIndex<span class="token punctuation">)</span> <span class="token comment">// Already scheduled later: reschedule below!</span>
+    <span class="token punctuation">&#125;</span>
+    task<span class="token punctuation">.</span>nextExecuteNanoTime <span class="token operator">=</span> executeNanoTime
+
+  	<span class="token comment">// 将该task按指定delay顺序插入到futureTask中</span>
+    <span class="token keyword">var</span> insertAt <span class="token operator">=</span> futureTasks<span class="token punctuation">.</span><span class="token function">indexOfFirst</span> <span class="token punctuation">&#123;</span> it<span class="token punctuation">.</span>nextExecuteNanoTime <span class="token operator">-</span> now <span class="token operator">></span> delayNanos <span class="token punctuation">&#125;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>insertAt <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> insertAt <span class="token operator">=</span> futureTasks<span class="token punctuation">.</span>size
+    futureTasks<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>insertAt<span class="token punctuation">,</span> task<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> insertAt <span class="token operator">==</span> <span class="token number">0</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">internal</span> <span class="token keyword">fun</span> <span class="token function">kickCoordinator</span><span class="token punctuation">(</span>taskQueue<span class="token operator">:</span> TaskQueue<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">assertThreadHoldsLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token comment">// 如果当前TaskQueue中没有正在执行的清理任务</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>taskQueue<span class="token punctuation">.</span>activeTask <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 有等待执行的清理任务</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>taskQueue<span class="token punctuation">.</span>futureTasks<span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 将任务加入到准备执行队列中</span>
+      readyQueues<span class="token punctuation">.</span><span class="token function">addIfAbsent</span><span class="token punctuation">(</span>taskQueue<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+      readyQueues<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>taskQueue<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+	<span class="token comment">// 暂时不太清楚</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>coordinatorWaiting<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    backend<span class="token punctuation">.</span><span class="token function">coordinatorNotify</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token label symbol">@TaskRunner</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 交给线程池执行runnable</span>
+    backend<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span>runnable<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>到此为止，梳理一下连接池中开启清理线程的逻辑</p>
+<p>一个RealConnection -&gt; 一个TaskRunner -&gt; 多个TaskQueue -&gt; 多个Task</p>
+<p><img src="/Users/pplong/Library/Application%20Support/typora-user-images/image-20230824234553755.png" alt="image-20230824234553755"></p>
+<ul>
+<li>两种调用schedule的入口：
+<ul>
+<li>RealConnectionPool.connectionBecameIdle：当call进行完毕时会调用方法</li>
+<li>RealConnectionPool.put：尝试一个RealConnection放入到线程池时(也就是在RealConnection进行Connect后，此时已于服务端开启Socket连接)，通过cleanUpQueue申请调度cleanupTask这个清理任务</li>
+</ul>
+</li>
+<li>taskQueue.scheduleAndDecide：为task安排在多久进行调度
+<ul>
+<li>taskQueue通过futuerTask查看自己是否已经启动。如果没有启动则进行调度。如果启动了，</li>
+<li>指定task下次执行时间为指定的delay，并将该该task按照待执行时间插入到queue的futureTasks中，如果futureTask中该task位于队头，则需要立马执行，否则就不管</li>
+</ul>
+</li>
+<li>taskRunner.kickCoordinator: 尝试将将该TaskQueue(cleanupQueue)放入到TaskRunner中的readyQueues中，并通过线程池去execute TaskRunner中<strong>已经初始化好了且已经实现的Runnable</strong>。</li>
+<li>切换到该线程池安排的线程，该runnable中从before、run、after的角度又对清理线程实际Runnable做了这样几件事情(接下来介绍该部分)：
+<ul>
+<li>awaitTasktoRun，尝试从readyQueues中获取一个queue并且按顺序获取所有readyQueue中待执行时间最近的那一个task(这里应该基本上都是cleanupQueue的task)。对task进行before处理
+<ul>
+<li>beforeRun：该Task即将被执行，做了以下配置
+<ul>
+<li>从queue的futureTask中移除该task，说明该queue马上要做了</li>
+<li>从readyQueues中移除该queue，该queue马上要被执行</li>
+<li>指定queue的Actvitytask为当前task</li>
+<li>busyQueue中添加该queue，说明该queue正在执行任务</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>runTask，拿到该task，开始执行真正run与afterRun方法
+<ul>
+<li>task.runOnce: 真正运行清理线程的实际逻辑(cleanup)，最终拿到下一次应当进行清理的时延</li>
+<li>afterRun:
+<ul>
+<li>对当前操作queue设置activieTask为null</li>
+<li>将queue从busyQueues中移除</li>
+<li>如果queue还有futuerTask，则readyQueues中再次加入该queue</li>
+<li>如果指定了还要在指定时间后再次run该task，则调用scheduleAndDecide方法进行调度安排</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>那么TaskRunnner执行的Runnable是什么？在taskRunner中已经初始化好了</p>
+<h5 id="清理线程做了什么">清理线程做了什么</h5>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">private</span> <span class="token keyword">val</span> runnable<span class="token operator">:</span> Runnable <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token operator">:</span> Runnable <span class="token punctuation">&#123;</span>
+  <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 从readyTask中获取一个可执行的task，可能为null</span>
+      <span class="token keyword">val</span> task <span class="token operator">=</span> <span class="token function">synchronized</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token label symbol">@TaskRunner</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">awaitTaskToRun</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span> <span class="token operator">?:</span> <span class="token keyword">return</span>
+
+      <span class="token function">logElapsed</span><span class="token punctuation">(</span>task<span class="token punctuation">,</span> task<span class="token punctuation">.</span>queue<span class="token operator">!!</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">var</span> completedNormally <span class="token operator">=</span> <span class="token boolean">false</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+          <span class="token comment">// 执行具体task</span>
+          <span class="token function">runTask</span><span class="token punctuation">(</span>task<span class="token punctuation">)</span>
+          completedNormally <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+          <span class="token comment">// If the task is crashing start another thread to service the queues.</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>completedNormally<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            backend<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+          <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+
+<span class="token keyword">private</span> <span class="token keyword">fun</span> <span class="token function">runTask</span><span class="token punctuation">(</span>task<span class="token operator">:</span> Task<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">assertThreadDoesntHoldLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">val</span> currentThread <span class="token operator">=</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">val</span> oldName <span class="token operator">=</span> currentThread<span class="token punctuation">.</span>name
+  currentThread<span class="token punctuation">.</span>name <span class="token operator">=</span> task<span class="token punctuation">.</span>name
+
+  <span class="token keyword">var</span> delayNanos <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1L</span>
+  <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// task.runOnce其实也就是开始执行清理任务cleanup</span>
+		<span class="token comment">// 获取得到下次应该执行清理任务的时间</span>
+    delayNanos <span class="token operator">=</span> task<span class="token punctuation">.</span><span class="token function">runOnce</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">synchronized</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 从busyQueue中移除该taskQueue，并安排下次清理任务</span>
+      <span class="token function">afterRun</span><span class="token punctuation">(</span>task<span class="token punctuation">,</span> delayNanos<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    currentThread<span class="token punctuation">.</span>name <span class="token operator">=</span> oldName
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">private</span> <span class="token keyword">fun</span> <span class="token function">afterRun</span><span class="token punctuation">(</span>task<span class="token operator">:</span> Task<span class="token punctuation">,</span> delayNanos<span class="token operator">:</span> Long<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">assertThreadHoldsLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">val</span> queue <span class="token operator">=</span> task<span class="token punctuation">.</span>queue<span class="token operator">!!</span>
+  <span class="token function">check</span><span class="token punctuation">(</span>queue<span class="token punctuation">.</span>activeTask <span class="token operator">===</span> task<span class="token punctuation">)</span>
+
+  <span class="token keyword">val</span> cancelActiveTask <span class="token operator">=</span> queue<span class="token punctuation">.</span>cancelActiveTask
+  queue<span class="token punctuation">.</span>cancelActiveTask <span class="token operator">=</span> <span class="token boolean">false</span>
+  queue<span class="token punctuation">.</span>activeTask <span class="token operator">=</span> <span class="token keyword">null</span>
+  busyQueues<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span>
+  <span class="token comment">// 如果不符合清理条件且指定了下次的清理时间</span>
+	<span class="token comment">// 则根据指定的清理时间重新安排该清理task</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>delayNanos <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1L</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>cancelActiveTask <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>queue<span class="token punctuation">.</span>shutdown<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    queue<span class="token punctuation">.</span><span class="token function">scheduleAndDecide</span><span class="token punctuation">(</span>task<span class="token punctuation">,</span> delayNanos<span class="token punctuation">,</span> recurrence <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>queue<span class="token punctuation">.</span>futureTasks<span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    readyQueues<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+<p>重头戏cleanup，先理解出发连接池清理的条件：</p>
+<ul>
+<li>RealConnection闲置时间不超过5分钟</li>
+<li>RealConnectionPool中闲置的RealConnection数量不超过5个</li>
+</ul>
+<div class="code-wrapper"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">cleanup</span><span class="token punctuation">(</span>now<span class="token operator">:</span> Long<span class="token punctuation">)</span><span class="token operator">:</span> Long <span class="token punctuation">&#123;</span>
+ 	<span class="token keyword">var</span> inUseConnectionCount <span class="token operator">=</span> <span class="token number">0</span>
+  <span class="token keyword">var</span> idleConnectionCount <span class="token operator">=</span> <span class="token number">0</span>
+  <span class="token keyword">var</span> longestIdleConnection<span class="token operator">:</span> RealConnection<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
+  <span class="token keyword">var</span> longestIdleDurationNs <span class="token operator">=</span> Long<span class="token punctuation">.</span>MIN_VALUE
+  
+  <span class="token keyword">for</span> <span class="token punctuation">(</span>connection <span class="token keyword">in</span> connections<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">synchronized</span><span class="token punctuation">(</span>connection<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 寻找正在使用的Connection</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">pruneAndGetAllocationCount</span><span class="token punctuation">(</span>connection<span class="token punctuation">,</span> now<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        inUseConnectionCount<span class="token operator">++</span>
+      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 寻找空闲的Connection</span>
+        idleConnectionCount<span class="token operator">++</span>
+
+        <span class="token comment">// 计算当前空闲Connection的空闲时间并算出空闲最久的Connection与时间</span>
+        <span class="token keyword">val</span> idleDurationNs <span class="token operator">=</span> now <span class="token operator">-</span> connection<span class="token punctuation">.</span>idleAtNs
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>idleDurationNs <span class="token operator">></span> longestIdleDurationNs<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          longestIdleDurationNs <span class="token operator">=</span> idleDurationNs
+          longestIdleConnection <span class="token operator">=</span> connection
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+          Unit
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  
+  <span class="token keyword">when</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 如果连接队列中最长闲置时间 >= 允许的最大闲置时间</span>
+    <span class="token comment">// 或者闲置Connection数量超过最大允许闲置数量</span>
+    longestIdleDurationNs <span class="token operator">>=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>keepAliveDurationNs
+        <span class="token operator">||</span> idleConnectionCount <span class="token operator">></span> <span class="token keyword">this</span><span class="token punctuation">.</span>maxIdleConnections <span class="token operator">-></span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 先清理闲置时间最长的这个Connection</span>
+      <span class="token keyword">val</span> connection <span class="token operator">=</span> longestIdleConnection<span class="token operator">!!</span>
+      <span class="token comment">// 对Connection加锁再次进行状态判断，以防止多线程下状态不对应</span>
+      <span class="token function">synchronized</span><span class="token punctuation">(</span>connection<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>connection<span class="token punctuation">.</span>calls<span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0L</span> <span class="token comment">// No longer idle.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>connection<span class="token punctuation">.</span>idleAtNs <span class="token operator">+</span> longestIdleDurationNs <span class="token operator">!=</span> now<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0L</span> <span class="token comment">// No longer oldest.</span>
+        connection<span class="token punctuation">.</span>noNewExchanges <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token comment">// 从连接池中删除该connection</span>
+        connections<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>longestIdleConnection<span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span>
+			<span class="token comment">// 关闭该connection的socket连接</span>
+      connection<span class="token punctuation">.</span><span class="token function">socket</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">closeQuietly</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>connections<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> cleanupQueue<span class="token punctuation">.</span><span class="token function">cancelAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+      <span class="token comment">// 立马清理下一个Connection，这里其实是交给上面的afterRun方法来进行的</span>
+      <span class="token keyword">return</span> <span class="token number">0L</span>
+    <span class="token punctuation">&#125;</span>
+		<span class="token comment">// 如果有空闲的Connection但不满足上述条件</span>
+    idleConnectionCount <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">-></span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 下一次安排清理的时间应该是允许 规定最长空闲时间-空闲时间最长的Connection已经空闲时间</span>
+      <span class="token keyword">return</span> keepAliveDurationNs <span class="token operator">-</span> longestIdleDurationNs
+    <span class="token punctuation">&#125;</span>
+		
+    <span class="token comment">// 如果有正在使用的Connection，那等待指定时间后再尝试清理</span>
+    inUseConnectionCount <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">-></span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// All connections are in use. It'll be at least the keep alive duration 'til we run again</span>
+      <span class="token keyword">return</span> keepAliveDurationNs
+    <span class="token punctuation">&#125;</span>
+		<span class="token comment">// 连接池中没有Connection，不清理</span>
+    <span class="token keyword">else</span> <span class="token operator">-></span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// No connections, idle or in use.</span>
+      <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div>
+
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="post-metas mb-3">
+                                            
+                                                <div class="post-meta mr-3">
+                                                    <i class="iconfont icon-category"></i>
+                                                    
+                                                        <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/">
+                                                            学习
+                                                        </a>
+                                                        
+                                                </div>
+                                                
+                                                    
+                                        </div>
+                                        
+                                            <p class="note note-warning">
+                                                
+                                                            本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                                                                
+                                            </p>
+                                            
+                                                
+                                                    <div class="post-prevnext">
+                                                        <article class="post-prev col-6">
+                                                            
+                                                                
+                                                                    <a href="/2023/04/28/Android-Lifecycle%E6%9C%BA%E5%88%B6%E6%8E%A2%E7%A9%B6/">
+                                                                        <i class="iconfont icon-arrowleft"></i>
+                                                                        <span class="hidden-mobile">Android Lifecycle机制探究</span>
+                                                                        <span class="visible-mobile">上一篇</span>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                        <article class="post-next col-6">
+                                                            
+                                                                
+                                                                    <a href="/2023/04/10/Android-Activity-Fragment%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%8E%A2%E7%A9%B6/">
+                                                                        <span class="hidden-mobile">Android Activity&Fragment生命周期探究</span>
+                                                                        <span class="visible-mobile">下一篇</span>
+                                                                        <i class="iconfont icon-arrowright"></i>
+                                                                    </a>
+                                                                    
+                                                        </article>
+                                                    </div>
+                                                    
+                                    </div>
+
+                                    
+                                        <!-- Comments -->
+                                        <article class="comments" id="comments">
+                                            
+                                                        
+                                                            
+                                                                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'PPLong222/commit-utterances');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+                                        </article>
+                                        
+                        </article>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+                    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+                </div>
+                
+        </div>
+    </div>
+
+    <!-- Custom -->
+    
+    <!--添加我自己的设置页面-->
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+    <!--加入自定义格式的-->
+    <!--自定义的git徽标样式-->
+<img height="20" src="https://img.shields.io/badge/Source-Github-blue?logo=github&style=flat&logoColor=rgb(252,%2098,%2093)&color=blue">
+<img height="20" src="https://img.shields.io/badge/Build-Hexo-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=fc766a">
+<img height="20" src="https://img.shields.io/badge/Build-Fluid-blue?logo=hexo&style=flat&logoColor=rgb(14,%20131,%20205)&color=f2c080">
+<br>
+<img height="20" src="https://img.shields.io/badge/蜀ICP备-2022003192号-blue?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAdCAYAAAC9pNwMAAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDIgNzkuMTYwOTI0LCAyMDE3LzA3LzEzLTAxOjA2OjM5ICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+nhxg7wAACNlJREFUSInF1mmMVeUdx/Hv2e+5+519mJWBYQZkGxZZxLKJqBXGoLS1iXWrmihotFXaJiTWWlsbl6q1aetWd5u0VkKjNG4YEJSlOCibDLMwM8x679z9nnPP1jcVJUxf+7z6J8+LT37/Z4VvaQhfFS8+sBXbctCDGrVTKlBUH4mxAbI9Hfj0IJLsp6paJ5/tmn20N/D0wKDRMq9F/c3M2U1/V0vDfWMFh+tv/Ig1zYPMabDImPJ52OaXO87W580KggCiiOsJOJ6I3wcNFaaeNKxrt72f2fLGu4FpJ/sDQABRzD22fH7/Yze069vGc6mrDLNIJCDik10sxz2by3VdPM87xzkP9jwPTZFRVI1YUJKH+oy7n3tbvv/P2wW/UQxRWe6w4ZJRptYLHDoCuz8v5cP92XbI762O+h6UVWHnUFbPpU0fEb2A60mMJ7MUi9b/b7UgKhiZMaIxm8YLplLMDPz8hl/EH+rs8TNlUpFf32uyZJGLPDwCiTGUyTWodTN49eUCdz2YwXb9NNcObp1X98WDoufynzMVCEKGn27ayPTWBi5ad8P5iQUkJEnFLjqM9Z+hrVX0vfDe6K2dPRWsW2bwyp9EUifSJB84gdxrkR0eRgv1o/3I4fbbprJ6scqamzVO9pffec1S5ZWY2Nfz5qEy/FqOC2Y3s3j53HMSi18VRjFPwSwg+1RfVbl115vvJrsfej7UGIsYPPGgQ7JXoO+Xx5B3dHEomyJ9x1qiQozkr95h5937aFnVyouPlgJK+Ss7Fxz64OTSxSX+LHYxT2IsRW5kbGI4oHcR0jqoqTjV9se3I7/f8rS/ClS23GxSXhph6L5d9Akm7qqZhHWBQGUJ+CWGFzcg7e7m6D3/ZuW1Ea5YKdA3EojuONi813TqNi+YPYOKUhXDtCeGL26/hakLLiEcdsaHRkRAoLRc4fJrmhnekyF0apgZowWSwwkaa+rw3f8WA1GZZsPP5JEChX8dhZTN6iU6kAcs5s+dHd183SJ0VVKL57pfw6YdRQw23aeWTns47DPTALWlRTR7kMLew6hGgYqUhWXYFFUdPZ6lUBahLA8hVcOftckfi7No7VRAAQqsX1dybfvG1qwriM9mM5mJ4e4jO5Cc01dPqixbr8tWGBQUL4vjGigEEShi+xUmZ2RiR/sJ1pbS8NkgZrKAGw0TsgQsQyFaF/nfYTGprAlMFysbA1pI3mhkR6snhGsaymYGvPyFEb9IdbUE2AzFFTwpRqCtBY0wmdER+hZW4j63gcJj38V+/ErSUZXsYBfjIZHIRW0c2Z8BskCAqN+CbBJBFnyyKjR+Ez57nBxLqpfMUeSISElMBFz6x2Q6OxzWrYjyxWVzEewioU3LCS5vQY6nMUrLwNaxXvoQ59IloFSx54PPAZtQLExVZZDxsVE8J4dn6v4JYatgbSjk0owPw7RGH2ADMo88Z7L20ip8f7gC7fAo0q4+0rt7kEQDvaghVZbiPHUHcyeXcfLjT3jmpR7AYsnSScya3UR8bARVMck7Y/cB75/X6rDf3Fg2dw2jKZm5dXGm1LuAzO5DCo9v6aT0ibco5kzOvLOP+NGTFJtDpPYeZKijk/Rn3QxsfZV7txwhX7ABiZUXBsGvIvguQApNQQva9RMmTvZ2dpVUls+tX/UD7GN/Y8Ws05w6rQF+9vyzg1vZjbvMRJhXiRSU8DpTFFe0QE8S6SfPkOkZoktrB2oAhZWrwljxOPmchiSMYOWNoxNuruFU5vWeXdsojiUon345113dBBQBmTYlTimgdB8nfPo4WjaNFgN9OMEkJ02dnadVt5ki54Esqy+bzKJltVhSPbI3iN2zCyMTeXNCuG7Omm2Zok7PR2+R7jvD8ouruHhmCrB5jVZeYxLdrTP4sr4Vtd9g4MA4qc4c+6cu5NPamfw4P59t2WrA4YdXKkASf7SFivo6PDdEPmf1fRM++zp1bH/0r4I1dD1ODtOWaW4IsvPjL7nqXhloQiSPwjjgMYkMASyGEBkjhISCQwkwzve/18AbT+pk8pVY4UacQi9y+gyZ0eRAw4qHa89LXEx1LXMSPfhDJYRb59BtlLKg2WPT2l6qYl1svtGkrLYckyA1S+t5+2ATm37WCui0LSynsckDNH5zTxAchbQtkx08hDHYiW6NgC0enHBzEZ102UDH8QORdEckjEzZrNWkRydzyx17uGnDXqbUnGZ6dRPjSY91q2TqwjFuvTxLo5Zn5Qo/pumRSFcTLQtybEhGE0fQrDhhJ0VvH2lTnnHPhGtsmWan469apERjI2MH3qN7+7MEfH6ql29CbV7PvsMG32k6yU2XDhEKyZw66eJaRdrXR7CzCcqUNC3zwgymPJRCH4KRRLINimpL14A5Y4GDeOqbsPRVcfuN7Xj44pav/hFfrNT2kr2rsqf2Ibp5pEA14ZIImUyW3t5REkkTXRGQ/DGGhtLginhqCWknQDE5hKf5UFSF9Lj020Q2ul5V1AR2hr+8vuP8Vlc2zMPRxoSjnx7XBC14sDoydahSGq7KdO/HFyrBchxCVfX4fDKp4T7SCQejYODZLrYgIqgKFsNIgQqEYob8mW6yiUyb7Z64LVK/+B85xznnJ3AWzqTzuIX46mr5wLs+UUTyIriBCjRNxguHMJIFDLEEvXEOVRWnSJ0+jCd4CJoGjoedM1CLcXQziW3nMV2TSMBeOx7vWZvPt1r+cMPzE8KunaUkFn0vNrvtqXj34c1W6gzxlEQ6naIoBahtnkMwoFMwIVzSRNguMt53Aj2s4nkSlgPoGqLkICsRNF0gl8rYWuP8+11/w/OOJDEhHPKLCIpOXmi+M9AgP+maiesLifF2T1Rn5ZNj5Lo/Qc/GcPMmhdoqlEgIGzCK4PiCmJKK68p4KfF3qYGuF0qCRUkJTzleUbvQyWRTuE5xYthxQbBs7EISAbkzUFG3VfXXbK2YFi3X/eryfKKnqVBItNjJxDzH8erddC4SqWwcN5WyTtlyO1RP/Lh3eHD76MB40swmiDVJyDLYRhpc5+ub6tse/wWKbvSQEAw1awAAAABJRU5ErkJggg==&style=flat&color=d2c68b">
+
+<!-- 自定义显示文章总页数和字数的模块 -->
+<div class="bottom-post-statistic">
+    <div class="bottom-post-count">
+        72&nbsp 篇文章
+    </div>
+    <div class="bottom-post-word">
+        319.3k&nbsp 字
+    </div>
+</div>
+        <div class="footer-content">
+             <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+        </div>
+
+        
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+            
+
+                
+</footer>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/reset_code_lang.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+  <!-- 暂时先不引入该功能 -->
+  <!-- 引入JQuery -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> -->
+  <!-- 引入自定义的页面访问和ip统计脚本 -->
+  <!-- <script src="/js/send_req_info.js"></script> --> -->
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?PPLong222";
+            var git_color =['#ebedf0', '#bef5cb', '#bef5cb', '#a9f5b4', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620'];
+            var git_user ="PPLong222";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div id="github-calendar" style="width:100%;height:auto;padding:10px;margin-bottom:20px"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;margin-top:100px;;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/about/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:200px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>#github_container > .position-relative > .border{border:0!important}#github-calendar{position: relative;margin-top: -2rem;background-color: var(--board-bg-color);transition: background-color 0.2s ease-in-out;border-radius: 0.5rem;z-index: 3;-webkit-box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%), 0 17px 50px 0 rgb(0 0 0 / 19%);}</style><!-- hexo injector body_end end --></body>
+</html>
